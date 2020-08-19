@@ -170,6 +170,25 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/attributes.js":
+/*!***************************!*\
+  !*** ./src/attributes.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var attributes = {
+  headers: {
+    type: "array",
+    default: []
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (attributes);
+
+/***/ }),
+
 /***/ "./src/edit.js":
 /*!*********************!*\
   !*** ./src/edit.js ***!
@@ -193,46 +212,54 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function isCoreHeading(block) {
+  if (!block) return false;
   return block.name === "core/heading";
 }
 
 function isEbHeading(block) {
+  if (!block) return false;
   return block.name === "essential-blocks/heading" || block.name === "block/heading";
 }
 
-function getLinks(headers) {
-  var links = [];
+function getTextFromBlocks(headerBlocks) {
+  var texts = [];
 
-  if (headers.length > 0) {
-    headers.map(function (header) {
-      if (isEbHeading(header) || isCoreHeading(header)) {
-        links.push(header.attributes.content);
+  if (headerBlocks.length > 0) {
+    headerBlocks.map(function (block) {
+      if (isEbHeading(block) || isCoreHeading(block)) {
+        texts.push(block.attributes.content);
       }
     });
   }
 
-  return links;
+  return texts;
 }
 
-function Edit() {
-  function getBlocks() {
-    var blocks = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__["useSelect"])(function (select) {
-      return select("core/block-editor").getBlocks();
-    }, []);
-    return blocks;
-  }
+function Edit(_ref) {
+  var attributes = _ref.attributes,
+      setAttributes = _ref.setAttributes;
+  var headers = attributes.headers; // console.log("attribute headers", headers);
 
-  var headers = getBlocks().filter(function (block) {
-    return isCoreHeading(block) || isEbHeading(block);
-  });
-  var headerLinks = getLinks(headers);
+  Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__["useSelect"])(function (select) {
+    var allBlocks = select("core/block-editor").getBlocks();
+    var headerBlocks = allBlocks.filter(function (block) {
+      return isCoreHeading(block) || isEbHeading(block);
+    });
+    var headerTexts = getTextFromBlocks(headerBlocks);
 
-  if (headerLinks.length === 0) {
+    if (JSON.stringify(headerTexts) !== JSON.stringify(headers)) {// console.log(JSON.stringify(headerTexts));
+      // console.log(JSON.stringify(headers));
+      // setAttributes({ headers: headerTexts });
+    }
+  }, []);
+
+  if (headers.length === 0) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, "No header found");
   }
 
-  if (headerLinks.length > 0) return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headerLinks.map(function (header, index) {
+  if (headers.length > 0) return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headers.map(function (header, index) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
       key: index
     }, header);
@@ -269,6 +296,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+
 
 
 
@@ -283,6 +312,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("cre
     // Removes support for an HTML mode.
     html: false
   },
+  attributes: _attributes__WEBPACK_IMPORTED_MODULE_5__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
 });

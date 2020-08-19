@@ -6,6 +6,7 @@ import "./style.scss";
 
 import Edit from "./edit";
 import save from "./save";
+import attributes from "./attributes";
 
 registerBlockType("create-block/table-of-content", {
 	title: __("Table Of Content", "create-block"),
@@ -23,6 +24,8 @@ registerBlockType("create-block/table-of-content", {
 		// Removes support for an HTML mode.
 		html: false,
 	},
+
+	attributes,
 
 	edit: Edit,
 
