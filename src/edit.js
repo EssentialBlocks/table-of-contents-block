@@ -13,6 +13,20 @@ function isEbHeading(block) {
 	);
 }
 
+function getLinks(headers) {
+	let links = [];
+
+	if (headers.length > 0) {
+		headers.map((header) => {
+			if (isEbHeading(header) || isCoreHeading(header)) {
+				links.push(header.attributes.content);
+			}
+		});
+	}
+
+	return links;
+}
+
 export default function Edit() {
 	function getBlocks() {
 		const blocks = useSelect((select) => {
@@ -22,11 +36,24 @@ export default function Edit() {
 		return blocks;
 	}
 
-	const allBlocks = getBlocks();
-
-	const headers = allBlocks.filter(
+	const headers = getBlocks().filter(
 		(block) => isCoreHeading(block) || isEbHeading(block)
 	);
 
-	return <h1>Done</h1>;
+	const headerLinks = getLinks(headers);
+
+	if (headerLinks.length === 0) {
+		return <div>No header found</div>;
+	}
+
+	if (headerLinks.length > 0)
+		return (
+			<div>
+				<ul>
+					{headerLinks.map((header, index) => (
+						<li key={index}>{header}</li>
+					))}
+				</ul>
+			</div>
+		);
 }
