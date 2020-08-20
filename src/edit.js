@@ -9,45 +9,31 @@ import { useSelect } from "@wordpress/data";
  * Internal dependencies
  */
 import Inspector from "./inspector";
+import {
+	isCoreHeading,
+	getFromCoreHeading,
+	isEbHeading,
+	getFromEbHeading,
+} from "./helper";
 import "./editor.scss";
 
-function isCoreHeading(block) {
-	return block.name === "core/heading";
-}
-
-function isEbHeading(block) {
-	return (
-		block.name === "essential-blocks/heading" || block.name === "block/heading"
-	);
-}
-
-function getHeaders(block) {
-	let headers = {};
-
-	if (isCoreHeading(block)) {
-		headers.level = parseInt(block.attributes.level);
-		headers.content = block.attributes.content;
-	} else if (isEbHeading(block)) {
-		headers.level = parseInt(block.attributes.tagName[1]);
-		headers.content = block.attributes.content;
-	}
-
-	return headers;
-}
-
-function getTextFromBlocks(headerBlocks) {
-	let texts = [];
+function getArrayFromBlocks(headerBlocks) {
+	let headerArray = [];
 
 	if (headerBlocks.length > 0) {
 		headerBlocks.map((block) => {
-			if (isEbHeading(block) || isCoreHeading(block)) {
-				const headers = getHeaders(block);
-				texts.push(headers);
+			let header = {};
+
+			if (isCoreHeading(block)) {
+				header = getFromCoreHeading(block);
+			} else if (isEbHeading(block)) {
+				header = getFromEbHeading(block);
 			}
+			headerArray.push(header);
 		});
 	}
 
-	return texts;
+	return headerArray;
 }
 
 const useHeader = () => {
@@ -57,20 +43,21 @@ const useHeader = () => {
 	const headerBlocks = allBlocks.filter(
 		(block) => isCoreHeading(block) || isEbHeading(block)
 	);
-	const headerTexts = getTextFromBlocks(headerBlocks);
-	return headerTexts;
+	const headerArray = getArrayFromBlocks(headerBlocks);
+
+	return headerArray;
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
 	const { headers, visibleHeaders } = attributes;
 
-	const headerTexts = useHeader();
+	const headerArray = useHeader();
 
 	useEffect(() => {
-		if (JSON.stringify(headerTexts) !== JSON.stringify(headers)) {
-			setAttributes({ headers: headerTexts });
+		if (JSON.stringify(headerArray) !== JSON.stringify(headers)) {
+			setAttributes({ headers: headerArray });
 		}
-	}, [headerTexts]);
+	}, [headerArray]);
 
 	// Decides whether header should be visible or not
 	const isVisible = (header) => visibleHeaders[header.level - 1];

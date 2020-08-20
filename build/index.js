@@ -323,8 +323,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helper */ "./src/helper.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_5__);
 
 
 /**
@@ -340,41 +341,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function isCoreHeading(block) {
-  return block.name === "core/heading";
-}
 
-function isEbHeading(block) {
-  return block.name === "essential-blocks/heading" || block.name === "block/heading";
-}
-
-function getHeaders(block) {
-  var headers = {};
-
-  if (isCoreHeading(block)) {
-    headers.level = parseInt(block.attributes.level);
-    headers.content = block.attributes.content;
-  } else if (isEbHeading(block)) {
-    headers.level = parseInt(block.attributes.tagName[1]);
-    headers.content = block.attributes.content;
-  }
-
-  return headers;
-}
-
-function getTextFromBlocks(headerBlocks) {
-  var texts = [];
+function getArrayFromBlocks(headerBlocks) {
+  var headerArray = [];
 
   if (headerBlocks.length > 0) {
     headerBlocks.map(function (block) {
-      if (isEbHeading(block) || isCoreHeading(block)) {
-        var headers = getHeaders(block);
-        texts.push(headers);
+      var header = {};
+
+      if (Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isCoreHeading"])(block)) {
+        header = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["getFromCoreHeading"])(block);
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isEbHeading"])(block)) {
+        header = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["getFromEbHeading"])(block);
       }
+
+      headerArray.push(header);
     });
   }
 
-  return texts;
+  return headerArray;
 }
 
 var useHeader = function useHeader() {
@@ -382,10 +367,10 @@ var useHeader = function useHeader() {
     return select("core/block-editor").getBlocks();
   });
   var headerBlocks = allBlocks.filter(function (block) {
-    return isCoreHeading(block) || isEbHeading(block);
+    return Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isCoreHeading"])(block) || Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isEbHeading"])(block);
   });
-  var headerTexts = getTextFromBlocks(headerBlocks);
-  return headerTexts;
+  var headerArray = getArrayFromBlocks(headerBlocks);
+  return headerArray;
 };
 
 function Edit(_ref) {
@@ -394,14 +379,14 @@ function Edit(_ref) {
       setAttributes = _ref.setAttributes;
   var headers = attributes.headers,
       visibleHeaders = attributes.visibleHeaders;
-  var headerTexts = useHeader();
+  var headerArray = useHeader();
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (JSON.stringify(headerTexts) !== JSON.stringify(headers)) {
+    if (JSON.stringify(headerArray) !== JSON.stringify(headers)) {
       setAttributes({
-        headers: headerTexts
+        headers: headerArray
       });
     }
-  }, [headerTexts]); // Decides whether header should be visible or not
+  }, [headerArray]); // Decides whether header should be visible or not
 
   var isVisible = function isVisible(header) {
     return visibleHeaders[header.level - 1];
@@ -433,6 +418,40 @@ function Edit(_ref) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // extracted by mini-css-extract-plugin
+
+/***/ }),
+
+/***/ "./src/helper.js":
+/*!***********************!*\
+  !*** ./src/helper.js ***!
+  \***********************/
+/*! exports provided: isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCoreHeading", function() { return isCoreHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromCoreHeading", function() { return getFromCoreHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEbHeading", function() { return isEbHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromEbHeading", function() { return getFromEbHeading; });
+function isCoreHeading(block) {
+  return block.name === "core/heading";
+}
+function getFromCoreHeading(block) {
+  return {
+    level: parseInt(block.attributes.level),
+    content: block.attributes.content
+  };
+}
+function isEbHeading(block) {
+  return block.name === "essential-blocks/heading" || block.name === "block/heading";
+}
+function getFromEbHeading(block) {
+  return {
+    level: parseInt(block.attributes.tagName[1]),
+    content: block.attributes.content
+  };
+}
 
 /***/ }),
 
