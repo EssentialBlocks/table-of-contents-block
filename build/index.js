@@ -392,7 +392,8 @@ function Edit(_ref) {
   var isSelected = _ref.isSelected,
       attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
-  var headers = attributes.headers;
+  var headers = attributes.headers,
+      visibleHeaders = attributes.visibleHeaders;
   var headerTexts = useHeader();
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (JSON.stringify(headerTexts) !== JSON.stringify(headers)) {
@@ -400,7 +401,11 @@ function Edit(_ref) {
         headers: headerTexts
       });
     }
-  }, [headerTexts]);
+  }, [headerTexts]); // Decides whether header should be visible or not
+
+  var isVisible = function isVisible(header) {
+    return visibleHeaders[header.level - 1];
+  };
 
   if (headers.length === 0) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, "No header found");
@@ -411,7 +416,7 @@ function Edit(_ref) {
       attributes: attributes,
       setAttributes: setAttributes
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headers.map(function (header, index) {
-      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
+      return isVisible(header) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
         key: index
       }, header.content);
     })))];
