@@ -5,15 +5,27 @@ import { useSelect } from "@wordpress/data";
 import "./editor.scss";
 
 function isCoreHeading(block) {
-	if (!block) return false;
 	return block.name === "core/heading";
 }
 
 function isEbHeading(block) {
-	if (!block) return false;
 	return (
 		block.name === "essential-blocks/heading" || block.name === "block/heading"
 	);
+}
+
+function getHeaders(block) {
+	let headers = {};
+
+	if (isCoreHeading(block)) {
+		headers.level = parseInt(block.attributes.level);
+		headers.content = block.attributes.content;
+	} else if (isEbHeading(block)) {
+		headers.level = parseInt(block.attributes.tagName[1]);
+		headers.content = block.attributes.content;
+	}
+
+	return headers;
 }
 
 function getTextFromBlocks(headerBlocks) {
@@ -22,7 +34,8 @@ function getTextFromBlocks(headerBlocks) {
 	if (headerBlocks.length > 0) {
 		headerBlocks.map((block) => {
 			if (isEbHeading(block) || isCoreHeading(block)) {
-				texts.push(block.attributes.content);
+				const headers = getHeaders(block);
+				texts.push(headers);
 			}
 		});
 	}
@@ -43,6 +56,7 @@ const useHeader = () => {
 
 export default function Edit({ attributes, setAttributes }) {
 	const { headers } = attributes;
+
 	const headerTexts = useHeader();
 
 	useEffect(() => {
@@ -55,14 +69,15 @@ export default function Edit({ attributes, setAttributes }) {
 		return <div>No header found</div>;
 	}
 
-	if (headers.length > 0)
+	if (headers.length > 0) {
 		return (
 			<div>
 				<ul>
 					{headers.map((header, index) => (
-						<li key={index}>{header}</li>
+						<li key={index}>{header.content}</li>
 					))}
 				</ul>
 			</div>
 		);
+	}
 }

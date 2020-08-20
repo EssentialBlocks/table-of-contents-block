@@ -214,13 +214,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function isCoreHeading(block) {
-  if (!block) return false;
   return block.name === "core/heading";
 }
 
 function isEbHeading(block) {
-  if (!block) return false;
   return block.name === "essential-blocks/heading" || block.name === "block/heading";
+}
+
+function getHeaders(block) {
+  var headers = {};
+
+  if (isCoreHeading(block)) {
+    headers.level = parseInt(block.attributes.level);
+    headers.content = block.attributes.content;
+  } else if (isEbHeading(block)) {
+    headers.level = parseInt(block.attributes.tagName[1]);
+    headers.content = block.attributes.content;
+  }
+
+  return headers;
 }
 
 function getTextFromBlocks(headerBlocks) {
@@ -229,7 +241,8 @@ function getTextFromBlocks(headerBlocks) {
   if (headerBlocks.length > 0) {
     headerBlocks.map(function (block) {
       if (isEbHeading(block) || isCoreHeading(block)) {
-        texts.push(block.attributes.content);
+        var headers = getHeaders(block);
+        texts.push(headers);
       }
     });
   }
@@ -265,11 +278,13 @@ function Edit(_ref) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, "No header found");
   }
 
-  if (headers.length > 0) return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headers.map(function (header, index) {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
-      key: index
-    }, header);
-  })));
+  if (headers.length > 0) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headers.map(function (header, index) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
+        key: index
+      }, header.content);
+    })));
+  }
 }
 
 /***/ }),
