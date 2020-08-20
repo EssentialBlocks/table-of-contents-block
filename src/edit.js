@@ -10,6 +10,7 @@ import { useSelect } from "@wordpress/data";
  */
 import Inspector from "./inspector";
 import {
+	supportedHeaders,
 	isCoreHeading,
 	getFromCoreHeading,
 	isEbHeading,
@@ -18,7 +19,7 @@ import {
 import "./editor.scss";
 
 function getArrayFromBlocks(headerBlocks) {
-	let headerArray = [];
+	let headerList = [];
 
 	if (headerBlocks.length > 0) {
 		headerBlocks.map((block) => {
@@ -29,35 +30,36 @@ function getArrayFromBlocks(headerBlocks) {
 			} else if (isEbHeading(block)) {
 				header = getFromEbHeading(block);
 			}
-			headerArray.push(header);
+			headerList.push(header);
 		});
 	}
 
-	return headerArray;
+	return headerList;
 }
 
+// Custom hook for dynamic header list
 const useHeader = () => {
 	const allBlocks = useSelect((select) =>
 		select("core/block-editor").getBlocks()
 	);
-	const headerBlocks = allBlocks.filter(
-		(block) => isCoreHeading(block) || isEbHeading(block)
+	const headerBlocks = allBlocks.filter((block) =>
+		supportedHeaders.includes(block.name)
 	);
-	const headerArray = getArrayFromBlocks(headerBlocks);
+	const headerList = getArrayFromBlocks(headerBlocks);
 
-	return headerArray;
+	return headerList;
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
 	const { headers, visibleHeaders } = attributes;
 
-	const headerArray = useHeader();
+	const headerList = useHeader();
 
 	useEffect(() => {
-		if (JSON.stringify(headerArray) !== JSON.stringify(headers)) {
-			setAttributes({ headers: headerArray });
+		if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
+			setAttributes({ headers: headerList });
 		}
-	}, [headerArray]);
+	}, [headerList]);
 
 	// Decides whether header should be visible or not
 	const isVisible = (header) => visibleHeaders[header.level - 1];

@@ -343,7 +343,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getArrayFromBlocks(headerBlocks) {
-  var headerArray = [];
+  var headerList = [];
 
   if (headerBlocks.length > 0) {
     headerBlocks.map(function (block) {
@@ -355,22 +355,23 @@ function getArrayFromBlocks(headerBlocks) {
         header = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["getFromEbHeading"])(block);
       }
 
-      headerArray.push(header);
+      headerList.push(header);
     });
   }
 
-  return headerArray;
-}
+  return headerList;
+} // Custom hook for dynamic header list
+
 
 var useHeader = function useHeader() {
   var allBlocks = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__["useSelect"])(function (select) {
     return select("core/block-editor").getBlocks();
   });
   var headerBlocks = allBlocks.filter(function (block) {
-    return Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isCoreHeading"])(block) || Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isEbHeading"])(block);
+    return _helper__WEBPACK_IMPORTED_MODULE_4__["supportedHeaders"].includes(block.name);
   });
-  var headerArray = getArrayFromBlocks(headerBlocks);
-  return headerArray;
+  var headerList = getArrayFromBlocks(headerBlocks);
+  return headerList;
 };
 
 function Edit(_ref) {
@@ -379,14 +380,14 @@ function Edit(_ref) {
       setAttributes = _ref.setAttributes;
   var headers = attributes.headers,
       visibleHeaders = attributes.visibleHeaders;
-  var headerArray = useHeader();
+  var headerList = useHeader();
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    if (JSON.stringify(headerArray) !== JSON.stringify(headers)) {
+    if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
       setAttributes({
-        headers: headerArray
+        headers: headerList
       });
     }
-  }, [headerArray]); // Decides whether header should be visible or not
+  }, [headerList]); // Decides whether header should be visible or not
 
   var isVisible = function isVisible(header) {
     return visibleHeaders[header.level - 1];
@@ -425,15 +426,17 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading */
+/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supportedHeaders", function() { return supportedHeaders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCoreHeading", function() { return isCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromCoreHeading", function() { return getFromCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEbHeading", function() { return isEbHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromEbHeading", function() { return getFromEbHeading; });
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }

@@ -1,3 +1,9 @@
+export const supportedHeaders = [
+	"core/heading",
+	"essential-blocks/heading",
+	"block/heading",
+];
+
 export function isCoreHeading(block) {
 	return block.name === "core/heading";
 }
