@@ -1,7 +1,14 @@
+/**
+ * WordPress dependencies
+ */
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
+/**
+ * Internal dependencies
+ */
+import Inspector from "./inspector";
 import "./editor.scss";
 
 function isCoreHeading(block) {
@@ -54,7 +61,7 @@ const useHeader = () => {
 	return headerTexts;
 };
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit({ isSelected, attributes, setAttributes }) {
 	const { headers } = attributes;
 
 	const headerTexts = useHeader();
@@ -70,14 +77,17 @@ export default function Edit({ attributes, setAttributes }) {
 	}
 
 	if (headers.length > 0) {
-		return (
+		return [
+			isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			),
 			<div>
 				<ul>
 					{headers.map((header, index) => (
 						<li key={index}>{header.content}</li>
 					))}
 				</ul>
-			</div>
-		);
+			</div>,
+		];
 	}
 }

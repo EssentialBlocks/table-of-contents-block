@@ -40,7 +40,6 @@ function create_block_table_of_content_block_init() {
 		'create-block-table-of-content-block-editor',
 		plugins_url( $editor_css, __FILE__ ),
 		array(),
-		filemtime( "$dir/$editor_css" )
 	);
 
 	$style_css = 'build/style-index.css';
@@ -48,7 +47,6 @@ function create_block_table_of_content_block_init() {
 		'create-block-table-of-content-block',
 		plugins_url( $style_css, __FILE__ ),
 		array(),
-		filemtime( "$dir/$style_css" )
 	);
 
 	register_block_type( 'create-block/table-of-content', array(
