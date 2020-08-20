@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 import "./editor.scss";
@@ -30,23 +30,26 @@ function getTextFromBlocks(headerBlocks) {
 	return texts;
 }
 
+const useHeader = () => {
+	const allBlocks = useSelect((select) =>
+		select("core/block-editor").getBlocks()
+	);
+	const headerBlocks = allBlocks.filter(
+		(block) => isCoreHeading(block) || isEbHeading(block)
+	);
+	const headerTexts = getTextFromBlocks(headerBlocks);
+	return headerTexts;
+};
+
 export default function Edit({ attributes, setAttributes }) {
 	const { headers } = attributes;
-	// console.log("attribute headers", headers);
+	const headerTexts = useHeader();
 
-	useSelect((select) => {
-		const allBlocks = select("core/block-editor").getBlocks();
-		const headerBlocks = allBlocks.filter(
-			(block) => isCoreHeading(block) || isEbHeading(block)
-		);
-		const headerTexts = getTextFromBlocks(headerBlocks);
-
+	useEffect(() => {
 		if (JSON.stringify(headerTexts) !== JSON.stringify(headers)) {
-			// console.log(JSON.stringify(headerTexts));
-			// console.log(JSON.stringify(headers));
-			// setAttributes({ headers: headerTexts });
+			setAttributes({ headers: headerTexts });
 		}
-	}, []);
+	}, [headerTexts]);
 
 	if (headers.length === 0) {
 		return <div>No header found</div>;
