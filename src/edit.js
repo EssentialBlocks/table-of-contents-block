@@ -55,6 +55,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 
 	const headerList = useHeader();
 
+	// console.log("headerList", headerList);
+
 	useEffect(() => {
 		if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
 			setAttributes({ headers: headerList });
