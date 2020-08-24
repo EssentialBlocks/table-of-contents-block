@@ -17,6 +17,7 @@ import {
 	getFromEbHeading,
 } from "./helper";
 import "./editor.scss";
+import List from "./list";
 
 function getArrayFromBlocks(headerBlocks) {
 	let headerList = [];
@@ -30,6 +31,7 @@ function getArrayFromBlocks(headerBlocks) {
 			} else if (isEbHeading(block)) {
 				header = getFromEbHeading(block);
 			}
+
 			headerList.push(header);
 		});
 	}
@@ -54,8 +56,6 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	const { headers, visibleHeaders } = attributes;
 
 	const headerList = useHeader();
-
-	// console.log("headerList", headerList);
 
 	useEffect(() => {
 		if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
@@ -82,6 +82,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 							isVisible(header) && <li key={index}>{header.content}</li>
 					)}
 				</ul>
+
+				<List mappingHeaders={visibleHeaders} headers={headers} />
 			</div>,
 		];
 	}
