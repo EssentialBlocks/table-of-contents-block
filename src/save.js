@@ -7,15 +7,15 @@ export default function save({ attributes }) {
 		return <div />;
 	}
 
-	return <List mappingHeaders={visibleHeaders} headers={headers} />;
-
-	// return (
-	// 	<div>
-	// 		<ul>
-	// 			{headers.map((header, index) => (
-	// 				<li key={index}>{header.content}</li>
-	// 			))}
-	// 		</ul>
-	// 	</div>
-	// );
+	return (
+		<div>
+			<div
+				className="eb-toc-wrapper"
+				data-headers={JSON.stringify(headers)}
+				data-visible={JSON.stringify(visibleHeaders)}
+			>
+				<List mappingHeaders={visibleHeaders} headers={headers} />
+			</div>
+		</div>
+	);
 }

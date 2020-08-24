@@ -45,6 +45,8 @@
 				EBTableOfContents._toggleCollapse
 			);
 			$(document).on("scroll", EBTableOfContents._showHideScroll);
+
+			this._run();
 		},
 
 		_toggleCollapse: function (e) {
@@ -116,65 +118,105 @@
 		 * Alter the_content.
 		 */
 		_run: function (attr, id) {
-			var $this_scope = $(id);
+			console.log("table of content");
+			let node = document.querySelector(".eb-toc-wrapper");
 
-			if ($this_scope.find(".eb-toc__collapsible-wrap").length > 0) {
-				$this_scope
-					.find(".eb-toc__title-wrap")
-					.addClass("eb-toc__is-collapsible");
-			}
+			if (node) {
+				let headers = JSON.parse(node.getAttribute("data-headers"));
+				let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
-			var $headers = JSON.parse(attr.headerLinks);
+				var allowed_h_tags = [];
+				if (visibleHeaders !== undefined) {
+					visibleHeaders.forEach((h_tag, index) =>
+						h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
+					);
+				}
 
-			var allowed_h_tags = [];
-
-			if (undefined !== attr.mappingHeaders) {
-				attr.mappingHeaders.forEach((h_tag, index) =>
-					h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
-				);
 				var allowed_h_tags_str =
 					null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
-			}
 
-			var all_header =
-				undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
-					? $("body").find(allowed_h_tags_str)
-					: $("body").find("h1, h2, h3, h4, h5, h6");
+				var all_header =
+					undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
+						? $("body").find(allowed_h_tags_str)
+						: $("body").find("h1, h2, h3, h4, h5, h6");
 
-			if (undefined !== $headers && 0 !== all_header.length) {
-				$headers.forEach(function (element, i) {
-					let element_text = parseTocSlug(element.text);
-					all_header.each(function () {
-						let header = $(this);
-						let header_text = parseTocSlug(header.text());
-						if (element_text.localeCompare(header_text) === 0) {
-							header.before(
-								'<span id="' +
-									header_text +
-									'" class="eb-toc__heading-anchor"></span>'
-							);
-						}
+				if (undefined !== headers && 0 !== all_header.length) {
+					headers.forEach(function (element, i) {
+						let element_text = parseTocSlug(element.text);
+						all_header.each(function () {
+							let header = $(this);
+							let header_text = parseTocSlug(header.text());
+							if (element_text.localeCompare(header_text) === 0) {
+								header.before(
+									'<span id="' +
+										header_text +
+										'" class="eb-toc__heading-anchor"></span>'
+								);
+							}
+						});
 					});
-				});
+				}
 			}
 
-			scroll_to_top = attr.scrollToTop;
+			// var $this_scope = $(id);
 
-			scroll_element = $(".eb-toc__scroll-top");
-			if (0 == scroll_element.length) {
-				$("body").append(
-					'<div class="eb-toc__scroll-top dashicons dashicons-arrow-up-alt2"></div>'
-				);
-				scroll_element = $(".eb-toc__scroll-top");
-			}
+			// if ($this_scope.find(".eb-toc__collapsible-wrap").length > 0) {
+			// 	$this_scope
+			// 		.find(".eb-toc__title-wrap")
+			// 		.addClass("eb-toc__is-collapsible");
+			// }
 
-			if (scroll_to_top) {
-				scroll_element.addClass("eb-toc__show-scroll");
-			} else {
-				scroll_element.removeClass("eb-toc__show-scroll");
-			}
+			// var $headers = JSON.parse(attr.headerLinks);
 
-			EBTableOfContents._showHideScroll();
+			// var allowed_h_tags = [];
+
+			// if (undefined !== attr.mappingHeaders) {
+			// 	attr.mappingHeaders.forEach((h_tag, index) =>
+			// 		h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
+			// 	);
+			// 	var allowed_h_tags_str =
+			// 		null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+			// }
+
+			// var all_header =
+			// 	undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
+			// 		? $("body").find(allowed_h_tags_str)
+			// 		: $("body").find("h1, h2, h3, h4, h5, h6");
+
+			// if (undefined !== $headers && 0 !== all_header.length) {
+			// 	$headers.forEach(function (element, i) {
+			// 		let element_text = parseTocSlug(element.text);
+			// 		all_header.each(function () {
+			// 			let header = $(this);
+			// 			let header_text = parseTocSlug(header.text());
+			// 			if (element_text.localeCompare(header_text) === 0) {
+			// 				header.before(
+			// 					'<span id="' +
+			// 						header_text +
+			// 						'" class="eb-toc__heading-anchor"></span>'
+			// 				);
+			// 			}
+			// 		});
+			// 	});
+			// }
+
+			// scroll_to_top = attr.scrollToTop;
+
+			// scroll_element = $(".eb-toc__scroll-top");
+			// if (0 == scroll_element.length) {
+			// 	$("body").append(
+			// 		'<div class="eb-toc__scroll-top dashicons dashicons-arrow-up-alt2"></div>'
+			// 	);
+			// 	scroll_element = $(".eb-toc__scroll-top");
+			// }
+
+			// if (scroll_to_top) {
+			// 	scroll_element.addClass("eb-toc__show-scroll");
+			// } else {
+			// 	scroll_element.removeClass("eb-toc__show-scroll");
+			// }
+
+			// EBTableOfContents._showHideScroll();
 		},
 	};
 

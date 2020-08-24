@@ -93,13 +93,6 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				<Inspector attributes={attributes} setAttributes={setAttributes} />
 			),
 			<div>
-				<ul>
-					{headers.map(
-						(header, index) =>
-							isVisible(header) && <li key={index}>{header.content}</li>
-					)}
-				</ul>
-
 				<List mappingHeaders={visibleHeaders} headers={headers} />
 			</div>,
 		];
