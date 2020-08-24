@@ -1,0 +1,184 @@
+(function ($) {
+	var scroll = true;
+	var scroll_offset = 30;
+	var scroll_delay = 800;
+	var scroll_to_top = false;
+	var scroll_element = null;
+
+	var parseTocSlug = function (slug) {
+		// If not have the element then return false!
+		if (!slug) {
+			return slug;
+		}
+
+		var parsedSlug = slug
+			.toString()
+			.toLowerCase()
+			.replace(/&(amp;)/g, "") // Remove &
+			.replace(/&(mdash;)/g, "") // Remove long dash
+			.replace(/\u2013|\u2014/g, "") // Remove long dash
+			.replace(/[&]nbsp[;]/gi, "-") // Replace inseccable spaces
+			.replace(/\s+/g, "-") // Replace spaces with -
+			.replace(/[&\/\\#,^!+()$~%.'":*?<>{}@‘’”“]/g, "") // Remove special chars
+			.replace(/\-\-+/g, "-") // Replace multiple - with single -
+			.replace(/^-+/, "") // Trim - from start of text
+			.replace(/-+$/, ""); // Trim - from end of text
+
+		return decodeURI(encodeURIComponent(parsedSlug));
+	};
+
+	EBTableOfContents = {
+		init: function () {
+			$(document).delegate(
+				".eb-toc__list a",
+				"click",
+				EBTableOfContents._scroll
+			);
+			$(document).delegate(
+				".eb-toc__scroll-top",
+				"click",
+				EBTableOfContents._scrollTop
+			);
+			$(document).delegate(
+				".eb-toc__title-wrap",
+				"click",
+				EBTableOfContents._toggleCollapse
+			);
+			$(document).on("scroll", EBTableOfContents._showHideScroll);
+		},
+
+		_toggleCollapse: function (e) {
+			if ($(this).find(".eb-toc__collapsible-wrap").length > 0) {
+				let $root = $(this).closest(".wp-block-eb-table-of-contents");
+
+				if ($root.hasClass("eb-toc__collapse")) {
+					$root.removeClass("eb-toc__collapse");
+				} else {
+					$root.addClass("eb-toc__collapse");
+				}
+			}
+		},
+
+		_showHideScroll: function (e) {
+			if (null != scroll_element) {
+				if (jQuery(window).scrollTop() > 300) {
+					if (scroll_to_top) {
+						scroll_element.addClass("eb-toc__show-scroll");
+					} else {
+						scroll_element.removeClass("eb-toc__show-scroll");
+					}
+				} else {
+					scroll_element.removeClass("eb-toc__show-scroll");
+				}
+			}
+		},
+
+		/**
+		 * Smooth To Top.
+		 */
+		_scrollTop: function (e) {
+			$("html, body").animate(
+				{
+					scrollTop: 0,
+				},
+				scroll_delay
+			);
+		},
+
+		/**
+		 * Smooth Scroll.
+		 */
+		_scroll: function (e) {
+			if (this.hash !== "") {
+				var hash = this.hash;
+				var node = $(this).closest(".wp-block-eb-table-of-contents");
+
+				scroll = node.data("scroll");
+				scroll_offset = node.data("offset");
+				scroll_delay = node.data("delay");
+
+				if (scroll) {
+					var offset = $(decodeURIComponent(hash)).offset();
+
+					if ("undefined" != typeof offset) {
+						$("html, body").animate(
+							{
+								scrollTop: offset.top - scroll_offset,
+							},
+							scroll_delay
+						);
+					}
+				}
+			}
+		},
+
+		/**
+		 * Alter the_content.
+		 */
+		_run: function (attr, id) {
+			var $this_scope = $(id);
+
+			if ($this_scope.find(".eb-toc__collapsible-wrap").length > 0) {
+				$this_scope
+					.find(".eb-toc__title-wrap")
+					.addClass("eb-toc__is-collapsible");
+			}
+
+			var $headers = JSON.parse(attr.headerLinks);
+
+			var allowed_h_tags = [];
+
+			if (undefined !== attr.mappingHeaders) {
+				attr.mappingHeaders.forEach((h_tag, index) =>
+					h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
+				);
+				var allowed_h_tags_str =
+					null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+			}
+
+			var all_header =
+				undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
+					? $("body").find(allowed_h_tags_str)
+					: $("body").find("h1, h2, h3, h4, h5, h6");
+
+			if (undefined !== $headers && 0 !== all_header.length) {
+				$headers.forEach(function (element, i) {
+					let element_text = parseTocSlug(element.text);
+					all_header.each(function () {
+						let header = $(this);
+						let header_text = parseTocSlug(header.text());
+						if (element_text.localeCompare(header_text) === 0) {
+							header.before(
+								'<span id="' +
+									header_text +
+									'" class="eb-toc__heading-anchor"></span>'
+							);
+						}
+					});
+				});
+			}
+
+			scroll_to_top = attr.scrollToTop;
+
+			scroll_element = $(".eb-toc__scroll-top");
+			if (0 == scroll_element.length) {
+				$("body").append(
+					'<div class="eb-toc__scroll-top dashicons dashicons-arrow-up-alt2"></div>'
+				);
+				scroll_element = $(".eb-toc__scroll-top");
+			}
+
+			if (scroll_to_top) {
+				scroll_element.addClass("eb-toc__show-scroll");
+			} else {
+				scroll_element.removeClass("eb-toc__show-scroll");
+			}
+
+			EBTableOfContents._showHideScroll();
+		},
+	};
+
+	$(document).ready(function () {
+		EBTableOfContents.init();
+	});
+})(jQuery);

@@ -5,6 +5,11 @@ import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
+/*
+ * External dependencies
+ */
+import striptags from "striptags";
+
 /**
  * Internal dependencies
  */
@@ -15,6 +20,7 @@ import {
 	getFromCoreHeading,
 	isEbHeading,
 	getFromEbHeading,
+	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
 import List from "./list";
@@ -27,11 +33,22 @@ function getArrayFromBlocks(headerBlocks) {
 			let header = {};
 
 			if (isCoreHeading(block)) {
-				header = getFromCoreHeading(block);
+				header = {
+					level: parseInt(block.attributes.level),
+					content: block.attributes.content,
+					text: striptags(block.attributes.content),
+					link: parseTocSlug(striptags(block.attributes.content)),
+				};
 			} else if (isEbHeading(block)) {
-				header = getFromEbHeading(block);
+				header = {
+					level: parseInt(block.attributes.tagName[1]),
+					content: block.attributes.content,
+					text: striptags(block.attributes.content),
+					link: parseTocSlug(striptags(block.attributes.content)),
+				};
 			}
 
+			// console.log(header);
 			headerList.push(header);
 		});
 	}

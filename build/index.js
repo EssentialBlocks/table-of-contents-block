@@ -462,6 +462,246 @@ module.exports = _unsupportedIterableToArray;
 
 /***/ }),
 
+/***/ "./node_modules/striptags/src/striptags.js":
+/*!*************************************************!*\
+  !*** ./node_modules/striptags/src/striptags.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_RESULT__;
+
+(function (global) {
+
+    // minimal symbol polyfill for IE11 and others
+    if (typeof Symbol !== 'function') {
+        var Symbol = function(name) {
+            return name;
+        }
+
+        Symbol.nonNative = true;
+    }
+
+    const STATE_PLAINTEXT = Symbol('plaintext');
+    const STATE_HTML      = Symbol('html');
+    const STATE_COMMENT   = Symbol('comment');
+
+    const ALLOWED_TAGS_REGEX  = /<(\w*)>/g;
+    const NORMALIZE_TAG_REGEX = /<\/?([^\s\/>]+)/;
+
+    function striptags(html, allowable_tags, tag_replacement) {
+        html            = html || '';
+        allowable_tags  = allowable_tags || [];
+        tag_replacement = tag_replacement || '';
+
+        let context = init_context(allowable_tags, tag_replacement);
+
+        return striptags_internal(html, context);
+    }
+
+    function init_striptags_stream(allowable_tags, tag_replacement) {
+        allowable_tags  = allowable_tags || [];
+        tag_replacement = tag_replacement || '';
+
+        let context = init_context(allowable_tags, tag_replacement);
+
+        return function striptags_stream(html) {
+            return striptags_internal(html || '', context);
+        };
+    }
+
+    striptags.init_streaming_mode = init_striptags_stream;
+
+    function init_context(allowable_tags, tag_replacement) {
+        allowable_tags = parse_allowable_tags(allowable_tags);
+
+        return {
+            allowable_tags : allowable_tags,
+            tag_replacement: tag_replacement,
+
+            state         : STATE_PLAINTEXT,
+            tag_buffer    : '',
+            depth         : 0,
+            in_quote_char : ''
+        };
+    }
+
+    function striptags_internal(html, context) {
+        let allowable_tags  = context.allowable_tags;
+        let tag_replacement = context.tag_replacement;
+
+        let state         = context.state;
+        let tag_buffer    = context.tag_buffer;
+        let depth         = context.depth;
+        let in_quote_char = context.in_quote_char;
+        let output        = '';
+
+        for (let idx = 0, length = html.length; idx < length; idx++) {
+            let char = html[idx];
+
+            if (state === STATE_PLAINTEXT) {
+                switch (char) {
+                    case '<':
+                        state       = STATE_HTML;
+                        tag_buffer += char;
+                        break;
+
+                    default:
+                        output += char;
+                        break;
+                }
+            }
+
+            else if (state === STATE_HTML) {
+                switch (char) {
+                    case '<':
+                        // ignore '<' if inside a quote
+                        if (in_quote_char) {
+                            break;
+                        }
+
+                        // we're seeing a nested '<'
+                        depth++;
+                        break;
+
+                    case '>':
+                        // ignore '>' if inside a quote
+                        if (in_quote_char) {
+                            break;
+                        }
+
+                        // something like this is happening: '<<>>'
+                        if (depth) {
+                            depth--;
+
+                            break;
+                        }
+
+                        // this is closing the tag in tag_buffer
+                        in_quote_char = '';
+                        state         = STATE_PLAINTEXT;
+                        tag_buffer   += '>';
+
+                        if (allowable_tags.has(normalize_tag(tag_buffer))) {
+                            output += tag_buffer;
+                        } else {
+                            output += tag_replacement;
+                        }
+
+                        tag_buffer = '';
+                        break;
+
+                    case '"':
+                    case '\'':
+                        // catch both single and double quotes
+
+                        if (char === in_quote_char) {
+                            in_quote_char = '';
+                        } else {
+                            in_quote_char = in_quote_char || char;
+                        }
+
+                        tag_buffer += char;
+                        break;
+
+                    case '-':
+                        if (tag_buffer === '<!-') {
+                            state = STATE_COMMENT;
+                        }
+
+                        tag_buffer += char;
+                        break;
+
+                    case ' ':
+                    case '\n':
+                        if (tag_buffer === '<') {
+                            state      = STATE_PLAINTEXT;
+                            output    += '< ';
+                            tag_buffer = '';
+
+                            break;
+                        }
+
+                        tag_buffer += char;
+                        break;
+
+                    default:
+                        tag_buffer += char;
+                        break;
+                }
+            }
+
+            else if (state === STATE_COMMENT) {
+                switch (char) {
+                    case '>':
+                        if (tag_buffer.slice(-2) == '--') {
+                            // close the comment
+                            state = STATE_PLAINTEXT;
+                        }
+
+                        tag_buffer = '';
+                        break;
+
+                    default:
+                        tag_buffer += char;
+                        break;
+                }
+            }
+        }
+
+        // save the context for future iterations
+        context.state         = state;
+        context.tag_buffer    = tag_buffer;
+        context.depth         = depth;
+        context.in_quote_char = in_quote_char;
+
+        return output;
+    }
+
+    function parse_allowable_tags(allowable_tags) {
+        let tag_set = new Set();
+
+        if (typeof allowable_tags === 'string') {
+            let match;
+
+            while ((match = ALLOWED_TAGS_REGEX.exec(allowable_tags))) {
+                tag_set.add(match[1]);
+            }
+        }
+
+        else if (!Symbol.nonNative &&
+                 typeof allowable_tags[Symbol.iterator] === 'function') {
+
+            tag_set = new Set(allowable_tags);
+        }
+
+        else if (typeof allowable_tags.forEach === 'function') {
+            // IE11 compatible
+            allowable_tags.forEach(tag_set.add, tag_set);
+        }
+
+        return tag_set;
+    }
+
+    function normalize_tag(tag_buffer) {
+        let match = NORMALIZE_TAG_REGEX.exec(tag_buffer);
+
+        return match ? match[1].toLowerCase() : null;
+    }
+
+    if (true) {
+        // AMD
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = (function module_factory() { return striptags; }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    }
+
+    else {}
+}(this));
+
+
+/***/ }),
+
 /***/ "./src/attributes.js":
 /*!***************************!*\
   !*** ./src/attributes.js ***!
@@ -501,17 +741,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./helper */ "./src/helper.js");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
-/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var striptags__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! striptags */ "./node_modules/striptags/src/striptags.js");
+/* harmony import */ var striptags__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(striptags__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./helper */ "./src/helper.js");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_editor_scss__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./list */ "./src/list.js");
 
 
 /**
  * WordPress dependencies
  */
 
+
+
+/*
+ * External dependencies
+ */
 
 
 /**
@@ -530,11 +777,22 @@ function getArrayFromBlocks(headerBlocks) {
     headerBlocks.map(function (block) {
       var header = {};
 
-      if (Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isCoreHeading"])(block)) {
-        header = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["getFromCoreHeading"])(block);
-      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_4__["isEbHeading"])(block)) {
-        header = Object(_helper__WEBPACK_IMPORTED_MODULE_4__["getFromEbHeading"])(block);
-      }
+      if (Object(_helper__WEBPACK_IMPORTED_MODULE_5__["isCoreHeading"])(block)) {
+        header = {
+          level: parseInt(block.attributes.level),
+          content: block.attributes.content,
+          text: striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content),
+          link: Object(_helper__WEBPACK_IMPORTED_MODULE_5__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content))
+        };
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_5__["isEbHeading"])(block)) {
+        header = {
+          level: parseInt(block.attributes.tagName[1]),
+          content: block.attributes.content,
+          text: striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content),
+          link: Object(_helper__WEBPACK_IMPORTED_MODULE_5__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content))
+        };
+      } // console.log(header);
+
 
       headerList.push(header);
     });
@@ -549,7 +807,7 @@ var useHeader = function useHeader() {
     return select("core/block-editor").getBlocks();
   });
   var headerBlocks = allBlocks.filter(function (block) {
-    return _helper__WEBPACK_IMPORTED_MODULE_4__["supportedHeaders"].includes(block.name);
+    return _helper__WEBPACK_IMPORTED_MODULE_5__["supportedHeaders"].includes(block.name);
   });
   var headerList = getArrayFromBlocks(headerBlocks);
   return headerList;
@@ -579,14 +837,14 @@ function Edit(_ref) {
   }
 
   if (headers.length > 0) {
-    return [isSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inspector__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    return [isSelected && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
       attributes: attributes,
       setAttributes: setAttributes
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("ul", null, headers.map(function (header, index) {
       return isVisible(header) && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("li", {
         key: index
       }, header.content);
-    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_7__["default"], {
       mappingHeaders: visibleHeaders,
       headers: headers
     }))];
@@ -610,7 +868,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading */
+/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -620,6 +878,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromCoreHeading", function() { return getFromCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEbHeading", function() { return isEbHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromEbHeading", function() { return getFromEbHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
 var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
@@ -638,6 +897,23 @@ function getFromEbHeading(block) {
     level: parseInt(block.attributes.tagName[1]),
     content: block.attributes.content
   };
+}
+function parseTocSlug(slug) {
+  if (!slug) {
+    return slug;
+  }
+
+  var parsedSlug = slug.toString().toLowerCase().replace(/&(amp;)/g, "") // Remove &
+  .replace(/&(mdash;)/g, "") // Remove long dash
+  .replace(/\u2013|\u2014/g, "") // Remove long dash
+  .replace(/[&]nbsp[;]/gi, "-") // Replace inseccable spaces
+  .replace(/\s+/g, "-") // Replace spaces with -
+  .replace(/[&\/\\#,^!+()$~%.'":*?<>{}@‘’”“]/g, "") // Remove special chars
+  .replace(/\-\-+/g, "-") // Replace multiple - with single -
+  .replace(/^-+/, "") // Trim - from start of text
+  .replace(/-+$/, ""); // Trim - from end of text
+
+  return decodeURI(encodeURIComponent(parsedSlug));
 }
 
 /***/ }),
