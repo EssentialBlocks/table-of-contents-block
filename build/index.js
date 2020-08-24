@@ -791,8 +791,7 @@ function getArrayFromBlocks(headerBlocks) {
           text: striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content),
           link: Object(_helper__WEBPACK_IMPORTED_MODULE_5__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_3___default()(block.attributes.content))
         };
-      } // console.log(header);
-
+      }
 
       headerList.push(header);
     });
@@ -1029,6 +1028,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_getPrototypeOf__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -1040,10 +1041,11 @@ function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflec
 
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
-var __ = wp.i18n.__;
 
-var List = /*#__PURE__*/function (_React$Component) {
-  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(List, _React$Component);
+
+
+var List = /*#__PURE__*/function (_Component) {
+  _babel_runtime_helpers_inherits__WEBPACK_IMPORTED_MODULE_2___default()(List, _Component);
 
   var _super = _createSuper(List);
 
@@ -1138,13 +1140,13 @@ var List = /*#__PURE__*/function (_React$Component) {
       } else {
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("p", {
           className: "eb_table-of-contents-placeholder"
-        }, __("Add a header to begin generating the table of contents"));
+        }, Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_6__["__"])("Add a header to begin generating the table of contents"));
       }
     }
   }]);
 
   return List;
-}(React.Component);
+}(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (List);
 

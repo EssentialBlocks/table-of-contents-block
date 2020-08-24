@@ -17,9 +17,7 @@ import Inspector from "./inspector";
 import {
 	supportedHeaders,
 	isCoreHeading,
-	getFromCoreHeading,
 	isEbHeading,
-	getFromEbHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -48,7 +46,6 @@ function getArrayFromBlocks(headerBlocks) {
 				};
 			}
 
-			// console.log(header);
 			headerList.push(header);
 		});
 	}

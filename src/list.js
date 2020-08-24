@@ -1,6 +1,7 @@
-const { __ } = wp.i18n;
+import { __ } from "@wordpress/i18n";
+import { Component } from "@wordpress/element";
 
-class List extends React.Component {
+class List extends Component {
 	render() {
 		const { mappingHeaders, headers } = this.props;
 
