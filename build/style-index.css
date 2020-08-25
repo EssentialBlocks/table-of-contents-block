@@ -1,5 +1,15 @@
 .eb-toc-wrapper {
   width: 100%; }
 
+ol {
+  counter-reset: item; }
+
+ol > li {
+  display: block; }
+
+ol > li:before {
+  content: counters(item, ".") " ";
+  counter-increment: item; }
+
 
 /*# sourceMappingURL=style-index.css.map*/
