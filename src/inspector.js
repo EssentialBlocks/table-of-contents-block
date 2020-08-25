@@ -2,11 +2,19 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
 import { PanelBody, BaseControl, ToggleControl } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
-	const { visibleHeaders, hasNumber, collapsible } = attributes;
+	const {
+		visibleHeaders,
+		hasNumber,
+		collapsible,
+		titleBg,
+		titleColor,
+		contentBg,
+		contentColor,
+	} = attributes;
 
 	return (
 		<InspectorControls key="controls">
@@ -41,6 +49,33 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={() => setAttributes({ collapsible: !collapsible })}
 				/>
 			</PanelBody>
+
+			<PanelColorSettings
+				title={__("Colors ")}
+				initialOpen={false}
+				colorSettings={[
+					{
+						value: titleBg,
+						onChange: (titleBg) => setAttributes({ titleBg }),
+						label: __("Title Background"),
+					},
+					{
+						value: titleColor,
+						onChange: (titleColor) => setAttributes({ titleColor }),
+						label: __("Title Color"),
+					},
+					{
+						value: contentBg,
+						onChange: (contentBg) => setAttributes({ contentBg }),
+						label: __("Content Background"),
+					},
+					{
+						value: contentColor,
+						onChange: (contentColor) => setAttributes({ contentColor }),
+						label: __("Content Color"),
+					},
+				]}
+			/>
 		</InspectorControls>
 	);
 };

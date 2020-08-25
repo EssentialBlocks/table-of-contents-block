@@ -822,6 +822,18 @@ var attributes = {
   collapsible: {
     type: "boolean",
     default: false
+  },
+  titleBg: {
+    type: "string"
+  },
+  titleColor: {
+    type: "string"
+  },
+  contentBg: {
+    type: "string"
+  },
+  contentColor: {
+    type: "string"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -929,7 +941,11 @@ function Edit(_ref) {
       visibleHeaders = attributes.visibleHeaders,
       hasNumber = attributes.hasNumber,
       title = attributes.title,
-      collapsible = attributes.collapsible;
+      collapsible = attributes.collapsible,
+      titleBg = attributes.titleBg,
+      titleColor = attributes.titleColor,
+      contentBg = attributes.contentBg,
+      contentColor = attributes.contentColor;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_0___default()(_useState, 2),
@@ -945,7 +961,14 @@ function Edit(_ref) {
     }
   }, [headerList]);
   var titleStyle = {
-    cursor: "pointer"
+    cursor: collapsible ? "pointer" : "default",
+    color: titleColor,
+    background: titleBg
+  };
+  var contentStyle = {
+    color: contentColor,
+    background: contentBg,
+    display: visible ? "block" : "none"
   };
 
   if (headers.length === 0) {
@@ -971,13 +994,9 @@ function Edit(_ref) {
         });
       }
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      style: {
-        display: visible ? "block" : "none"
-      }
+      style: contentStyle
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      mappingHeaders: visibleHeaders,
-      headers: headers,
-      hasNumber: hasNumber
+      attributes: attributes
     })))];
   }
 }
@@ -1123,7 +1142,11 @@ var Inspector = function Inspector(_ref) {
       setAttributes = _ref.setAttributes;
   var visibleHeaders = attributes.visibleHeaders,
       hasNumber = attributes.hasNumber,
-      collapsible = attributes.collapsible;
+      collapsible = attributes.collapsible,
+      titleBg = attributes.titleBg,
+      titleColor = attributes.titleColor,
+      contentBg = attributes.contentBg,
+      contentColor = attributes.contentColor;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], {
     key: "controls"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["BaseControl"], {
@@ -1154,7 +1177,43 @@ var Inspector = function Inspector(_ref) {
         collapsible: !collapsible
       });
     }
-  })));
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["PanelColorSettings"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Colors "),
+    initialOpen: false,
+    colorSettings: [{
+      value: titleBg,
+      onChange: function onChange(titleBg) {
+        return setAttributes({
+          titleBg: titleBg
+        });
+      },
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Title Background")
+    }, {
+      value: titleColor,
+      onChange: function onChange(titleColor) {
+        return setAttributes({
+          titleColor: titleColor
+        });
+      },
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Title Color")
+    }, {
+      value: contentBg,
+      onChange: function onChange(contentBg) {
+        return setAttributes({
+          contentBg: contentBg
+        });
+      },
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Content Background")
+    }, {
+      value: contentColor,
+      onChange: function onChange(contentColor) {
+        return setAttributes({
+          contentColor: contentColor
+        });
+      },
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Content Color")
+    }]
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Inspector);
@@ -1212,16 +1271,17 @@ var List = /*#__PURE__*/function (_Component) {
   _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_1___default()(List, [{
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          mappingHeaders = _this$props.mappingHeaders,
-          headers = _this$props.headers,
-          hasNumber = _this$props.hasNumber;
+      var _this$props$attribute = this.props.attributes,
+          visibleHeaders = _this$props$attribute.visibleHeaders,
+          headers = _this$props$attribute.headers,
+          hasNumber = _this$props$attribute.hasNumber,
+          contentColor = _this$props$attribute.contentColor;
       var ListTag = hasNumber ? "ol" : "ul";
 
       var makeHeaderArray = function makeHeaderArray(origHeaders) {
         var arrays = [];
         origHeaders.filter(function (header) {
-          return mappingHeaders[header.level - 1];
+          return visibleHeaders[header.level - 1];
         }).forEach(function (header) {
           var last = arrays.length - 1;
 
@@ -1253,7 +1313,7 @@ var List = /*#__PURE__*/function (_Component) {
       var filterArray = function filterArray(origHeaders) {
         var arrays = [];
         headers.forEach(function (heading, key) {
-          if (mappingHeaders[heading.level - 1]) {
+          if (visibleHeaders[heading.level - 1]) {
             arrays.push(heading);
           }
         });
@@ -1275,6 +1335,9 @@ var List = /*#__PURE__*/function (_Component) {
               href: "#".concat(item.link),
               dangerouslySetInnerHTML: {
                 __html: item.text
+              },
+              style: {
+                color: contentColor
               }
             })));
             counter++;
@@ -1287,8 +1350,8 @@ var List = /*#__PURE__*/function (_Component) {
         }, items);
       };
 
-      if (mappingHeaders != "undefined" && headers && headers.length > 0 && headers.filter(function (header) {
-        return mappingHeaders[header.level - 1];
+      if (visibleHeaders != "undefined" && headers && headers.length > 0 && headers.filter(function (header) {
+        return visibleHeaders[header.level - 1];
       }).length > 0) {
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("div", {
           className: "eb-toc__list-wrap"

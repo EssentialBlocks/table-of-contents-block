@@ -19,6 +19,18 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	titleBg: {
+		type: "string",
+	},
+	titleColor: {
+		type: "string",
+	},
+	contentBg: {
+		type: "string",
+	},
+	contentColor: {
+		type: "string",
+	},
 };
 
 export default attributes;

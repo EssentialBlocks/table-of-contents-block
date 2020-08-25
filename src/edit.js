@@ -68,7 +68,17 @@ const useHeader = () => {
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
-	const { headers, visibleHeaders, hasNumber, title, collapsible } = attributes;
+	const {
+		headers,
+		visibleHeaders,
+		hasNumber,
+		title,
+		collapsible,
+		titleBg,
+		titleColor,
+		contentBg,
+		contentColor,
+	} = attributes;
 
 	const [visible, setVisible] = useState(true);
 
@@ -81,7 +91,15 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [headerList]);
 
 	const titleStyle = {
-		cursor: "pointer",
+		cursor: collapsible ? "pointer" : "default",
+		color: titleColor,
+		background: titleBg,
+	};
+
+	const contentStyle = {
+		color: contentColor,
+		background: contentBg,
+		display: visible ? "block" : "none",
 	};
 
 	if (headers.length === 0) {
@@ -103,12 +121,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 						onChange={(title) => setAttributes({ title })}
 					/>
 				</div>
-				<div style={{ display: visible ? "block" : "none" }}>
-					<List
-						mappingHeaders={visibleHeaders}
-						headers={headers}
-						hasNumber={hasNumber}
-					/>
+				<div style={contentStyle}>
+					<List attributes={attributes} />
 				</div>
 			</div>,
 		];

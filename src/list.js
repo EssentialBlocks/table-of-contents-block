@@ -3,7 +3,12 @@ import { Component } from "@wordpress/element";
 
 class List extends Component {
 	render() {
-		const { mappingHeaders, headers, hasNumber } = this.props;
+		const {
+			visibleHeaders,
+			headers,
+			hasNumber,
+			contentColor,
+		} = this.props.attributes;
 
 		const ListTag = hasNumber ? "ol" : "ul";
 
@@ -11,7 +16,7 @@ class List extends Component {
 			let arrays = [];
 
 			origHeaders
-				.filter((header) => mappingHeaders[header.level - 1])
+				.filter((header) => visibleHeaders[header.level - 1])
 				.forEach((header) => {
 					let last = arrays.length - 1;
 					if (arrays.length === 0 || arrays[last][0].level < header.level) {
@@ -44,7 +49,7 @@ class List extends Component {
 		const filterArray = (origHeaders) => {
 			let arrays = [];
 			headers.forEach((heading, key) => {
-				if (mappingHeaders[heading.level - 1]) {
+				if (visibleHeaders[heading.level - 1]) {
 					arrays.push(heading);
 				}
 			});
@@ -67,6 +72,7 @@ class List extends Component {
 								dangerouslySetInnerHTML={{
 									__html: item.text,
 								}}
+								style={{ color: contentColor }}
 							/>
 						</li>
 					);
@@ -82,10 +88,10 @@ class List extends Component {
 		};
 
 		if (
-			mappingHeaders != "undefined" &&
+			visibleHeaders != "undefined" &&
 			headers &&
 			headers.length > 0 &&
-			headers.filter((header) => mappingHeaders[header.level - 1]).length > 0
+			headers.filter((header) => visibleHeaders[header.level - 1]).length > 0
 		) {
 			return (
 				<div className="eb-toc__list-wrap">
