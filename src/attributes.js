@@ -31,6 +31,9 @@ const attributes = {
 	contentColor: {
 		type: "string",
 	},
+	indent: {
+		type: "number",
+	},
 };
 
 export default attributes;

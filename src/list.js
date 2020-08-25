@@ -8,6 +8,7 @@ class List extends Component {
 			headers,
 			hasNumber,
 			contentColor,
+			indent,
 		} = this.props.attributes;
 
 		const ListTag = hasNumber ? "ol" : "ul";
@@ -81,7 +82,11 @@ class List extends Component {
 			});
 			ul_counter++;
 			return (
-				<ListTag key={counter + "-" + ul_counter} className="eb-toc__list">
+				<ListTag
+					key={counter + "-" + ul_counter}
+					className="eb-toc__list"
+					style={{ marginLeft: indent }}
+				>
 					{items}
 				</ListTag>
 			);

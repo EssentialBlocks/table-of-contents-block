@@ -3,7 +3,12 @@
  */
 import { __ } from "@wordpress/i18n";
 import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
-import { PanelBody, BaseControl, ToggleControl } from "@wordpress/components";
+import {
+	PanelBody,
+	BaseControl,
+	ToggleControl,
+	RangeControl,
+} from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -14,6 +19,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		titleColor,
 		contentBg,
 		contentColor,
+		indent,
 	} = attributes;
 
 	return (
@@ -47,6 +53,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Collapsible")}
 					checked={collapsible}
 					onChange={() => setAttributes({ collapsible: !collapsible })}
+				/>
+
+				<RangeControl
+					label={__("Indent")}
+					value={indent}
+					onChange={(indent) => setAttributes({ indent })}
 				/>
 			</PanelBody>
 

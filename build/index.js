@@ -834,6 +834,9 @@ var attributes = {
   },
   contentColor: {
     type: "string"
+  },
+  indent: {
+    type: "number"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1146,7 +1149,8 @@ var Inspector = function Inspector(_ref) {
       titleBg = attributes.titleBg,
       titleColor = attributes.titleColor,
       contentBg = attributes.contentBg,
-      contentColor = attributes.contentColor;
+      contentColor = attributes.contentColor,
+      indent = attributes.indent;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], {
     key: "controls"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["BaseControl"], {
@@ -1175,6 +1179,14 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange() {
       return setAttributes({
         collapsible: !collapsible
+      });
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Indent"),
+    value: indent,
+    onChange: function onChange(indent) {
+      return setAttributes({
+        indent: indent
       });
     }
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["PanelColorSettings"], {
@@ -1275,7 +1287,8 @@ var List = /*#__PURE__*/function (_Component) {
           visibleHeaders = _this$props$attribute.visibleHeaders,
           headers = _this$props$attribute.headers,
           hasNumber = _this$props$attribute.hasNumber,
-          contentColor = _this$props$attribute.contentColor;
+          contentColor = _this$props$attribute.contentColor,
+          indent = _this$props$attribute.indent;
       var ListTag = hasNumber ? "ol" : "ul";
 
       var makeHeaderArray = function makeHeaderArray(origHeaders) {
@@ -1346,7 +1359,10 @@ var List = /*#__PURE__*/function (_Component) {
         ul_counter++;
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(ListTag, {
           key: counter + "-" + ul_counter,
-          className: "eb-toc__list"
+          className: "eb-toc__list",
+          style: {
+            marginLeft: indent
+          }
         }, items);
       };
 
