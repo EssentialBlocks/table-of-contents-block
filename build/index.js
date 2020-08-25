@@ -719,6 +719,10 @@ var attributes = {
   visibleHeaders: {
     type: "array",
     default: Array(6).fill(true)
+  },
+  hasNumber: {
+    type: "boolean",
+    default: false
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -817,7 +821,8 @@ function Edit(_ref) {
       attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
   var headers = attributes.headers,
-      visibleHeaders = attributes.visibleHeaders;
+      visibleHeaders = attributes.visibleHeaders,
+      hasNumber = attributes.hasNumber;
   var headerList = useHeader();
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
@@ -825,11 +830,7 @@ function Edit(_ref) {
         headers: headerList
       });
     }
-  }, [headerList]); // Decides whether header should be visible or not
-
-  var isVisible = function isVisible(header) {
-    return visibleHeaders[header.level - 1];
-  };
+  }, [headerList]);
 
   if (headers.length === 0) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, "No header found");
@@ -841,7 +842,8 @@ function Edit(_ref) {
       setAttributes: setAttributes
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_7__["default"], {
       mappingHeaders: visibleHeaders,
-      headers: headers
+      headers: headers,
+      hasNumber: hasNumber
     }))];
   }
 }
@@ -985,7 +987,8 @@ __webpack_require__.r(__webpack_exports__);
 var Inspector = function Inspector(_ref) {
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
-  var visibleHeaders = attributes.visibleHeaders;
+  var visibleHeaders = attributes.visibleHeaders,
+      hasNumber = attributes.hasNumber;
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InspectorControls"], {
     key: "controls"
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["PanelBody"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["BaseControl"], {
@@ -1000,7 +1003,15 @@ var Inspector = function Inspector(_ref) {
         });
       }
     });
-  }))));
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Ordered List"),
+    checked: hasNumber,
+    onChange: function onChange() {
+      return setAttributes({
+        hasNumber: !hasNumber
+      });
+    }
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Inspector);
@@ -1060,7 +1071,9 @@ var List = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this$props = this.props,
           mappingHeaders = _this$props.mappingHeaders,
-          headers = _this$props.headers;
+          headers = _this$props.headers,
+          hasNumber = _this$props.hasNumber;
+      var ListTag = hasNumber ? "ol" : "ul";
 
       var makeHeaderArray = function makeHeaderArray(origHeaders) {
         var arrays = [];
@@ -1125,7 +1138,7 @@ var List = /*#__PURE__*/function (_Component) {
           }
         });
         ul_counter++;
-        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("ul", {
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(ListTag, {
           key: counter + "-" + ul_counter,
           className: "eb-toc__list"
         }, items);

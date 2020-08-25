@@ -3,7 +3,9 @@ import { Component } from "@wordpress/element";
 
 class List extends Component {
 	render() {
-		const { mappingHeaders, headers } = this.props;
+		const { mappingHeaders, headers, hasNumber } = this.props;
+
+		const ListTag = hasNumber ? "ol" : "ul";
 
 		const makeHeaderArray = (origHeaders) => {
 			let arrays = [];
@@ -73,9 +75,9 @@ class List extends Component {
 			});
 			ul_counter++;
 			return (
-				<ul key={counter + "-" + ul_counter} className="eb-toc__list">
+				<ListTag key={counter + "-" + ul_counter} className="eb-toc__list">
 					{items}
-				</ul>
+				</ListTag>
 			);
 		};
 

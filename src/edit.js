@@ -67,7 +67,7 @@ const useHeader = () => {
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
-	const { headers, visibleHeaders } = attributes;
+	const { headers, visibleHeaders, hasNumber } = attributes;
 
 	const headerList = useHeader();
 
@@ -76,9 +76,6 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			setAttributes({ headers: headerList });
 		}
 	}, [headerList]);
-
-	// Decides whether header should be visible or not
-	const isVisible = (header) => visibleHeaders[header.level - 1];
 
 	if (headers.length === 0) {
 		return <div>No header found</div>;
@@ -90,7 +87,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				<Inspector attributes={attributes} setAttributes={setAttributes} />
 			),
 			<div>
-				<List mappingHeaders={visibleHeaders} headers={headers} />
+				<List
+					mappingHeaders={visibleHeaders}
+					headers={headers}
+					hasNumber={hasNumber}
+				/>
 			</div>,
 		];
 	}

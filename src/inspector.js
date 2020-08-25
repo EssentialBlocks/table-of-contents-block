@@ -6,7 +6,7 @@ import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, BaseControl, ToggleControl } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
-	const { visibleHeaders } = attributes;
+	const { visibleHeaders, hasNumber } = attributes;
 
 	return (
 		<InspectorControls key="controls">
@@ -28,6 +28,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 					))}
 				</BaseControl>
+
+				<ToggleControl
+					label={__("Ordered List")}
+					checked={hasNumber}
+					onChange={() => setAttributes({ hasNumber: !hasNumber })}
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);
