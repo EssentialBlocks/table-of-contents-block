@@ -8,7 +8,14 @@ import {
 	BaseControl,
 	ToggleControl,
 	RangeControl,
+	ButtonGroup,
+	Button,
 } from "@wordpress/components";
+
+/**
+ * Internal dependencies
+ */
+import { ALIGNS } from "./constants";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -20,74 +27,105 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentBg,
 		contentColor,
 		indent,
+		displayTitle,
+		titleAlign,
 	} = attributes;
 
 	return (
 		<InspectorControls key="controls">
 			<PanelBody>
-				<BaseControl label={__("Header Visibility")}>
-					{visibleHeaders.map((header, index) => (
+				<PanelBody>
+					<BaseControl label={__("Header Visibility")}>
+						{visibleHeaders.map((header, index) => (
+							<ToggleControl
+								label={`H${index + 1}`}
+								checked={header}
+								onChange={() =>
+									setAttributes({
+										visibleHeaders: [
+											...visibleHeaders.slice(0, index),
+											!visibleHeaders[index],
+											...visibleHeaders.slice(index + 1),
+										],
+									})
+								}
+							/>
+						))}
+					</BaseControl>
+
+					<ToggleControl
+						label={__("Ordered List")}
+						checked={hasNumber}
+						onChange={() => setAttributes({ hasNumber: !hasNumber })}
+					/>
+
+					<ToggleControl
+						label={__("Display title")}
+						checked={displayTitle}
+						onChange={() => setAttributes({ displayTitle: !displayTitle })}
+					/>
+
+					{displayTitle && (
 						<ToggleControl
-							label={`H${index + 1}`}
-							checked={header}
-							onChange={() =>
-								setAttributes({
-									visibleHeaders: [
-										...visibleHeaders.slice(0, index),
-										!visibleHeaders[index],
-										...visibleHeaders.slice(index + 1),
-									],
-								})
-							}
+							label={__("Collapsible")}
+							checked={collapsible}
+							onChange={() => setAttributes({ collapsible: !collapsible })}
 						/>
-					))}
-				</BaseControl>
+					)}
 
-				<ToggleControl
-					label={__("Ordered List")}
-					checked={hasNumber}
-					onChange={() => setAttributes({ hasNumber: !hasNumber })}
-				/>
+					<RangeControl
+						label={__("Indent")}
+						value={indent}
+						onChange={(indent) => setAttributes({ indent })}
+					/>
+				</PanelBody>
 
-				<ToggleControl
-					label={__("Collapsible")}
-					checked={collapsible}
-					onChange={() => setAttributes({ collapsible: !collapsible })}
-				/>
+				{displayTitle && (
+					<PanelBody title={__("Title Settings")} initialOpen={false}>
+						<BaseControl label={__("Align")} className="eb-base-control">
+							<ButtonGroup>
+								{ALIGNS.map((align, index) => (
+									<Button
+										isSmall
+										isPrimary={titleAlign === align.value}
+										isSecondary={titleAlign !== align.value}
+										onClick={() => setAttributes({ titleAlign: align.value })}
+									>
+										{align.label}
+									</Button>
+								))}
+							</ButtonGroup>
+						</BaseControl>
+					</PanelBody>
+				)}
 
-				<RangeControl
-					label={__("Indent")}
-					value={indent}
-					onChange={(indent) => setAttributes({ indent })}
+				<PanelColorSettings
+					title={__("Colors ")}
+					initialOpen={false}
+					colorSettings={[
+						{
+							value: titleBg,
+							onChange: (titleBg) => setAttributes({ titleBg }),
+							label: __("Title Background"),
+						},
+						{
+							value: titleColor,
+							onChange: (titleColor) => setAttributes({ titleColor }),
+							label: __("Title Color"),
+						},
+						{
+							value: contentBg,
+							onChange: (contentBg) => setAttributes({ contentBg }),
+							label: __("Content Background"),
+						},
+						{
+							value: contentColor,
+							onChange: (contentColor) => setAttributes({ contentColor }),
+							label: __("Content Color"),
+						},
+					]}
 				/>
 			</PanelBody>
-
-			<PanelColorSettings
-				title={__("Colors ")}
-				initialOpen={false}
-				colorSettings={[
-					{
-						value: titleBg,
-						onChange: (titleBg) => setAttributes({ titleBg }),
-						label: __("Title Background"),
-					},
-					{
-						value: titleColor,
-						onChange: (titleColor) => setAttributes({ titleColor }),
-						label: __("Title Color"),
-					},
-					{
-						value: contentBg,
-						onChange: (contentBg) => setAttributes({ contentBg }),
-						label: __("Content Background"),
-					},
-					{
-						value: contentColor,
-						onChange: (contentColor) => setAttributes({ contentColor }),
-						label: __("Content Color"),
-					},
-				]}
-			/>
 		</InspectorControls>
 	);
 };

@@ -9,5 +9,9 @@ ol {
     content: counters(item, ".") " ";
     counter-increment: item; }
 
+.eb-base-control > div {
+  display: flex;
+  justify-content: space-between; }
+
 
 /*# sourceMappingURL=style-index.css.map*/

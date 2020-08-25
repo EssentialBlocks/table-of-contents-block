@@ -78,6 +78,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		titleColor,
 		contentBg,
 		contentColor,
+		titleAlign,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -91,6 +92,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [headerList]);
 
 	const titleStyle = {
+		textAlign: titleAlign,
 		cursor: collapsible ? "pointer" : "default",
 		color: titleColor,
 		background: titleBg,
@@ -122,7 +124,12 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 					/>
 				</div>
 				<div style={contentStyle}>
-					<List attributes={attributes} />
+					<List
+						attributes={attributes}
+						mappingHeaders={visibleHeaders}
+						headers={headers}
+						hasNumber={hasNumber}
+					/>
 				</div>
 			</div>,
 		];

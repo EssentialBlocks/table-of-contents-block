@@ -34,6 +34,14 @@ const attributes = {
 	indent: {
 		type: "number",
 	},
+	displayTitle: {
+		type: "boolean",
+		default: true,
+	},
+	titleAlign: {
+		type: "string",
+		default: "left",
+	},
 };
 
 export default attributes;
