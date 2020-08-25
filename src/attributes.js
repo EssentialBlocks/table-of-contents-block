@@ -15,6 +15,10 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	collapsible: {
+		type: "boolean",
+		default: false,
+	},
 };
 
 export default attributes;

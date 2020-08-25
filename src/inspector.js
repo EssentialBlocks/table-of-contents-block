@@ -6,7 +6,7 @@ import { InspectorControls } from "@wordpress/block-editor";
 import { PanelBody, BaseControl, ToggleControl } from "@wordpress/components";
 
 const Inspector = ({ attributes, setAttributes }) => {
-	const { visibleHeaders, hasNumber } = attributes;
+	const { visibleHeaders, hasNumber, collapsible } = attributes;
 
 	return (
 		<InspectorControls key="controls">
@@ -33,6 +33,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Ordered List")}
 					checked={hasNumber}
 					onChange={() => setAttributes({ hasNumber: !hasNumber })}
+				/>
+
+				<ToggleControl
+					label={__("Collapsible")}
+					checked={collapsible}
+					onChange={() => setAttributes({ collapsible: !collapsible })}
 				/>
 			</PanelBody>
 		</InspectorControls>

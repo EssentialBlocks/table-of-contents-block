@@ -4,13 +4,13 @@
 
 ol {
 	counter-reset: item;
-}
 
-ol > li{
-	display: block;
-}
+	li {
+		display: block;
+	}
 
-ol > li:before {
-	content: counters(item, ".") " ";
-	counter-increment: item;
+	li:before {
+		content: counters(item, ".") " ";
+		counter-increment: item;
+	}
 }

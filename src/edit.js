@@ -3,7 +3,7 @@
  */
 import { __ } from "@wordpress/i18n";
 import { RichText } from "@wordpress/block-editor";
-import { useEffect } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 /*
@@ -68,7 +68,9 @@ const useHeader = () => {
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
-	const { headers, visibleHeaders, hasNumber, title } = attributes;
+	const { headers, visibleHeaders, hasNumber, title, collapsible } = attributes;
+
+	const [visible, setVisible] = useState(true);
 
 	const headerList = useHeader();
 
@@ -77,6 +79,10 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			setAttributes({ headers: headerList });
 		}
 	}, [headerList]);
+
+	const titleStyle = {
+		cursor: "pointer",
+	};
 
 	if (headers.length === 0) {
 		return <div>No header found</div>;
@@ -88,18 +94,22 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				<Inspector attributes={attributes} setAttributes={setAttributes} />
 			),
 			<div>
-				<RichText
-					className="eb-toc-title"
-					placeholder="Table of content"
-					value={title}
-					onChange={(title) => setAttributes({ title })}
-				/>
-
-				<List
-					mappingHeaders={visibleHeaders}
-					headers={headers}
-					hasNumber={hasNumber}
-				/>
+				<div onClick={() => collapsible && setVisible(!visible)}>
+					<RichText
+						className="eb-toc-title"
+						style={titleStyle}
+						placeholder="Table of content"
+						value={title}
+						onChange={(title) => setAttributes({ title })}
+					/>
+				</div>
+				<div style={{ display: visible ? "block" : "none" }}>
+					<List
+						mappingHeaders={visibleHeaders}
+						headers={headers}
+						hasNumber={hasNumber}
+					/>
+				</div>
 			</div>,
 		];
 	}

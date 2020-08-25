@@ -3,6 +3,9 @@ import List from "./list";
 export default function save({ attributes }) {
 	const { visibleHeaders, headers } = attributes;
 
+	// Until finalizing backend
+	return <div />;
+
 	if (headers.length === 0) {
 		return <div />;
 	}
