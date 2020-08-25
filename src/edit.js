@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
+import { RichText } from "@wordpress/block-editor";
 import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
@@ -67,7 +68,7 @@ const useHeader = () => {
 };
 
 export default function Edit({ isSelected, attributes, setAttributes }) {
-	const { headers, visibleHeaders, hasNumber } = attributes;
+	const { headers, visibleHeaders, hasNumber, title } = attributes;
 
 	const headerList = useHeader();
 
@@ -87,6 +88,13 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				<Inspector attributes={attributes} setAttributes={setAttributes} />
 			),
 			<div>
+				<RichText
+					className="eb-toc-title"
+					placeholder="Table of content"
+					value={title}
+					onChange={(title) => setAttributes({ title })}
+				/>
+
 				<List
 					mappingHeaders={visibleHeaders}
 					headers={headers}

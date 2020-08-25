@@ -118,7 +118,6 @@
 		 * Alter the_content.
 		 */
 		_run: function (attr, id) {
-			console.log("table of content");
 			let node = document.querySelector(".eb-toc-wrapper");
 
 			if (node) {

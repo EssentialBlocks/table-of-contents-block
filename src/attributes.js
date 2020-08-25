@@ -11,6 +11,10 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	title: {
+		type: "string",
+		default: "",
+	},
 };
 
 export default attributes;
