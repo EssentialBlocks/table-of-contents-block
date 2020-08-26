@@ -82,12 +82,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					</BaseControl>
 
 					<ToggleControl
-						label={__("Ordered List")}
-						checked={hasNumber}
-						onChange={() => setAttributes({ hasNumber: !hasNumber })}
-					/>
-
-					<ToggleControl
 						label={__("Display title")}
 						checked={displayTitle}
 						onChange={() => setAttributes({ displayTitle: !displayTitle })}
@@ -100,12 +94,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 							onChange={() => setAttributes({ collapsible: !collapsible })}
 						/>
 					)}
-
-					<RangeControl
-						label={__("Indent")}
-						value={indent}
-						onChange={(indent) => setAttributes({ indent })}
-					/>
 				</PanelBody>
 
 				{displayTitle && (
@@ -250,6 +238,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 						</BaseControl>
 					</PanelBody>
 				)}
+
+				<PanelBody title={__("Content Settings")} initialOpen={false}>
+					<ToggleControl
+						label={__("Ordered List")}
+						checked={hasNumber}
+						onChange={() => setAttributes({ hasNumber: !hasNumber })}
+					/>
+
+					<RangeControl
+						label={__("Indent")}
+						value={indent}
+						onChange={(indent) => setAttributes({ indent })}
+					/>
+				</PanelBody>
 
 				<PanelColorSettings
 					title={__("Colors ")}
