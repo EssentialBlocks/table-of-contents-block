@@ -47,6 +47,7 @@
 			$(document).on("scroll", EBTableOfContents._showHideScroll);
 
 			this._run();
+			this._scroll();
 		},
 
 		_toggleCollapse: function (e) {
@@ -90,26 +91,22 @@
 		/**
 		 * Smooth Scroll.
 		 */
-		_scroll: function (e) {
-			if (this.hash !== "") {
-				var hash = this.hash;
-				var node = $(this).closest(".wp-block-eb-table-of-contents");
+		_scroll: function () {
+			let nodes = document.querySelectorAll(".eb-toc-wrapper");
 
-				scroll = node.data("scroll");
-				scroll_offset = node.data("offset");
-				scroll_delay = node.data("delay");
+			for (node of nodes) {
+				const isSmooth = node.getAttribute("data-smooth") === "true";
 
-				if (scroll) {
-					var offset = $(decodeURIComponent(hash)).offset();
+				if (isSmooth) {
+					node.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+						anchor.addEventListener("click", function (e) {
+							e.preventDefault();
 
-					if ("undefined" != typeof offset) {
-						$("html, body").animate(
-							{
-								scrollTop: offset.top - scroll_offset,
-							},
-							scroll_delay
-						);
-					}
+							document.querySelector(this.getAttribute("href")).scrollIntoView({
+								behavior: "smooth",
+							});
+						});
+					});
 				}
 			}
 		},
@@ -117,7 +114,7 @@
 		/**
 		 * Alter the_content.
 		 */
-		_run: function (attr, id) {
+		_run: function () {
 			let node = document.querySelector(".eb-toc-wrapper");
 
 			if (node) {
@@ -156,48 +153,6 @@
 					});
 				}
 			}
-
-			// var $this_scope = $(id);
-
-			// if ($this_scope.find(".eb-toc__collapsible-wrap").length > 0) {
-			// 	$this_scope
-			// 		.find(".eb-toc__title-wrap")
-			// 		.addClass("eb-toc__is-collapsible");
-			// }
-
-			// var $headers = JSON.parse(attr.headerLinks);
-
-			// var allowed_h_tags = [];
-
-			// if (undefined !== attr.mappingHeaders) {
-			// 	attr.mappingHeaders.forEach((h_tag, index) =>
-			// 		h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
-			// 	);
-			// 	var allowed_h_tags_str =
-			// 		null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
-			// }
-
-			// var all_header =
-			// 	undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
-			// 		? $("body").find(allowed_h_tags_str)
-			// 		: $("body").find("h1, h2, h3, h4, h5, h6");
-
-			// if (undefined !== $headers && 0 !== all_header.length) {
-			// 	$headers.forEach(function (element, i) {
-			// 		let element_text = parseTocSlug(element.text);
-			// 		all_header.each(function () {
-			// 			let header = $(this);
-			// 			let header_text = parseTocSlug(header.text());
-			// 			if (element_text.localeCompare(header_text) === 0) {
-			// 				header.before(
-			// 					'<span id="' +
-			// 						header_text +
-			// 						'" class="eb-toc__heading-anchor"></span>'
-			// 				);
-			// 			}
-			// 		});
-			// 	});
-			// }
 
 			// scroll_to_top = attr.scrollToTop;
 

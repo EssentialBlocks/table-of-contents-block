@@ -2091,6 +2091,10 @@ var attributes = {
   contentLineHeightUnit: {
     type: "string",
     default: "px"
+  },
+  isSmooth: {
+    type: "boolean",
+    default: true
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2526,7 +2530,8 @@ var Inspector = function Inspector(_ref) {
       contentLetterSpacing = attributes.contentLetterSpacing,
       contentLetterSpacingUnit = attributes.contentLetterSpacingUnit,
       contentLineHeight = attributes.contentLineHeight,
-      contentLineHeightUnit = attributes.contentLineHeightUnit;
+      contentLineHeightUnit = attributes.contentLineHeightUnit,
+      isSmooth = attributes.isSmooth;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2554,11 +2559,19 @@ var Inspector = function Inspector(_ref) {
       }
     });
   })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ToggleControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Display title"),
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Display Title"),
     checked: displayTitle,
     onChange: function onChange() {
       return setAttributes({
         displayTitle: !displayTitle
+      });
+    }
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Smooth Scroll"),
+    checked: isSmooth,
+    onChange: function onChange() {
+      return setAttributes({
+        isSmooth: !isSmooth
       });
     }
   }), displayTitle && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ToggleControl"], {
@@ -3118,9 +3131,9 @@ __webpack_require__.r(__webpack_exports__);
 function save(_ref) {
   var attributes = _ref.attributes;
   var visibleHeaders = attributes.visibleHeaders,
-      headers = attributes.headers; // Until finalizing backend
-
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null);
+      headers = attributes.headers,
+      isSmooth = attributes.isSmooth; // Until finalizing backend
+  // return <div />;
 
   if (headers.length === 0) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null);
@@ -3129,7 +3142,8 @@ function save(_ref) {
   return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "eb-toc-wrapper",
     "data-headers": JSON.stringify(headers),
-    "data-visible": JSON.stringify(visibleHeaders)
+    "data-visible": JSON.stringify(visibleHeaders),
+    "data-smooth": isSmooth
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attributes: attributes
   })));

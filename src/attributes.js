@@ -111,6 +111,10 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	isSmooth: {
+		type: "boolean",
+		default: true,
+	},
 };
 
 export default attributes;

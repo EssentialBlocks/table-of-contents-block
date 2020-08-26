@@ -58,6 +58,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentLetterSpacingUnit,
 		contentLineHeight,
 		contentLineHeightUnit,
+		isSmooth,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -101,9 +102,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 					</BaseControl>
 
 					<ToggleControl
-						label={__("Display title")}
+						label={__("Display Title")}
 						checked={displayTitle}
 						onChange={() => setAttributes({ displayTitle: !displayTitle })}
+					/>
+
+					<ToggleControl
+						label={__("Smooth Scroll")}
+						checked={isSmooth}
+						onChange={() => setAttributes({ isSmooth: !isSmooth })}
 					/>
 
 					{displayTitle && (
