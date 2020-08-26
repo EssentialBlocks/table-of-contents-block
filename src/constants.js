@@ -27,3 +27,14 @@ export const TEXT_DECORATION = [
 	{ label: __("Underline"), value: "underline" },
 	{ label: __("Underline Oveline"), value: "underline overline" },
 ];
+
+export const SEPERATOR_STYLES = [
+	{ label: __("Dashed"), value: "dashed" },
+	{ label: __("Solid"), value: "solid" },
+	{ label: __("Dotted"), value: "dotted" },
+	{ label: __("Double"), value: "double" },
+	{ label: __("Groove"), value: "groove" },
+	{ label: __("Inset"), value: "inset" },
+	{ label: __("Outset"), value: "outset" },
+	{ label: __("Ridge"), value: "ridge" },
+];

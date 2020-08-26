@@ -115,6 +115,20 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+	seperator: {
+		type: "boolean",
+		default: false,
+	},
+	seperatorColor: {
+		type: "string",
+	},
+	seperatorSize: {
+		type: "number",
+	},
+	seperatorStyle: {
+		type: "string",
+		default: "solid",
+	},
 };
 
 export default attributes;

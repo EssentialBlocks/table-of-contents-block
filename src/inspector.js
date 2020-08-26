@@ -22,9 +22,11 @@ import {
 	FONT_WEIGHTS,
 	TEXT_TRANSFORM,
 	TEXT_DECORATION,
+	SEPERATOR_STYLES,
 } from "./constants";
 import UnitControl from "../util/unit-control";
 import FontPicker from "../util/typography-control/FontPicker";
+import ColorControl from "../util/color-control/index";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -59,6 +61,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentLineHeight,
 		contentLineHeightUnit,
 		isSmooth,
+		seperator,
+		seperatorSize,
+		seperatorColor,
+		seperatorStyle,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -107,12 +113,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={() => setAttributes({ displayTitle: !displayTitle })}
 					/>
 
-					<ToggleControl
-						label={__("Smooth Scroll")}
-						checked={isSmooth}
-						onChange={() => setAttributes({ isSmooth: !isSmooth })}
-					/>
-
 					{displayTitle && (
 						<ToggleControl
 							label={__("Collapsible")}
@@ -120,6 +120,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 							onChange={() => setAttributes({ collapsible: !collapsible })}
 						/>
 					)}
+
+					<ToggleControl
+						label={__("Smooth Scroll")}
+						checked={isSmooth}
+						onChange={() => setAttributes({ isSmooth: !isSmooth })}
+					/>
+
+					<ToggleControl
+						label={__("Seperator")}
+						checked={seperator}
+						onChange={() => setAttributes({ seperator: !seperator })}
+					/>
 				</PanelBody>
 
 				{displayTitle && (
@@ -399,6 +411,31 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 					</BaseControl>
 				</PanelBody>
+
+				{seperator && (
+					<PanelBody title={__("Seperator")}>
+						<RangeControl
+							label={__("Seperator Size")}
+							value={seperatorSize}
+							onChange={(seperatorSize) => setAttributes({ seperatorSize })}
+							min={0}
+							max={100}
+						/>
+
+						<ColorControl
+							label={__("Seperator Color")}
+							color={seperatorColor}
+							onChange={(seperatorColor) => setAttributes({ seperatorColor })}
+						/>
+
+						<SelectControl
+							label={__("Seperator Style")}
+							value={seperatorStyle}
+							options={SEPERATOR_STYLES}
+							onChange={(seperatorStyle) => setAttributes({ seperatorStyle })}
+						/>
+					</PanelBody>
+				)}
 
 				<PanelColorSettings
 					title={__("Colors ")}

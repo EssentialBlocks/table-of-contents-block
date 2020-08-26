@@ -1,35 +1,3 @@
-.eb-toc-wrapper {
-  width: 100%; }
-
-ol {
-  counter-reset: item; }
-  ol li {
-    display: block; }
-  ol li:before {
-    content: counters(item, ".") " ";
-    counter-increment: item; }
-
-.eb-base-control > div {
-  display: flex;
-  justify-content: space-between; }
-
-.eb-unit-control-btn-group {
-  margin: 0px 0px -20px 0px;
-  text-align: right;
-  display: block; }
-
-.eb-unit-control-btn {
-  color: black;
-  background: transparent !important;
-  outline: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  text-shadow: none !important; }
-
-.eb-unit-active {
-  color: #0084bc !important;
-  font-weight: bold; }
-
 .eb-color-base div {
 	display: flex;
 	justify-content: space-between;
@@ -64,6 +32,3 @@ ol {
 .eb-color-undo :hover {
 	box-shadow: none;
 }
-
-
-/*# sourceMappingURL=style-index.css.map*/

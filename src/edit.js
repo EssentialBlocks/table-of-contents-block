@@ -70,14 +70,13 @@ const useHeader = () => {
 export default function Edit({ isSelected, attributes, setAttributes }) {
 	const {
 		headers,
-		visibleHeaders,
-		hasNumber,
 		title,
 		collapsible,
 		titleBg,
 		titleColor,
 		contentBg,
 		contentColor,
+		displayTitle,
 		titleAlign,
 		titleFontFamily,
 		titleSizeUnit,
@@ -89,6 +88,10 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		titleLetterSpacingUnit,
 		titleLineHeight,
 		titleLineHeightUnit,
+		seperator,
+		seperatorSize,
+		seperatorColor,
+		seperatorStyle,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -102,6 +105,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [headerList]);
 
 	const titleStyle = {
+		display: displayTitle ? "block" : "none",
 		fontFamily: titleFontFamily,
 		fontSize: titleFontSize + titleSizeUnit,
 		fontWeight: titleFontWeight,
@@ -113,6 +117,9 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		cursor: collapsible ? "pointer" : "default",
 		color: titleColor,
 		background: titleBg,
+		borderBottom: seperator
+			? `${seperatorSize || 0}px ${seperatorStyle} ${seperatorColor}`
+			: "none",
 	};
 
 	const contentStyle = {
