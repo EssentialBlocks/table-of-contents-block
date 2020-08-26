@@ -76,6 +76,41 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	contentFontFamily: {
+		type: "string",
+	},
+	contentSizeUnit: {
+		type: "string",
+		default: "px",
+	},
+	contentFontSize: {
+		type: "number",
+	},
+	contentFontWeight: {
+		type: "string",
+		default: "normal",
+	},
+	contentTextTransform: {
+		type: "string",
+	},
+	contentTextDecoration: {
+		type: "string",
+		default: "underline",
+	},
+	contentLetterSpacing: {
+		type: "number",
+	},
+	contentLetterSpacingUnit: {
+		type: "string",
+		default: "px",
+	},
+	contentLineHeight: {
+		type: "number",
+	},
+	contentLineHeightUnit: {
+		type: "string",
+		default: "px",
+	},
 };
 
 export default attributes;

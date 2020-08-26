@@ -9,6 +9,16 @@ class List extends Component {
 			hasNumber,
 			contentColor,
 			indent,
+			contentFontFamily,
+			contentSizeUnit,
+			contentFontSize,
+			contentFontWeight,
+			contentTextTransform,
+			contentTextDecoration,
+			contentLetterSpacing,
+			contentLetterSpacingUnit,
+			contentLineHeight,
+			contentLineHeightUnit,
 		} = this.props.attributes;
 
 		const ListTag = hasNumber ? "ol" : "ul";
@@ -67,13 +77,26 @@ class List extends Component {
 					items.push(parseList(item));
 				} else {
 					items.push(
-						<li key={counter}>
+						<li
+							key={counter}
+							style={{
+								fontFamily: contentFontFamily,
+								fontSize: contentFontSize + contentSizeUnit,
+								fontWeight: contentFontWeight,
+								letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
+								lineHeight: contentLineHeight + contentLineHeightUnit,
+								textTransform: contentTextTransform,
+							}}
+						>
 							<a
 								href={`#${item.link}`}
 								dangerouslySetInnerHTML={{
 									__html: item.text,
 								}}
-								style={{ color: contentColor }}
+								style={{
+									color: contentColor,
+									textDecoration: contentTextDecoration,
+								}}
 							/>
 						</li>
 					);
