@@ -17,7 +17,7 @@ export default function save({ attributes }) {
 				data-headers={JSON.stringify(headers)}
 				data-visible={JSON.stringify(visibleHeaders)}
 			>
-				<List mappingHeaders={visibleHeaders} headers={headers} />
+				<List attributes={attributes} />
 			</div>
 		</div>
 	);

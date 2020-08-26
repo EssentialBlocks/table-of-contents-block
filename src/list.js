@@ -21,6 +21,23 @@ class List extends Component {
 			contentLineHeightUnit,
 		} = this.props.attributes;
 
+		// Style objects
+		const listStyle = { marginLeft: indent };
+
+		const listItemStyle = {
+			fontFamily: contentFontFamily,
+			fontSize: contentFontSize + contentSizeUnit,
+			fontWeight: contentFontWeight,
+			letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
+			lineHeight: contentLineHeight + contentLineHeightUnit,
+			textTransform: contentTextTransform,
+		};
+
+		const linkStyle = {
+			color: contentColor,
+			textDecoration: contentTextDecoration,
+		};
+
 		const ListTag = hasNumber ? "ol" : "ul";
 
 		const makeHeaderArray = (origHeaders) => {
@@ -77,26 +94,13 @@ class List extends Component {
 					items.push(parseList(item));
 				} else {
 					items.push(
-						<li
-							key={counter}
-							style={{
-								fontFamily: contentFontFamily,
-								fontSize: contentFontSize + contentSizeUnit,
-								fontWeight: contentFontWeight,
-								letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-								lineHeight: contentLineHeight + contentLineHeightUnit,
-								textTransform: contentTextTransform,
-							}}
-						>
+						<li key={counter} style={listItemStyle}>
 							<a
 								href={`#${item.link}`}
 								dangerouslySetInnerHTML={{
 									__html: item.text,
 								}}
-								style={{
-									color: contentColor,
-									textDecoration: contentTextDecoration,
-								}}
+								style={linkStyle}
 							/>
 						</li>
 					);
@@ -108,7 +112,7 @@ class List extends Component {
 				<ListTag
 					key={counter + "-" + ul_counter}
 					className="eb-toc__list"
-					style={{ marginLeft: indent }}
+					style={listStyle}
 				>
 					{items}
 				</ListTag>

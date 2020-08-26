@@ -141,12 +141,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 					/>
 				</div>
 				<div style={contentStyle}>
-					<List
-						attributes={attributes}
-						mappingHeaders={visibleHeaders}
-						headers={headers}
-						hasNumber={hasNumber}
-					/>
+					<List attributes={attributes} />
 				</div>
 			</div>,
 		];

@@ -2343,10 +2343,7 @@ function Edit(_ref) {
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
       style: contentStyle
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      attributes: attributes,
-      mappingHeaders: visibleHeaders,
-      headers: headers,
-      hasNumber: hasNumber
+      attributes: attributes
     })))];
   }
 }
@@ -2991,7 +2988,23 @@ var List = /*#__PURE__*/function (_Component) {
           contentLetterSpacing = _this$props$attribute.contentLetterSpacing,
           contentLetterSpacingUnit = _this$props$attribute.contentLetterSpacingUnit,
           contentLineHeight = _this$props$attribute.contentLineHeight,
-          contentLineHeightUnit = _this$props$attribute.contentLineHeightUnit;
+          contentLineHeightUnit = _this$props$attribute.contentLineHeightUnit; // Style objects
+
+      var listStyle = {
+        marginLeft: indent
+      };
+      var listItemStyle = {
+        fontFamily: contentFontFamily,
+        fontSize: contentFontSize + contentSizeUnit,
+        fontWeight: contentFontWeight,
+        letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
+        lineHeight: contentLineHeight + contentLineHeightUnit,
+        textTransform: contentTextTransform
+      };
+      var linkStyle = {
+        color: contentColor,
+        textDecoration: contentTextDecoration
+      };
       var ListTag = hasNumber ? "ol" : "ul";
 
       var makeHeaderArray = function makeHeaderArray(origHeaders) {
@@ -3047,23 +3060,13 @@ var List = /*#__PURE__*/function (_Component) {
           } else {
             items.push(Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("li", {
               key: counter,
-              style: {
-                fontFamily: contentFontFamily,
-                fontSize: contentFontSize + contentSizeUnit,
-                fontWeight: contentFontWeight,
-                letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-                lineHeight: contentLineHeight + contentLineHeightUnit,
-                textTransform: contentTextTransform
-              }
+              style: listItemStyle
             }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])("a", {
               href: "#".concat(item.link),
               dangerouslySetInnerHTML: {
                 __html: item.text
               },
-              style: {
-                color: contentColor,
-                textDecoration: contentTextDecoration
-              }
+              style: linkStyle
             })));
             counter++;
           }
@@ -3072,9 +3075,7 @@ var List = /*#__PURE__*/function (_Component) {
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_5__["createElement"])(ListTag, {
           key: counter + "-" + ul_counter,
           className: "eb-toc__list",
-          style: {
-            marginLeft: indent
-          }
+          style: listStyle
         }, items);
       };
 
@@ -3130,8 +3131,7 @@ function save(_ref) {
     "data-headers": JSON.stringify(headers),
     "data-visible": JSON.stringify(visibleHeaders)
   }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    mappingHeaders: visibleHeaders,
-    headers: headers
+    attributes: attributes
   })));
 }
 
