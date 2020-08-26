@@ -42,6 +42,40 @@ const attributes = {
 		type: "string",
 		default: "left",
 	},
+	titleFontFamily: {
+		type: "string",
+	},
+	titleSizeUnit: {
+		type: "string",
+		default: "px",
+	},
+	titleFontSize: {
+		type: "number",
+	},
+	titleFontWeight: {
+		type: "string",
+		default: "normal",
+	},
+	titleTextTransform: {
+		type: "string",
+	},
+	titleTextDecoration: {
+		type: "string",
+	},
+	titleLetterSpacing: {
+		type: "number",
+	},
+	titleLetterSpacingUnit: {
+		type: "string",
+		default: "px",
+	},
+	titleLineHeight: {
+		type: "number",
+	},
+	titleLineHeightUnit: {
+		type: "string",
+		default: "px",
+	},
 };
 
 export default attributes;

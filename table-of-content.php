@@ -17,6 +17,10 @@
  *
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
+
+require_once __DIR__ . '/includes/font-loader.php';
+require_once __DIR__ . '/includes/post-meta.php';
+
 function create_block_table_of_content_block_init() {
 	$dir = dirname( __FILE__ );
 

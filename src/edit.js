@@ -79,6 +79,16 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		contentBg,
 		contentColor,
 		titleAlign,
+		titleFontFamily,
+		titleSizeUnit,
+		titleFontSize,
+		titleFontWeight,
+		titleTextTransform,
+		titleTextDecoration,
+		titleLetterSpacing,
+		titleLetterSpacingUnit,
+		titleLineHeight,
+		titleLineHeightUnit,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -92,6 +102,13 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [headerList]);
 
 	const titleStyle = {
+		fontFamily: titleFontFamily,
+		fontSize: titleFontSize + titleSizeUnit,
+		fontWeight: titleFontWeight,
+		textTransform: titleTextTransform,
+		textDecoration: titleTextDecoration,
+		letterSpacing: titleLetterSpacing + titleLetterSpacingUnit,
+		lineHeight: titleLineHeight + titleLineHeightUnit,
 		textAlign: titleAlign,
 		cursor: collapsible ? "pointer" : "default",
 		color: titleColor,

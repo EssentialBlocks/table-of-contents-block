@@ -8,14 +8,23 @@ import {
 	BaseControl,
 	ToggleControl,
 	RangeControl,
+	SelectControl,
 	ButtonGroup,
 	Button,
+	Dropdown,
 } from "@wordpress/components";
 
 /**
  * Internal dependencies
  */
-import { ALIGNS } from "./constants";
+import {
+	ALIGNS,
+	FONT_WEIGHTS,
+	TEXT_TRANSFORM,
+	TEXT_DECORATION,
+} from "./constants";
+import UnitControl from "../util/unit-control";
+import FontPicker from "../util/typography-control/FontPicker";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -29,7 +38,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 		indent,
 		displayTitle,
 		titleAlign,
+		titleFontFamily,
+		titleSizeUnit,
+		titleFontSize,
+		titleFontWeight,
+		titleTextTransform,
+		titleTextDecoration,
+		titleLetterSpacing,
+		titleLetterSpacingUnit,
+		titleLineHeight,
+		titleLineHeightUnit,
 	} = attributes;
+
+	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
+	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
+
+	const TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
+	const TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
+
+	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
+	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
 
 	return (
 		<InspectorControls key="controls">
@@ -95,6 +123,130 @@ const Inspector = ({ attributes, setAttributes }) => {
 									</Button>
 								))}
 							</ButtonGroup>
+						</BaseControl>
+
+						<BaseControl
+							label={__("Typography")}
+							className="eb-typography-base"
+						>
+							<Dropdown
+								className="eb-typography-dropdown"
+								contentClassName="my-popover-content-classname"
+								position="bottom right"
+								renderToggle={({ isOpen, onToggle }) => (
+									<Button
+										isSmall
+										onClick={onToggle}
+										aria-expanded={isOpen}
+										icon="edit"
+									></Button>
+								)}
+								renderContent={() => (
+									<div style={{ padding: "1rem" }}>
+										<FontPicker
+											label={__("Font Family")}
+											value={titleFontFamily}
+											onChange={(titleFontFamily) =>
+												setAttributes({ titleFontFamily })
+											}
+										/>
+
+										<UnitControl
+											selectedUnit={titleSizeUnit}
+											unitTypes={[
+												{ label: "px", value: "px" },
+												{ label: "%", value: "%" },
+												{ label: "em", value: "em" },
+											]}
+											onClick={(titleSizeUnit) =>
+												setAttributes({ titleSizeUnit })
+											}
+										/>
+
+										<RangeControl
+											label={__("Font Size")}
+											value={titleFontSize}
+											onChange={(titleFontSize) =>
+												setAttributes({ titleFontSize })
+											}
+											step={TITLE_SIZE_STEP}
+											min={0}
+											max={TITLE_SIZE_MAX}
+										/>
+
+										<SelectControl
+											label={__("Font Weight")}
+											value={titleFontWeight}
+											options={FONT_WEIGHTS}
+											onChange={(titleFontWeight) =>
+												setAttributes({ titleFontWeight })
+											}
+										/>
+
+										<SelectControl
+											label={__("Text Transform")}
+											value={titleTextTransform}
+											options={TEXT_TRANSFORM}
+											onChange={(titleTextTransform) =>
+												setAttributes({ titleTextTransform })
+											}
+										/>
+
+										<SelectControl
+											label={__("Text Decoration")}
+											value={titleTextDecoration}
+											options={TEXT_DECORATION}
+											onChange={(titleTextDecoration) =>
+												setAttributes({ titleTextDecoration })
+											}
+										/>
+
+										<UnitControl
+											selectedUnit={titleLetterSpacingUnit}
+											unitTypes={[
+												{ label: "px", value: "px" },
+												{ label: "em", value: "em" },
+											]}
+											onClick={(titleLetterSpacingUnit) =>
+												setAttributes({ titleLetterSpacingUnit })
+											}
+										/>
+
+										<RangeControl
+											label={__("Letter Spacing")}
+											value={titleLetterSpacing}
+											onChange={(titleLetterSpacing) =>
+												setAttributes({ titleLetterSpacing })
+											}
+											min={0}
+											max={TITLE_SPACING_MAX}
+											step={TITLE_SPACING_STEP}
+										/>
+
+										<UnitControl
+											selectedUnit={titleLineHeightUnit}
+											unitTypes={[
+												{ label: "px", value: "px" },
+												{ label: "em", value: "em" },
+											]}
+											onClick={(titleLineHeightUnit) =>
+												setAttributes({ titleLineHeightUnit })
+											}
+										/>
+
+										<RangeControl
+											label={__("Line Height")}
+											value={titleLineHeight}
+											onChange={(titleLineHeight) =>
+												setAttributes({ titleLineHeight })
+											}
+											min={0}
+											max={TITLE_LINE_HEIGHT_MAX}
+											step={TITLE_LINE_HEIGHT_STEP}
+										/>
+									</div>
+								)}
+							/>
 						</BaseControl>
 					</PanelBody>
 				)}
