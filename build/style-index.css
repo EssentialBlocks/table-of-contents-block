@@ -13,6 +13,9 @@ ol {
   display: flex;
   justify-content: space-between; }
 
+.hide-content {
+  display: none; }
+
 .eb-unit-control-btn-group {
   margin: 0px 0px -20px 0px;
   text-align: right;

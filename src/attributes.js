@@ -19,6 +19,10 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	initialCollape: {
+		type: "boolean",
+		default: false,
+	},
 	titleBg: {
 		type: "string",
 	},

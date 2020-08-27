@@ -27,6 +27,7 @@ export default function save({ attributes }) {
 		titleColor,
 		titleBg,
 		collapsible,
+		initialCollapse,
 		seperator,
 		seperatorSize,
 		seperatorStyle,
@@ -59,7 +60,11 @@ export default function save({ attributes }) {
 	}
 
 	return (
-		<div>
+		<div
+			className="eb-toc-container"
+			data-collapsible={collapsible}
+			data-initial-collapse={initialCollapse}
+		>
 			<RichText.Content
 				tagName="p"
 				className="eb-toc-title"

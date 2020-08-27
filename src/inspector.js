@@ -33,6 +33,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		visibleHeaders,
 		collapsible,
+		initialCollapse,
 		listType,
 		listColor,
 		titleBg,
@@ -132,6 +133,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Collapsible")}
 						checked={collapsible}
 						onChange={() => setAttributes({ collapsible: !collapsible })}
+					/>
+				)}
+
+				{displayTitle && collapsible && (
+					<ToggleControl
+						label={__("Initial Collapse")}
+						checked={initialCollapse}
+						onChange={() =>
+							setAttributes({ initialCollapse: !initialCollapse })
+						}
 					/>
 				)}
 

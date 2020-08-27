@@ -48,9 +48,33 @@
 
 			this._run();
 			this._scroll();
+			this._toggleCollapse();
 		},
 
-		_toggleCollapse: function (e) {
+		_toggleCollapse: function () {
+			let containers = document.querySelectorAll(".eb-toc-container");
+
+			for (container of containers) {
+				const collapsible =
+					container.getAttribute("data-collapsible") === "true";
+				const initialCollapse =
+					container.getAttribute("data-initial-collapse") === "true";
+
+				if (collapsible) {
+					const title = container.querySelector(".eb-toc-title");
+					const content = container.querySelector(".eb-toc-wrapper");
+
+					if (initialCollapse) {
+						content.classList.add("hide-content");
+					}
+
+					title.addEventListener("click", function () {
+						content.classList.toggle("hide-content");
+					});
+				}
+			}
+
+			return;
 			if ($(this).find(".eb-toc__collapsible-wrap").length > 0) {
 				let $root = $(this).closest(".wp-block-eb-table-of-contents");
 

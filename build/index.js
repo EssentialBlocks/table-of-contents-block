@@ -1552,6 +1552,10 @@ var attributes = {
     type: "boolean",
     "default": false
   },
+  initialCollape: {
+    type: "boolean",
+    "default": false
+  },
   titleBg: {
     type: "string"
   },
@@ -2199,6 +2203,7 @@ var Inspector = function Inspector(_ref) {
       setAttributes = _ref.setAttributes;
   var visibleHeaders = attributes.visibleHeaders,
       collapsible = attributes.collapsible,
+      initialCollapse = attributes.initialCollapse,
       listType = attributes.listType,
       listColor = attributes.listColor,
       titleBg = attributes.titleBg,
@@ -2285,6 +2290,14 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange() {
       return setAttributes({
         collapsible: !collapsible
+      });
+    }
+  }), displayTitle && collapsible && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Initial Collapse"),
+    checked: initialCollapse,
+    onChange: function onChange() {
+      return setAttributes({
+        initialCollapse: !initialCollapse
       });
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
@@ -3007,6 +3020,7 @@ function save(_ref) {
       titleColor = attributes.titleColor,
       titleBg = attributes.titleBg,
       collapsible = attributes.collapsible,
+      initialCollapse = attributes.initialCollapse,
       seperator = attributes.seperator,
       seperatorSize = attributes.seperatorSize,
       seperatorStyle = attributes.seperatorStyle,
@@ -3034,7 +3048,11 @@ function save(_ref) {
     return /*#__PURE__*/React.createElement("div", null);
   }
 
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "eb-toc-container",
+    "data-collapsible": collapsible,
+    "data-initial-collapse": initialCollapse
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",
     value: title,
