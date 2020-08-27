@@ -31,6 +31,13 @@ const attributes = {
 	contentColor: {
 		type: "string",
 	},
+	contentGap: {
+		type: "number",
+	},
+	contentGapUnit: {
+		type: "string",
+		default: "px",
+	},
 	indent: {
 		type: "number",
 	},

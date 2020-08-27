@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InspectorControls, PanelColorSettings } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	BaseControl,
@@ -37,6 +37,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentBg,
 		contentColor,
 		indent,
+		contentGap,
+		contentGapUnit,
 		displayTitle,
 		titleAlign,
 		titleFontFamily,
@@ -74,6 +76,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
 	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
+
+	const CONTENT_GAP_STEP = contentGapUnit === "em" ? 0.1 : 1;
+	const CONTENT_GAP_MAX = contentGapUnit === "em" ? 10 : 100;
 
 	const CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
 	const CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
@@ -291,6 +296,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Indent")}
 					value={indent}
 					onChange={(indent) => setAttributes({ indent })}
+				/>
+
+				<UnitControl
+					selectedUnit={contentGapUnit}
+					unitTypes={[
+						{ label: "px", value: "px" },
+						{ label: "%", value: "%" },
+						{ label: "em", value: "em" },
+					]}
+					onClick={(contentGapUnit) => setAttributes({ contentGapUnit })}
+				/>
+
+				<RangeControl
+					label={__("Content Gap")}
+					value={contentGap}
+					onChange={(contentGap) => setAttributes({ contentGap })}
+					min={0}
+					max={CONTENT_GAP_MAX}
+					step={CONTENT_GAP_STEP}
 				/>
 
 				<ColorControl

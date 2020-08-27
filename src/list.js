@@ -9,6 +9,8 @@ class List extends Component {
 			listType,
 			contentColor,
 			indent,
+			contentGap,
+			contentGapUnit,
 			contentFontFamily,
 			contentSizeUnit,
 			contentFontSize,
@@ -97,7 +99,15 @@ class List extends Component {
 					items.push(parseList(item));
 				} else {
 					items.push(
-						<li key={counter} style={listItemStyle}>
+						<li
+							key={counter}
+							style={{
+								...listItemStyle,
+								paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
+								paddingBottom:
+									counter < list.length && contentGap / 2 + contentGapUnit,
+							}}
+						>
 							<a
 								href={`#${item.link}`}
 								dangerouslySetInnerHTML={{
