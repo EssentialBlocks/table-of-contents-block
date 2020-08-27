@@ -121,6 +121,7 @@ const attributes = {
 	},
 	seperatorColor: {
 		type: "string",
+		default: "black",
 	},
 	seperatorSize: {
 		type: "number",

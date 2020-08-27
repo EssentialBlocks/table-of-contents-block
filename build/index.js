@@ -2112,7 +2112,8 @@ var attributes = {
     default: false
   },
   seperatorColor: {
-    type: "string"
+    type: "string",
+    default: "black"
   },
   seperatorSize: {
     type: "number"
@@ -3243,26 +3244,76 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return save; });
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./list */ "./src/list.js");
+
+
+/*
+ * WordPress dependencies
+ */
+
+/*
+ * Internal dependencies
+ */
 
 
 function save(_ref) {
   var attributes = _ref.attributes;
-  var visibleHeaders = attributes.visibleHeaders,
+  var displayTitle = attributes.displayTitle,
+      title = attributes.title,
+      titleFontFamily = attributes.titleFontFamily,
+      titleFontSize = attributes.titleFontSize,
+      titleSizeUnit = attributes.titleSizeUnit,
+      titleFontWeight = attributes.titleFontWeight,
+      titleTextTransform = attributes.titleTextTransform,
+      titleTextDecoration = attributes.titleTextDecoration,
+      titleLetterSpacing = attributes.titleLetterSpacing,
+      titleLetterSpacingUnit = attributes.titleLetterSpacingUnit,
+      titleLineHeight = attributes.titleLineHeight,
+      titleLineHeightUnit = attributes.titleLineHeightUnit,
+      titleAlign = attributes.titleAlign,
+      titleColor = attributes.titleColor,
+      titleBg = attributes.titleBg,
+      collapsible = attributes.collapsible,
+      seperator = attributes.seperator,
+      seperatorSize = attributes.seperatorSize,
+      seperatorStyle = attributes.seperatorStyle,
+      seperatorColor = attributes.seperatorColor,
+      visibleHeaders = attributes.visibleHeaders,
       headers = attributes.headers,
-      isSmooth = attributes.isSmooth; // Until finalizing backend
-  // return <div />;
+      isSmooth = attributes.isSmooth;
+  var titleStyle = {
+    display: displayTitle ? "block" : "none",
+    fontFamily: titleFontFamily,
+    fontSize: titleFontSize + titleSizeUnit,
+    fontWeight: titleFontWeight,
+    textTransform: titleTextTransform,
+    textDecoration: titleTextDecoration,
+    letterSpacing: titleLetterSpacing + titleLetterSpacingUnit,
+    lineHeight: titleLineHeight + titleLineHeightUnit,
+    textAlign: titleAlign,
+    cursor: collapsible ? "pointer" : "default",
+    color: titleColor,
+    background: titleBg,
+    borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none"
+  };
 
   if (headers.length === 0) {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null);
   }
 
-  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["RichText"].Content, {
+    tagName: "p",
+    className: "eb-toc-title",
+    value: title,
+    style: titleStyle
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
     className: "eb-toc-wrapper",
     "data-headers": JSON.stringify(headers),
     "data-visible": JSON.stringify(visibleHeaders),
     "data-smooth": isSmooth
-  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_list__WEBPACK_IMPORTED_MODULE_2__["default"], {
     attributes: attributes
   })));
 }

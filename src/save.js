@@ -1,10 +1,58 @@
+/*
+ * WordPress dependencies
+ */
+
+import { RichText } from "@wordpress/block-editor";
+
+/*
+ * Internal dependencies
+ */
 import List from "./list";
 
 export default function save({ attributes }) {
-	const { visibleHeaders, headers, isSmooth } = attributes;
+	const {
+		displayTitle,
+		title,
+		titleFontFamily,
+		titleFontSize,
+		titleSizeUnit,
+		titleFontWeight,
+		titleTextTransform,
+		titleTextDecoration,
+		titleLetterSpacing,
+		titleLetterSpacingUnit,
+		titleLineHeight,
+		titleLineHeightUnit,
+		titleAlign,
+		titleColor,
+		titleBg,
+		collapsible,
+		seperator,
+		seperatorSize,
+		seperatorStyle,
+		seperatorColor,
+		visibleHeaders,
+		headers,
+		isSmooth,
+	} = attributes;
 
-	// Until finalizing backend
-	// return <div />;
+	const titleStyle = {
+		display: displayTitle ? "block" : "none",
+		fontFamily: titleFontFamily,
+		fontSize: titleFontSize + titleSizeUnit,
+		fontWeight: titleFontWeight,
+		textTransform: titleTextTransform,
+		textDecoration: titleTextDecoration,
+		letterSpacing: titleLetterSpacing + titleLetterSpacingUnit,
+		lineHeight: titleLineHeight + titleLineHeightUnit,
+		textAlign: titleAlign,
+		cursor: collapsible ? "pointer" : "default",
+		color: titleColor,
+		background: titleBg,
+		borderBottom: seperator
+			? `${seperatorSize || 0}px ${seperatorStyle} ${seperatorColor}`
+			: "none",
+	};
 
 	if (headers.length === 0) {
 		return <div />;
@@ -12,6 +60,12 @@ export default function save({ attributes }) {
 
 	return (
 		<div>
+			<RichText.Content
+				tagName="p"
+				className="eb-toc-title"
+				value={title}
+				style={titleStyle}
+			/>
 			<div
 				className="eb-toc-wrapper"
 				data-headers={JSON.stringify(headers)}
