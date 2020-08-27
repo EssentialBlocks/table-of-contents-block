@@ -2,7 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { RichText } from "@wordpress/block-editor";
+import { BlockControls, RichText } from "@wordpress/block-editor";
+import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
@@ -72,6 +73,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		headers,
 		title,
 		collapsible,
+		listType,
 		titleBg,
 		titleColor,
 		contentBg,
@@ -137,6 +139,31 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			isSelected && (
 				<Inspector attributes={attributes} setAttributes={setAttributes} />
 			),
+			<BlockControls>
+				<Toolbar>
+					<ToolbarButton
+						title="Unordered"
+						icon="editor-ul"
+						isActive={listType === "ul"}
+						onClick={() => setAttributes({ listType: "ul" })}
+					/>
+
+					<ToolbarButton
+						title="Ordered"
+						icon="editor-ol"
+						isActive={listType === "ol"}
+						onClick={() => setAttributes({ listType: "ol" })}
+					/>
+
+					<ToolbarButton
+						title="None"
+						icon="minus"
+						isActive={listType === "none"}
+						onClick={() => setAttributes({ listType: "none" })}
+					/>
+				</Toolbar>
+			</BlockControls>,
+
 			<div>
 				<div onClick={() => collapsible && setVisible(!visible)}>
 					<RichText

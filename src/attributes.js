@@ -7,9 +7,9 @@ const attributes = {
 		type: "array",
 		default: Array(6).fill(true),
 	},
-	hasNumber: {
-		type: "boolean",
-		default: false,
+	listType: {
+		type: "string",
+		default: "ul",
 	},
 	title: {
 		type: "string",

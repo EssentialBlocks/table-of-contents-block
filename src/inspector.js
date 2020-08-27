@@ -31,7 +31,6 @@ import ColorControl from "../util/color-control/index";
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		visibleHeaders,
-		hasNumber,
 		collapsible,
 		titleBg,
 		titleColor,
@@ -288,12 +287,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			)}
 
 			<PanelBody title={__("Content Settings")} initialOpen={false}>
-				<ToggleControl
-					label={__("Ordered List")}
-					checked={hasNumber}
-					onChange={() => setAttributes({ hasNumber: !hasNumber })}
-				/>
-
 				<RangeControl
 					label={__("Indent")}
 					value={indent}

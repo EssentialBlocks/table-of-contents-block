@@ -6,7 +6,7 @@ class List extends Component {
 		const {
 			visibleHeaders,
 			headers,
-			hasNumber,
+			listType,
 			contentColor,
 			indent,
 			contentFontFamily,
@@ -22,7 +22,10 @@ class List extends Component {
 		} = this.props.attributes;
 
 		// Style objects
-		const listStyle = { marginLeft: indent };
+		const listStyle = {
+			listStyle: listType === "none" && "none",
+			marginLeft: indent,
+		};
 
 		const listItemStyle = {
 			fontFamily: contentFontFamily,
@@ -38,7 +41,7 @@ class List extends Component {
 			textDecoration: contentTextDecoration,
 		};
 
-		const ListTag = hasNumber ? "ol" : "ul";
+		const ListTag = listType === "ol" ? "ol" : "ul";
 
 		const makeHeaderArray = (origHeaders) => {
 			let arrays = [];
