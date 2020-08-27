@@ -1935,7 +1935,12 @@ function Edit(_ref) {
       seperatorStyle = attributes.seperatorStyle,
       borderWidth = attributes.borderWidth,
       borderColor = attributes.borderColor,
-      borderStyle = attributes.borderStyle;
+      borderStyle = attributes.borderStyle,
+      titlePaddingTop = attributes.titlePaddingTop,
+      titlePaddingRight = attributes.titlePaddingRight,
+      titlePaddingBottom = attributes.titlePaddingBottom,
+      titlePaddingLeft = attributes.titlePaddingLeft,
+      titlePaddingUnit = attributes.titlePaddingUnit;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1951,7 +1956,8 @@ function Edit(_ref) {
     }
   }, [headerList]);
   var wrapperStyle = {
-    border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor)
+    border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
+    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -2330,41 +2336,6 @@ var Inspector = function Inspector(_ref) {
         titleColor: titleColor
       });
     }
-  }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    selectedUnit: titlePaddingUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "%",
-      value: "%"
-    }, {
-      label: "em",
-      value: "em"
-    }],
-    onClick: function onClick(titlePaddingUnit) {
-      return setAttributes({
-        titlePaddingUnit: titlePaddingUnit
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Padding"),
-    top: titlePaddingTop,
-    right: titlePaddingRight,
-    bottom: titlePaddingBottom,
-    left: titlePaddingLeft,
-    onChange: function onChange(_ref2) {
-      var top = _ref2.top,
-          right = _ref2.right,
-          bottom = _ref2.bottom,
-          left = _ref2.left;
-      return setAttributes({
-        titlePaddingTop: top,
-        titlePaddingRight: right,
-        titlePaddingBottom: bottom,
-        titlePaddingLeft: left
-      });
-    }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Typography"),
     className: "eb-typography-base"
@@ -2372,9 +2343,9 @@ var Inspector = function Inspector(_ref) {
     className: "eb-typography-dropdown",
     contentClassName: "my-popover-content-classname",
     position: "bottom right",
-    renderToggle: function renderToggle(_ref3) {
-      var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Button"], {
         isSmall: true,
         onClick: onToggle,
@@ -2502,7 +2473,42 @@ var Inspector = function Inspector(_ref) {
         step: TITLE_LINE_HEIGHT_STEP
       }));
     }
-  }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
+  })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selectedUnit: titlePaddingUnit,
+    unitTypes: [{
+      label: "px",
+      value: "px"
+    }, {
+      label: "%",
+      value: "%"
+    }, {
+      label: "em",
+      value: "em"
+    }],
+    onClick: function onClick(titlePaddingUnit) {
+      return setAttributes({
+        titlePaddingUnit: titlePaddingUnit
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Padding"),
+    top: titlePaddingTop,
+    right: titlePaddingRight,
+    bottom: titlePaddingBottom,
+    left: titlePaddingLeft,
+    onChange: function onChange(_ref3) {
+      var top = _ref3.top,
+          right = _ref3.right,
+          bottom = _ref3.bottom,
+          left = _ref3.left;
+      return setAttributes({
+        titlePaddingTop: top,
+        titlePaddingRight: right,
+        titlePaddingBottom: bottom,
+        titlePaddingLeft: left
+      });
+    }
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Settings"),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {

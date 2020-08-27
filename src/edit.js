@@ -97,6 +97,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		borderWidth,
 		borderColor,
 		borderStyle,
+		titlePaddingTop,
+		titlePaddingRight,
+		titlePaddingBottom,
+		titlePaddingLeft,
+		titlePaddingUnit,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -111,6 +116,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
+		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
+			titlePaddingRight || 0
+		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
+			titlePaddingLeft || 0
+		}${titlePaddingUnit}`,
 	};
 
 	const titleStyle = {

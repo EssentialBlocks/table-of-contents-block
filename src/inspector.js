@@ -179,32 +179,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={(titleColor) => setAttributes({ titleColor })}
 					/>
 
-					<UnitControl
-						selectedUnit={titlePaddingUnit}
-						unitTypes={[
-							{ label: "px", value: "px" },
-							{ label: "%", value: "%" },
-							{ label: "em", value: "em" },
-						]}
-						onClick={(titlePaddingUnit) => setAttributes({ titlePaddingUnit })}
-					/>
-
-					<DimensionsControl
-						label={__("Padding")}
-						top={titlePaddingTop}
-						right={titlePaddingRight}
-						bottom={titlePaddingBottom}
-						left={titlePaddingLeft}
-						onChange={({ top, right, bottom, left }) =>
-							setAttributes({
-								titlePaddingTop: top,
-								titlePaddingRight: right,
-								titlePaddingBottom: bottom,
-								titlePaddingLeft: left,
-							})
-						}
-					/>
-
 					<BaseControl label={__("Typography")} className="eb-typography-base">
 						<Dropdown
 							className="eb-typography-dropdown"
@@ -325,6 +299,32 @@ const Inspector = ({ attributes, setAttributes }) => {
 							)}
 						/>
 					</BaseControl>
+
+					<UnitControl
+						selectedUnit={titlePaddingUnit}
+						unitTypes={[
+							{ label: "px", value: "px" },
+							{ label: "%", value: "%" },
+							{ label: "em", value: "em" },
+						]}
+						onClick={(titlePaddingUnit) => setAttributes({ titlePaddingUnit })}
+					/>
+
+					<DimensionsControl
+						label={__("Padding")}
+						top={titlePaddingTop}
+						right={titlePaddingRight}
+						bottom={titlePaddingBottom}
+						left={titlePaddingLeft}
+						onChange={({ top, right, bottom, left }) =>
+							setAttributes({
+								titlePaddingTop: top,
+								titlePaddingRight: right,
+								titlePaddingBottom: bottom,
+								titlePaddingLeft: left,
+							})
+						}
+					/>
 				</PanelBody>
 			)}
 
