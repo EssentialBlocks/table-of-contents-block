@@ -140,6 +140,17 @@ const attributes = {
 	listColor: {
 		type: "string",
 	},
+	borderWidth: {
+		type: "number",
+	},
+	borderColor: {
+		type: "string",
+		default: "black",
+	},
+	borderStyle: {
+		type: "string",
+		default: "solid",
+	},
 };
 
 export default attributes;

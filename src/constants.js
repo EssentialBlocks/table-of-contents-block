@@ -28,7 +28,7 @@ export const TEXT_DECORATION = [
 	{ label: __("Underline Oveline"), value: "underline overline" },
 ];
 
-export const SEPERATOR_STYLES = [
+export const BORDER_STYLES = [
 	{ label: __("Dashed"), value: "dashed" },
 	{ label: __("Solid"), value: "solid" },
 	{ label: __("Dotted"), value: "dotted" },

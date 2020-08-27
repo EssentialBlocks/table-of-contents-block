@@ -22,7 +22,7 @@ import {
 	FONT_WEIGHTS,
 	TEXT_TRANSFORM,
 	TEXT_DECORATION,
-	SEPERATOR_STYLES,
+	BORDER_STYLES,
 } from "./constants";
 import UnitControl from "../util/unit-control";
 import FontPicker from "../util/typography-control/FontPicker";
@@ -68,6 +68,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		seperatorSize,
 		seperatorColor,
 		seperatorStyle,
+		borderWidth,
+		borderColor,
+		borderStyle,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -333,7 +336,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{listType !== "none" && (
 					<ColorControl
-						label={__("List Color")}
+						label={__("Bullet Points Color")}
 						color={listColor}
 						onChange={(listColor) => setAttributes({ listColor })}
 					/>
@@ -480,11 +483,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 					<SelectControl
 						label={__("Seperator Style")}
 						value={seperatorStyle}
-						options={SEPERATOR_STYLES}
+						options={BORDER_STYLES}
 						onChange={(seperatorStyle) => setAttributes({ seperatorStyle })}
 					/>
 				</PanelBody>
 			)}
+
+			<PanelBody title={__("Border")} initialOpen={false}>
+				<RangeControl
+					label={__("Border Width")}
+					value={borderWidth}
+					onChange={(borderWidth) => setAttributes({ borderWidth })}
+					min={0}
+					max={100}
+				/>
+
+				<SelectControl
+					label={__("Border Style")}
+					value={borderStyle}
+					options={BORDER_STYLES}
+					onChange={(borderStyle) => setAttributes({ borderStyle })}
+				/>
+
+				<ColorControl
+					label={__("Border Color")}
+					color={borderColor}
+					onChange={(borderColor) => setAttributes({ borderColor })}
+				/>
+			</PanelBody>
 		</InspectorControls>
 	);
 };

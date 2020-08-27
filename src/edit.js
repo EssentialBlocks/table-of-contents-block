@@ -94,6 +94,9 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		seperatorSize,
 		seperatorColor,
 		seperatorStyle,
+		borderWidth,
+		borderColor,
+		borderStyle,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -105,6 +108,10 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			setAttributes({ headers: headerList });
 		}
 	}, [headerList]);
+
+	const wrapperStyle = {
+		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
+	};
 
 	const titleStyle = {
 		display: displayTitle ? "block" : "none",
@@ -164,7 +171,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				</Toolbar>
 			</BlockControls>,
 
-			<div>
+			<div style={wrapperStyle}>
 				<div onClick={() => collapsible && setVisible(!visible)}>
 					<RichText
 						className="eb-toc-title"
