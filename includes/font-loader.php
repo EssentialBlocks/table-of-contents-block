@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Accordion_Font_Loader
+class Toc_Font_Loader
 {
 
     private static $instance;
@@ -91,4 +91,4 @@ class Accordion_Font_Loader
         }
     }
 }
-Accordion_Font_Loader::register();
+Toc_Font_Loader::register();

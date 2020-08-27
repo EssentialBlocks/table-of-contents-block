@@ -27,6 +27,7 @@ import {
 import UnitControl from "../util/unit-control";
 import FontPicker from "../util/typography-control/FontPicker";
 import ColorControl from "../util/color-control/index";
+import DimensionsControl from "../util/dimensions-control";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
@@ -71,6 +72,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		borderWidth,
 		borderColor,
 		borderStyle,
+		titlePaddingTop,
+		titlePaddingRight,
+		titlePaddingBottom,
+		titlePaddingLeft,
+		titlePaddingUnit,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -171,6 +177,32 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Text Color")}
 						color={titleColor}
 						onChange={(titleColor) => setAttributes({ titleColor })}
+					/>
+
+					<UnitControl
+						selectedUnit={titlePaddingUnit}
+						unitTypes={[
+							{ label: "px", value: "px" },
+							{ label: "%", value: "%" },
+							{ label: "em", value: "em" },
+						]}
+						onClick={(titlePaddingUnit) => setAttributes({ titlePaddingUnit })}
+					/>
+
+					<DimensionsControl
+						label={__("Padding")}
+						top={titlePaddingTop}
+						right={titlePaddingRight}
+						bottom={titlePaddingBottom}
+						left={titlePaddingLeft}
+						onChange={({ top, right, bottom, left }) =>
+							setAttributes({
+								titlePaddingTop: top,
+								titlePaddingRight: right,
+								titlePaddingBottom: bottom,
+								titlePaddingLeft: left,
+							})
+						}
 					/>
 
 					<BaseControl label={__("Typography")} className="eb-typography-base">

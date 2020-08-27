@@ -14,7 +14,9 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
+		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@wordpress/scripts": "^12.1.1",
+		"prop-types": "^15.7.2",
 		"striptags": "^3.1.1"
 	}
 }

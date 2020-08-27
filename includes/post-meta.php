@@ -5,7 +5,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-class Accordion_Post_Meta
+class Toc_Post_Meta
 {
     public function __construct()
     {
@@ -39,4 +39,4 @@ class Accordion_Post_Meta
     }
 }
 
-new Accordion_Post_Meta();
+new Toc_Post_Meta();

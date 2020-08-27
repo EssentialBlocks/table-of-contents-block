@@ -151,6 +151,22 @@ const attributes = {
 		type: "string",
 		default: "solid",
 	},
+	titleMarginTop: {
+		type: "number",
+	},
+	titlePaddingRight: {
+		type: "number",
+	},
+	titlePaddingBottom: {
+		type: "number",
+	},
+	titlePaddingLeft: {
+		type: "number",
+	},
+	titlePaddingUnit: {
+		type: "string",
+		default: "px",
+	},
 };
 
 export default attributes;
