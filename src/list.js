@@ -7,6 +7,7 @@ class List extends Component {
 			visibleHeaders,
 			headers,
 			listType,
+			listColor,
 			contentColor,
 			indent,
 			contentGap,
@@ -26,6 +27,7 @@ class List extends Component {
 		// Style objects
 		const listStyle = {
 			listStyle: listType === "none" && "none",
+			color: listType !== "none" && listColor,
 			marginLeft: indent,
 		};
 

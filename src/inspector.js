@@ -32,6 +32,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		visibleHeaders,
 		collapsible,
+		listType,
+		listColor,
 		titleBg,
 		titleColor,
 		contentBg,
@@ -328,6 +330,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 					color={contentColor}
 					onChange={(contentColor) => setAttributes({ contentColor })}
 				/>
+
+				{listType !== "none" && (
+					<ColorControl
+						label={__("List Color")}
+						color={listColor}
+						onChange={(listColor) => setAttributes({ listColor })}
+					/>
+				)}
 
 				<BaseControl label={__("Typography")} className="eb-typography-base">
 					<Dropdown

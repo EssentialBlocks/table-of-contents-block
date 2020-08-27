@@ -137,6 +137,9 @@ const attributes = {
 		type: "string",
 		default: "solid",
 	},
+	listColor: {
+		type: "string",
+	},
 };
 
 export default attributes;

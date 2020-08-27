@@ -2154,6 +2154,9 @@ var attributes = {
   seperatorStyle: {
     type: "string",
     default: "solid"
+  },
+  listColor: {
+    type: "string"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2626,6 +2629,8 @@ var Inspector = function Inspector(_ref) {
       setAttributes = _ref.setAttributes;
   var visibleHeaders = attributes.visibleHeaders,
       collapsible = attributes.collapsible,
+      listType = attributes.listType,
+      listColor = attributes.listColor,
       titleBg = attributes.titleBg,
       titleColor = attributes.titleColor,
       contentBg = attributes.contentBg,
@@ -2945,6 +2950,14 @@ var Inspector = function Inspector(_ref) {
         contentColor: contentColor
       });
     }
+  }), listType !== "none" && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_util_color_control_index__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("List Color"),
+    color: listColor,
+    onChange: function onChange(listColor) {
+      return setAttributes({
+        listColor: listColor
+      });
+    }
   }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["BaseControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Typography"),
     className: "eb-typography-base"
@@ -3180,6 +3193,7 @@ var List = /*#__PURE__*/function (_Component) {
           visibleHeaders = _this$props$attribute.visibleHeaders,
           headers = _this$props$attribute.headers,
           listType = _this$props$attribute.listType,
+          listColor = _this$props$attribute.listColor,
           contentColor = _this$props$attribute.contentColor,
           indent = _this$props$attribute.indent,
           contentGap = _this$props$attribute.contentGap,
@@ -3197,6 +3211,7 @@ var List = /*#__PURE__*/function (_Component) {
 
       var listStyle = {
         listStyle: listType === "none" && "none",
+        color: listType !== "none" && listColor,
         marginLeft: indent
       };
       var listItemStyle = {
