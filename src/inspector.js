@@ -151,6 +151,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 							</ButtonGroup>
 						</BaseControl>
 
+						<ColorControl
+							label={__("Background Color")}
+							color={titleBg}
+							onChange={(titleBg) => setAttributes({ titleBg })}
+						/>
+
+						<ColorControl
+							label={__("Text Color")}
+							color={titleColor}
+							onChange={(titleColor) => setAttributes({ titleColor })}
+						/>
+
 						<BaseControl
 							label={__("Typography")}
 							className="eb-typography-base"
@@ -288,6 +300,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 						label={__("Indent")}
 						value={indent}
 						onChange={(indent) => setAttributes({ indent })}
+					/>
+
+					<ColorControl
+						label={__("Background Color")}
+						color={contentBg}
+						onChange={(contentBg) => setAttributes({ contentBg })}
+					/>
+
+					<ColorControl
+						label={__("Text Color")}
+						color={contentColor}
+						onChange={(contentColor) => setAttributes({ contentColor })}
 					/>
 
 					<BaseControl label={__("Typography")} className="eb-typography-base">
@@ -436,33 +460,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						/>
 					</PanelBody>
 				)}
-
-				<PanelColorSettings
-					title={__("Colors ")}
-					initialOpen={false}
-					colorSettings={[
-						{
-							value: titleBg,
-							onChange: (titleBg) => setAttributes({ titleBg }),
-							label: __("Title Background"),
-						},
-						{
-							value: titleColor,
-							onChange: (titleColor) => setAttributes({ titleColor }),
-							label: __("Title Color"),
-						},
-						{
-							value: contentBg,
-							onChange: (contentBg) => setAttributes({ contentBg }),
-							label: __("Content Background"),
-						},
-						{
-							value: contentColor,
-							onChange: (contentColor) => setAttributes({ contentColor }),
-							label: __("Content Color"),
-						},
-					]}
-				/>
 			</PanelBody>
 		</InspectorControls>
 	);
