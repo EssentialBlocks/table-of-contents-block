@@ -87,231 +87,81 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	return (
 		<InspectorControls key="controls">
+			<PanelBody title={__("Visible Headers")}>
+				{visibleHeaders.map((header, index) => (
+					<ToggleControl
+						label={`H${index + 1}`}
+						checked={header}
+						onChange={() =>
+							setAttributes({
+								visibleHeaders: [
+									...visibleHeaders.slice(0, index),
+									!visibleHeaders[index],
+									...visibleHeaders.slice(index + 1),
+								],
+							})
+						}
+					/>
+				))}
+			</PanelBody>
+
 			<PanelBody>
-				<PanelBody>
-					<BaseControl label={__("Header Visibility")}>
-						{visibleHeaders.map((header, index) => (
-							<ToggleControl
-								label={`H${index + 1}`}
-								checked={header}
-								onChange={() =>
-									setAttributes({
-										visibleHeaders: [
-											...visibleHeaders.slice(0, index),
-											!visibleHeaders[index],
-											...visibleHeaders.slice(index + 1),
-										],
-									})
-								}
-							/>
-						))}
-					</BaseControl>
+				<ToggleControl
+					label={__("Display Title")}
+					checked={displayTitle}
+					onChange={() => setAttributes({ displayTitle: !displayTitle })}
+				/>
 
+				{displayTitle && (
 					<ToggleControl
-						label={__("Display Title")}
-						checked={displayTitle}
-						onChange={() => setAttributes({ displayTitle: !displayTitle })}
+						label={__("Collapsible")}
+						checked={collapsible}
+						onChange={() => setAttributes({ collapsible: !collapsible })}
 					/>
+				)}
 
-					{displayTitle && (
-						<ToggleControl
-							label={__("Collapsible")}
-							checked={collapsible}
-							onChange={() => setAttributes({ collapsible: !collapsible })}
-						/>
-					)}
+				<ToggleControl
+					label={__("Smooth Scroll")}
+					checked={isSmooth}
+					onChange={() => setAttributes({ isSmooth: !isSmooth })}
+				/>
 
-					<ToggleControl
-						label={__("Smooth Scroll")}
-						checked={isSmooth}
-						onChange={() => setAttributes({ isSmooth: !isSmooth })}
-					/>
-
+				{displayTitle && (
 					<ToggleControl
 						label={__("Seperator")}
 						checked={seperator}
 						onChange={() => setAttributes({ seperator: !seperator })}
 					/>
-				</PanelBody>
-
-				{displayTitle && (
-					<PanelBody title={__("Title Settings")} initialOpen={false}>
-						<BaseControl label={__("Align")} className="eb-base-control">
-							<ButtonGroup>
-								{ALIGNS.map((align, index) => (
-									<Button
-										isSmall
-										isPrimary={titleAlign === align.value}
-										isSecondary={titleAlign !== align.value}
-										onClick={() => setAttributes({ titleAlign: align.value })}
-									>
-										{align.label}
-									</Button>
-								))}
-							</ButtonGroup>
-						</BaseControl>
-
-						<ColorControl
-							label={__("Background Color")}
-							color={titleBg}
-							onChange={(titleBg) => setAttributes({ titleBg })}
-						/>
-
-						<ColorControl
-							label={__("Text Color")}
-							color={titleColor}
-							onChange={(titleColor) => setAttributes({ titleColor })}
-						/>
-
-						<BaseControl
-							label={__("Typography")}
-							className="eb-typography-base"
-						>
-							<Dropdown
-								className="eb-typography-dropdown"
-								contentClassName="my-popover-content-classname"
-								position="bottom right"
-								renderToggle={({ isOpen, onToggle }) => (
-									<Button
-										isSmall
-										onClick={onToggle}
-										aria-expanded={isOpen}
-										icon="edit"
-									></Button>
-								)}
-								renderContent={() => (
-									<div style={{ padding: "1rem" }}>
-										<FontPicker
-											label={__("Font Family")}
-											value={titleFontFamily}
-											onChange={(titleFontFamily) =>
-												setAttributes({ titleFontFamily })
-											}
-										/>
-
-										<UnitControl
-											selectedUnit={titleSizeUnit}
-											unitTypes={[
-												{ label: "px", value: "px" },
-												{ label: "%", value: "%" },
-												{ label: "em", value: "em" },
-											]}
-											onClick={(titleSizeUnit) =>
-												setAttributes({ titleSizeUnit })
-											}
-										/>
-
-										<RangeControl
-											label={__("Font Size")}
-											value={titleFontSize}
-											onChange={(titleFontSize) =>
-												setAttributes({ titleFontSize })
-											}
-											step={TITLE_SIZE_STEP}
-											min={0}
-											max={TITLE_SIZE_MAX}
-										/>
-
-										<SelectControl
-											label={__("Font Weight")}
-											value={titleFontWeight}
-											options={FONT_WEIGHTS}
-											onChange={(titleFontWeight) =>
-												setAttributes({ titleFontWeight })
-											}
-										/>
-
-										<SelectControl
-											label={__("Text Transform")}
-											value={titleTextTransform}
-											options={TEXT_TRANSFORM}
-											onChange={(titleTextTransform) =>
-												setAttributes({ titleTextTransform })
-											}
-										/>
-
-										<SelectControl
-											label={__("Text Decoration")}
-											value={titleTextDecoration}
-											options={TEXT_DECORATION}
-											onChange={(titleTextDecoration) =>
-												setAttributes({ titleTextDecoration })
-											}
-										/>
-
-										<UnitControl
-											selectedUnit={titleLetterSpacingUnit}
-											unitTypes={[
-												{ label: "px", value: "px" },
-												{ label: "em", value: "em" },
-											]}
-											onClick={(titleLetterSpacingUnit) =>
-												setAttributes({ titleLetterSpacingUnit })
-											}
-										/>
-
-										<RangeControl
-											label={__("Letter Spacing")}
-											value={titleLetterSpacing}
-											onChange={(titleLetterSpacing) =>
-												setAttributes({ titleLetterSpacing })
-											}
-											min={0}
-											max={TITLE_SPACING_MAX}
-											step={TITLE_SPACING_STEP}
-										/>
-
-										<UnitControl
-											selectedUnit={titleLineHeightUnit}
-											unitTypes={[
-												{ label: "px", value: "px" },
-												{ label: "em", value: "em" },
-											]}
-											onClick={(titleLineHeightUnit) =>
-												setAttributes({ titleLineHeightUnit })
-											}
-										/>
-
-										<RangeControl
-											label={__("Line Height")}
-											value={titleLineHeight}
-											onChange={(titleLineHeight) =>
-												setAttributes({ titleLineHeight })
-											}
-											min={0}
-											max={TITLE_LINE_HEIGHT_MAX}
-											step={TITLE_LINE_HEIGHT_STEP}
-										/>
-									</div>
-								)}
-							/>
-						</BaseControl>
-					</PanelBody>
 				)}
+			</PanelBody>
 
-				<PanelBody title={__("Content Settings")} initialOpen={false}>
-					<ToggleControl
-						label={__("Ordered List")}
-						checked={hasNumber}
-						onChange={() => setAttributes({ hasNumber: !hasNumber })}
-					/>
-
-					<RangeControl
-						label={__("Indent")}
-						value={indent}
-						onChange={(indent) => setAttributes({ indent })}
-					/>
+			{displayTitle && (
+				<PanelBody title={__("Title Settings")} initialOpen={false}>
+					<BaseControl label={__("Align")} className="eb-base-control">
+						<ButtonGroup>
+							{ALIGNS.map((align, index) => (
+								<Button
+									isSmall
+									isPrimary={titleAlign === align.value}
+									isSecondary={titleAlign !== align.value}
+									onClick={() => setAttributes({ titleAlign: align.value })}
+								>
+									{align.label}
+								</Button>
+							))}
+						</ButtonGroup>
+					</BaseControl>
 
 					<ColorControl
 						label={__("Background Color")}
-						color={contentBg}
-						onChange={(contentBg) => setAttributes({ contentBg })}
+						color={titleBg}
+						onChange={(titleBg) => setAttributes({ titleBg })}
 					/>
 
 					<ColorControl
 						label={__("Text Color")}
-						color={contentColor}
-						onChange={(contentColor) => setAttributes({ contentColor })}
+						color={titleColor}
+						onChange={(titleColor) => setAttributes({ titleColor })}
 					/>
 
 					<BaseControl label={__("Typography")} className="eb-typography-base">
@@ -331,136 +181,283 @@ const Inspector = ({ attributes, setAttributes }) => {
 								<div style={{ padding: "1rem" }}>
 									<FontPicker
 										label={__("Font Family")}
-										value={contentFontFamily}
-										onChange={(contentFontFamily) =>
-											setAttributes({ contentFontFamily })
+										value={titleFontFamily}
+										onChange={(titleFontFamily) =>
+											setAttributes({ titleFontFamily })
 										}
 									/>
 
 									<UnitControl
-										selectedUnit={contentSizeUnit}
+										selectedUnit={titleSizeUnit}
 										unitTypes={[
 											{ label: "px", value: "px" },
 											{ label: "%", value: "%" },
 											{ label: "em", value: "em" },
 										]}
-										onClick={(contentSizeUnit) =>
-											setAttributes({ contentSizeUnit })
+										onClick={(titleSizeUnit) =>
+											setAttributes({ titleSizeUnit })
 										}
 									/>
 
 									<RangeControl
 										label={__("Font Size")}
-										value={contentFontSize}
-										onChange={(contentFontSize) =>
-											setAttributes({ contentFontSize })
+										value={titleFontSize}
+										onChange={(titleFontSize) =>
+											setAttributes({ titleFontSize })
 										}
-										step={CONTENT_SIZE_STEP}
+										step={TITLE_SIZE_STEP}
 										min={0}
-										max={CONTENT_SIZE_MAX}
+										max={TITLE_SIZE_MAX}
 									/>
 
 									<SelectControl
 										label={__("Font Weight")}
-										value={contentFontWeight}
+										value={titleFontWeight}
 										options={FONT_WEIGHTS}
-										onChange={(contentFontWeight) =>
-											setAttributes({ contentFontWeight })
+										onChange={(titleFontWeight) =>
+											setAttributes({ titleFontWeight })
 										}
 									/>
 
 									<SelectControl
 										label={__("Text Transform")}
-										value={contentTextTransform}
+										value={titleTextTransform}
 										options={TEXT_TRANSFORM}
-										onChange={(contentTextTransform) =>
-											setAttributes({ contentTextTransform })
+										onChange={(titleTextTransform) =>
+											setAttributes({ titleTextTransform })
 										}
 									/>
 
 									<SelectControl
 										label={__("Text Decoration")}
-										value={contentTextDecoration}
+										value={titleTextDecoration}
 										options={TEXT_DECORATION}
-										onChange={(contentTextDecoration) =>
-											setAttributes({ contentTextDecoration })
+										onChange={(titleTextDecoration) =>
+											setAttributes({ titleTextDecoration })
 										}
 									/>
 
 									<UnitControl
-										selectedUnit={contentLetterSpacingUnit}
+										selectedUnit={titleLetterSpacingUnit}
 										unitTypes={[
 											{ label: "px", value: "px" },
 											{ label: "em", value: "em" },
 										]}
-										onClick={(contentLetterSpacingUnit) =>
-											setAttributes({ contentLetterSpacingUnit })
+										onClick={(titleLetterSpacingUnit) =>
+											setAttributes({ titleLetterSpacingUnit })
 										}
 									/>
 
 									<RangeControl
 										label={__("Letter Spacing")}
-										value={contentLetterSpacing}
-										onChange={(contentLetterSpacing) =>
-											setAttributes({ contentLetterSpacing })
+										value={titleLetterSpacing}
+										onChange={(titleLetterSpacing) =>
+											setAttributes({ titleLetterSpacing })
 										}
 										min={0}
-										max={CONTENT_SPACING_MAX}
-										step={CONTENT_SPACING_STEP}
+										max={TITLE_SPACING_MAX}
+										step={TITLE_SPACING_STEP}
 									/>
 
 									<UnitControl
-										selectedUnit={contentLineHeightUnit}
+										selectedUnit={titleLineHeightUnit}
 										unitTypes={[
 											{ label: "px", value: "px" },
 											{ label: "em", value: "em" },
 										]}
-										onClick={(contentLineHeightUnit) =>
-											setAttributes({ contentLineHeightUnit })
+										onClick={(titleLineHeightUnit) =>
+											setAttributes({ titleLineHeightUnit })
 										}
 									/>
 
 									<RangeControl
 										label={__("Line Height")}
-										value={contentLineHeight}
-										onChange={(contentLineHeight) =>
-											setAttributes({ contentLineHeight })
+										value={titleLineHeight}
+										onChange={(titleLineHeight) =>
+											setAttributes({ titleLineHeight })
 										}
 										min={0}
-										max={CONTENT_LINE_HEIGHT_MAX}
-										step={CONTENT_LINE_HEIGHT_STEP}
+										max={TITLE_LINE_HEIGHT_MAX}
+										step={TITLE_LINE_HEIGHT_STEP}
 									/>
 								</div>
 							)}
 						/>
 					</BaseControl>
 				</PanelBody>
+			)}
 
-				{seperator && (
-					<PanelBody title={__("Seperator")}>
-						<RangeControl
-							label={__("Seperator Size")}
-							value={seperatorSize}
-							onChange={(seperatorSize) => setAttributes({ seperatorSize })}
-							min={0}
-							max={100}
-						/>
+			<PanelBody title={__("Content Settings")} initialOpen={false}>
+				<ToggleControl
+					label={__("Ordered List")}
+					checked={hasNumber}
+					onChange={() => setAttributes({ hasNumber: !hasNumber })}
+				/>
 
-						<ColorControl
-							label={__("Seperator Color")}
-							color={seperatorColor}
-							onChange={(seperatorColor) => setAttributes({ seperatorColor })}
-						/>
+				<RangeControl
+					label={__("Indent")}
+					value={indent}
+					onChange={(indent) => setAttributes({ indent })}
+				/>
 
-						<SelectControl
-							label={__("Seperator Style")}
-							value={seperatorStyle}
-							options={SEPERATOR_STYLES}
-							onChange={(seperatorStyle) => setAttributes({ seperatorStyle })}
-						/>
-					</PanelBody>
-				)}
+				<ColorControl
+					label={__("Background Color")}
+					color={contentBg}
+					onChange={(contentBg) => setAttributes({ contentBg })}
+				/>
+
+				<ColorControl
+					label={__("Text Color")}
+					color={contentColor}
+					onChange={(contentColor) => setAttributes({ contentColor })}
+				/>
+
+				<BaseControl label={__("Typography")} className="eb-typography-base">
+					<Dropdown
+						className="eb-typography-dropdown"
+						contentClassName="my-popover-content-classname"
+						position="bottom right"
+						renderToggle={({ isOpen, onToggle }) => (
+							<Button
+								isSmall
+								onClick={onToggle}
+								aria-expanded={isOpen}
+								icon="edit"
+							></Button>
+						)}
+						renderContent={() => (
+							<div style={{ padding: "1rem" }}>
+								<FontPicker
+									label={__("Font Family")}
+									value={contentFontFamily}
+									onChange={(contentFontFamily) =>
+										setAttributes({ contentFontFamily })
+									}
+								/>
+
+								<UnitControl
+									selectedUnit={contentSizeUnit}
+									unitTypes={[
+										{ label: "px", value: "px" },
+										{ label: "%", value: "%" },
+										{ label: "em", value: "em" },
+									]}
+									onClick={(contentSizeUnit) =>
+										setAttributes({ contentSizeUnit })
+									}
+								/>
+
+								<RangeControl
+									label={__("Font Size")}
+									value={contentFontSize}
+									onChange={(contentFontSize) =>
+										setAttributes({ contentFontSize })
+									}
+									step={CONTENT_SIZE_STEP}
+									min={0}
+									max={CONTENT_SIZE_MAX}
+								/>
+
+								<SelectControl
+									label={__("Font Weight")}
+									value={contentFontWeight}
+									options={FONT_WEIGHTS}
+									onChange={(contentFontWeight) =>
+										setAttributes({ contentFontWeight })
+									}
+								/>
+
+								<SelectControl
+									label={__("Text Transform")}
+									value={contentTextTransform}
+									options={TEXT_TRANSFORM}
+									onChange={(contentTextTransform) =>
+										setAttributes({ contentTextTransform })
+									}
+								/>
+
+								<SelectControl
+									label={__("Text Decoration")}
+									value={contentTextDecoration}
+									options={TEXT_DECORATION}
+									onChange={(contentTextDecoration) =>
+										setAttributes({ contentTextDecoration })
+									}
+								/>
+
+								<UnitControl
+									selectedUnit={contentLetterSpacingUnit}
+									unitTypes={[
+										{ label: "px", value: "px" },
+										{ label: "em", value: "em" },
+									]}
+									onClick={(contentLetterSpacingUnit) =>
+										setAttributes({ contentLetterSpacingUnit })
+									}
+								/>
+
+								<RangeControl
+									label={__("Letter Spacing")}
+									value={contentLetterSpacing}
+									onChange={(contentLetterSpacing) =>
+										setAttributes({ contentLetterSpacing })
+									}
+									min={0}
+									max={CONTENT_SPACING_MAX}
+									step={CONTENT_SPACING_STEP}
+								/>
+
+								<UnitControl
+									selectedUnit={contentLineHeightUnit}
+									unitTypes={[
+										{ label: "px", value: "px" },
+										{ label: "em", value: "em" },
+									]}
+									onClick={(contentLineHeightUnit) =>
+										setAttributes({ contentLineHeightUnit })
+									}
+								/>
+
+								<RangeControl
+									label={__("Line Height")}
+									value={contentLineHeight}
+									onChange={(contentLineHeight) =>
+										setAttributes({ contentLineHeight })
+									}
+									min={0}
+									max={CONTENT_LINE_HEIGHT_MAX}
+									step={CONTENT_LINE_HEIGHT_STEP}
+								/>
+							</div>
+						)}
+					/>
+				</BaseControl>
 			</PanelBody>
+
+			{seperator && (
+				<PanelBody title={__("Seperator")}>
+					<RangeControl
+						label={__("Seperator Size")}
+						value={seperatorSize}
+						onChange={(seperatorSize) => setAttributes({ seperatorSize })}
+						min={0}
+						max={100}
+					/>
+
+					<ColorControl
+						label={__("Seperator Color")}
+						color={seperatorColor}
+						onChange={(seperatorColor) => setAttributes({ seperatorColor })}
+					/>
+
+					<SelectControl
+						label={__("Seperator Style")}
+						value={seperatorStyle}
+						options={SEPERATOR_STYLES}
+						onChange={(seperatorStyle) => setAttributes({ seperatorStyle })}
+					/>
+				</PanelBody>
+			)}
 		</InspectorControls>
 	);
 };
