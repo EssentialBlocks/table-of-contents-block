@@ -49,6 +49,7 @@
 			this._run();
 			this._scroll();
 			this._toggleCollapse();
+			this._scrollToTop();
 		},
 
 		_toggleCollapse: function () {
@@ -82,6 +83,50 @@
 					$root.removeClass("eb-toc__collapse");
 				} else {
 					$root.addClass("eb-toc__collapse");
+				}
+			}
+		},
+
+		_scrollToTop: function (e) {
+			// Create go to top element
+			const goTop = document.createElement("div");
+			goTop.setAttribute(
+				"class",
+				"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
+			);
+			document.body.insertBefore(goTop, document.body.lastChild);
+
+			// Add click event
+			goTop.addEventListener("click", function () {
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			});
+
+			// Add scroll event
+			window.addEventListener("scroll", function () {
+				if (
+					document.body.scrollTop > 30 ||
+					document.documentElement.scrollTop > 20
+				) {
+					goTop.classList.remove("hide-scroll");
+					goTop.classList.add("show-scroll");
+				} else {
+					goTop.classList.remove("show-scroll");
+					goTop.classList.add("hide-scroll");
+				}
+			});
+
+			const containers = document.querySelectorAll(".eb-toc-container");
+
+			for (container of containers) {
+				const goToTop = container.getAttribute("data-scroll-top") === "true";
+
+				if (goToTop) {
+					goTop.classList.remove("hide-scroll");
+					goTop.classList.add("show-scroll");
+				} else {
+					goTop.classList.remove("show-scroll");
+					goTop.classList.add("hide-scroll");
 				}
 			}
 		},
