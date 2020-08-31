@@ -1967,6 +1967,7 @@ function Edit(_ref) {
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
     var goTop = document.createElement("div");
     goTop.setAttribute("class", "eb-toc-go-top dashicons dashicons-arrow-up-alt2");
+    goTop.style.right = "300px";
     document.body.insertBefore(goTop, document.body.lastChild);
   }, []);
   Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {

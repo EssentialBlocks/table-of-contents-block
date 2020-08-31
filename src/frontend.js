@@ -102,19 +102,21 @@
 				document.documentElement.scrollTop = 0;
 			});
 
-			// Add scroll event
-			window.addEventListener("scroll", function () {
-				if (
-					document.body.scrollTop > 30 ||
-					document.documentElement.scrollTop > 20
-				) {
-					goTop.classList.remove("hide-scroll");
-					goTop.classList.add("show-scroll");
-				} else {
-					goTop.classList.remove("show-scroll");
-					goTop.classList.add("hide-scroll");
-				}
-			});
+			function hideScroll() {
+				goTop.classList.remove("show-scroll");
+				goTop.classList.add("hide-scroll");
+			}
+
+			function showScroll() {
+				goTop.classList.remove("hide-scroll");
+				goTop.classList.add("show-scroll");
+			}
+
+			function onScrollPage() {
+				document.body.scrollTop > 30 || document.documentElement.scrollTop > 20
+					? showScroll()
+					: hideScroll();
+			}
 
 			const containers = document.querySelectorAll(".eb-toc-container");
 
@@ -122,11 +124,11 @@
 				const goToTop = container.getAttribute("data-scroll-top") === "true";
 
 				if (goToTop) {
-					goTop.classList.remove("hide-scroll");
-					goTop.classList.add("show-scroll");
+					// Add scroll event
+					window.addEventListener("scroll", onScrollPage);
+					showScroll();
 				} else {
-					goTop.classList.remove("show-scroll");
-					goTop.classList.add("hide-scroll");
+					hideScroll();
 				}
 			}
 		},

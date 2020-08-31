@@ -121,6 +121,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			"class",
 			"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
 		);
+		goTop.style.right = "300px";
 		document.body.insertBefore(goTop, document.body.lastChild);
 	}, []);
 
