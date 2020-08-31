@@ -1961,7 +1961,8 @@ function Edit(_ref) {
   }, [headerList]);
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
-    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
+    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
+    background: contentBg
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -1980,7 +1981,6 @@ function Edit(_ref) {
   };
   var contentStyle = {
     color: contentColor,
-    background: contentBg,
     display: visible ? "block" : "none"
   };
 

@@ -121,6 +121,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
 			titlePaddingLeft || 0
 		}${titlePaddingUnit}`,
+		background: contentBg,
 	};
 
 	const titleStyle = {
@@ -143,7 +144,6 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 
 	const contentStyle = {
 		color: contentColor,
-		background: contentBg,
 		display: visible ? "block" : "none",
 	};
 
