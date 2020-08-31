@@ -27,14 +27,19 @@ ol {
 }
 
 .eb-toc-go-top {
+	height: 30px;
+	width: 30px;
 	position: fixed;
 	bottom: 50px;
 	right: 50px;
 	background: #ccd0d4;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
 }
 
 .show-scroll {
-	display: block;
+	display: flex;
 }
 
 .hide-scroll {

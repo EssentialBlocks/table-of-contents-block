@@ -1707,6 +1707,12 @@ var attributes = {
   scrollToTop: {
     type: "boolean",
     "default": false
+  },
+  arrowHeight: {
+    type: "number"
+  },
+  arrowWidth: {
+    type: "number"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1949,7 +1955,9 @@ function Edit(_ref) {
       titlePaddingBottom = attributes.titlePaddingBottom,
       titlePaddingLeft = attributes.titlePaddingLeft,
       titlePaddingUnit = attributes.titlePaddingUnit,
-      scrollToTop = attributes.scrollToTop;
+      scrollToTop = attributes.scrollToTop,
+      arrowHeight = attributes.arrowHeight,
+      arrowWidth = attributes.arrowWidth;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1981,6 +1989,14 @@ function Edit(_ref) {
       scrollElement.classList.remove("show-scroll");
     }
   }, [scrollToTop]);
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    var scrollElement = document.querySelector(".eb-toc-go-top");
+
+    if (scrollElement) {
+      if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
+      if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
+    }
+  }, [arrowHeight, arrowWidth]);
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
@@ -2271,7 +2287,9 @@ var Inspector = function Inspector(_ref) {
       titlePaddingBottom = attributes.titlePaddingBottom,
       titlePaddingLeft = attributes.titlePaddingLeft,
       titlePaddingUnit = attributes.titlePaddingUnit,
-      scrollToTop = attributes.scrollToTop;
+      scrollToTop = attributes.scrollToTop,
+      arrowHeight = attributes.arrowHeight,
+      arrowWidth = attributes.arrowWidth;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2785,6 +2803,26 @@ var Inspector = function Inspector(_ref) {
         scrollToTop: !scrollToTop
       });
     }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Arrow Height"),
+    value: arrowHeight,
+    onChange: function onChange(arrowHeight) {
+      return setAttributes({
+        arrowHeight: arrowHeight
+      });
+    },
+    min: 0,
+    max: 100
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Arrow Width"),
+    value: arrowWidth,
+    onChange: function onChange(arrowWidth) {
+      return setAttributes({
+        arrowWidth: arrowWidth
+      });
+    },
+    min: 0,
+    max: 100
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Border"),
     initialOpen: false
@@ -3063,7 +3101,9 @@ function save(_ref) {
       visibleHeaders = attributes.visibleHeaders,
       headers = attributes.headers,
       isSmooth = attributes.isSmooth,
-      scrollToTop = attributes.scrollToTop;
+      scrollToTop = attributes.scrollToTop,
+      arrowHeight = attributes.arrowHeight,
+      arrowWidth = attributes.arrowWidth;
   var titleStyle = {
     display: displayTitle ? "block" : "none",
     fontFamily: titleFontFamily,
@@ -3088,7 +3128,9 @@ function save(_ref) {
     className: "eb-toc-container",
     "data-collapsible": collapsible,
     "data-initial-collapse": initialCollapse,
-    "data-scroll-top": scrollToTop
+    "data-scroll-top": scrollToTop,
+    "data-arrow-height": arrowHeight,
+    "data-arrow-width": arrowWidth
   }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",

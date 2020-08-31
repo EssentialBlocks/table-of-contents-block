@@ -79,6 +79,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		titlePaddingLeft,
 		titlePaddingUnit,
 		scrollToTop,
+		arrowHeight,
+		arrowWidth,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -538,6 +540,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Scroll To Top")}
 					checked={scrollToTop}
 					onChange={() => setAttributes({ scrollToTop: !scrollToTop })}
+				/>
+
+				<RangeControl
+					label={__("Arrow Height")}
+					value={arrowHeight}
+					onChange={(arrowHeight) => setAttributes({ arrowHeight })}
+					min={0}
+					max={100}
+				/>
+
+				<RangeControl
+					label={__("Arrow Width")}
+					value={arrowWidth}
+					onChange={(arrowWidth) => setAttributes({ arrowWidth })}
+					min={0}
+					max={100}
 				/>
 			</PanelBody>
 

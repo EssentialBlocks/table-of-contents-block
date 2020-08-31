@@ -103,6 +103,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		titlePaddingLeft,
 		titlePaddingUnit,
 		scrollToTop,
+		arrowHeight,
+		arrowWidth,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -136,6 +138,16 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			scrollElement.classList.remove("show-scroll");
 		}
 	}, [scrollToTop]);
+
+	useEffect(() => {
+		const scrollElement = document.querySelector(".eb-toc-go-top");
+
+		if (scrollElement) {
+			if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
+
+			if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
+		}
+	}, [arrowHeight, arrowWidth]);
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,

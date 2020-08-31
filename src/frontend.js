@@ -118,14 +118,25 @@
 					: hideScroll();
 			}
 
+			function setArrowStyles(height, width) {
+				if (height) goTop.style.height = height + "px";
+				if (width) goTop.style.width = width + "px";
+			}
+
 			const containers = document.querySelectorAll(".eb-toc-container");
 
 			for (container of containers) {
 				const goToTop = container.getAttribute("data-scroll-top") === "true";
+				const height = container.getAttribute("data-arrow-height");
+				const width = container.getAttribute("data-arrow-width");
 
 				if (goToTop) {
 					// Add scroll event
 					window.addEventListener("scroll", onScrollPage);
+
+					// Set arrow styles
+					setArrowStyles(height, width);
+
 					showScroll();
 				} else {
 					hideScroll();

@@ -175,6 +175,12 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	arrowHeight: {
+		type: "number",
+	},
+	arrowWidth: {
+		type: "number",
+	},
 };
 
 export default attributes;

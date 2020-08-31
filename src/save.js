@@ -36,6 +36,8 @@ export default function save({ attributes }) {
 		headers,
 		isSmooth,
 		scrollToTop,
+		arrowHeight,
+		arrowWidth,
 	} = attributes;
 
 	const titleStyle = {
@@ -66,6 +68,8 @@ export default function save({ attributes }) {
 			data-collapsible={collapsible}
 			data-initial-collapse={initialCollapse}
 			data-scroll-top={scrollToTop}
+			data-arrow-height={arrowHeight}
+			data-arrow-width={arrowWidth}
 		>
 			<RichText.Content
 				tagName="p"
