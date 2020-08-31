@@ -35,6 +35,7 @@ export default function save({ attributes }) {
 		visibleHeaders,
 		headers,
 		isSmooth,
+		scrollToTop,
 	} = attributes;
 
 	const titleStyle = {
@@ -64,6 +65,7 @@ export default function save({ attributes }) {
 			className="eb-toc-container"
 			data-collapsible={collapsible}
 			data-initial-collapse={initialCollapse}
+			data-scroll-top={scrollToTop}
 		>
 			<RichText.Content
 				tagName="p"

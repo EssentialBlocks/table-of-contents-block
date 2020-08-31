@@ -1703,6 +1703,10 @@ var attributes = {
   titlePaddingUnit: {
     type: "string",
     "default": "px"
+  },
+  scrollToTop: {
+    type: "boolean",
+    "default": false
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1944,7 +1948,8 @@ function Edit(_ref) {
       titlePaddingRight = attributes.titlePaddingRight,
       titlePaddingBottom = attributes.titlePaddingBottom,
       titlePaddingLeft = attributes.titlePaddingLeft,
-      titlePaddingUnit = attributes.titlePaddingUnit;
+      titlePaddingUnit = attributes.titlePaddingUnit,
+      scrollToTop = attributes.scrollToTop;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1959,6 +1964,22 @@ function Edit(_ref) {
       });
     }
   }, [headerList]);
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    var goTop = document.createElement("div");
+    goTop.setAttribute("class", "eb-toc-go-top dashicons dashicons-arrow-up-alt2");
+    document.body.insertBefore(goTop, document.body.lastChild);
+  }, []);
+  Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useEffect"])(function () {
+    var scrollElement = document.querySelector(".eb-toc-go-top");
+
+    if (scrollToTop) {
+      scrollElement.classList.add("show-scroll");
+      scrollElement.classList.remove("hide-scroll");
+    } else {
+      scrollElement.classList.add("hide-scroll");
+      scrollElement.classList.remove("show-scroll");
+    }
+  }, [scrollToTop]);
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
@@ -1981,7 +2002,8 @@ function Edit(_ref) {
   };
   var contentStyle = {
     color: contentColor,
-    display: visible ? "block" : "none"
+    display: visible ? "block" : "none",
+    background: contentBg
   };
 
   if (headers.length === 0) {
@@ -2247,7 +2269,8 @@ var Inspector = function Inspector(_ref) {
       titlePaddingRight = attributes.titlePaddingRight,
       titlePaddingBottom = attributes.titlePaddingBottom,
       titlePaddingLeft = attributes.titlePaddingLeft,
-      titlePaddingUnit = attributes.titlePaddingUnit;
+      titlePaddingUnit = attributes.titlePaddingUnit,
+      scrollToTop = attributes.scrollToTop;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2298,14 +2321,6 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange() {
       return setAttributes({
         initialCollapse: !initialCollapse
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Smooth Scroll"),
-    checked: isSmooth,
-    onChange: function onChange() {
-      return setAttributes({
-        isSmooth: !isSmooth
       });
     }
   }), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
@@ -2751,6 +2766,25 @@ var Inspector = function Inspector(_ref) {
       });
     }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Scroll"),
+    initialOpen: true
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Smooth Scroll"),
+    checked: isSmooth,
+    onChange: function onChange() {
+      return setAttributes({
+        isSmooth: !isSmooth
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Scroll To Top"),
+    checked: scrollToTop,
+    onChange: function onChange() {
+      return setAttributes({
+        scrollToTop: !scrollToTop
+      });
+    }
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Border"),
     initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
@@ -3027,7 +3061,8 @@ function save(_ref) {
       seperatorColor = attributes.seperatorColor,
       visibleHeaders = attributes.visibleHeaders,
       headers = attributes.headers,
-      isSmooth = attributes.isSmooth;
+      isSmooth = attributes.isSmooth,
+      scrollToTop = attributes.scrollToTop;
   var titleStyle = {
     display: displayTitle ? "block" : "none",
     fontFamily: titleFontFamily,
@@ -3051,7 +3086,8 @@ function save(_ref) {
   return /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-container",
     "data-collapsible": collapsible,
-    "data-initial-collapse": initialCollapse
+    "data-initial-collapse": initialCollapse,
+    "data-scroll-top": scrollToTop
   }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",

@@ -171,6 +171,10 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	scrollToTop: {
+		type: "boolean",
+		default: false,
+	},
 };
 
 export default attributes;

@@ -16,6 +16,18 @@ ol {
 .hide-content {
   display: none; }
 
+.eb-toc-go-top {
+  position: fixed;
+  bottom: 50px;
+  right: 300px;
+  background: #ccd0d4; }
+
+.show-scroll {
+  display: block; }
+
+.hide-scroll {
+  display: none; }
+
 .eb-unit-control-btn-group {
   margin: 0px 0px -20px 0px;
   text-align: right;

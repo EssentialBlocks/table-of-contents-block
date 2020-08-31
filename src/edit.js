@@ -3,7 +3,7 @@
  */
 import { __ } from "@wordpress/i18n";
 import { BlockControls, RichText } from "@wordpress/block-editor";
-import { Toolbar, ToolbarButton } from "@wordpress/components";
+import { Toolbar, ToolbarButton, Button } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
@@ -102,6 +102,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		titlePaddingBottom,
 		titlePaddingLeft,
 		titlePaddingUnit,
+		scrollToTop,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -113,6 +114,27 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			setAttributes({ headers: headerList });
 		}
 	}, [headerList]);
+
+	useEffect(() => {
+		const goTop = document.createElement("div");
+		goTop.setAttribute(
+			"class",
+			"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
+		);
+		document.body.insertBefore(goTop, document.body.lastChild);
+	}, []);
+
+	useEffect(() => {
+		const scrollElement = document.querySelector(".eb-toc-go-top");
+
+		if (scrollToTop) {
+			scrollElement.classList.add("show-scroll");
+			scrollElement.classList.remove("hide-scroll");
+		} else {
+			scrollElement.classList.add("hide-scroll");
+			scrollElement.classList.remove("show-scroll");
+		}
+	}, [scrollToTop]);
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
@@ -145,6 +167,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	const contentStyle = {
 		color: contentColor,
 		display: visible ? "block" : "none",
+		background: contentBg,
 	};
 
 	if (headers.length === 0) {

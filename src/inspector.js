@@ -78,6 +78,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		titlePaddingBottom,
 		titlePaddingLeft,
 		titlePaddingUnit,
+		scrollToTop,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -145,12 +146,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						}
 					/>
 				)}
-
-				<ToggleControl
-					label={__("Smooth Scroll")}
-					checked={isSmooth}
-					onChange={() => setAttributes({ isSmooth: !isSmooth })}
-				/>
 
 				{displayTitle && (
 					<ToggleControl
@@ -531,6 +526,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				</PanelBody>
 			)}
+
+			<PanelBody title={__("Scroll")} initialOpen={true}>
+				<ToggleControl
+					label={__("Smooth Scroll")}
+					checked={isSmooth}
+					onChange={() => setAttributes({ isSmooth: !isSmooth })}
+				/>
+
+				<ToggleControl
+					label={__("Scroll To Top")}
+					checked={scrollToTop}
+					onChange={() => setAttributes({ scrollToTop: !scrollToTop })}
+				/>
+			</PanelBody>
 
 			<PanelBody title={__("Border")} initialOpen={false}>
 				<RangeControl
