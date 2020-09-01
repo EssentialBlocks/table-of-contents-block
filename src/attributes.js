@@ -227,6 +227,13 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	radius: {
+		type: "number",
+	},
+	radiusUnit: {
+		type: "string",
+		default: "px",
+	},
 };
 
 export default attributes;

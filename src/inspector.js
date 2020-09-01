@@ -93,6 +93,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentPaddingBottom,
 		contentPaddingLeft,
 		contentPaddingUnit,
+		radius,
+		radiusUnit,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -174,7 +176,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{displayTitle && (
 					<ToggleControl
-						label={__("Seperator")}
+						label={__("Title Seperator")}
 						checked={seperator}
 						onChange={() => setAttributes({ seperator: !seperator })}
 					/>
@@ -642,6 +644,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Border Color")}
 					color={borderColor}
 					onChange={(borderColor) => setAttributes({ borderColor })}
+				/>
+
+				<UnitControl
+					selectedUnit={radiusUnit}
+					unitTypes={[
+						{ label: "px", value: "px" },
+						{ label: "%", value: "%" },
+					]}
+					onClick={(radiusUnit) => setAttributes({ radiusUnit })}
+				/>
+
+				<RangeControl
+					label={__("Border Radius")}
+					value={radius}
+					onChange={(radius) => setAttributes({ radius })}
+					min={0}
+					max={100}
 				/>
 			</PanelBody>
 

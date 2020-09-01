@@ -117,6 +117,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		contentPaddingBottom,
 		contentPaddingLeft,
 		contentPaddingUnit,
+		radius,
+		radiusUnit,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -171,6 +173,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
 			spread || 0
 		}px ${shadowColor || "black"}`,
+		borderRadius: radius + radiusUnit,
 	};
 
 	const titleStyle = {

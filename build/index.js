@@ -1759,6 +1759,13 @@ var attributes = {
   contentPaddingUnit: {
     type: "string",
     "default": "px"
+  },
+  radius: {
+    type: "number"
+  },
+  radiusUnit: {
+    type: "string",
+    "default": "px"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2015,7 +2022,9 @@ function Edit(_ref) {
       contentPaddingRight = attributes.contentPaddingRight,
       contentPaddingBottom = attributes.contentPaddingBottom,
       contentPaddingLeft = attributes.contentPaddingLeft,
-      contentPaddingUnit = attributes.contentPaddingUnit;
+      contentPaddingUnit = attributes.contentPaddingUnit,
+      radius = attributes.radius,
+      radiusUnit = attributes.radiusUnit;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2060,7 +2069,8 @@ function Edit(_ref) {
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
-    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
+    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
+    borderRadius: radius + radiusUnit
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -2497,7 +2507,9 @@ var Inspector = function Inspector(_ref) {
       contentPaddingRight = attributes.contentPaddingRight,
       contentPaddingBottom = attributes.contentPaddingBottom,
       contentPaddingLeft = attributes.contentPaddingLeft,
-      contentPaddingUnit = attributes.contentPaddingUnit;
+      contentPaddingUnit = attributes.contentPaddingUnit,
+      radius = attributes.radius,
+      radiusUnit = attributes.radiusUnit;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2568,7 +2580,7 @@ var Inspector = function Inspector(_ref) {
       });
     }
   }), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator"),
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Title Seperator"),
     checked: seperator,
     onChange: function onChange() {
       return setAttributes({
@@ -3129,6 +3141,30 @@ var Inspector = function Inspector(_ref) {
         borderColor: borderColor
       });
     }
+  }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selectedUnit: radiusUnit,
+    unitTypes: [{
+      label: "px",
+      value: "px"
+    }, {
+      label: "%",
+      value: "%"
+    }],
+    onClick: function onClick(radiusUnit) {
+      return setAttributes({
+        radiusUnit: radiusUnit
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Border Radius"),
+    value: radius,
+    onChange: function onChange(radius) {
+      return setAttributes({
+        radius: radius
+      });
+    },
+    min: 0,
+    max: 100
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Shadow"),
     initialOpen: false
@@ -3452,11 +3488,14 @@ function save(_ref) {
       contentPaddingRight = attributes.contentPaddingRight,
       contentPaddingBottom = attributes.contentPaddingBottom,
       contentPaddingLeft = attributes.contentPaddingLeft,
-      contentPaddingUnit = attributes.contentPaddingUnit;
+      contentPaddingUnit = attributes.contentPaddingUnit,
+      radius = attributes.radius,
+      radiusUnit = attributes.radiusUnit;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
-    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
+    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
+    borderRadius: radius + radiusUnit
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
