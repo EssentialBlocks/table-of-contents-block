@@ -2034,7 +2034,6 @@ function Edit(_ref) {
   }, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
-    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
     background: contentBg,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
   };
@@ -2051,7 +2050,8 @@ function Edit(_ref) {
     cursor: collapsible ? "pointer" : "default",
     color: titleColor,
     background: titleBg,
-    borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none"
+    borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none",
+    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
   };
   var contentStyle = {
     color: contentColor,
@@ -3233,7 +3233,6 @@ function save(_ref) {
       spread = attributes.spread;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
-    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
     background: contentBg,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
   };
@@ -3250,7 +3249,8 @@ function save(_ref) {
     cursor: collapsible ? "pointer" : "default",
     color: titleColor,
     background: titleBg,
-    borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none"
+    borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none",
+    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
   };
 
   if (headers.length === 0) {

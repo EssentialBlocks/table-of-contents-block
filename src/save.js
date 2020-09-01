@@ -60,11 +60,6 @@ export default function save({ attributes }) {
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
-		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
-			titlePaddingRight || 0
-		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
-			titlePaddingLeft || 0
-		}${titlePaddingUnit}`,
 		background: contentBg,
 		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
 			spread || 0
@@ -87,6 +82,11 @@ export default function save({ attributes }) {
 		borderBottom: seperator
 			? `${seperatorSize || 0}px ${seperatorStyle} ${seperatorColor}`
 			: "none",
+		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
+			titlePaddingRight || 0
+		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
+			titlePaddingLeft || 0
+		}${titlePaddingUnit}`,
 	};
 
 	if (headers.length === 0) {
