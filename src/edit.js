@@ -107,6 +107,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		arrowWidth,
 		arrowBg,
 		arrowColor,
+		shadowColor,
+		hOffset,
+		vOffset,
+		blur,
+		spread,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -163,6 +168,9 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			titlePaddingLeft || 0
 		}${titlePaddingUnit}`,
 		background: contentBg,
+		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
+			spread || 0
+		}px ${shadowColor || "black"}`,
 	};
 
 	const titleStyle = {

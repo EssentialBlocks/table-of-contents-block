@@ -83,6 +83,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		arrowWidth,
 		arrowBg,
 		arrowColor,
+		shadowColor,
+		hOffset,
+		vOffset,
+		blur,
+		spread,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -531,7 +536,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-			<PanelBody title={__("Scroll")} initialOpen={true}>
+			<PanelBody title={__("Scroll")} initialOpen={false}>
 				<ToggleControl
 					label={__("Smooth Scroll")}
 					checked={isSmooth}
@@ -593,6 +598,46 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Border Color")}
 					color={borderColor}
 					onChange={(borderColor) => setAttributes({ borderColor })}
+				/>
+			</PanelBody>
+
+			<PanelBody title={__("Shadow")} initialOpen={false}>
+				<ColorControl
+					label={__("Shadow Color")}
+					color={shadowColor}
+					onChange={(shadowColor) => setAttributes({ shadowColor })}
+				/>
+
+				<RangeControl
+					label={__("Horizontal Offset")}
+					value={hOffset}
+					onChange={(hOffset) => setAttributes({ hOffset })}
+					min={0}
+					max={30}
+				/>
+
+				<RangeControl
+					label={__("Vertical Offset")}
+					value={vOffset}
+					onChange={(vOffset) => setAttributes({ vOffset })}
+					min={0}
+					max={30}
+				/>
+
+				<RangeControl
+					label={__("Blur")}
+					value={blur}
+					onChange={(blur) => setAttributes({ blur })}
+					min={0}
+					max={30}
+				/>
+
+				<RangeControl
+					label={__("Spread")}
+					value={spread}
+					onChange={(spread) => setAttributes({ spread })}
+					min={0}
+					max={30}
 				/>
 			</PanelBody>
 		</InspectorControls>

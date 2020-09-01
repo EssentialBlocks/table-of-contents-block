@@ -187,6 +187,22 @@ const attributes = {
 	arrowColor: {
 		type: "string",
 	},
+	hOffset: {
+		type: "number",
+	},
+	vOffset: {
+		type: "number",
+	},
+	blur: {
+		type: "number",
+	},
+	spread: {
+		type: "number",
+	},
+	shadowColor: {
+		type: "string",
+		default: "black",
+	},
 };
 
 export default attributes;

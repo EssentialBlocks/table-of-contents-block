@@ -1719,6 +1719,22 @@ var attributes = {
   },
   arrowColor: {
     type: "string"
+  },
+  hOffset: {
+    type: "number"
+  },
+  vOffset: {
+    type: "number"
+  },
+  blur: {
+    type: "number"
+  },
+  spread: {
+    type: "number"
+  },
+  shadowColor: {
+    type: "string",
+    "default": "black"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1965,7 +1981,12 @@ function Edit(_ref) {
       arrowHeight = attributes.arrowHeight,
       arrowWidth = attributes.arrowWidth,
       arrowBg = attributes.arrowBg,
-      arrowColor = attributes.arrowColor;
+      arrowColor = attributes.arrowColor,
+      shadowColor = attributes.shadowColor,
+      hOffset = attributes.hOffset,
+      vOffset = attributes.vOffset,
+      blur = attributes.blur,
+      spread = attributes.spread;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2010,7 +2031,8 @@ function Edit(_ref) {
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
-    background: contentBg
+    background: contentBg,
+    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -2301,7 +2323,12 @@ var Inspector = function Inspector(_ref) {
       arrowHeight = attributes.arrowHeight,
       arrowWidth = attributes.arrowWidth,
       arrowBg = attributes.arrowBg,
-      arrowColor = attributes.arrowColor;
+      arrowColor = attributes.arrowColor,
+      shadowColor = attributes.shadowColor,
+      hOffset = attributes.hOffset,
+      vOffset = attributes.vOffset,
+      blur = attributes.blur,
+      spread = attributes.spread;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2798,7 +2825,7 @@ var Inspector = function Inspector(_ref) {
     }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Scroll"),
-    initialOpen: true
+    initialOpen: false
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Smooth Scroll"),
     checked: isSmooth,
@@ -2881,6 +2908,57 @@ var Inspector = function Inspector(_ref) {
         borderColor: borderColor
       });
     }
+  })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Shadow"),
+    initialOpen: false
+  }, /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Shadow Color"),
+    color: shadowColor,
+    onChange: function onChange(shadowColor) {
+      return setAttributes({
+        shadowColor: shadowColor
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Horizontal Offset"),
+    value: hOffset,
+    onChange: function onChange(hOffset) {
+      return setAttributes({
+        hOffset: hOffset
+      });
+    },
+    min: 0,
+    max: 30
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Vertical Offset"),
+    value: vOffset,
+    onChange: function onChange(vOffset) {
+      return setAttributes({
+        vOffset: vOffset
+      });
+    },
+    min: 0,
+    max: 30
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Blur"),
+    value: blur,
+    onChange: function onChange(blur) {
+      return setAttributes({
+        blur: blur
+      });
+    },
+    min: 0,
+    max: 30
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Spread"),
+    value: spread,
+    onChange: function onChange(spread) {
+      return setAttributes({
+        spread: spread
+      });
+    },
+    min: 0,
+    max: 30
   })));
 };
 
