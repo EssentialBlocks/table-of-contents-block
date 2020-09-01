@@ -1,10 +1,4 @@
 (function ($) {
-	var scroll = true;
-	var scroll_offset = 30;
-	var scroll_delay = 800;
-	var scroll_to_top = false;
-	var scroll_element = null;
-
 	var parseTocSlug = function (slug) {
 		// If not have the element then return false!
 		if (!slug) {
@@ -29,23 +23,6 @@
 
 	EBTableOfContents = {
 		init: function () {
-			$(document).delegate(
-				".eb-toc__list a",
-				"click",
-				EBTableOfContents._scroll
-			);
-			$(document).delegate(
-				".eb-toc__scroll-top",
-				"click",
-				EBTableOfContents._scrollTop
-			);
-			$(document).delegate(
-				".eb-toc__title-wrap",
-				"click",
-				EBTableOfContents._toggleCollapse
-			);
-			$(document).on("scroll", EBTableOfContents._showHideScroll);
-
 			this._run();
 			this._scroll();
 			this._toggleCollapse();
@@ -74,20 +51,9 @@
 					});
 				}
 			}
-
-			return;
-			if ($(this).find(".eb-toc__collapsible-wrap").length > 0) {
-				let $root = $(this).closest(".wp-block-eb-table-of-contents");
-
-				if ($root.hasClass("eb-toc__collapse")) {
-					$root.removeClass("eb-toc__collapse");
-				} else {
-					$root.addClass("eb-toc__collapse");
-				}
-			}
 		},
 
-		_scrollToTop: function (e) {
+		_scrollToTop: function () {
 			// Create go to top element
 			const goTop = document.createElement("div");
 			goTop.setAttribute(
@@ -146,32 +112,6 @@
 					hideScroll();
 				}
 			}
-		},
-
-		_showHideScroll: function (e) {
-			if (null != scroll_element) {
-				if (jQuery(window).scrollTop() > 300) {
-					if (scroll_to_top) {
-						scroll_element.addClass("eb-toc__show-scroll");
-					} else {
-						scroll_element.removeClass("eb-toc__show-scroll");
-					}
-				} else {
-					scroll_element.removeClass("eb-toc__show-scroll");
-				}
-			}
-		},
-
-		/**
-		 * Smooth To Top.
-		 */
-		_scrollTop: function (e) {
-			$("html, body").animate(
-				{
-					scrollTop: 0,
-				},
-				scroll_delay
-			);
 		},
 
 		/**
@@ -239,24 +179,6 @@
 					});
 				}
 			}
-
-			// scroll_to_top = attr.scrollToTop;
-
-			// scroll_element = $(".eb-toc__scroll-top");
-			// if (0 == scroll_element.length) {
-			// 	$("body").append(
-			// 		'<div class="eb-toc__scroll-top dashicons dashicons-arrow-up-alt2"></div>'
-			// 	);
-			// 	scroll_element = $(".eb-toc__scroll-top");
-			// }
-
-			// if (scroll_to_top) {
-			// 	scroll_element.addClass("eb-toc__show-scroll");
-			// } else {
-			// 	scroll_element.removeClass("eb-toc__show-scroll");
-			// }
-
-			// EBTableOfContents._showHideScroll();
 		},
 	};
 
