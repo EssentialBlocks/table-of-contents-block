@@ -88,6 +88,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		vOffset,
 		blur,
 		spread,
+		contentPaddingTop,
+		contentPaddingRight,
+		contentPaddingBottom,
+		contentPaddingLeft,
+		contentPaddingUnit,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -124,6 +129,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 									...visibleHeaders.slice(0, index),
 									!visibleHeaders[index],
 									...visibleHeaders.slice(index + 1),
+									<UnitControl
+										selectedUnit={titleSizeUnit}
+										unitTypes={[
+											{ label: "px", value: "px" },
+											{ label: "%", value: "%" },
+											{ label: "em", value: "em" },
+										]}
+										onClick={(titleSizeUnit) =>
+											setAttributes({ titleSizeUnit })
+										}
+									/>,
 								],
 							})
 						}
@@ -509,6 +525,34 @@ const Inspector = ({ attributes, setAttributes }) => {
 						)}
 					/>
 				</BaseControl>
+
+				<UnitControl
+					selectedUnit={contentPaddingUnit}
+					unitTypes={[
+						{ label: "px", value: "px" },
+						{ label: "%", value: "%" },
+						{ label: "em", value: "em" },
+					]}
+					onClick={(contentPaddingUnit) =>
+						setAttributes({ contentPaddingUnit })
+					}
+				/>
+
+				<DimensionsControl
+					label={__("Padding")}
+					top={contentPaddingTop}
+					right={contentPaddingRight}
+					bottom={contentPaddingBottom}
+					left={contentPaddingLeft}
+					onChange={({ top, right, bottom, left }) =>
+						setAttributes({
+							contentPaddingTop: top,
+							contentPaddingRight: right,
+							contentPaddingBottom: bottom,
+							contentPaddingLeft: left,
+						})
+					}
+				/>
 			</PanelBody>
 
 			{seperator && (

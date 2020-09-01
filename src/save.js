@@ -36,7 +36,6 @@ export default function save({ attributes }) {
 		seperatorColor,
 		visibleHeaders,
 		headers,
-
 		borderWidth,
 		borderColor,
 		borderStyle,
@@ -56,6 +55,11 @@ export default function save({ attributes }) {
 		vOffset,
 		blur,
 		spread,
+		contentPaddingTop,
+		contentPaddingRight,
+		contentPaddingBottom,
+		contentPaddingLeft,
+		contentPaddingUnit,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -89,6 +93,16 @@ export default function save({ attributes }) {
 		}${titlePaddingUnit}`,
 	};
 
+	const contentStyle = {
+		color: contentColor,
+		background: contentBg,
+		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
+			contentPaddingRight || 0
+		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
+			contentPaddingLeft || 0
+		}${contentPaddingUnit}`,
+	};
+
 	if (headers.length === 0) {
 		return <div />;
 	}
@@ -113,6 +127,7 @@ export default function save({ attributes }) {
 			/>
 			<div
 				className="eb-toc-wrapper"
+				style={contentStyle}
 				data-headers={JSON.stringify(headers)}
 				data-visible={JSON.stringify(visibleHeaders)}
 				data-smooth={isSmooth}

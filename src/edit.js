@@ -112,6 +112,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		vOffset,
 		blur,
 		spread,
+		contentPaddingTop,
+		contentPaddingRight,
+		contentPaddingBottom,
+		contentPaddingLeft,
+		contentPaddingUnit,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -195,6 +200,11 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		color: contentColor,
 		display: visible ? "block" : "none",
 		background: contentBg,
+		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
+			contentPaddingRight || 0
+		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
+			contentPaddingLeft || 0
+		}${contentPaddingUnit}`,
 	};
 
 	if (headers.length === 0) {

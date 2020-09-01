@@ -155,7 +155,7 @@ const attributes = {
 		type: "string",
 		default: "solid",
 	},
-	titleMarginTop: {
+	titlePaddingTop: {
 		type: "number",
 		default: 0,
 	},
@@ -206,6 +206,26 @@ const attributes = {
 	shadowColor: {
 		type: "string",
 		default: "black",
+	},
+	contentPaddingTop: {
+		type: "number",
+		default: 0,
+	},
+	contentPaddingRight: {
+		type: "number",
+		default: 0,
+	},
+	contentPaddingBottom: {
+		type: "number",
+		default: 0,
+	},
+	contentPaddingLeft: {
+		type: "number",
+		default: 0,
+	},
+	contentPaddingUnit: {
+		type: "string",
+		default: "px",
 	},
 };
 

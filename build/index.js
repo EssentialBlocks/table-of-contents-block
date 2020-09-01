@@ -1688,7 +1688,7 @@ var attributes = {
     type: "string",
     "default": "solid"
   },
-  titleMarginTop: {
+  titlePaddingTop: {
     type: "number",
     "default": 0
   },
@@ -1739,6 +1739,26 @@ var attributes = {
   shadowColor: {
     type: "string",
     "default": "black"
+  },
+  contentPaddingTop: {
+    type: "number",
+    "default": 0
+  },
+  contentPaddingRight: {
+    type: "number",
+    "default": 0
+  },
+  contentPaddingBottom: {
+    type: "number",
+    "default": 0
+  },
+  contentPaddingLeft: {
+    type: "number",
+    "default": 0
+  },
+  contentPaddingUnit: {
+    type: "string",
+    "default": "px"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1990,7 +2010,12 @@ function Edit(_ref) {
       hOffset = attributes.hOffset,
       vOffset = attributes.vOffset,
       blur = attributes.blur,
-      spread = attributes.spread;
+      spread = attributes.spread,
+      contentPaddingTop = attributes.contentPaddingTop,
+      contentPaddingRight = attributes.contentPaddingRight,
+      contentPaddingBottom = attributes.contentPaddingBottom,
+      contentPaddingLeft = attributes.contentPaddingLeft,
+      contentPaddingUnit = attributes.contentPaddingUnit;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2056,7 +2081,8 @@ function Edit(_ref) {
   var contentStyle = {
     color: contentColor,
     display: visible ? "block" : "none",
-    background: contentBg
+    background: contentBg,
+    padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit)
   };
 
   if (headers.length === 0) {
@@ -2466,7 +2492,12 @@ var Inspector = function Inspector(_ref) {
       hOffset = attributes.hOffset,
       vOffset = attributes.vOffset,
       blur = attributes.blur,
-      spread = attributes.spread;
+      spread = attributes.spread,
+      contentPaddingTop = attributes.contentPaddingTop,
+      contentPaddingRight = attributes.contentPaddingRight,
+      contentPaddingBottom = attributes.contentPaddingBottom,
+      contentPaddingLeft = attributes.contentPaddingLeft,
+      contentPaddingUnit = attributes.contentPaddingUnit;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2491,7 +2522,24 @@ var Inspector = function Inspector(_ref) {
       checked: header,
       onChange: function onChange() {
         return setAttributes({
-          visibleHeaders: [].concat(_toConsumableArray(visibleHeaders.slice(0, index)), [!visibleHeaders[index]], _toConsumableArray(visibleHeaders.slice(index + 1)))
+          visibleHeaders: [].concat(_toConsumableArray(visibleHeaders.slice(0, index)), [!visibleHeaders[index]], _toConsumableArray(visibleHeaders.slice(index + 1)), [/*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+            selectedUnit: titleSizeUnit,
+            unitTypes: [{
+              label: "px",
+              value: "px"
+            }, {
+              label: "%",
+              value: "%"
+            }, {
+              label: "em",
+              value: "em"
+            }],
+            onClick: function onClick(titleSizeUnit) {
+              return setAttributes({
+                titleSizeUnit: titleSizeUnit
+              });
+            }
+          })])
         });
       }
     });
@@ -2932,7 +2980,42 @@ var Inspector = function Inspector(_ref) {
         step: CONTENT_LINE_HEIGHT_STEP
       }));
     }
-  }))), seperator && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
+  })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    selectedUnit: contentPaddingUnit,
+    unitTypes: [{
+      label: "px",
+      value: "px"
+    }, {
+      label: "%",
+      value: "%"
+    }, {
+      label: "em",
+      value: "em"
+    }],
+    onClick: function onClick(contentPaddingUnit) {
+      return setAttributes({
+        contentPaddingUnit: contentPaddingUnit
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Padding"),
+    top: contentPaddingTop,
+    right: contentPaddingRight,
+    bottom: contentPaddingBottom,
+    left: contentPaddingLeft,
+    onChange: function onChange(_ref5) {
+      var top = _ref5.top,
+          right = _ref5.right,
+          bottom = _ref5.bottom,
+          left = _ref5.left;
+      return setAttributes({
+        contentPaddingTop: top,
+        contentPaddingRight: right,
+        contentPaddingBottom: bottom,
+        contentPaddingLeft: left
+      });
+    }
+  })), seperator && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator Size"),
@@ -3364,7 +3447,12 @@ function save(_ref) {
       hOffset = attributes.hOffset,
       vOffset = attributes.vOffset,
       blur = attributes.blur,
-      spread = attributes.spread;
+      spread = attributes.spread,
+      contentPaddingTop = attributes.contentPaddingTop,
+      contentPaddingRight = attributes.contentPaddingRight,
+      contentPaddingBottom = attributes.contentPaddingBottom,
+      contentPaddingLeft = attributes.contentPaddingLeft,
+      contentPaddingUnit = attributes.contentPaddingUnit;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
@@ -3385,6 +3473,11 @@ function save(_ref) {
     background: titleBg,
     borderBottom: seperator ? "".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor) : "none",
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
+  };
+  var contentStyle = {
+    color: contentColor,
+    background: contentBg,
+    padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit)
   };
 
   if (headers.length === 0) {
@@ -3408,6 +3501,7 @@ function save(_ref) {
     style: titleStyle
   }), /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-wrapper",
+    style: contentStyle,
     "data-headers": JSON.stringify(headers),
     "data-visible": JSON.stringify(visibleHeaders),
     "data-smooth": isSmooth
