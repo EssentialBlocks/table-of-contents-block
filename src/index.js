@@ -8,11 +8,11 @@ import save from "./save";
 import attributes from "./attributes";
 import icon from "./icon";
 
-registerBlockType("create-block/table-of-content", {
-	title: __("Table Of Content", "create-block"),
+registerBlockType("block/table-of-contents-block", {
+	title: __("Table Of Contents", "create-block"),
 	description: __(
 		"Example block written with ESNext standard and JSX support – build step required.",
-		"create-block"
+		"table-of-contents-block"
 	),
 	category: "widgets",
 	icon,

@@ -1,13 +1,9 @@
 {
-	"name": "create-block/table-of-content",
+	"name": "block/table-of-contents-block",
 	"title": "Table Of Content",
 	"category": "widgets",
-	"icon": "smiley",
 	"description": "Example block written with ESNext standard and JSX support – build step required.",
-	"textdomain": "create-block",
-	"supports": {
-		"html": false
-	},
+	"textdomain": "table-of-contents-block",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"

@@ -1,14 +1,14 @@
 <?php
 /**
- * Plugin Name:     Table Of Content
+ * Plugin Name:     Table Of Contents
  * Description:     Example block written with ESNext standard and JSX support – build step required.
  * Version:         0.1.0
  * Author:          The WordPress Contributors
  * License:         GPL-2.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:     create-block
+ * Text Domain:     table-of-contents-block
  *
- * @package         create-block
+ * @package         table-of-contents-block
  */
 
 /**
@@ -27,7 +27,7 @@ function create_block_table_of_content_block_init() {
 	$script_asset_path = "$dir/build/index.asset.php";
 	if ( ! file_exists( $script_asset_path ) ) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "create-block/table-of-content" block first.'
+			'You need to run `npm start` or `npm run build` for the "block/table-of-contents" block first.'
 		);
 	}
 	$index_js     = 'build/index.js';
@@ -64,7 +64,7 @@ function create_block_table_of_content_block_init() {
   }
 
 
-	register_block_type( 'create-block/table-of-content', array(
+	register_block_type( 'block/table-of-contents-block', array(
 		'editor_script' => 'create-block-table-of-content-block-editor',
 		'editor_style'  => 'create-block-table-of-content-block-editor',
 		'style'         => 'create-block-table-of-content-block',
