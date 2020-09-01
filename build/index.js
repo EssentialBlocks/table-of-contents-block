@@ -1713,6 +1713,12 @@ var attributes = {
   },
   arrowWidth: {
     type: "number"
+  },
+  arrowBg: {
+    type: "string"
+  },
+  arrowColor: {
+    type: "string"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1957,7 +1963,9 @@ function Edit(_ref) {
       titlePaddingUnit = attributes.titlePaddingUnit,
       scrollToTop = attributes.scrollToTop,
       arrowHeight = attributes.arrowHeight,
-      arrowWidth = attributes.arrowWidth;
+      arrowWidth = attributes.arrowWidth,
+      arrowBg = attributes.arrowBg,
+      arrowColor = attributes.arrowColor;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -1995,8 +2003,10 @@ function Edit(_ref) {
     if (scrollElement) {
       if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
       if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
+      if (arrowBg) scrollElement.style.background = arrowBg;
+      if (arrowColor) scrollElement.style.color = arrowColor;
     }
-  }, [arrowHeight, arrowWidth]);
+  }, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
@@ -2289,7 +2299,9 @@ var Inspector = function Inspector(_ref) {
       titlePaddingUnit = attributes.titlePaddingUnit,
       scrollToTop = attributes.scrollToTop,
       arrowHeight = attributes.arrowHeight,
-      arrowWidth = attributes.arrowWidth;
+      arrowWidth = attributes.arrowWidth,
+      arrowBg = attributes.arrowBg,
+      arrowColor = attributes.arrowColor;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2823,6 +2835,22 @@ var Inspector = function Inspector(_ref) {
     },
     min: 0,
     max: 100
+  }), /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Arrow Background"),
+    color: arrowBg,
+    onChange: function onChange(arrowBg) {
+      return setAttributes({
+        arrowBg: arrowBg
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Arrow Color"),
+    color: arrowColor,
+    onChange: function onChange(arrowColor) {
+      return setAttributes({
+        arrowColor: arrowColor
+      });
+    }
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Border"),
     initialOpen: false
@@ -3103,7 +3131,9 @@ function save(_ref) {
       isSmooth = attributes.isSmooth,
       scrollToTop = attributes.scrollToTop,
       arrowHeight = attributes.arrowHeight,
-      arrowWidth = attributes.arrowWidth;
+      arrowWidth = attributes.arrowWidth,
+      arrowBg = attributes.arrowBg,
+      arrowColor = attributes.arrowColor;
   var titleStyle = {
     display: displayTitle ? "block" : "none",
     fontFamily: titleFontFamily,
@@ -3130,7 +3160,9 @@ function save(_ref) {
     "data-initial-collapse": initialCollapse,
     "data-scroll-top": scrollToTop,
     "data-arrow-height": arrowHeight,
-    "data-arrow-width": arrowWidth
+    "data-arrow-width": arrowWidth,
+    "data-arrow-bg": arrowBg,
+    "data-arrow-color": arrowColor
   }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",

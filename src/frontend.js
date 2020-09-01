@@ -118,9 +118,11 @@
 					: hideScroll();
 			}
 
-			function setArrowStyles(height, width) {
+			function setArrowStyles(height, width, bg, color) {
 				if (height) goTop.style.height = height + "px";
 				if (width) goTop.style.width = width + "px";
+				if (bg) goTop.style.background = bg;
+				if (color) goTop.style.color = color;
 			}
 
 			const containers = document.querySelectorAll(".eb-toc-container");
@@ -129,13 +131,15 @@
 				const goToTop = container.getAttribute("data-scroll-top") === "true";
 				const height = container.getAttribute("data-arrow-height");
 				const width = container.getAttribute("data-arrow-width");
+				const bg = container.getAttribute("data-arrow-bg");
+				const color = container.getAttribute("data-arrow-color");
 
 				if (goToTop) {
 					// Add scroll event
 					window.addEventListener("scroll", onScrollPage);
 
 					// Set arrow styles
-					setArrowStyles(height, width);
+					setArrowStyles(height, width, bg, color);
 
 					showScroll();
 				} else {

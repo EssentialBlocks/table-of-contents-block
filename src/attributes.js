@@ -181,6 +181,12 @@ const attributes = {
 	arrowWidth: {
 		type: "number",
 	},
+	arrowBg: {
+		type: "string",
+	},
+	arrowColor: {
+		type: "string",
+	},
 };
 
 export default attributes;

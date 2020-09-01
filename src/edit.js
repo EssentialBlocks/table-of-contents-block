@@ -105,6 +105,8 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
+		arrowBg,
+		arrowColor,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -146,8 +148,12 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
 
 			if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
+
+			if (arrowBg) scrollElement.style.background = arrowBg;
+
+			if (arrowColor) scrollElement.style.color = arrowColor;
 		}
-	}, [arrowHeight, arrowWidth]);
+	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,

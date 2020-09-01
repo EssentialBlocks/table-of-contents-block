@@ -81,6 +81,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
+		arrowBg,
+		arrowColor,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -556,6 +558,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={(arrowWidth) => setAttributes({ arrowWidth })}
 					min={0}
 					max={100}
+				/>
+
+				<ColorControl
+					label={__("Arrow Background")}
+					color={arrowBg}
+					onChange={(arrowBg) => setAttributes({ arrowBg })}
+				/>
+
+				<ColorControl
+					label={__("Arrow Color")}
+					color={arrowColor}
+					onChange={(arrowColor) => setAttributes({ arrowColor })}
 				/>
 			</PanelBody>
 

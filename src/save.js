@@ -38,6 +38,8 @@ export default function save({ attributes }) {
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
+		arrowBg,
+		arrowColor,
 	} = attributes;
 
 	const titleStyle = {
@@ -70,6 +72,8 @@ export default function save({ attributes }) {
 			data-scroll-top={scrollToTop}
 			data-arrow-height={arrowHeight}
 			data-arrow-width={arrowWidth}
+			data-arrow-bg={arrowBg}
+			data-arrow-color={arrowColor}
 		>
 			<RichText.Content
 				tagName="p"
