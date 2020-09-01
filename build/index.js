@@ -1689,16 +1689,20 @@ var attributes = {
     "default": "solid"
   },
   titleMarginTop: {
-    type: "number"
+    type: "number",
+    "default": 0
   },
   titlePaddingRight: {
-    type: "number"
+    type: "number",
+    "default": 0
   },
   titlePaddingBottom: {
-    type: "number"
+    type: "number",
+    "default": 0
   },
   titlePaddingLeft: {
-    type: "number"
+    type: "number",
+    "default": 0
   },
   titlePaddingUnit: {
     type: "string",
@@ -3198,6 +3202,8 @@ function save(_ref) {
       titleAlign = attributes.titleAlign,
       titleColor = attributes.titleColor,
       titleBg = attributes.titleBg,
+      contentColor = attributes.contentColor,
+      contentBg = attributes.contentBg,
       collapsible = attributes.collapsible,
       initialCollapse = attributes.initialCollapse,
       seperator = attributes.seperator,
@@ -3206,12 +3212,31 @@ function save(_ref) {
       seperatorColor = attributes.seperatorColor,
       visibleHeaders = attributes.visibleHeaders,
       headers = attributes.headers,
+      borderWidth = attributes.borderWidth,
+      borderColor = attributes.borderColor,
+      borderStyle = attributes.borderStyle,
+      titlePaddingTop = attributes.titlePaddingTop,
+      titlePaddingRight = attributes.titlePaddingRight,
+      titlePaddingBottom = attributes.titlePaddingBottom,
+      titlePaddingLeft = attributes.titlePaddingLeft,
+      titlePaddingUnit = attributes.titlePaddingUnit,
       isSmooth = attributes.isSmooth,
       scrollToTop = attributes.scrollToTop,
       arrowHeight = attributes.arrowHeight,
       arrowWidth = attributes.arrowWidth,
       arrowBg = attributes.arrowBg,
-      arrowColor = attributes.arrowColor;
+      arrowColor = attributes.arrowColor,
+      shadowColor = attributes.shadowColor,
+      hOffset = attributes.hOffset,
+      vOffset = attributes.vOffset,
+      blur = attributes.blur,
+      spread = attributes.spread;
+  var wrapperStyle = {
+    border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
+    padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit),
+    background: contentBg,
+    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
+  };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
     fontFamily: titleFontFamily,
@@ -3234,6 +3259,7 @@ function save(_ref) {
 
   return /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-container",
+    style: wrapperStyle,
     "data-collapsible": collapsible,
     "data-initial-collapse": initialCollapse,
     "data-scroll-top": scrollToTop,

@@ -157,15 +157,19 @@ const attributes = {
 	},
 	titleMarginTop: {
 		type: "number",
+		default: 0,
 	},
 	titlePaddingRight: {
 		type: "number",
+		default: 0,
 	},
 	titlePaddingBottom: {
 		type: "number",
+		default: 0,
 	},
 	titlePaddingLeft: {
 		type: "number",
+		default: 0,
 	},
 	titlePaddingUnit: {
 		type: "string",

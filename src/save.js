@@ -26,6 +26,8 @@ export default function save({ attributes }) {
 		titleAlign,
 		titleColor,
 		titleBg,
+		contentColor,
+		contentBg,
 		collapsible,
 		initialCollapse,
 		seperator,
@@ -34,13 +36,40 @@ export default function save({ attributes }) {
 		seperatorColor,
 		visibleHeaders,
 		headers,
+
+		borderWidth,
+		borderColor,
+		borderStyle,
+		titlePaddingTop,
+		titlePaddingRight,
+		titlePaddingBottom,
+		titlePaddingLeft,
+		titlePaddingUnit,
 		isSmooth,
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
 		arrowBg,
 		arrowColor,
+		shadowColor,
+		hOffset,
+		vOffset,
+		blur,
+		spread,
 	} = attributes;
+
+	const wrapperStyle = {
+		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
+		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
+			titlePaddingRight || 0
+		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
+			titlePaddingLeft || 0
+		}${titlePaddingUnit}`,
+		background: contentBg,
+		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
+			spread || 0
+		}px ${shadowColor || "black"}`,
+	};
 
 	const titleStyle = {
 		display: displayTitle ? "block" : "none",
@@ -67,6 +96,7 @@ export default function save({ attributes }) {
 	return (
 		<div
 			className="eb-toc-container"
+			style={wrapperStyle}
 			data-collapsible={collapsible}
 			data-initial-collapse={initialCollapse}
 			data-scroll-top={scrollToTop}
