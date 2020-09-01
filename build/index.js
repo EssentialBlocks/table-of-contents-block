@@ -2185,6 +2185,142 @@ function parseTocSlug(slug) {
 
 /***/ }),
 
+/***/ "./src/icon.js":
+/*!*********************!*\
+  !*** ./src/icon.js ***!
+  \*********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return icon; });
+function icon() {
+  return /*#__PURE__*/React.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    x: "0",
+    y: "0",
+    enableBackground: "new 0 0 66 70",
+    version: "1.1",
+    viewBox: "0 0 66 70",
+    xmlSpace: "preserve"
+  }, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_1_",
+    x1: "-6.254",
+    x2: "50.81",
+    y1: "45.89",
+    y2: "11.805",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M17.7 18.8H55.599999999999994V21.7H17.7z",
+    className: "st0"
+  }), /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_2_",
+    x1: "-13.111",
+    x2: "43.953",
+    y1: "34.411",
+    y2: "0.326",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M8.7 18.5H12.299999999999999V22.1H8.7z",
+    className: "st1"
+  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_3_",
+    x1: "-1.304",
+    x2: "55.76",
+    y1: "54.177",
+    y2: "20.092",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M17.7 30.1H55.599999999999994V33H17.7z",
+    className: "st2"
+  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_4_",
+    x1: "-8.161",
+    x2: "48.903",
+    y1: "42.698",
+    y2: "8.613",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M8.7 29.7H12.299999999999999V33.3H8.7z",
+    className: "st3"
+  }))), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_5_",
+    x1: "2.815",
+    x2: "59.879",
+    y1: "61.073",
+    y2: "26.988",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M17.9 41.3H48.9V44.199999999999996H17.9z",
+    className: "st4"
+  }), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_6_",
+    x1: "-3.143",
+    x2: "53.921",
+    y1: "51.098",
+    y2: "17.013",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M9 41H12.6V44.6H9z",
+    className: "st5"
+  }))), /*#__PURE__*/React.createElement("g", null, /*#__PURE__*/React.createElement("linearGradient", {
+    id: "SVGID_7_",
+    x1: "-0.708",
+    x2: "56.356",
+    y1: "55.175",
+    y2: "21.09",
+    gradientUnits: "userSpaceOnUse"
+  }, /*#__PURE__*/React.createElement("stop", {
+    offset: "0",
+    stopColor: "#1A6DFF"
+  }), /*#__PURE__*/React.createElement("stop", {
+    offset: "1",
+    stopColor: "#C822FF"
+  })), /*#__PURE__*/React.createElement("path", {
+    d: "M60.5 68.9H5.6c-3 0-5.5-2.5-5.5-5.5V6.6c0-3 2.5-5.5 5.5-5.5h54.9c3 0 5.5 2.5 5.5 5.5v56.8c0 3-2.5 5.5-5.5 5.5zM5.6 4.1c-1.4 0-2.5 1.1-2.5 2.5v56.8c0 1.4 1.1 2.5 2.5 2.5h54.9c1.4 0 2.5-1.1 2.5-2.5V6.6c0-1.4-1.1-2.5-2.5-2.5H5.6z",
+    className: "st6"
+  })));
+}
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -2203,6 +2339,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./src/edit.js");
 /* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./save */ "./src/save.js");
 /* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon */ "./src/icon.js");
+
 
 
 
@@ -2213,11 +2351,7 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("cre
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Table Of Content", "create-block"),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Example block written with ESNext standard and JSX support – build step required.", "create-block"),
   category: "widgets",
-  icon: "smiley",
-  supports: {
-    // Removes support for an HTML mode.
-    html: false
-  },
+  icon: _icon__WEBPACK_IMPORTED_MODULE_6__["default"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_5__["default"],
   edit: _edit__WEBPACK_IMPORTED_MODULE_3__["default"],
   save: _save__WEBPACK_IMPORTED_MODULE_4__["default"]
