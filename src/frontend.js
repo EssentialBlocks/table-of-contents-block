@@ -27,6 +27,8 @@
 			this._scroll();
 			this._toggleCollapse();
 			this._scrollToTop();
+			this._hide();
+			this._show();
 		},
 
 		_toggleCollapse: function () {
@@ -41,13 +43,16 @@
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
+					const header = container.querySelector(".eb-toc-header");
 
 					if (initialCollapse) {
 						content.classList.add("hide-content");
+						header.classList.add("hide-content");
 					}
 
 					title.addEventListener("click", function () {
 						content.classList.toggle("hide-content");
+						header.classList.toggle("hide-content");
 					});
 				}
 			}
@@ -134,6 +139,42 @@
 						});
 					});
 				}
+			}
+		},
+
+		/**
+		 * Close contents
+		 */
+		_hide: function () {
+			const crossButtons = document.querySelectorAll(".eb-toc-close");
+
+			for (crossButton of crossButtons) {
+				crossButton.addEventListener("click", function () {
+					const headerNode = crossButton.closest(".eb-toc-header");
+					const contentNode = headerNode.nextSibling;
+					const headerButton = contentNode.nextSibling;
+
+					headerNode.style.display = "none";
+					contentNode.style.display = "none";
+
+					headerButton.style.display = "block";
+				});
+			}
+		},
+
+		_show: function () {
+			const headerButtons = document.querySelectorAll(".eb-toc-button");
+
+			for (headerButton of headerButtons) {
+				headerButton.addEventListener("click", function () {
+					const headerNode = headerButton.parentNode.firstChild;
+					const contentNode = headerNode.nextSibling;
+
+					headerNode.style.display = "block";
+					contentNode.style.display = "block";
+
+					this.style.display = "none";
+				});
 			}
 		},
 
