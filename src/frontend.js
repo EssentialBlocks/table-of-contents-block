@@ -44,10 +44,13 @@
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
 					const header = container.querySelector(".eb-toc-header");
+					const headerButton = container.querySelector(".eb-toc-button");
 
 					if (initialCollapse) {
 						content.classList.add("hide-content");
 						header.classList.add("hide-content");
+					} else {
+						headerButton.style.display = "none";
 					}
 
 					title.addEventListener("click", function () {
@@ -157,7 +160,7 @@
 					headerNode.style.display = "none";
 					contentNode.style.display = "none";
 
-					headerButton.style.display = "block";
+					headerButton.style.display = "inline-block";
 				});
 			}
 		},
