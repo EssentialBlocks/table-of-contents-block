@@ -62,6 +62,10 @@ export default function save({ attributes }) {
 		contentPaddingUnit,
 		radius,
 		radiusUnit,
+		topSpace,
+		contentHeight,
+		contentWidth,
+		contentWidthUnit,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -71,6 +75,10 @@ export default function save({ attributes }) {
 			spread || 0
 		}px ${shadowColor || "black"}`,
 		borderRadius: radius + radiusUnit,
+		position: "fixed",
+		top: topSpace + "%",
+		width: contentWidth + contentWidthUnit,
+		zIndex: 999,
 	};
 
 	const titleStyle = {
@@ -104,6 +112,8 @@ export default function save({ attributes }) {
 		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
 			contentPaddingLeft || 0
 		}${contentPaddingUnit}`,
+		overflow: "scroll",
+		height: contentHeight,
 	};
 
 	if (headers.length === 0) {
@@ -122,12 +132,15 @@ export default function save({ attributes }) {
 			data-arrow-bg={arrowBg}
 			data-arrow-color={arrowColor}
 		>
-			<RichText.Content
-				tagName="p"
-				className="eb-toc-title"
-				value={title}
-				style={titleStyle}
-			/>
+			<div className="eb-toc-header">
+				<span className="eb-toc-close">x</span>
+				<RichText.Content
+					tagName="p"
+					className="eb-toc-title"
+					value={title}
+					style={titleStyle}
+				/>
+			</div>
 			<div
 				className="eb-toc-wrapper"
 				style={contentStyle}
@@ -137,6 +150,9 @@ export default function save({ attributes }) {
 			>
 				<List attributes={attributes} />
 			</div>
+			<button className="eb-toc-button">
+				{displayTitle && title ? title : "Table of Contents"}
+			</button>
 		</div>
 	);
 }

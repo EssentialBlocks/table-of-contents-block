@@ -244,6 +244,26 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	topSpace: {
+		type: "number",
+		default: 25,
+	},
+	contentHeight: {
+		type: "number",
+		default: 200,
+	},
+	contentHeightUnit: {
+		type: "string",
+		default: "px",
+	},
+	contentWidth: {
+		type: "number",
+		default: 200,
+	},
+	contentWidthUnit: {
+		type: "string",
+		default: "px",
+	},
 };
 
 export default attributes;

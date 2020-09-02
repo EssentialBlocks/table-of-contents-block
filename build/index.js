@@ -1776,6 +1776,26 @@ var attributes = {
   hasUnderline: {
     type: "boolean",
     "default": false
+  },
+  topSpace: {
+    type: "number",
+    "default": 25
+  },
+  contentHeight: {
+    type: "number",
+    "default": 200
+  },
+  contentHeightUnit: {
+    type: "string",
+    "default": "px"
+  },
+  contentWidth: {
+    type: "number",
+    "default": 200
+  },
+  contentWidthUnit: {
+    type: "string",
+    "default": "px"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -3546,12 +3566,20 @@ function save(_ref) {
       contentPaddingLeft = attributes.contentPaddingLeft,
       contentPaddingUnit = attributes.contentPaddingUnit,
       radius = attributes.radius,
-      radiusUnit = attributes.radiusUnit;
+      radiusUnit = attributes.radiusUnit,
+      topSpace = attributes.topSpace,
+      contentHeight = attributes.contentHeight,
+      contentWidth = attributes.contentWidth,
+      contentWidthUnit = attributes.contentWidthUnit;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
-    borderRadius: radius + radiusUnit
+    borderRadius: radius + radiusUnit,
+    position: "fixed",
+    top: topSpace + "%",
+    width: contentWidth + contentWidthUnit,
+    zIndex: 999
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -3572,7 +3600,9 @@ function save(_ref) {
   var contentStyle = {
     color: contentColor,
     background: contentBg,
-    padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit)
+    padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit),
+    overflow: "scroll",
+    height: contentHeight
   };
 
   if (headers.length === 0) {
@@ -3589,12 +3619,16 @@ function save(_ref) {
     "data-arrow-width": arrowWidth,
     "data-arrow-bg": arrowBg,
     "data-arrow-color": arrowColor
-  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "eb-toc-header"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eb-toc-close"
+  }, "x"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",
     value: title,
     style: titleStyle
-  }), /*#__PURE__*/React.createElement("div", {
+  })), /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-wrapper",
     style: contentStyle,
     "data-headers": JSON.stringify(headers),
@@ -3602,7 +3636,9 @@ function save(_ref) {
     "data-smooth": isSmooth
   }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attributes: attributes
-  })));
+  })), /*#__PURE__*/React.createElement("button", {
+    className: "eb-toc-button"
+  }, displayTitle && title ? title : "Table of Contents"));
 }
 
 /***/ }),
