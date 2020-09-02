@@ -1637,10 +1637,6 @@ var attributes = {
   contentTextTransform: {
     type: "string"
   },
-  contentTextDecoration: {
-    type: "string",
-    "default": "underline"
-  },
   contentLetterSpacing: {
     type: "number"
   },
@@ -1776,6 +1772,10 @@ var attributes = {
   },
   listSeperatorColor: {
     type: "string"
+  },
+  hasUnderline: {
+    type: "boolean",
+    "default": false
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2525,7 +2525,8 @@ var Inspector = function Inspector(_ref) {
       radiusUnit = attributes.radiusUnit,
       listSeperatorWidth = attributes.listSeperatorWidth,
       listSeperatorStyle = attributes.listSeperatorStyle,
-      listSeperatorColor = attributes.listSeperatorColor;
+      listSeperatorColor = attributes.listSeperatorColor,
+      hasUnderline = attributes.hasUnderline;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2811,7 +2812,15 @@ var Inspector = function Inspector(_ref) {
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Settings"),
     initialOpen: false
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Display Underline"),
+    checked: hasUnderline,
+    onChange: function onChange() {
+      return setAttributes({
+        hasUnderline: !hasUnderline
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Indent"),
     value: indent,
     onChange: function onChange(indent) {
@@ -3338,14 +3347,14 @@ var List = /*#__PURE__*/function (_Component) {
           contentFontSize = _this$props$attribute.contentFontSize,
           contentFontWeight = _this$props$attribute.contentFontWeight,
           contentTextTransform = _this$props$attribute.contentTextTransform,
-          contentTextDecoration = _this$props$attribute.contentTextDecoration,
           contentLetterSpacing = _this$props$attribute.contentLetterSpacing,
           contentLetterSpacingUnit = _this$props$attribute.contentLetterSpacingUnit,
           contentLineHeight = _this$props$attribute.contentLineHeight,
           contentLineHeightUnit = _this$props$attribute.contentLineHeightUnit,
           listSeperatorWidth = _this$props$attribute.listSeperatorWidth,
           listSeperatorStyle = _this$props$attribute.listSeperatorStyle,
-          listSeperatorColor = _this$props$attribute.listSeperatorColor; // Style objects
+          listSeperatorColor = _this$props$attribute.listSeperatorColor,
+          hasUnderline = _this$props$attribute.hasUnderline; // Style objects
 
       var listStyle = {
         listStyle: listType === "none" && "none",
@@ -3362,7 +3371,7 @@ var List = /*#__PURE__*/function (_Component) {
       };
       var linkStyle = {
         color: contentColor,
-        textDecoration: contentTextDecoration
+        textDecoration: hasUnderline ? "underline" : "none"
       };
       var ListTag = listType === "ol" ? "ol" : "ul";
 

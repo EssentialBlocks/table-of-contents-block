@@ -17,7 +17,6 @@ class List extends Component {
 			contentFontSize,
 			contentFontWeight,
 			contentTextTransform,
-			contentTextDecoration,
 			contentLetterSpacing,
 			contentLetterSpacingUnit,
 			contentLineHeight,
@@ -25,6 +24,7 @@ class List extends Component {
 			listSeperatorWidth,
 			listSeperatorStyle,
 			listSeperatorColor,
+			hasUnderline,
 		} = this.props.attributes;
 
 		// Style objects
@@ -45,7 +45,7 @@ class List extends Component {
 
 		const linkStyle = {
 			color: contentColor,
-			textDecoration: contentTextDecoration,
+			textDecoration: hasUnderline ? "underline" : "none",
 		};
 
 		const ListTag = listType === "ol" ? "ol" : "ul";

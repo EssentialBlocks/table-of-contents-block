@@ -98,6 +98,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		listSeperatorWidth,
 		listSeperatorStyle,
 		listSeperatorColor,
+		hasUnderline,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -365,6 +366,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 			)}
 
 			<PanelBody title={__("Content Settings")} initialOpen={false}>
+				<ToggleControl
+					label={__("Display Underline")}
+					checked={hasUnderline}
+					onChange={() => setAttributes({ hasUnderline: !hasUnderline })}
+				/>
+
 				<RangeControl
 					label={__("Indent")}
 					value={indent}

@@ -104,10 +104,6 @@ const attributes = {
 	contentTextTransform: {
 		type: "string",
 	},
-	contentTextDecoration: {
-		type: "string",
-		default: "underline",
-	},
 	contentLetterSpacing: {
 		type: "number",
 	},
@@ -243,6 +239,10 @@ const attributes = {
 	},
 	listSeperatorColor: {
 		type: "string",
+	},
+	hasUnderline: {
+		type: "boolean",
+		default: false,
 	},
 };
 
