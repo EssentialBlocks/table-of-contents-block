@@ -95,6 +95,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentPaddingUnit,
 		radius,
 		radiusUnit,
+		listSeperatorWidth,
+		listSeperatorStyle,
+		listSeperatorColor,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -555,6 +558,37 @@ const Inspector = ({ attributes, setAttributes }) => {
 						})
 					}
 				/>
+
+				<SelectControl
+					label={__("Seperator Style")}
+					value={listSeperatorStyle}
+					options={BORDER_STYLES}
+					onChange={(listSeperatorStyle) =>
+						setAttributes({ listSeperatorStyle })
+					}
+				/>
+
+				{listSeperatorStyle !== "none" && (
+					<ColorControl
+						label={__("Seperator Color")}
+						color={listSeperatorColor}
+						onChange={(listSeperatorColor) =>
+							setAttributes({ listSeperatorColor })
+						}
+					/>
+				)}
+
+				{listSeperatorStyle !== "none" && (
+					<RangeControl
+						label={__("Seperator Size")}
+						value={listSeperatorWidth}
+						onChange={(listSeperatorWidth) =>
+							setAttributes({ listSeperatorWidth })
+						}
+						min={0}
+						max={100}
+					/>
+				)}
 			</PanelBody>
 
 			{seperator && (

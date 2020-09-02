@@ -22,6 +22,9 @@ class List extends Component {
 			contentLetterSpacingUnit,
 			contentLineHeight,
 			contentLineHeightUnit,
+			listSeperatorWidth,
+			listSeperatorStyle,
+			listSeperatorColor,
 		} = this.props.attributes;
 
 		// Style objects
@@ -108,6 +111,9 @@ class List extends Component {
 								paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
 								paddingBottom:
 									counter < list.length && contentGap / 2 + contentGapUnit,
+								borderBottom:
+									counter < list.length &&
+									`${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor}`,
 							}}
 						>
 							<a

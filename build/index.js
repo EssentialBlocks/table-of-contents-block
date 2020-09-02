@@ -1766,6 +1766,16 @@ var attributes = {
   radiusUnit: {
     type: "string",
     "default": "px"
+  },
+  listSeperatorWidth: {
+    type: "number"
+  },
+  listSeperatorStyle: {
+    type: "string",
+    "default": "none"
+  },
+  listSeperatorColor: {
+    type: "string"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -1842,6 +1852,9 @@ var TEXT_DECORATION = [{
   value: "underline overline"
 }];
 var BORDER_STYLES = [{
+  label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("None"),
+  value: "none"
+}, {
   label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Dashed"),
   value: "dashed"
 }, {
@@ -2509,7 +2522,10 @@ var Inspector = function Inspector(_ref) {
       contentPaddingLeft = attributes.contentPaddingLeft,
       contentPaddingUnit = attributes.contentPaddingUnit,
       radius = attributes.radius,
-      radiusUnit = attributes.radiusUnit;
+      radiusUnit = attributes.radiusUnit,
+      listSeperatorWidth = attributes.listSeperatorWidth,
+      listSeperatorStyle = attributes.listSeperatorStyle,
+      listSeperatorColor = attributes.listSeperatorColor;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -3027,6 +3043,33 @@ var Inspector = function Inspector(_ref) {
         contentPaddingLeft: left
       });
     }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["SelectControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator Style"),
+    value: listSeperatorStyle,
+    options: _constants__WEBPACK_IMPORTED_MODULE_3__["BORDER_STYLES"],
+    onChange: function onChange(listSeperatorStyle) {
+      return setAttributes({
+        listSeperatorStyle: listSeperatorStyle
+      });
+    }
+  }), listSeperatorStyle !== "none" && /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator Color"),
+    color: listSeperatorColor,
+    onChange: function onChange(listSeperatorColor) {
+      return setAttributes({
+        listSeperatorColor: listSeperatorColor
+      });
+    }
+  }), listSeperatorStyle !== "none" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator Size"),
+    value: listSeperatorWidth,
+    onChange: function onChange(listSeperatorWidth) {
+      return setAttributes({
+        listSeperatorWidth: listSeperatorWidth
+      });
+    },
+    min: 0,
+    max: 100
   })), seperator && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Seperator")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
@@ -3299,7 +3342,10 @@ var List = /*#__PURE__*/function (_Component) {
           contentLetterSpacing = _this$props$attribute.contentLetterSpacing,
           contentLetterSpacingUnit = _this$props$attribute.contentLetterSpacingUnit,
           contentLineHeight = _this$props$attribute.contentLineHeight,
-          contentLineHeightUnit = _this$props$attribute.contentLineHeightUnit; // Style objects
+          contentLineHeightUnit = _this$props$attribute.contentLineHeightUnit,
+          listSeperatorWidth = _this$props$attribute.listSeperatorWidth,
+          listSeperatorStyle = _this$props$attribute.listSeperatorStyle,
+          listSeperatorColor = _this$props$attribute.listSeperatorColor; // Style objects
 
       var listStyle = {
         listStyle: listType === "none" && "none",
@@ -3375,7 +3421,8 @@ var List = /*#__PURE__*/function (_Component) {
               key: counter,
               style: _objectSpread(_objectSpread({}, listItemStyle), {}, {
                 paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
-                paddingBottom: counter < list.length && contentGap / 2 + contentGapUnit
+                paddingBottom: counter < list.length && contentGap / 2 + contentGapUnit,
+                borderBottom: counter < list.length && "".concat(listSeperatorWidth, "px ").concat(listSeperatorStyle, " ").concat(listSeperatorColor)
               })
             }, /*#__PURE__*/React.createElement("a", {
               href: "#".concat(item.link),

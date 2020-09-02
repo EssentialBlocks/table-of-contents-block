@@ -234,6 +234,16 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	listSeperatorWidth: {
+		type: "number",
+	},
+	listSeperatorStyle: {
+		type: "string",
+		default: "none",
+	},
+	listSeperatorColor: {
+		type: "string",
+	},
 };
 
 export default attributes;

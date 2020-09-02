@@ -29,6 +29,7 @@ export const TEXT_DECORATION = [
 ];
 
 export const BORDER_STYLES = [
+	{ label: __("None"), value: "none" },
 	{ label: __("Dashed"), value: "dashed" },
 	{ label: __("Solid"), value: "solid" },
 	{ label: __("Dotted"), value: "dotted" },
