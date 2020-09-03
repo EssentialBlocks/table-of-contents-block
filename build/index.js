@@ -3588,7 +3588,7 @@ function save(_ref) {
       isSticky = attributes.isSticky;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
-    background: contentBg,
+    background: !isSticky ? contentBg : undefined,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
     borderRadius: radius + radiusUnit,
     position: isSticky ? "fixed" : undefined,
@@ -3640,7 +3640,7 @@ function save(_ref) {
   }, isSticky && /*#__PURE__*/React.createElement("span", {
     className: "eb-toc-close"
   }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
-    tagName: "p",
+    tagName: "div",
     className: "eb-toc-title",
     value: title,
     style: titleStyle

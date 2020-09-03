@@ -71,7 +71,7 @@ export default function save({ attributes }) {
 
 	const wrapperStyle = {
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
-		background: contentBg,
+		background: !isSticky ? contentBg : undefined,
 		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
 			spread || 0
 		}px ${shadowColor || "black"}`,
@@ -137,7 +137,7 @@ export default function save({ attributes }) {
 			<div className="eb-toc-header">
 				{isSticky && <span className="eb-toc-close"></span>}
 				<RichText.Content
-					tagName="p"
+					tagName="div"
 					className="eb-toc-title"
 					value={title}
 					style={titleStyle}
