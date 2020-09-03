@@ -57,25 +57,6 @@ ol {
 .eb-toc-header {
   position: relative; }
 
-.eb-toc-close {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  background: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  right: -9px;
-  top: -11px;
-  border-radius: 20px;
-  font-family: serif;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 28px;
-  text-align: center;
-  cursor: pointer;
-  padding: 0;
-  margin: 0;
-  border: 0; }
-
 .eb-toc-button {
   position: relative;
   display: inline-block;
@@ -91,6 +72,41 @@ ol {
   transform: rotate(90deg);
   transform-origin: bottom left;
   cursor: pointer; }
+
+.eb-toc-close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: -9px;
+  top: -11px;
+  width: 28px;
+  height: 28px;
+  background: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 20px;
+  font-family: serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  opacity: 0.8; }
+  .eb-toc-close:hover {
+    opacity: 1; }
+  .eb-toc-close:before, .eb-toc-close:after {
+    position: absolute;
+    content: " ";
+    height: 12px;
+    width: 2px;
+    background-color: #333; }
+  .eb-toc-close:before {
+    transform: rotate(45deg); }
+  .eb-toc-close:after {
+    transform: rotate(-45deg); }
 
 .eb-unit-control-btn-group {
   margin: 0px 0px -20px 0px;

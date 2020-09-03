@@ -3639,7 +3639,7 @@ function save(_ref) {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {
     className: "eb-toc-close"
-  }, "x"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
+  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
     className: "eb-toc-title",
     value: title,

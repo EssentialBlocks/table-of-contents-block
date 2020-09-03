@@ -135,7 +135,7 @@ export default function save({ attributes }) {
 			data-sticky={isSticky}
 		>
 			<div className="eb-toc-header">
-				{isSticky && <span className="eb-toc-close">x</span>}
+				{isSticky && <span className="eb-toc-close"></span>}
 				<RichText.Content
 					tagName="p"
 					className="eb-toc-title"
