@@ -99,6 +99,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		listSeperatorStyle,
 		listSeperatorColor,
 		hasUnderline,
+		isSticky,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -185,6 +186,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={() => setAttributes({ seperator: !seperator })}
 					/>
 				)}
+
+				<ToggleControl
+					label={__("Sticky contents")}
+					help={__("Always show contents on sidebar")}
+					checked={isSticky}
+					onChange={() => setAttributes({ isSticky: !isSticky })}
+				/>
 			</PanelBody>
 
 			{displayTitle && (

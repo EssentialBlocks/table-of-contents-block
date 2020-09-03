@@ -264,6 +264,10 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
+	isSticky: {
+		type: "boolean",
+		default: false,
+	},
 };
 
 export default attributes;

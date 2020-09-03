@@ -1796,6 +1796,10 @@ var attributes = {
   contentWidthUnit: {
     type: "string",
     "default": "px"
+  },
+  isSticky: {
+    type: "boolean",
+    "default": false
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2546,7 +2550,8 @@ var Inspector = function Inspector(_ref) {
       listSeperatorWidth = attributes.listSeperatorWidth,
       listSeperatorStyle = attributes.listSeperatorStyle,
       listSeperatorColor = attributes.listSeperatorColor,
-      hasUnderline = attributes.hasUnderline;
+      hasUnderline = attributes.hasUnderline,
+      isSticky = attributes.isSticky;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2622,6 +2627,15 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange() {
       return setAttributes({
         seperator: !seperator
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky contents"),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Always show contents on sidebar"),
+    checked: isSticky,
+    onChange: function onChange() {
+      return setAttributes({
+        isSticky: !isSticky
       });
     }
   })), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
@@ -3570,16 +3584,17 @@ function save(_ref) {
       topSpace = attributes.topSpace,
       contentHeight = attributes.contentHeight,
       contentWidth = attributes.contentWidth,
-      contentWidthUnit = attributes.contentWidthUnit;
+      contentWidthUnit = attributes.contentWidthUnit,
+      isSticky = attributes.isSticky;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
     borderRadius: radius + radiusUnit,
-    position: "fixed",
-    top: topSpace + "%",
-    width: contentWidth + contentWidthUnit,
-    zIndex: 999
+    position: isSticky ? "fixed" : undefined,
+    top: isSticky ? topSpace + "%" : undefined,
+    width: isSticky ? contentWidth + contentWidthUnit : undefined,
+    zIndex: isSticky ? 999 : undefined
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -3601,8 +3616,8 @@ function save(_ref) {
     color: contentColor,
     background: contentBg,
     padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit),
-    overflow: "scroll",
-    height: contentHeight
+    overflow: isSticky ? "scroll" : undefined,
+    height: isSticky ? contentHeight : undefined
   };
 
   if (headers.length === 0) {
@@ -3621,7 +3636,7 @@ function save(_ref) {
     "data-arrow-color": arrowColor
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
-  }, /*#__PURE__*/React.createElement("span", {
+  }, isSticky && /*#__PURE__*/React.createElement("span", {
     className: "eb-toc-close"
   }, "x"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__["RichText"].Content, {
     tagName: "p",
@@ -3636,7 +3651,7 @@ function save(_ref) {
     "data-smooth": isSmooth
   }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_1__["default"], {
     attributes: attributes
-  })), /*#__PURE__*/React.createElement("button", {
+  })), isSticky && /*#__PURE__*/React.createElement("button", {
     className: "eb-toc-button"
   }, displayTitle && title ? title : "Table of Contents"));
 }

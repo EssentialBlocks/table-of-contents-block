@@ -66,6 +66,7 @@ export default function save({ attributes }) {
 		contentHeight,
 		contentWidth,
 		contentWidthUnit,
+		isSticky,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -75,10 +76,10 @@ export default function save({ attributes }) {
 			spread || 0
 		}px ${shadowColor || "black"}`,
 		borderRadius: radius + radiusUnit,
-		position: "fixed",
-		top: topSpace + "%",
-		width: contentWidth + contentWidthUnit,
-		zIndex: 999,
+		position: isSticky ? "fixed" : undefined,
+		top: isSticky ? topSpace + "%" : undefined,
+		width: isSticky ? contentWidth + contentWidthUnit : undefined,
+		zIndex: isSticky ? 999 : undefined,
 	};
 
 	const titleStyle = {
@@ -112,8 +113,8 @@ export default function save({ attributes }) {
 		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
 			contentPaddingLeft || 0
 		}${contentPaddingUnit}`,
-		overflow: "scroll",
-		height: contentHeight,
+		overflow: isSticky ? "scroll" : undefined,
+		height: isSticky ? contentHeight : undefined,
 	};
 
 	if (headers.length === 0) {
@@ -133,7 +134,7 @@ export default function save({ attributes }) {
 			data-arrow-color={arrowColor}
 		>
 			<div className="eb-toc-header">
-				<span className="eb-toc-close">x</span>
+				{isSticky && <span className="eb-toc-close">x</span>}
 				<RichText.Content
 					tagName="p"
 					className="eb-toc-title"
@@ -150,9 +151,11 @@ export default function save({ attributes }) {
 			>
 				<List attributes={attributes} />
 			</div>
-			<button className="eb-toc-button">
-				{displayTitle && title ? title : "Table of Contents"}
-			</button>
+			{isSticky && (
+				<button className="eb-toc-button">
+					{displayTitle && title ? title : "Table of Contents"}
+				</button>
+			)}
 		</div>
 	);
 }
