@@ -19,7 +19,7 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
-	initialCollape: {
+	initialCollapse: {
 		type: "boolean",
 		default: false,
 	},

@@ -49,7 +49,6 @@
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
-					const header = container.querySelector(".eb-toc-header");
 
 					if (initialCollapse) {
 						if (isSticky) {

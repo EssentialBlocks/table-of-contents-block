@@ -71,7 +71,8 @@ ol {
   border: none;
   transform: rotate(90deg);
   transform-origin: bottom left;
-  cursor: pointer; }
+  cursor: pointer;
+  text-decoration: none; }
 
 .eb-toc-close {
   display: flex;
