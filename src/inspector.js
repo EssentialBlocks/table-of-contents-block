@@ -101,9 +101,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		hasUnderline,
 		isSticky,
 		contentHeight,
-		contentHeightUnit,
 		contentWidth,
-		contentWidthUnit,
+		topSpace,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -201,12 +200,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{isSticky && (
 				<PanelBody title={__("Sticky settings")}>
-					<UnitControl
-						selectedUnit={contentHeightUnit}
-						unitTypes={[{ label: "px", value: "px" }]}
-						onClick={(contentHeightUnit) =>
-							setAttributes({ contentHeightUnit })
-						}
+					<RangeControl
+						label={__("Top Space")}
+						value={topSpace}
+						onChange={(topSpace) => setAttributes({ topSpace })}
+						min={0}
+						max={100}
 					/>
 
 					<RangeControl
@@ -215,12 +214,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={(contentHeight) => setAttributes({ contentHeight })}
 						min={0}
 						max={1000}
-					/>
-
-					<UnitControl
-						selectedUnit={contentWidthUnit}
-						unitTypes={[{ label: "px", value: "px" }]}
-						onClick={(contentWidthUnit) => setAttributes({ contentWidthUnit })}
 					/>
 
 					<RangeControl

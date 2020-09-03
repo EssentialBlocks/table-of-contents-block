@@ -2553,9 +2553,8 @@ var Inspector = function Inspector(_ref) {
       hasUnderline = attributes.hasUnderline,
       isSticky = attributes.isSticky,
       contentHeight = attributes.contentHeight,
-      contentHeightUnit = attributes.contentHeightUnit,
       contentWidth = attributes.contentWidth,
-      contentWidthUnit = attributes.contentWidthUnit;
+      topSpace = attributes.topSpace;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2644,17 +2643,16 @@ var Inspector = function Inspector(_ref) {
     }
   })), isSticky && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky settings")
-  }, /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    selectedUnit: contentHeightUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }],
-    onClick: function onClick(contentHeightUnit) {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Top Space"),
+    value: topSpace,
+    onChange: function onChange(topSpace) {
       return setAttributes({
-        contentHeightUnit: contentHeightUnit
+        topSpace: topSpace
       });
-    }
+    },
+    min: 0,
+    max: 100
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Height"),
     value: contentHeight,
@@ -2665,17 +2663,6 @@ var Inspector = function Inspector(_ref) {
     },
     min: 0,
     max: 1000
-  }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    selectedUnit: contentWidthUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }],
-    onClick: function onClick(contentWidthUnit) {
-      return setAttributes({
-        contentWidthUnit: contentWidthUnit
-      });
-    }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Width"),
     value: contentWidth,
