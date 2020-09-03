@@ -2598,6 +2598,15 @@ var Inspector = function Inspector(_ref) {
       }
     });
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky contents"),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Always show contents on sidebar"),
+    checked: isSticky,
+    onChange: function onChange() {
+      return setAttributes({
+        isSticky: !isSticky
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Display Title"),
     checked: displayTitle,
     onChange: function onChange() {
@@ -2627,15 +2636,6 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange() {
       return setAttributes({
         seperator: !seperator
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky contents"),
-    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Always show contents on sidebar"),
-    checked: isSticky,
-    onChange: function onChange() {
-      return setAttributes({
-        isSticky: !isSticky
       });
     }
   })), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
@@ -3633,7 +3633,8 @@ function save(_ref) {
     "data-arrow-height": arrowHeight,
     "data-arrow-width": arrowWidth,
     "data-arrow-bg": arrowBg,
-    "data-arrow-color": arrowColor
+    "data-arrow-color": arrowColor,
+    "data-sticky": isSticky
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {

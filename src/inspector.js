@@ -156,6 +156,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			<PanelBody>
 				<ToggleControl
+					label={__("Sticky contents")}
+					help={__("Always show contents on sidebar")}
+					checked={isSticky}
+					onChange={() => setAttributes({ isSticky: !isSticky })}
+				/>
+
+				<ToggleControl
 					label={__("Display Title")}
 					checked={displayTitle}
 					onChange={() => setAttributes({ displayTitle: !displayTitle })}
@@ -186,13 +193,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={() => setAttributes({ seperator: !seperator })}
 					/>
 				)}
-
-				<ToggleControl
-					label={__("Sticky contents")}
-					help={__("Always show contents on sidebar")}
-					checked={isSticky}
-					onChange={() => setAttributes({ isSticky: !isSticky })}
-				/>
 			</PanelBody>
 
 			{displayTitle && (

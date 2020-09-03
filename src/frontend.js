@@ -35,13 +35,16 @@
 			let containers = document.querySelectorAll(".eb-toc-container");
 
 			for (container of containers) {
+				const isSticky = container.getAttribute("data-sticky") === "true";
 				const collapsible =
 					container.getAttribute("data-collapsible") === "true";
 				const initialCollapse =
 					container.getAttribute("data-initial-collapse") === "true";
-
 				const headerButton = container.querySelector(".eb-toc-button");
-				headerButton.style.visibility = "hidden";
+
+				if (isSticky) {
+					headerButton.style.visibility = "hidden";
+				}
 
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
@@ -49,17 +52,22 @@
 					const header = container.querySelector(".eb-toc-header");
 
 					if (initialCollapse) {
-						container.style.visibility = "hidden";
-						content.style.height = "0";
-						headerButton.style.visibility = "visible";
+						if (isSticky) {
+							container.style.visibility = "hidden";
+							content.style.height = "0";
+							headerButton.style.visibility = "visible";
+						} else {
+							content.classList.add("hide-content");
+						}
 					} else {
 						container.style.visibility = "none";
 					}
 
-					title.addEventListener("click", function () {
-						// content.classList.toggle("hide-content");
-						// header.classList.toggle("hide-content");
-					});
+					if (!isSticky) {
+						title.addEventListener("click", function () {
+							content.classList.toggle("hide-content");
+						});
+					}
 				}
 			}
 		},

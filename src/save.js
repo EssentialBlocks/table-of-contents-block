@@ -132,6 +132,7 @@ export default function save({ attributes }) {
 			data-arrow-width={arrowWidth}
 			data-arrow-bg={arrowBg}
 			data-arrow-color={arrowColor}
+			data-sticky={isSticky}
 		>
 			<div className="eb-toc-header">
 				{isSticky && <span className="eb-toc-close">x</span>}
