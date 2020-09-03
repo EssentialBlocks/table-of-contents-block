@@ -35,6 +35,9 @@ const attributes = {
 	contentColor: {
 		type: "string",
 	},
+	contentHoverColor: {
+		type: "string",
+	},
 	contentGap: {
 		type: "number",
 	},
@@ -137,7 +140,7 @@ const attributes = {
 		type: "string",
 		default: "solid",
 	},
-	listColor: {
+	bulletColor: {
 		type: "string",
 	},
 	borderWidth: {

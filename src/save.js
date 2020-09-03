@@ -27,6 +27,7 @@ export default function save({ attributes }) {
 		titleColor,
 		titleBg,
 		contentColor,
+		contentHoverColor,
 		contentBg,
 		collapsible,
 		initialCollapse,
@@ -133,6 +134,8 @@ export default function save({ attributes }) {
 			data-arrow-bg={arrowBg}
 			data-arrow-color={arrowColor}
 			data-sticky={isSticky}
+			data-text-color={contentColor}
+			data-hover-color={contentHoverColor}
 		>
 			<div className="eb-toc-header">
 				{isSticky && <span className="eb-toc-close"></span>}

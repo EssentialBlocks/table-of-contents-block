@@ -35,11 +35,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 		collapsible,
 		initialCollapse,
 		listType,
-		listColor,
+		bulletColor,
 		titleBg,
 		titleColor,
 		contentBg,
 		contentColor,
+		contentHoverColor,
 		indent,
 		contentGap,
 		contentGapUnit,
@@ -448,11 +449,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={(contentColor) => setAttributes({ contentColor })}
 				/>
 
+				<ColorControl
+					label={__("Hover Color")}
+					color={contentHoverColor}
+					onChange={(contentHoverColor) => setAttributes({ contentHoverColor })}
+				/>
+
 				{listType !== "none" && (
 					<ColorControl
 						label={__("Bullet Points Color")}
-						color={listColor}
-						onChange={(listColor) => setAttributes({ listColor })}
+						color={bulletColor}
+						onChange={(bulletColor) => setAttributes({ bulletColor })}
 					/>
 				)}
 

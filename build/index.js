@@ -1568,6 +1568,9 @@ var attributes = {
   contentColor: {
     type: "string"
   },
+  contentHoverColor: {
+    type: "string"
+  },
   contentGap: {
     type: "number"
   },
@@ -1670,7 +1673,7 @@ var attributes = {
     type: "string",
     "default": "solid"
   },
-  listColor: {
+  bulletColor: {
     type: "string"
   },
   borderWidth: {
@@ -2487,11 +2490,12 @@ var Inspector = function Inspector(_ref) {
       collapsible = attributes.collapsible,
       initialCollapse = attributes.initialCollapse,
       listType = attributes.listType,
-      listColor = attributes.listColor,
+      bulletColor = attributes.bulletColor,
       titleBg = attributes.titleBg,
       titleColor = attributes.titleColor,
       contentBg = attributes.contentBg,
       contentColor = attributes.contentColor,
+      contentHoverColor = attributes.contentHoverColor,
       indent = attributes.indent,
       contentGap = attributes.contentGap,
       contentGapUnit = attributes.contentGapUnit,
@@ -2941,12 +2945,20 @@ var Inspector = function Inspector(_ref) {
         contentColor: contentColor
       });
     }
+  }), /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Hover Color"),
+    color: contentHoverColor,
+    onChange: function onChange(contentHoverColor) {
+      return setAttributes({
+        contentHoverColor: contentHoverColor
+      });
+    }
   }), listType !== "none" && /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Bullet Points Color"),
-    color: listColor,
-    onChange: function onChange(listColor) {
+    color: bulletColor,
+    onChange: function onChange(bulletColor) {
       return setAttributes({
-        listColor: listColor
+        bulletColor: bulletColor
       });
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {
@@ -3581,6 +3593,7 @@ function save(_ref) {
       titleColor = attributes.titleColor,
       titleBg = attributes.titleBg,
       contentColor = attributes.contentColor,
+      contentHoverColor = attributes.contentHoverColor,
       contentBg = attributes.contentBg,
       collapsible = attributes.collapsible,
       initialCollapse = attributes.initialCollapse,
@@ -3669,7 +3682,9 @@ function save(_ref) {
     "data-arrow-width": arrowWidth,
     "data-arrow-bg": arrowBg,
     "data-arrow-color": arrowColor,
-    "data-sticky": isSticky
+    "data-sticky": isSticky,
+    "data-text-color": contentColor,
+    "data-hover-color": contentHoverColor
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {
