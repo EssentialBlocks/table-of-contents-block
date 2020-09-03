@@ -40,22 +40,25 @@
 				const initialCollapse =
 					container.getAttribute("data-initial-collapse") === "true";
 
+				const headerButton = container.querySelector(".eb-toc-button");
+				headerButton.style.visibility = "hidden";
+
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
 					const header = container.querySelector(".eb-toc-header");
-					const headerButton = container.querySelector(".eb-toc-button");
 
 					if (initialCollapse) {
-						content.classList.add("hide-content");
-						header.classList.add("hide-content");
+						container.style.visibility = "hidden";
+						content.style.height = "0";
+						headerButton.style.visibility = "visible";
 					} else {
-						headerButton.style.display = "none";
+						container.style.visibility = "none";
 					}
 
 					title.addEventListener("click", function () {
-						content.classList.toggle("hide-content");
-						header.classList.toggle("hide-content");
+						// content.classList.toggle("hide-content");
+						// header.classList.toggle("hide-content");
 					});
 				}
 			}
@@ -153,14 +156,13 @@
 
 			for (crossButton of crossButtons) {
 				crossButton.addEventListener("click", function () {
-					const headerNode = crossButton.closest(".eb-toc-header");
-					const contentNode = headerNode.nextSibling;
-					const headerButton = contentNode.nextSibling;
+					const container = crossButton.closest(".eb-toc-container");
+					const contentNode = container.querySelector(".eb-toc-wrapper");
+					const headerButton = container.lastChild;
 
-					headerNode.style.display = "none";
-					contentNode.style.display = "none";
-
-					headerButton.style.display = "inline-block";
+					container.style.visibility = "hidden";
+					contentNode.style.height = "0";
+					headerButton.style.visibility = "visible";
 				});
 			}
 		},
@@ -170,13 +172,12 @@
 
 			for (headerButton of headerButtons) {
 				headerButton.addEventListener("click", function () {
-					const headerNode = headerButton.parentNode.firstChild;
-					const contentNode = headerNode.nextSibling;
+					const container = headerButton.closest(".eb-toc-container");
+					const contentNode = container.querySelector(".eb-toc-wrapper");
 
-					headerNode.style.display = "block";
-					contentNode.style.display = "block";
-
-					this.style.display = "none";
+					container.style.visibility = "visible";
+					contentNode.style.height = window.ebTocHeight || "200px";
+					this.style.visibility = "hidden";
 				});
 			}
 		},
@@ -188,6 +189,10 @@
 			let node = document.querySelector(".eb-toc-wrapper");
 
 			if (node) {
+				// Save container height
+				const tocHeight = node.style.height;
+				window.ebTocHeight = tocHeight;
+
 				let headers = JSON.parse(node.getAttribute("data-headers"));
 				let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
