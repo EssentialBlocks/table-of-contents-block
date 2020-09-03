@@ -644,33 +644,41 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={() => setAttributes({ scrollToTop: !scrollToTop })}
 				/>
 
-				<RangeControl
-					label={__("Arrow Height")}
-					value={arrowHeight}
-					onChange={(arrowHeight) => setAttributes({ arrowHeight })}
-					min={0}
-					max={100}
-				/>
+				{scrollToTop && (
+					<RangeControl
+						label={__("Arrow Height")}
+						value={arrowHeight}
+						onChange={(arrowHeight) => setAttributes({ arrowHeight })}
+						min={0}
+						max={100}
+					/>
+				)}
 
-				<RangeControl
-					label={__("Arrow Width")}
-					value={arrowWidth}
-					onChange={(arrowWidth) => setAttributes({ arrowWidth })}
-					min={0}
-					max={100}
-				/>
+				{scrollToTop && (
+					<RangeControl
+						label={__("Arrow Width")}
+						value={arrowWidth}
+						onChange={(arrowWidth) => setAttributes({ arrowWidth })}
+						min={0}
+						max={100}
+					/>
+				)}
 
-				<ColorControl
-					label={__("Arrow Background")}
-					color={arrowBg}
-					onChange={(arrowBg) => setAttributes({ arrowBg })}
-				/>
+				{scrollToTop && (
+					<ColorControl
+						label={__("Arrow Background")}
+						color={arrowBg}
+						onChange={(arrowBg) => setAttributes({ arrowBg })}
+					/>
+				)}
 
-				<ColorControl
-					label={__("Arrow Color")}
-					color={arrowColor}
-					onChange={(arrowColor) => setAttributes({ arrowColor })}
-				/>
+				{scrollToTop && (
+					<ColorControl
+						label={__("Arrow Color")}
+						color={arrowColor}
+						onChange={(arrowColor) => setAttributes({ arrowColor })}
+					/>
+				)}
 			</PanelBody>
 
 			<PanelBody title={__("Border")} initialOpen={false}>
