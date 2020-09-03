@@ -100,6 +100,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		listSeperatorColor,
 		hasUnderline,
 		isSticky,
+		contentHeight,
+		contentHeightUnit,
+		contentWidth,
+		contentWidthUnit,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -194,6 +198,40 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				)}
 			</PanelBody>
+
+			{isSticky && (
+				<PanelBody title={__("Sticky settings")}>
+					<UnitControl
+						selectedUnit={contentHeightUnit}
+						unitTypes={[{ label: "px", value: "px" }]}
+						onClick={(contentHeightUnit) =>
+							setAttributes({ contentHeightUnit })
+						}
+					/>
+
+					<RangeControl
+						label={__("Content Height")}
+						value={contentHeight}
+						onChange={(contentHeight) => setAttributes({ contentHeight })}
+						min={0}
+						max={1000}
+					/>
+
+					<UnitControl
+						selectedUnit={contentWidthUnit}
+						unitTypes={[{ label: "px", value: "px" }]}
+						onClick={(contentWidthUnit) => setAttributes({ contentWidthUnit })}
+					/>
+
+					<RangeControl
+						label={__("Content Width")}
+						value={contentWidth}
+						onChange={(contentWidth) => setAttributes({ contentWidth })}
+						min={0}
+						max={1000}
+					/>
+				</PanelBody>
+			)}
 
 			{displayTitle && (
 				<PanelBody title={__("Title Settings")} initialOpen={false}>
