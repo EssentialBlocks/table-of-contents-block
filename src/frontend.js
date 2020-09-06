@@ -45,6 +45,7 @@
 
 				if (isSticky) {
 					headerButton.style.visibility = "hidden";
+					headerButton.style.display = "none";
 				}
 
 				if (collapsible) {
@@ -56,6 +57,7 @@
 							container.style.visibility = "hidden";
 							content.style.height = "0";
 							headerButton.style.visibility = "visible";
+							headerButton.style.display = "inline-block";
 						} else {
 							content.classList.add("hide-content");
 						}
@@ -171,6 +173,7 @@
 					container.style.visibility = "hidden";
 					contentNode.style.height = "0";
 					headerButton.style.visibility = "visible";
+					headerButton.style.display = "inline-block";
 				});
 			}
 		},
@@ -186,6 +189,7 @@
 					container.style.visibility = "visible";
 					contentNode.style.height = window.ebTocHeight || "200px";
 					this.style.visibility = "hidden";
+					this.style.display = "none";
 				});
 			}
 		},
