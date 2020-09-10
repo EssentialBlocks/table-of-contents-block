@@ -3,6 +3,7 @@ export const supportedHeaders = [
 	"essential-blocks/heading",
 	"block/heading",
 	"uagb/advanced-heading",
+	"kadence/advancedheading",
 ];
 
 export function isCoreHeading(block) {
@@ -20,6 +21,10 @@ export function isEbHeading(block) {
 	return (
 		block.name === "essential-blocks/heading" || block.name === "block/heading"
 	);
+}
+
+export function isKadenceHeading(block) {
+	return block.name === "kadence/advancedheading";
 }
 
 export function getFromEbHeading(block) {

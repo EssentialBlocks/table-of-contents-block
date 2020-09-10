@@ -21,6 +21,7 @@ import {
 	isCoreHeading,
 	isEbHeading,
 	isUaHeading,
+	isKadenceHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -53,6 +54,13 @@ function getArrayFromBlocks(headerBlocks) {
 					content: block.attributes.headingTitle,
 					text: striptags(block.attributes.headingTitle),
 					link: parseTocSlug(striptags(block.attributes.headingTitle)),
+				};
+			} else if (isKadenceHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.level),
+					content: block.attributes.content,
+					text: striptags(block.attributes.content),
+					link: parseTocSlug(striptags(block.attributes.content)),
 				};
 			}
 

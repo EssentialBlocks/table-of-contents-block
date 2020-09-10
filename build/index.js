@@ -1998,6 +1998,13 @@ function getArrayFromBlocks(headerBlocks) {
           text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.headingTitle),
           link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.headingTitle))
         };
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isKadenceHeading"])(block)) {
+        header = {
+          level: parseInt(block.attributes.level),
+          content: block.attributes.content,
+          text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content),
+          link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
+        };
       }
 
       headerList.push(header);
@@ -2218,7 +2225,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, getFromEbHeading, isUaHeading, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, isKadenceHeading, getFromEbHeading, isUaHeading, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2227,10 +2234,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCoreHeading", function() { return isCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromCoreHeading", function() { return getFromCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEbHeading", function() { return isEbHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKadenceHeading", function() { return isKadenceHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromEbHeading", function() { return getFromEbHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUaHeading", function() { return isUaHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
-var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading"];
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
@@ -2242,6 +2250,9 @@ function getFromCoreHeading(block) {
 }
 function isEbHeading(block) {
   return block.name === "essential-blocks/heading" || block.name === "block/heading";
+}
+function isKadenceHeading(block) {
+  return block.name === "kadence/advancedheading";
 }
 function getFromEbHeading(block) {
   return {
