@@ -20,6 +20,7 @@ import {
 	supportedHeaders,
 	isCoreHeading,
 	isEbHeading,
+	isUaHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -46,6 +47,13 @@ function getArrayFromBlocks(headerBlocks) {
 					text: striptags(block.attributes.content),
 					link: parseTocSlug(striptags(block.attributes.content)),
 				};
+			} else if (isUaHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.level),
+					content: block.attributes.headingTitle,
+					text: striptags(block.attributes.headingTitle),
+					link: parseTocSlug(striptags(block.attributes.headingTitle)),
+				};
 			}
 
 			headerList.push(header);
@@ -60,9 +68,11 @@ const useHeader = () => {
 	const allBlocks = useSelect((select) =>
 		select("core/block-editor").getBlocks()
 	);
+
 	const headerBlocks = allBlocks.filter((block) =>
 		supportedHeaders.includes(block.name)
 	);
+
 	const headerList = getArrayFromBlocks(headerBlocks);
 
 	return headerList;

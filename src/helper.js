@@ -2,6 +2,7 @@ export const supportedHeaders = [
 	"core/heading",
 	"essential-blocks/heading",
 	"block/heading",
+	"uagb/advanced-heading",
 ];
 
 export function isCoreHeading(block) {
@@ -26,6 +27,10 @@ export function getFromEbHeading(block) {
 		level: parseInt(block.attributes.tagName[1]),
 		content: block.attributes.content,
 	};
+}
+
+export function isUaHeading(block) {
+	return block.name === "uagb/advanced-heading";
 }
 
 export function parseTocSlug(slug) {
