@@ -1977,7 +1977,7 @@ function getArrayFromBlocks(headerBlocks) {
     headerBlocks.map(function (block) {
       var header = {};
 
-      if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isCoreHeading"])(block)) {
+      if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isCoreHeading"])(block) || Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isKadenceHeading"])(block)) {
         header = {
           level: parseInt(block.attributes.level),
           content: block.attributes.content,
@@ -1997,13 +1997,6 @@ function getArrayFromBlocks(headerBlocks) {
           content: block.attributes.headingTitle,
           text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.headingTitle),
           link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.headingTitle))
-        };
-      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isKadenceHeading"])(block)) {
-        header = {
-          level: parseInt(block.attributes.level),
-          content: block.attributes.content,
-          text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content),
-          link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
         };
       }
 
@@ -2225,40 +2218,26 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, getFromCoreHeading, isEbHeading, isKadenceHeading, getFromEbHeading, isUaHeading, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "supportedHeaders", function() { return supportedHeaders; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isCoreHeading", function() { return isCoreHeading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromCoreHeading", function() { return getFromCoreHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isEbHeading", function() { return isEbHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isKadenceHeading", function() { return isKadenceHeading; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getFromEbHeading", function() { return getFromEbHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUaHeading", function() { return isUaHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
 var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
-function getFromCoreHeading(block) {
-  return {
-    level: parseInt(block.attributes.level),
-    content: block.attributes.content
-  };
-}
 function isEbHeading(block) {
   return block.name === "essential-blocks/heading" || block.name === "block/heading";
 }
 function isKadenceHeading(block) {
   return block.name === "kadence/advancedheading";
-}
-function getFromEbHeading(block) {
-  return {
-    level: parseInt(block.attributes.tagName[1]),
-    content: block.attributes.content
-  };
 }
 function isUaHeading(block) {
   return block.name === "uagb/advanced-heading";
