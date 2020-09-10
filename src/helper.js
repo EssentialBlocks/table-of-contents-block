@@ -4,6 +4,8 @@ export const supportedHeaders = [
 	"block/heading",
 	"uagb/advanced-heading",
 	"kadence/advancedheading",
+	"qubely/heading",
+	"qubely/text",
 ];
 
 export function isCoreHeading(block) {
@@ -22,6 +24,14 @@ export function isKadenceHeading(block) {
 
 export function isUaHeading(block) {
 	return block.name === "uagb/advanced-heading";
+}
+
+export function isQubelyHeading(block) {
+	return block.name === "qubely/heading";
+}
+
+export function isQubelyText(block) {
+	return block.name === "qubely/text";
 }
 
 export function parseTocSlug(slug) {

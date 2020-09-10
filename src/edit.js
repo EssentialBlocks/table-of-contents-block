@@ -3,7 +3,7 @@
  */
 import { __ } from "@wordpress/i18n";
 import { BlockControls, RichText } from "@wordpress/block-editor";
-import { Toolbar, ToolbarButton, Button } from "@wordpress/components";
+import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
@@ -22,6 +22,8 @@ import {
 	isEbHeading,
 	isUaHeading,
 	isKadenceHeading,
+	isQubelyHeading,
+	isQubelyText,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -34,7 +36,11 @@ function getArrayFromBlocks(headerBlocks) {
 		headerBlocks.map((block) => {
 			let header = {};
 
-			if (isCoreHeading(block) || isKadenceHeading(block)) {
+			if (
+				isCoreHeading(block) ||
+				isKadenceHeading(block) ||
+				isQubelyHeading(block)
+			) {
 				header = {
 					level: parseInt(block.attributes.level),
 					content: block.attributes.content,
@@ -55,6 +61,15 @@ function getArrayFromBlocks(headerBlocks) {
 					text: striptags(block.attributes.headingTitle),
 					link: parseTocSlug(striptags(block.attributes.headingTitle)),
 				};
+			} else if (isQubelyText(block)) {
+				if (block.attributes.enableTitle) {
+					header = {
+						level: parseInt(block.attributes.titleLevel),
+						content: block.attributes.title,
+						text: striptags(block.attributes.title),
+						link: parseTocSlug(striptags(block.attributes.title)),
+					};
+				}
 			}
 
 			headerList.push(header);
