@@ -32,6 +32,7 @@ import {
 	isCreativeBlockHeading,
 	isEasyBlocksHeading,
 	isDiHeading,
+	isElegantHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -150,6 +151,13 @@ function getArrayFromBlocks(headerBlocks) {
 					content: block.attributes.HeadContent,
 					text: striptags(block.attributes.HeadContent),
 					link: parseTocSlug(striptags(block.attributes.HeadContent)),
+				};
+			} else if (isElegantHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.headingTag[1]),
+					content: block.attributes.title,
+					text: striptags(block.attributes.title),
+					link: parseTocSlug(striptags(block.attributes.title)),
 				};
 			}
 

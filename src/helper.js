@@ -14,6 +14,7 @@ export const supportedHeaders = [
 	"creative-blocks/heading",
 	"essential-gutenberg-blocks/title-subtitle",
 	"di-blocks/headline",
+	"elegant-blocks-plugin/heading",
 ];
 
 export function isCoreHeading(block) {
@@ -72,6 +73,10 @@ export function isEasyBlocksHeading(block) {
 
 export function isDiHeading(block) {
 	return block.name === "di-blocks/headline";
+}
+
+export function isElegantHeading(block) {
+	return block.name === "elegant-blocks-plugin/heading";
 }
 
 export function parseTocSlug(slug) {
