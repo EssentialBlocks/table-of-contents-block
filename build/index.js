@@ -2007,7 +2007,7 @@ function getArrayFromBlocks(headerBlocks) {
             link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title))
           };
         }
-      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isStackableHeading"])(block)) {
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isStackableHeader"])(block)) {
         if (block.attributes.showTitle) {
           header = {
             level: parseInt(block.attributes.titleTag[1]),
@@ -2016,6 +2016,13 @@ function getArrayFromBlocks(headerBlocks) {
             link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title))
           };
         }
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isStackableHeading"])(block)) {
+        header = {
+          level: parseInt(block.attributes.titleTag[1]),
+          content: block.attributes.title,
+          text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title),
+          link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title))
+        };
       }
 
       headerList.push(header);
@@ -2029,7 +2036,8 @@ function getArrayFromBlocks(headerBlocks) {
 var useHeader = function useHeader() {
   var allBlocks = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__["useSelect"])(function (select) {
     return select("core/block-editor").getBlocks();
-  });
+  }); // console.log(allBlocks);
+
   var headerBlocks = allBlocks.filter(function (block) {
     return _helper__WEBPACK_IMPORTED_MODULE_7__["supportedHeaders"].includes(block.name);
   });
@@ -2236,7 +2244,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeading, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2248,9 +2256,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isUaHeading", function() { return isUaHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isQubelyHeading", function() { return isQubelyHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isQubelyText", function() { return isQubelyText; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeader", function() { return isStackableHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeading", function() { return isStackableHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
-var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header"];
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
@@ -2269,8 +2278,11 @@ function isQubelyHeading(block) {
 function isQubelyText(block) {
   return block.name === "qubely/text";
 }
-function isStackableHeading(block) {
+function isStackableHeader(block) {
   return block.name === "ugb/header";
+}
+function isStackableHeading(block) {
+  return block.name === "ugb/heading";
 }
 function parseTocSlug(slug) {
   if (!slug) {

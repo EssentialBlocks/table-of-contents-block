@@ -24,6 +24,7 @@ import {
 	isKadenceHeading,
 	isQubelyHeading,
 	isQubelyText,
+	isStackableHeader,
 	isStackableHeading,
 	parseTocSlug,
 } from "./helper";
@@ -71,7 +72,7 @@ function getArrayFromBlocks(headerBlocks) {
 						link: parseTocSlug(striptags(block.attributes.title)),
 					};
 				}
-			} else if (isStackableHeading(block)) {
+			} else if (isStackableHeader(block)) {
 				if (block.attributes.showTitle) {
 					header = {
 						level: parseInt(block.attributes.titleTag[1]),
@@ -80,6 +81,13 @@ function getArrayFromBlocks(headerBlocks) {
 						link: parseTocSlug(striptags(block.attributes.title)),
 					};
 				}
+			} else if (isStackableHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.titleTag[1]),
+					content: block.attributes.title,
+					text: striptags(block.attributes.title),
+					link: parseTocSlug(striptags(block.attributes.title)),
+				};
 			}
 
 			headerList.push(header);
@@ -94,6 +102,8 @@ const useHeader = () => {
 	const allBlocks = useSelect((select) =>
 		select("core/block-editor").getBlocks()
 	);
+
+	// console.log(allBlocks);
 
 	const headerBlocks = allBlocks.filter((block) =>
 		supportedHeaders.includes(block.name)
