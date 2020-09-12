@@ -30,6 +30,7 @@ import {
 	isGetwidHeader,
 	isGenerateBlocksHeader,
 	isCreativeBlockHeading,
+	isEasyBlocksHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -134,6 +135,13 @@ function getArrayFromBlocks(headerBlocks) {
 					content: block.attributes.headingText,
 					text: striptags(block.attributes.headingText),
 					link: parseTocSlug(striptags(block.attributes.headingText)),
+				};
+			} else if (isEasyBlocksHeading(block)) {
+				header = {
+					level: 2, // Only suports h2
+					content: block.attributes.title,
+					text: striptags(block.attributes.title),
+					link: parseTocSlug(striptags(block.attributes.title)),
 				};
 			}
 
