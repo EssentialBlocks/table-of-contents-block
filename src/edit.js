@@ -29,6 +29,7 @@ import {
 	isOtterHeading,
 	isGetwidHeader,
 	isGenerateBlocksHeader,
+	isCreativeBlockHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -127,6 +128,13 @@ function getArrayFromBlocks(headerBlocks) {
 						};
 					}
 				}
+			} else if (isCreativeBlockHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.tag[1]),
+					content: block.attributes.headingText,
+					text: striptags(block.attributes.headingText),
+					link: parseTocSlug(striptags(block.attributes.headingText)),
+				};
 			}
 
 			headerList.push(header);

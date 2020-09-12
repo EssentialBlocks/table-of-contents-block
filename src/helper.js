@@ -11,6 +11,7 @@ export const supportedHeaders = [
 	"themeisle-blocks/advanced-heading",
 	"getwid/advanced-heading",
 	"generateblocks/headline",
+	"creative-blocks/heading",
 ];
 
 export function isCoreHeading(block) {
@@ -57,6 +58,10 @@ export function isGetwidHeader(block) {
 
 export function isGenerateBlocksHeader(block) {
 	return block.name === "generateblocks/headline";
+}
+
+export function isCreativeBlockHeading(block) {
+	return block.name === "creative-blocks/heading";
 }
 
 export function parseTocSlug(slug) {
