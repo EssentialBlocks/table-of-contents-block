@@ -31,6 +31,7 @@ import {
 	isGenerateBlocksHeader,
 	isCreativeBlockHeading,
 	isEasyBlocksHeading,
+	isDiHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -142,6 +143,13 @@ function getArrayFromBlocks(headerBlocks) {
 					content: block.attributes.title,
 					text: striptags(block.attributes.title),
 					link: parseTocSlug(striptags(block.attributes.title)),
+				};
+			} else if (isDiHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.HeadTag[1]),
+					content: block.attributes.HeadContent,
+					text: striptags(block.attributes.HeadContent),
+					link: parseTocSlug(striptags(block.attributes.HeadContent)),
 				};
 			}
 

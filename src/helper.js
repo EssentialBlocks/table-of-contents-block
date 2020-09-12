@@ -13,6 +13,7 @@ export const supportedHeaders = [
 	"generateblocks/headline",
 	"creative-blocks/heading",
 	"essential-gutenberg-blocks/title-subtitle",
+	"di-blocks/headline",
 ];
 
 export function isCoreHeading(block) {
@@ -67,6 +68,10 @@ export function isCreativeBlockHeading(block) {
 
 export function isEasyBlocksHeading(block) {
 	return block.name === "essential-gutenberg-blocks/title-subtitle";
+}
+
+export function isDiHeading(block) {
+	return block.name === "di-blocks/headline";
 }
 
 export function parseTocSlug(slug) {
