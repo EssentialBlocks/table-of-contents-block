@@ -9,6 +9,7 @@ export const supportedHeaders = [
 	"ugb/header",
 	"ugb/heading",
 	"themeisle-blocks/advanced-heading",
+	"getwid/advanced-heading",
 ];
 
 export function isCoreHeading(block) {
@@ -47,6 +48,10 @@ export function isStackableHeading(block) {
 
 export function isOtterHeading(block) {
 	return block.name === "themeisle-blocks/advanced-heading";
+}
+
+export function isGetwidHeader(block) {
+	return block.name === "getwid/advanced-heading";
 }
 
 export function parseTocSlug(slug) {

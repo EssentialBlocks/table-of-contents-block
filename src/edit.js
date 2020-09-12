@@ -27,6 +27,7 @@ import {
 	isStackableHeader,
 	isStackableHeading,
 	isOtterHeading,
+	isGetwidHeader,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -96,6 +97,16 @@ function getArrayFromBlocks(headerBlocks) {
 					text: striptags(block.attributes.content),
 					link: parseTocSlug(striptags(block.attributes.content)),
 				};
+			} else if (isGetwidHeader(block)) {
+				// Ignore getwid span and p tag
+				if (block.attributes.titleTag[0] === "h") {
+					header = {
+						level: parseInt(block.attributes.titleTag[1]),
+						content: block.attributes.content,
+						text: striptags(block.attributes.content),
+						link: parseTocSlug(striptags(block.attributes.content)),
+					};
+				}
 			}
 
 			headerList.push(header);

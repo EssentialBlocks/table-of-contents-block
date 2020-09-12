@@ -2030,6 +2030,16 @@ function getArrayFromBlocks(headerBlocks) {
           text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content),
           link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
         };
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isGetwidHeader"])(block)) {
+        // Ignore getwid span and p tag
+        if (block.attributes.titleTag[0] === "h") {
+          header = {
+            level: parseInt(block.attributes.titleTag[1]),
+            content: block.attributes.content,
+            text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content),
+            link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
+          };
+        }
       }
 
       headerList.push(header);
@@ -2251,7 +2261,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, isOtterHeading, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, isOtterHeading, isGetwidHeader, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2266,8 +2276,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeader", function() { return isStackableHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeading", function() { return isStackableHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOtterHeading", function() { return isOtterHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGetwidHeader", function() { return isGetwidHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
-var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading", "themeisle-blocks/advanced-heading"];
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading", "themeisle-blocks/advanced-heading", "getwid/advanced-heading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
@@ -2294,6 +2305,9 @@ function isStackableHeading(block) {
 }
 function isOtterHeading(block) {
   return block.name === "themeisle-blocks/advanced-heading";
+}
+function isGetwidHeader(block) {
+  return block.name === "getwid/advanced-heading";
 }
 function parseTocSlug(slug) {
   if (!slug) {
