@@ -24,6 +24,7 @@ import {
 	isKadenceHeading,
 	isQubelyHeading,
 	isQubelyText,
+	isStackableHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -65,6 +66,15 @@ function getArrayFromBlocks(headerBlocks) {
 				if (block.attributes.enableTitle) {
 					header = {
 						level: parseInt(block.attributes.titleLevel),
+						content: block.attributes.title,
+						text: striptags(block.attributes.title),
+						link: parseTocSlug(striptags(block.attributes.title)),
+					};
+				}
+			} else if (isStackableHeading(block)) {
+				if (block.attributes.showTitle) {
+					header = {
+						level: parseInt(block.attributes.titleTag[1]),
 						content: block.attributes.title,
 						text: striptags(block.attributes.title),
 						link: parseTocSlug(striptags(block.attributes.title)),

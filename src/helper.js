@@ -6,6 +6,7 @@ export const supportedHeaders = [
 	"kadence/advancedheading",
 	"qubely/heading",
 	"qubely/text",
+	"ugb/header",
 ];
 
 export function isCoreHeading(block) {
@@ -32,6 +33,10 @@ export function isQubelyHeading(block) {
 
 export function isQubelyText(block) {
 	return block.name === "qubely/text";
+}
+
+export function isStackableHeading(block) {
+	return block.name === "ugb/header";
 }
 
 export function parseTocSlug(slug) {
