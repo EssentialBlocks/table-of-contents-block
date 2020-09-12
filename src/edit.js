@@ -28,6 +28,7 @@ import {
 	isStackableHeading,
 	isOtterHeading,
 	isGetwidHeader,
+	isGenerateBlocksHeader,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -106,6 +107,25 @@ function getArrayFromBlocks(headerBlocks) {
 						text: striptags(block.attributes.content),
 						link: parseTocSlug(striptags(block.attributes.content)),
 					};
+				}
+			} else if (isGenerateBlocksHeader(block)) {
+				// Ignore tags other than heading, check empty content
+				if (
+					block.attributes.element[0] === "h" &&
+					block.attributes.content.length > 0
+				) {
+					let content = block.attributes.content.find(
+						(item) => typeof item === "string"
+					);
+
+					if (content) {
+						header = {
+							level: parseInt(block.attributes.element[1]),
+							conetnt: content,
+							text: striptags(content),
+							link: parseTocSlug(striptags(content)),
+						};
+					}
 				}
 			}
 

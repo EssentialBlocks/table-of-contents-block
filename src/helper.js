@@ -10,6 +10,7 @@ export const supportedHeaders = [
 	"ugb/heading",
 	"themeisle-blocks/advanced-heading",
 	"getwid/advanced-heading",
+	"generateblocks/headline",
 ];
 
 export function isCoreHeading(block) {
@@ -52,6 +53,10 @@ export function isOtterHeading(block) {
 
 export function isGetwidHeader(block) {
 	return block.name === "getwid/advanced-heading";
+}
+
+export function isGenerateBlocksHeader(block) {
+	return block.name === "generateblocks/headline";
 }
 
 export function parseTocSlug(slug) {

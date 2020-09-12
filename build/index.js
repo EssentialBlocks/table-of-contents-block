@@ -2040,6 +2040,22 @@ function getArrayFromBlocks(headerBlocks) {
             link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
           };
         }
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isGenerateBlocksHeader"])(block)) {
+        // Ignore tags other than heading, check empty content
+        if (block.attributes.element[0] === "h" && block.attributes.content.length > 0) {
+          var content = block.attributes.content.find(function (item) {
+            return typeof item === "string";
+          });
+
+          if (content) {
+            header = {
+              level: parseInt(block.attributes.element[1]),
+              conetnt: content,
+              text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(content),
+              link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(content))
+            };
+          }
+        }
       }
 
       headerList.push(header);
@@ -2261,7 +2277,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, isOtterHeading, isGetwidHeader, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, isOtterHeading, isGetwidHeader, isGenerateBlocksHeader, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2277,8 +2293,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeading", function() { return isStackableHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOtterHeading", function() { return isOtterHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGetwidHeader", function() { return isGetwidHeader; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isGenerateBlocksHeader", function() { return isGenerateBlocksHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
-var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading", "themeisle-blocks/advanced-heading", "getwid/advanced-heading"];
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading", "themeisle-blocks/advanced-heading", "getwid/advanced-heading", "generateblocks/headline"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
@@ -2308,6 +2325,9 @@ function isOtterHeading(block) {
 }
 function isGetwidHeader(block) {
   return block.name === "getwid/advanced-heading";
+}
+function isGenerateBlocksHeader(block) {
+  return block.name === "generateblocks/headline";
 }
 function parseTocSlug(slug) {
   if (!slug) {
