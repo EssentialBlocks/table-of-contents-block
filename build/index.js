@@ -2023,6 +2023,13 @@ function getArrayFromBlocks(headerBlocks) {
           text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title),
           link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.title))
         };
+      } else if (Object(_helper__WEBPACK_IMPORTED_MODULE_7__["isOtterHeading"])(block)) {
+        header = {
+          level: parseInt(block.attributes.tag[1]),
+          content: block.attributes.content,
+          text: striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content),
+          link: Object(_helper__WEBPACK_IMPORTED_MODULE_7__["parseTocSlug"])(striptags__WEBPACK_IMPORTED_MODULE_5___default()(block.attributes.content))
+        };
       }
 
       headerList.push(header);
@@ -2244,7 +2251,7 @@ function Edit(_ref) {
 /*!***********************!*\
   !*** ./src/helper.js ***!
   \***********************/
-/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, parseTocSlug */
+/*! exports provided: supportedHeaders, isCoreHeading, isEbHeading, isKadenceHeading, isUaHeading, isQubelyHeading, isQubelyText, isStackableHeader, isStackableHeading, isOtterHeading, parseTocSlug */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2258,8 +2265,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isQubelyText", function() { return isQubelyText; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeader", function() { return isStackableHeader; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isStackableHeading", function() { return isStackableHeading; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isOtterHeading", function() { return isOtterHeading; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parseTocSlug", function() { return parseTocSlug; });
-var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading"];
+var supportedHeaders = ["core/heading", "essential-blocks/heading", "block/heading", "uagb/advanced-heading", "kadence/advancedheading", "qubely/heading", "qubely/text", "ugb/header", "ugb/heading", "themeisle-blocks/advanced-heading"];
 function isCoreHeading(block) {
   return block.name === "core/heading";
 }
@@ -2283,6 +2291,9 @@ function isStackableHeader(block) {
 }
 function isStackableHeading(block) {
   return block.name === "ugb/heading";
+}
+function isOtterHeading(block) {
+  return block.name === "themeisle-blocks/advanced-heading";
 }
 function parseTocSlug(slug) {
   if (!slug) {

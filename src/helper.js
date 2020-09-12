@@ -8,6 +8,7 @@ export const supportedHeaders = [
 	"qubely/text",
 	"ugb/header",
 	"ugb/heading",
+	"themeisle-blocks/advanced-heading",
 ];
 
 export function isCoreHeading(block) {
@@ -42,6 +43,10 @@ export function isStackableHeader(block) {
 
 export function isStackableHeading(block) {
 	return block.name === "ugb/heading";
+}
+
+export function isOtterHeading(block) {
+	return block.name === "themeisle-blocks/advanced-heading";
 }
 
 export function parseTocSlug(slug) {

@@ -26,6 +26,7 @@ import {
 	isQubelyText,
 	isStackableHeader,
 	isStackableHeading,
+	isOtterHeading,
 	parseTocSlug,
 } from "./helper";
 import "./editor.scss";
@@ -87,6 +88,13 @@ function getArrayFromBlocks(headerBlocks) {
 					content: block.attributes.title,
 					text: striptags(block.attributes.title),
 					link: parseTocSlug(striptags(block.attributes.title)),
+				};
+			} else if (isOtterHeading(block)) {
+				header = {
+					level: parseInt(block.attributes.tag[1]),
+					content: block.attributes.content,
+					text: striptags(block.attributes.content),
+					link: parseTocSlug(striptags(block.attributes.content)),
 				};
 			}
 
