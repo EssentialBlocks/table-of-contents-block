@@ -43,14 +43,14 @@ function create_block_table_of_content_block_init() {
 	wp_register_style(
 		'create-block-table-of-content-block-editor',
 		plugins_url( $editor_css, __FILE__ ),
-		array(),
+		array()
 	);
 
 	$style_css = 'build/style-index.css';
 	wp_register_style(
 		'create-block-table-of-content-block',
 		plugins_url( $style_css, __FILE__ ),
-		array(),
+		array()
 	);
 
   if (!is_admin()) {
