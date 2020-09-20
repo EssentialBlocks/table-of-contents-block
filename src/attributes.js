@@ -13,7 +13,7 @@ const attributes = {
 	},
 	title: {
 		type: "string",
-		default: "",
+		default: "Table of contents",
 	},
 	collapsible: {
 		type: "boolean",

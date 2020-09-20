@@ -327,54 +327,52 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		}${contentPaddingUnit}`,
 	};
 
-	if (headers.length === 0) {
-		return <div>No header found</div>;
-	}
+	return [
+		isSelected && (
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
+		),
+		<BlockControls>
+			<Toolbar>
+				<ToolbarButton
+					title="Unordered"
+					icon="editor-ul"
+					isActive={listType === "ul"}
+					onClick={() => setAttributes({ listType: "ul" })}
+				/>
 
-	if (headers.length > 0) {
-		return [
-			isSelected && (
-				<Inspector attributes={attributes} setAttributes={setAttributes} />
-			),
-			<BlockControls>
-				<Toolbar>
-					<ToolbarButton
-						title="Unordered"
-						icon="editor-ul"
-						isActive={listType === "ul"}
-						onClick={() => setAttributes({ listType: "ul" })}
-					/>
+				<ToolbarButton
+					title="Ordered"
+					icon="editor-ol"
+					isActive={listType === "ol"}
+					onClick={() => setAttributes({ listType: "ol" })}
+				/>
 
-					<ToolbarButton
-						title="Ordered"
-						icon="editor-ol"
-						isActive={listType === "ol"}
-						onClick={() => setAttributes({ listType: "ol" })}
-					/>
+				<ToolbarButton
+					title="None"
+					icon="minus"
+					isActive={listType === "none"}
+					onClick={() => setAttributes({ listType: "none" })}
+				/>
+			</Toolbar>
+		</BlockControls>,
 
-					<ToolbarButton
-						title="None"
-						icon="minus"
-						isActive={listType === "none"}
-						onClick={() => setAttributes({ listType: "none" })}
-					/>
-				</Toolbar>
-			</BlockControls>,
-
-			<div style={wrapperStyle}>
-				<div onClick={() => collapsible && setVisible(!visible)}>
-					<RichText
-						className="eb-toc-title"
-						style={titleStyle}
-						placeholder="Table of content"
-						value={title}
-						onChange={(title) => setAttributes({ title })}
-					/>
-				</div>
+		<div style={wrapperStyle}>
+			<div onClick={() => collapsible && setVisible(!visible)}>
+				<RichText
+					className="eb-toc-title"
+					style={titleStyle}
+					placeholder="Table of content"
+					value={title}
+					onChange={(title) => setAttributes({ title })}
+				/>
+			</div>
+			{headers.length > 0 ? (
 				<div style={contentStyle}>
 					<List attributes={attributes} />
 				</div>
-			</div>,
-		];
-	}
+			) : (
+				<p>Add header to generate table of contents</p>
+			)}
+		</div>,
+	];
 }

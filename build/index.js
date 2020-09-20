@@ -1546,7 +1546,7 @@ var attributes = {
   },
   title: {
     type: "string",
-    "default": ""
+    "default": "Table of contents"
   },
   collapsible: {
     type: "boolean",
@@ -2229,64 +2229,57 @@ function Edit(_ref) {
     background: contentBg,
     padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit)
   };
-
-  if (headers.length === 0) {
-    return /*#__PURE__*/React.createElement("div", null, "No header found");
-  }
-
-  if (headers.length > 0) {
-    return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      attributes: attributes,
-      setAttributes: setAttributes
-    }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["BlockControls"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
-      title: "Unordered",
-      icon: "editor-ul",
-      isActive: listType === "ul",
-      onClick: function onClick() {
-        return setAttributes({
-          listType: "ul"
-        });
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
-      title: "Ordered",
-      icon: "editor-ol",
-      isActive: listType === "ol",
-      onClick: function onClick() {
-        return setAttributes({
-          listType: "ol"
-        });
-      }
-    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
-      title: "None",
-      icon: "minus",
-      isActive: listType === "none",
-      onClick: function onClick() {
-        return setAttributes({
-          listType: "none"
-        });
-      }
-    }))), /*#__PURE__*/React.createElement("div", {
-      style: wrapperStyle
-    }, /*#__PURE__*/React.createElement("div", {
-      onClick: function onClick() {
-        return collapsible && setVisible(!visible);
-      }
-    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["RichText"], {
-      className: "eb-toc-title",
-      style: titleStyle,
-      placeholder: "Table of content",
-      value: title,
-      onChange: function onChange(title) {
-        return setAttributes({
-          title: title
-        });
-      }
-    })), /*#__PURE__*/React.createElement("div", {
-      style: contentStyle
-    }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      attributes: attributes
-    })))];
-  }
+  return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    attributes: attributes,
+    setAttributes: setAttributes
+  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["BlockControls"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
+    title: "Unordered",
+    icon: "editor-ul",
+    isActive: listType === "ul",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "ul"
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
+    title: "Ordered",
+    icon: "editor-ol",
+    isActive: listType === "ol",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "ol"
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
+    title: "None",
+    icon: "minus",
+    isActive: listType === "none",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "none"
+      });
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    style: wrapperStyle
+  }, /*#__PURE__*/React.createElement("div", {
+    onClick: function onClick() {
+      return collapsible && setVisible(!visible);
+    }
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["RichText"], {
+    className: "eb-toc-title",
+    style: titleStyle,
+    placeholder: "Table of content",
+    value: title,
+    onChange: function onChange(title) {
+      return setAttributes({
+        title: title
+      });
+    }
+  })), headers.length > 0 ? /*#__PURE__*/React.createElement("div", {
+    style: contentStyle
+  }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
+    attributes: attributes
+  })) : /*#__PURE__*/React.createElement("p", null, "Add header to generate table of contents"))];
 }
 
 /***/ }),
