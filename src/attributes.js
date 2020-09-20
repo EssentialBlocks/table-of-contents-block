@@ -140,9 +140,6 @@ const attributes = {
 		type: "string",
 		default: "solid",
 	},
-	bulletColor: {
-		type: "string",
-	},
 	borderWidth: {
 		type: "number",
 	},

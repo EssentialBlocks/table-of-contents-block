@@ -1673,9 +1673,6 @@ var attributes = {
     type: "string",
     "default": "solid"
   },
-  bulletColor: {
-    type: "string"
-  },
   borderWidth: {
     type: "number"
   },
@@ -2615,8 +2612,6 @@ var Inspector = function Inspector(_ref) {
   var visibleHeaders = attributes.visibleHeaders,
       collapsible = attributes.collapsible,
       initialCollapse = attributes.initialCollapse,
-      listType = attributes.listType,
-      bulletColor = attributes.bulletColor,
       titleBg = attributes.titleBg,
       titleColor = attributes.titleColor,
       contentBg = attributes.contentBg,
@@ -3060,14 +3055,6 @@ var Inspector = function Inspector(_ref) {
     onChange: function onChange(contentHoverColor) {
       return setAttributes({
         contentHoverColor: contentHoverColor
-      });
-    }
-  }), listType !== "none" && /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Bullet Points Color"),
-    color: bulletColor,
-    onChange: function onChange(bulletColor) {
-      return setAttributes({
-        bulletColor: bulletColor
       });
     }
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["BaseControl"], {

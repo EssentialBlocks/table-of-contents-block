@@ -34,8 +34,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		visibleHeaders,
 		collapsible,
 		initialCollapse,
-		listType,
-		bulletColor,
 		titleBg,
 		titleColor,
 		contentBg,
@@ -443,14 +441,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					color={contentHoverColor}
 					onChange={(contentHoverColor) => setAttributes({ contentHoverColor })}
 				/>
-
-				{listType !== "none" && (
-					<ColorControl
-						label={__("Bullet Points Color")}
-						color={bulletColor}
-						onChange={(bulletColor) => setAttributes({ bulletColor })}
-					/>
-				)}
 
 				<BaseControl label={__("Typography")} className="eb-typography-base">
 					<Dropdown
