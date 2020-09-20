@@ -140,17 +140,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 									...visibleHeaders.slice(0, index),
 									!visibleHeaders[index],
 									...visibleHeaders.slice(index + 1),
-									<UnitControl
-										selectedUnit={titleSizeUnit}
-										unitTypes={[
-											{ label: "px", value: "px" },
-											{ label: "%", value: "%" },
-											{ label: "em", value: "em" },
-										]}
-										onClick={(titleSizeUnit) =>
-											setAttributes({ titleSizeUnit })
-										}
-									/>,
 								],
 							})
 						}
