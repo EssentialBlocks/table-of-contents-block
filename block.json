@@ -1,6 +1,6 @@
 {
 	"name": "block/table-of-contents-block",
-	"title": "Table Of Content",
+	"title": "Table Of Contents",
 	"category": "widgets",
 	"description": "Example block written with ESNext standard and JSX support – build step required.",
 	"textdomain": "table-of-contents-block",

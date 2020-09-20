@@ -1546,7 +1546,7 @@ var attributes = {
   },
   title: {
     type: "string",
-    "default": "Table of contents"
+    "default": "Table of Contents"
   },
   collapsible: {
     type: "boolean",
@@ -1557,16 +1557,20 @@ var attributes = {
     "default": false
   },
   titleBg: {
-    type: "string"
+    type: "string",
+    "default": "#ff7d50"
   },
   titleColor: {
-    type: "string"
+    type: "string",
+    "default": "white"
   },
   contentBg: {
-    type: "string"
+    type: "string",
+    "default": "#fff6f3"
   },
   contentColor: {
-    type: "string"
+    type: "string",
+    "default": "#707070"
   },
   contentHoverColor: {
     type: "string"
@@ -1597,7 +1601,8 @@ var attributes = {
     "default": "px"
   },
   titleFontSize: {
-    type: "number"
+    type: "number",
+    "default": 22
   },
   titleFontWeight: {
     type: "string",

@@ -13,7 +13,7 @@ const attributes = {
 	},
 	title: {
 		type: "string",
-		default: "Table of contents",
+		default: "Table of Contents",
 	},
 	collapsible: {
 		type: "boolean",
@@ -25,15 +25,19 @@ const attributes = {
 	},
 	titleBg: {
 		type: "string",
+		default: "#ff7d50",
 	},
 	titleColor: {
 		type: "string",
+		default: "white",
 	},
 	contentBg: {
 		type: "string",
+		default: "#fff6f3",
 	},
 	contentColor: {
 		type: "string",
+		default: "#707070",
 	},
 	contentHoverColor: {
 		type: "string",
@@ -65,6 +69,7 @@ const attributes = {
 	},
 	titleFontSize: {
 		type: "number",
+		default: 22,
 	},
 	titleFontWeight: {
 		type: "string",
