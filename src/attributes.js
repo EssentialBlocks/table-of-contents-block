@@ -170,7 +170,7 @@ const attributes = {
 	},
 	titlePaddingLeft: {
 		type: "number",
-		default: 0,
+		default: 10,
 	},
 	titlePaddingUnit: {
 		type: "string",
