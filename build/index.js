@@ -3542,8 +3542,8 @@ var List = /*#__PURE__*/function (_Component) {
           hasUnderline = _this$props$attribute.hasUnderline; // Style objects
 
       var listStyle = {
-        listStyle: listType === "none" && "none",
-        color: listType !== "none" && listColor,
+        listStyle: listType === "none" ? "none" : undefined,
+        color: listType !== "none" ? listColor : undefined,
         marginLeft: indent
       };
       var listItemStyle = {

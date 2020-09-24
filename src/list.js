@@ -29,8 +29,8 @@ class List extends Component {
 
 		// Style objects
 		const listStyle = {
-			listStyle: listType === "none" && "none",
-			color: listType !== "none" && listColor,
+			listStyle: listType === "none" ? "none" : undefined,
+			color: listType !== "none" ? listColor : undefined,
 			marginLeft: indent,
 		};
 
