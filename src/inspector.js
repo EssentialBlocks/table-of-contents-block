@@ -102,6 +102,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentHeight,
 		contentWidth,
 		topSpace,
+		hideOnMobile,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -188,6 +189,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			{isSticky && (
 				<PanelBody title={__("Sticky settings")}>
+					<ToggleControl
+						label={__("Hide on Mobile")}
+						checked={hideOnMobile}
+						onChange={() => setAttributes({ hideOnMobile: !hideOnMobile })}
+					/>
+
 					<RangeControl
 						label={__("Top Space")}
 						help={__("Visible on frontend only")}

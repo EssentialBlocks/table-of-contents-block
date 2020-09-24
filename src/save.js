@@ -68,6 +68,7 @@ export default function save({ attributes }) {
 		contentWidth,
 		contentWidthUnit,
 		isSticky,
+		hideOnMobile,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -136,6 +137,7 @@ export default function save({ attributes }) {
 			data-sticky={isSticky}
 			data-text-color={contentColor}
 			data-hover-color={contentHoverColor}
+			data-hide-mobile={hideOnMobile}
 		>
 			<div className="eb-toc-header">
 				{isSticky && <span className="eb-toc-close"></span>}

@@ -30,6 +30,7 @@
 			this._hide();
 			this._show();
 			this._hover();
+			this._hideOnMobileView();
 		},
 
 		_toggleCollapse: function () {
@@ -264,6 +265,19 @@
 						});
 					});
 				}
+			}
+		},
+
+		/**
+		 * Hide sticky content on mobile
+		 */
+		_hideOnMobileView: function () {
+			const container = document.querySelector(".eb-toc-container");
+			const isSticky = container.getAttribute("data-sticky") === "true";
+			const hideOnMobile = container.getAttribute("data-hide-mobile") == "true";
+
+			if (isSticky && hideOnMobile && window.screen.width < 420) {
+				container.style.display = "none";
 			}
 		},
 	};

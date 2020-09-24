@@ -1805,6 +1805,10 @@ var attributes = {
   isSticky: {
     type: "boolean",
     "default": false
+  },
+  hideOnMobile: {
+    type: "boolean",
+    "default": false
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2684,7 +2688,8 @@ var Inspector = function Inspector(_ref) {
       isSticky = attributes.isSticky,
       contentHeight = attributes.contentHeight,
       contentWidth = attributes.contentWidth,
-      topSpace = attributes.topSpace;
+      topSpace = attributes.topSpace,
+      hideOnMobile = attributes.hideOnMobile;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2756,7 +2761,15 @@ var Inspector = function Inspector(_ref) {
     }
   })), isSticky && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky settings")
-  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+  }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Hide on Mobile"),
+    checked: hideOnMobile,
+    onChange: function onChange() {
+      return setAttributes({
+        hideOnMobile: !hideOnMobile
+      });
+    }
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Top Space"),
     help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Visible on frontend only"),
     value: topSpace,
@@ -3737,7 +3750,8 @@ function save(_ref) {
       contentHeight = attributes.contentHeight,
       contentWidth = attributes.contentWidth,
       contentWidthUnit = attributes.contentWidthUnit,
-      isSticky = attributes.isSticky;
+      isSticky = attributes.isSticky,
+      hideOnMobile = attributes.hideOnMobile;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: !isSticky ? contentBg : undefined,
@@ -3788,7 +3802,8 @@ function save(_ref) {
     "data-arrow-color": arrowColor,
     "data-sticky": isSticky,
     "data-text-color": contentColor,
-    "data-hover-color": contentHoverColor
+    "data-hover-color": contentHoverColor,
+    "data-hide-mobile": hideOnMobile
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {
