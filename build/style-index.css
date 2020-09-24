@@ -1,6 +1,9 @@
 .eb-toc-wrapper {
   width: 100%; }
 
+.eb-toc__list-wrap ul {
+  margin-bottom: 0px; }
+
 ol {
   counter-reset: item; }
   ol li {
