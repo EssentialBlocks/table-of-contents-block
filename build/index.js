@@ -2758,6 +2758,7 @@ var Inspector = function Inspector(_ref) {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Sticky settings")
   }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Top Space"),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Visible on frontend only"),
     value: topSpace,
     onChange: function onChange(topSpace) {
       return setAttributes({
@@ -2768,6 +2769,7 @@ var Inspector = function Inspector(_ref) {
     max: 100
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Height"),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Visible on frontend only"),
     value: contentHeight,
     onChange: function onChange(contentHeight) {
       return setAttributes({
@@ -2778,6 +2780,7 @@ var Inspector = function Inspector(_ref) {
     max: 1000
   }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Content Width"),
+    help: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Visible on frontend only"),
     value: contentWidth,
     onChange: function onChange(contentWidth) {
       return setAttributes({

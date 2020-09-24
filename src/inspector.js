@@ -190,6 +190,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<PanelBody title={__("Sticky settings")}>
 					<RangeControl
 						label={__("Top Space")}
+						help={__("Visible on frontend only")}
 						value={topSpace}
 						onChange={(topSpace) => setAttributes({ topSpace })}
 						min={0}
@@ -198,6 +199,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 					<RangeControl
 						label={__("Content Height")}
+						help={__("Visible on frontend only")}
 						value={contentHeight}
 						onChange={(contentHeight) => setAttributes({ contentHeight })}
 						min={0}
@@ -206,6 +208,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 					<RangeControl
 						label={__("Content Width")}
+						help={__("Visible on frontend only")}
 						value={contentWidth}
 						onChange={(contentWidth) => setAttributes({ contentWidth })}
 						min={0}
