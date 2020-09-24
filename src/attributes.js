@@ -277,6 +277,10 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	zIndex: {
+		type: "number",
+		default: 999,
+	},
 };
 
 export default attributes;

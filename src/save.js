@@ -69,6 +69,7 @@ export default function save({ attributes }) {
 		contentWidthUnit,
 		isSticky,
 		hideOnMobile,
+		zIndex,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -81,7 +82,7 @@ export default function save({ attributes }) {
 		position: isSticky ? "fixed" : undefined,
 		top: isSticky ? topSpace + "%" : undefined,
 		width: isSticky ? contentWidth + contentWidthUnit : undefined,
-		zIndex: isSticky ? 999 : undefined,
+		zIndex: isSticky && zIndex ? zIndex : undefined,
 	};
 
 	const titleStyle = {

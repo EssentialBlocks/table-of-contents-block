@@ -103,6 +103,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentWidth,
 		topSpace,
 		hideOnMobile,
+		zIndex,
 	} = attributes;
 
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
@@ -220,6 +221,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 						onChange={(contentWidth) => setAttributes({ contentWidth })}
 						min={0}
 						max={1000}
+					/>
+
+					<RangeControl
+						label={__("Z-Index")}
+						value={zIndex}
+						onChange={(zIndex) => setAttributes({ zIndex })}
+						min={0}
+						max={9999}
 					/>
 				</PanelBody>
 			)}

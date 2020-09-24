@@ -1809,6 +1809,10 @@ var attributes = {
   hideOnMobile: {
     type: "boolean",
     "default": false
+  },
+  zIndex: {
+    type: "number",
+    "default": 999
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -2689,7 +2693,8 @@ var Inspector = function Inspector(_ref) {
       contentHeight = attributes.contentHeight,
       contentWidth = attributes.contentWidth,
       topSpace = attributes.topSpace,
-      hideOnMobile = attributes.hideOnMobile;
+      hideOnMobile = attributes.hideOnMobile,
+      zIndex = attributes.zIndex;
   var TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
   var TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
   var TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
@@ -2802,6 +2807,16 @@ var Inspector = function Inspector(_ref) {
     },
     min: 0,
     max: 1000
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Z-Index"),
+    value: zIndex,
+    onChange: function onChange(zIndex) {
+      return setAttributes({
+        zIndex: zIndex
+      });
+    },
+    min: 0,
+    max: 9999
   })), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Title Settings"),
     initialOpen: false
@@ -3751,7 +3766,8 @@ function save(_ref) {
       contentWidth = attributes.contentWidth,
       contentWidthUnit = attributes.contentWidthUnit,
       isSticky = attributes.isSticky,
-      hideOnMobile = attributes.hideOnMobile;
+      hideOnMobile = attributes.hideOnMobile,
+      zIndex = attributes.zIndex;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: !isSticky ? contentBg : undefined,
@@ -3760,7 +3776,7 @@ function save(_ref) {
     position: isSticky ? "fixed" : undefined,
     top: isSticky ? topSpace + "%" : undefined,
     width: isSticky ? contentWidth + contentWidthUnit : undefined,
-    zIndex: isSticky ? 999 : undefined
+    zIndex: isSticky && zIndex ? zIndex : undefined
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
