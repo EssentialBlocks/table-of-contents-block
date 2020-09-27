@@ -1,7 +1,7 @@
 {
 	"name": "table-of-contents",
 	"version": "1.0.0",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
