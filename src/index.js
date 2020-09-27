@@ -11,7 +11,7 @@ import icon from "./icon";
 registerBlockType("block/table-of-contents-block", {
 	title: __("Table Of Contents", "create-block"),
 	description: __(
-		"Example block written with ESNext standard and JSX support – build step required.",
+		"Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 		"table-of-contents-block"
 	),
 	category: "widgets",

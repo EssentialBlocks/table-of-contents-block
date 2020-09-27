@@ -2561,7 +2561,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("block/table-of-contents-block", {
   title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Table Of Contents", "create-block"),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Example block written with ESNext standard and JSX support – build step required.", "table-of-contents-block"),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website", "table-of-contents-block"),
   category: "widgets",
   icon: _icon__WEBPACK_IMPORTED_MODULE_6__["default"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_5__["default"],

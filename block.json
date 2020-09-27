@@ -2,7 +2,7 @@
 	"name": "block/table-of-contents-block",
 	"title": "Table Of Contents",
 	"category": "widgets",
-	"description": "Example block written with ESNext standard and JSX support – build step required.",
+	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"textdomain": "table-of-contents-block",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
