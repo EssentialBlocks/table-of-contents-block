@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:     Table Of Contents
+ * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website
  * Version:         1.0.0
@@ -29,7 +29,7 @@ function create_block_table_of_content_block_init() {
 	$script_asset_path = "$dir/build/index.asset.php";
 	if ( ! file_exists( $script_asset_path ) ) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "block/table-of-contents" block first.'
+			'You need to run `npm start` or `npm run build` for the "table-of-contents-block/table-of-contents-block" block first.'
 		);
 	}
 	$index_js     = 'build/index.js';
@@ -66,7 +66,7 @@ function create_block_table_of_content_block_init() {
   }
 
 
-	register_block_type( 'block/table-of-contents-block', array(
+	register_block_type( 'table-of-contents-block/table-of-contents-block', array(
 		'editor_script' => 'create-block-table-of-content-block-editor',
 		'editor_style'  => 'create-block-table-of-content-block-editor',
 		'style'         => 'create-block-table-of-content-block',
