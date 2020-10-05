@@ -13,11 +13,14 @@ import {
 	Button,
 	Dropdown,
 } from "@wordpress/components";
+import { useState, useEffect } from "@wordpress/element";
+import Select from "react-select";
 
 /**
  * Internal dependencies
  */
 import {
+	HEADERS,
 	ALIGNS,
 	FONT_WEIGHTS,
 	TEXT_TRANSFORM,
@@ -106,6 +109,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 		zIndex,
 	} = attributes;
 
+	const [options, setOptions] = useState(HEADERS);
+	const [defaultOptions, setDefaultOptions] = useState([]);
+
+	useEffect(() => {
+		setDefaultVisible();
+	}, []);
+
+	useEffect(() => {
+		setDefaultVisible();
+	}, [visibleHeaders]);
+
+	const setDefaultVisible = () => {
+		let defaultOptions = [];
+
+		visibleHeaders.map((header, index) => {
+			if (header) {
+				defaultOptions.push({ label: `h${index + 1}`, value: index + 1 });
+			}
+		});
+
+		setDefaultOptions(defaultOptions);
+	};
+
 	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
 	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
 
@@ -127,24 +153,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
 	const CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
 
+	const onHeaderChange = (options) => {
+		if (options) {
+			let visibleHeaders = Array(6).fill(false);
+
+			options.map((option) => (visibleHeaders[option.value - 1] = true));
+
+			setAttributes({ visibleHeaders });
+		} else {
+			setAttributes({ visibleHeaders: [] });
+		}
+	};
+
 	return (
 		<InspectorControls key="controls">
 			<PanelBody title={__("Visible Headers")}>
-				{visibleHeaders.map((header, index) => (
-					<ToggleControl
-						label={`H${index + 1}`}
-						checked={header}
-						onChange={() =>
-							setAttributes({
-								visibleHeaders: [
-									...visibleHeaders.slice(0, index),
-									!visibleHeaders[index],
-									...visibleHeaders.slice(index + 1),
-								],
-							})
-						}
-					/>
-				))}
+				<Select
+					options={options}
+					defaultValue={defaultOptions}
+					isMulti
+					onChange={onHeaderChange}
+				/>
 			</PanelBody>
 
 			<PanelBody>

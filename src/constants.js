@@ -1,5 +1,14 @@
 import { __ } from "@wordpress/i18n";
 
+export const HEADERS = [
+	{ label: "h1", value: 1 },
+	{ label: "h2", value: 2 },
+	{ label: "h3", value: 3 },
+	{ label: "h4", value: 4 },
+	{ label: "h5", value: 5 },
+	{ label: "h6", value: 6 },
+];
+
 export const ALIGNS = [
 	{ label: __("Left"), value: "left" },
 	{ label: __("Center"), value: "center" },
