@@ -281,6 +281,10 @@ const attributes = {
 		type: "number",
 		default: 999,
 	},
+	contentAlign: {
+		type: "string",
+		default: "left",
+	},
 };
 
 export default attributes;

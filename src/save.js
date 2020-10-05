@@ -70,6 +70,7 @@ export default function save({ attributes }) {
 		isSticky,
 		hideOnMobile,
 		zIndex,
+		contentAlign,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -109,6 +110,7 @@ export default function save({ attributes }) {
 	};
 
 	const contentStyle = {
+		textAlign: contentAlign,
 		color: contentColor,
 		background: contentBg,
 		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${

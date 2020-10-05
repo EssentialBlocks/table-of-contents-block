@@ -2,7 +2,11 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { BlockControls, RichText } from "@wordpress/block-editor";
+import {
+	BlockControls,
+	RichText,
+	BlockAlignmentToolbar,
+} from "@wordpress/block-editor";
 import { Toolbar, ToolbarButton } from "@wordpress/components";
 import { useState, useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
@@ -236,6 +240,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		contentPaddingUnit,
 		radius,
 		radiusUnit,
+		contentAlign,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -317,6 +322,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	};
 
 	const contentStyle = {
+		textAlign: contentAlign,
 		color: contentColor,
 		display: visible ? "block" : "none",
 		background: contentBg,
@@ -331,7 +337,13 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		isSelected && (
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 		),
+
 		<BlockControls>
+			<BlockAlignmentToolbar
+				value={contentAlign}
+				onChange={(contentAlign) => setAttributes({ contentAlign })}
+				controls={["left", "center", "right"]}
+			/>
 			<Toolbar>
 				<ToolbarButton
 					title="Unordered"

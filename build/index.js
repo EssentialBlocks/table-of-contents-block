@@ -8717,6 +8717,10 @@ var attributes = {
   zIndex: {
     type: "number",
     "default": 999
+  },
+  contentAlign: {
+    type: "string",
+    "default": "left"
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -9093,7 +9097,8 @@ function Edit(_ref) {
       contentPaddingLeft = attributes.contentPaddingLeft,
       contentPaddingUnit = attributes.contentPaddingUnit,
       radius = attributes.radius,
-      radiusUnit = attributes.radiusUnit;
+      radiusUnit = attributes.radiusUnit,
+      contentAlign = attributes.contentAlign;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -9158,6 +9163,7 @@ function Edit(_ref) {
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
   };
   var contentStyle = {
+    textAlign: contentAlign,
     color: contentColor,
     display: visible ? "block" : "none",
     background: contentBg,
@@ -9166,7 +9172,15 @@ function Edit(_ref) {
   return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_6__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["BlockControls"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
+  }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["BlockControls"], null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["BlockAlignmentToolbar"], {
+    value: contentAlign,
+    onChange: function onChange(contentAlign) {
+      return setAttributes({
+        contentAlign: contentAlign
+      });
+    },
+    controls: ["left", "center", "right"]
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["Toolbar"], null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToolbarButton"], {
     title: "Unordered",
     icon: "editor-ul",
     isActive: listType === "ul",
@@ -10740,7 +10754,8 @@ function save(_ref) {
       contentWidthUnit = attributes.contentWidthUnit,
       isSticky = attributes.isSticky,
       hideOnMobile = attributes.hideOnMobile,
-      zIndex = attributes.zIndex;
+      zIndex = attributes.zIndex,
+      contentAlign = attributes.contentAlign;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: !isSticky ? contentBg : undefined,
@@ -10768,6 +10783,7 @@ function save(_ref) {
     padding: "".concat(titlePaddingTop || 0).concat(titlePaddingUnit, " ").concat(titlePaddingRight || 0).concat(titlePaddingUnit, " ").concat(titlePaddingBottom || 0).concat(titlePaddingUnit, " ").concat(titlePaddingLeft || 0).concat(titlePaddingUnit)
   };
   var contentStyle = {
+    textAlign: contentAlign,
     color: contentColor,
     background: contentBg,
     padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit),
