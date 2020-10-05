@@ -285,6 +285,10 @@ const attributes = {
 		type: "string",
 		default: "left",
 	},
+	containerWidth: {
+		type: "number",
+		default: 100,
+	},
 };
 
 export default attributes;

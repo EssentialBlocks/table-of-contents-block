@@ -241,6 +241,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		radius,
 		radiusUnit,
 		contentAlign,
+		containerWidth,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -290,6 +291,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
 
 	const wrapperStyle = {
+		width: containerWidth + "%",
 		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
 		background: contentBg,
 		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
@@ -368,7 +370,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 			</Toolbar>
 		</BlockControls>,
 
-		<div style={wrapperStyle}>
+		<div className="eb-toc-container" style={wrapperStyle}>
 			<div onClick={() => collapsible && setVisible(!visible)}>
 				<RichText
 					className="eb-toc-title"
@@ -379,7 +381,7 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 				/>
 			</div>
 			{headers.length > 0 ? (
-				<div style={contentStyle}>
+				<div className="eb-toc-wrapper" style={contentStyle}>
 					<List attributes={attributes} />
 				</div>
 			) : (

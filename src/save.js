@@ -71,6 +71,7 @@ export default function save({ attributes }) {
 		hideOnMobile,
 		zIndex,
 		contentAlign,
+		containerWidth,
 	} = attributes;
 
 	const wrapperStyle = {
@@ -82,7 +83,7 @@ export default function save({ attributes }) {
 		borderRadius: radius + radiusUnit,
 		position: isSticky ? "fixed" : undefined,
 		top: isSticky ? topSpace + "%" : undefined,
-		width: isSticky ? contentWidth + contentWidthUnit : undefined,
+		width: isSticky ? contentWidth + contentWidthUnit : containerWidth + "%",
 		zIndex: isSticky && zIndex ? zIndex : undefined,
 	};
 

@@ -107,6 +107,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		topSpace,
 		hideOnMobile,
 		zIndex,
+		containerWidth,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
@@ -470,6 +471,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 					min={0}
 					max={CONTENT_GAP_MAX}
 					step={CONTENT_GAP_STEP}
+				/>
+
+				<RangeControl
+					label={__("Container Width")}
+					value={containerWidth}
+					onChange={(containerWidth) => setAttributes({ containerWidth })}
 				/>
 
 				<ColorControl

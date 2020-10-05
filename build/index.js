@@ -8721,6 +8721,10 @@ var attributes = {
   contentAlign: {
     type: "string",
     "default": "left"
+  },
+  containerWidth: {
+    type: "number",
+    "default": 100
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
@@ -9098,7 +9102,8 @@ function Edit(_ref) {
       contentPaddingUnit = attributes.contentPaddingUnit,
       radius = attributes.radius,
       radiusUnit = attributes.radiusUnit,
-      contentAlign = attributes.contentAlign;
+      contentAlign = attributes.contentAlign,
+      containerWidth = attributes.containerWidth;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -9141,6 +9146,7 @@ function Edit(_ref) {
     }
   }, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
   var wrapperStyle = {
+    width: containerWidth + "%",
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
@@ -9208,6 +9214,7 @@ function Edit(_ref) {
       });
     }
   }))), /*#__PURE__*/React.createElement("div", {
+    className: "eb-toc-container",
     style: wrapperStyle
   }, /*#__PURE__*/React.createElement("div", {
     onClick: function onClick() {
@@ -9224,6 +9231,7 @@ function Edit(_ref) {
       });
     }
   })), headers.length > 0 ? /*#__PURE__*/React.createElement("div", {
+    className: "eb-toc-wrapper",
     style: contentStyle
   }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
     attributes: attributes
@@ -9637,7 +9645,8 @@ var Inspector = function Inspector(_ref) {
       contentWidth = attributes.contentWidth,
       topSpace = attributes.topSpace,
       hideOnMobile = attributes.hideOnMobile,
-      zIndex = attributes.zIndex;
+      zIndex = attributes.zIndex,
+      containerWidth = attributes.containerWidth;
 
   var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__["useState"])(_constants__WEBPACK_IMPORTED_MODULE_5__["HEADERS"]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -10056,6 +10065,14 @@ var Inspector = function Inspector(_ref) {
     min: 0,
     max: CONTENT_GAP_MAX,
     step: CONTENT_GAP_STEP
+  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Container Width"),
+    value: containerWidth,
+    onChange: function onChange(containerWidth) {
+      return setAttributes({
+        containerWidth: containerWidth
+      });
+    }
   }), /*#__PURE__*/React.createElement(_util_color_control_index__WEBPACK_IMPORTED_MODULE_8__["default"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Background Color"),
     color: contentBg,
@@ -10755,7 +10772,8 @@ function save(_ref) {
       isSticky = attributes.isSticky,
       hideOnMobile = attributes.hideOnMobile,
       zIndex = attributes.zIndex,
-      contentAlign = attributes.contentAlign;
+      contentAlign = attributes.contentAlign,
+      containerWidth = attributes.containerWidth;
   var wrapperStyle = {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: !isSticky ? contentBg : undefined,
@@ -10763,7 +10781,7 @@ function save(_ref) {
     borderRadius: radius + radiusUnit,
     position: isSticky ? "fixed" : undefined,
     top: isSticky ? topSpace + "%" : undefined,
-    width: isSticky ? contentWidth + contentWidthUnit : undefined,
+    width: isSticky ? contentWidth + contentWidthUnit : containerWidth + "%",
     zIndex: isSticky && zIndex ? zIndex : undefined
   };
   var titleStyle = {
