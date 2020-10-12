@@ -8,16 +8,21 @@
 .eb-toc__list-wrap ul {
   display: inline-block;
   text-align: left;
-  margin-bottom: 0px;
-  margin-left: 0px; }
+  margin-bottom: 1.5em;
+  margin-left: 3em; }
 
 ol {
-  counter-reset: item; }
+  counter-reset: item;
+  margin-bottom: 1.5em;
+  margin-left: 3em; }
   ol li {
     display: block; }
   ol li:before {
     content: counters(item, ".") " ";
     counter-increment: item; }
+
+.eb-toc__list ul {
+  margin-bottom: 0; }
 
 .eb-base-control > div {
   display: flex;
