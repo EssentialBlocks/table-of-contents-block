@@ -9,15 +9,17 @@
   display: inline-block;
   text-align: left;
   margin-bottom: 1.5em;
-  margin-left: 3em; }
+  margin-left: 1.3em;
+  padding-left: 1.3em; }
 
-ol {
+.eb-toc__list-wrap ol {
   counter-reset: item;
   margin-bottom: 1.5em;
-  margin-left: 3em; }
-  ol li {
+  margin-left: 1.3em;
+  padding-left: 1.3em; }
+  .eb-toc__list-wrap ol li {
     display: block; }
-  ol li:before {
+  .eb-toc__list-wrap ol li:before {
     content: counters(item, ".") " ";
     counter-increment: item; }
 
