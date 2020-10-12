@@ -263,7 +263,7 @@ const attributes = {
 	},
 	contentWidth: {
 		type: "number",
-		default: 200,
+		default: 300,
 	},
 	contentWidthUnit: {
 		type: "string",
