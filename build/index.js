@@ -8665,13 +8665,6 @@ var attributes = {
     type: "string",
     "default": "px"
   },
-  radius: {
-    type: "number"
-  },
-  radiusUnit: {
-    type: "string",
-    "default": "px"
-  },
   listSeperatorWidth: {
     type: "number"
   },
@@ -9100,8 +9093,6 @@ function Edit(_ref) {
       contentPaddingBottom = attributes.contentPaddingBottom,
       contentPaddingLeft = attributes.contentPaddingLeft,
       contentPaddingUnit = attributes.contentPaddingUnit,
-      radius = attributes.radius,
-      radiusUnit = attributes.radiusUnit,
       contentAlign = attributes.contentAlign,
       containerWidth = attributes.containerWidth;
 
@@ -9149,8 +9140,7 @@ function Edit(_ref) {
     width: containerWidth + "%",
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: contentBg,
-    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
-    borderRadius: radius + radiusUnit
+    boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black")
   };
   var titleStyle = {
     display: displayTitle ? "block" : "none",
@@ -10410,30 +10400,6 @@ var Inspector = function Inspector(_ref) {
         borderColor: borderColor
       });
     }
-  }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    selectedUnit: radiusUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(radiusUnit) {
-      return setAttributes({
-        radiusUnit: radiusUnit
-      });
-    }
-  }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["RangeControl"], {
-    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Border Radius"),
-    value: radius,
-    onChange: function onChange(radius) {
-      return setAttributes({
-        radius: radius
-      });
-    },
-    min: 0,
-    max: 100
   })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["PanelBody"], {
     title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Shadow"),
     initialOpen: false
@@ -10763,8 +10729,6 @@ function save(_ref) {
       contentPaddingBottom = attributes.contentPaddingBottom,
       contentPaddingLeft = attributes.contentPaddingLeft,
       contentPaddingUnit = attributes.contentPaddingUnit,
-      radius = attributes.radius,
-      radiusUnit = attributes.radiusUnit,
       topSpace = attributes.topSpace,
       contentHeight = attributes.contentHeight,
       contentWidth = attributes.contentWidth,
@@ -10778,7 +10742,6 @@ function save(_ref) {
     border: "".concat(borderWidth, "px ").concat(borderStyle, " ").concat(borderColor),
     background: !isSticky ? contentBg : undefined,
     boxShadow: "".concat(hOffset || 0, "px ").concat(vOffset || 0, "px ").concat(blur || 0, "px ").concat(spread || 0, "px ").concat(shadowColor || "black"),
-    borderRadius: radius + radiusUnit,
     position: isSticky ? "fixed" : undefined,
     top: isSticky ? topSpace + "%" : undefined,
     width: isSticky ? contentWidth + contentWidthUnit : containerWidth + "%",

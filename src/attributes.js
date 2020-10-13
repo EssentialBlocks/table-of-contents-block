@@ -228,13 +228,6 @@ const attributes = {
 		type: "string",
 		default: "px",
 	},
-	radius: {
-		type: "number",
-	},
-	radiusUnit: {
-		type: "string",
-		default: "px",
-	},
 	listSeperatorWidth: {
 		type: "number",
 	},

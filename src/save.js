@@ -61,8 +61,6 @@ export default function save({ attributes }) {
 		contentPaddingBottom,
 		contentPaddingLeft,
 		contentPaddingUnit,
-		radius,
-		radiusUnit,
 		topSpace,
 		contentHeight,
 		contentWidth,
@@ -80,7 +78,6 @@ export default function save({ attributes }) {
 		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
 			spread || 0
 		}px ${shadowColor || "black"}`,
-		borderRadius: radius + radiusUnit,
 		position: isSticky ? "fixed" : undefined,
 		top: isSticky ? topSpace + "%" : undefined,
 		width: isSticky ? contentWidth + contentWidthUnit : containerWidth + "%",

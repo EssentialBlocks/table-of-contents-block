@@ -774,23 +774,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 					color={borderColor}
 					onChange={(borderColor) => setAttributes({ borderColor })}
 				/>
-
-				<UnitControl
-					selectedUnit={radiusUnit}
-					unitTypes={[
-						{ label: "px", value: "px" },
-						{ label: "%", value: "%" },
-					]}
-					onClick={(radiusUnit) => setAttributes({ radiusUnit })}
-				/>
-
-				<RangeControl
-					label={__("Border Radius")}
-					value={radius}
-					onChange={(radius) => setAttributes({ radius })}
-					min={0}
-					max={100}
-				/>
 			</PanelBody>
 
 			<PanelBody title={__("Shadow")} initialOpen={false}>
