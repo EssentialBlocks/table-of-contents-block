@@ -10826,7 +10826,9 @@ function save(_ref) {
     "data-sticky": isSticky,
     "data-text-color": contentColor,
     "data-hover-color": contentHoverColor,
-    "data-hide-mobile": hideOnMobile
+    "data-hide-mobile": hideOnMobile,
+    "data-title-bg": titleBg,
+    "data-title-color": titleColor
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {

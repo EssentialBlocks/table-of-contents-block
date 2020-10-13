@@ -142,6 +142,8 @@ export default function save({ attributes }) {
 			data-text-color={contentColor}
 			data-hover-color={contentHoverColor}
 			data-hide-mobile={hideOnMobile}
+			data-title-bg={titleBg}
+			data-title-color={titleColor}
 		>
 			<div className="eb-toc-header">
 				{isSticky && <span className="eb-toc-close"></span>}
