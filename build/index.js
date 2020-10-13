@@ -9736,7 +9736,7 @@ var Inspector = function Inspector(_ref) {
         displayTitle: !displayTitle
       });
     }
-  }), displayTitle && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
+  }), displayTitle && !isSticky && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__["ToggleControl"], {
     label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])("Collapsible"),
     checked: collapsible,
     onChange: function onChange() {

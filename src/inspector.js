@@ -191,7 +191,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					onChange={() => setAttributes({ displayTitle: !displayTitle })}
 				/>
 
-				{displayTitle && (
+				{displayTitle && !isSticky && (
 					<ToggleControl
 						label={__("Collapsible")}
 						checked={collapsible}
