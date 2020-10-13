@@ -31,6 +31,7 @@
 			this._show();
 			this._hover();
 			this._hideOnMobileView();
+			this._changeHeaderColors();
 		},
 
 		_toggleCollapse: function () {
@@ -278,6 +279,26 @@
 
 			if (isSticky && hideOnMobile && window.screen.width < 420) {
 				container.style.display = "none";
+			}
+		},
+
+		/**
+		 * Change collapsible header colors for sticky content
+		 */
+		_changeHeaderColors: function () {
+			let containers = document.querySelectorAll(".eb-toc-container");
+
+			for (container of containers) {
+				const isSticky = container.getAttribute("data-sticky") === "true";
+
+				if (isSticky) {
+					const titleBg = container.getAttribute("data-title-bg");
+					const titleColor = container.getAttribute("data-title-color");
+					const button = container.querySelector(".eb-toc-button");
+
+					button.style.color = titleColor;
+					button.style.background = titleBg;
+				}
 			}
 		},
 	};
