@@ -176,6 +176,9 @@
 					contentNode.style.height = "0";
 					headerButton.style.visibility = "visible";
 					headerButton.style.display = "inline-block";
+
+					// Remove container border
+					container.style.border = 0;
 				});
 			}
 		},
@@ -189,6 +192,8 @@
 					const contentNode = container.querySelector(".eb-toc-wrapper");
 
 					container.style.visibility = "visible";
+					container.style.border = window.ebTocBorder;
+
 					contentNode.style.height = window.ebTocHeight || "200px";
 					this.style.visibility = "hidden";
 					this.style.display = "none";
@@ -225,6 +230,14 @@
 		 * Alter the_content.
 		 */
 		_run: function () {
+			let container = document.querySelector(".eb-toc-container");
+
+			if (container) {
+				// Save container border
+				const tocBorder = container.style.border;
+				window.ebTocBorder = tocBorder;
+			}
+
 			let node = document.querySelector(".eb-toc-wrapper");
 
 			if (node) {
