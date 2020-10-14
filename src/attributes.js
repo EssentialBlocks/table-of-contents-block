@@ -121,6 +121,7 @@ const attributes = {
 	},
 	contentLineHeight: {
 		type: "number",
+		default: 26,
 	},
 	contentLineHeightUnit: {
 		type: "string",
