@@ -11,16 +11,14 @@
 	ul {
 		display: inline-block;
 		text-align: left;
-		margin-bottom: 1.5em;
-		margin-left: 1.3em;
-		padding-left: 1.3em;
+		margin: 0em 0em 1.5em 1.3em;
+		padding: 0em 0em 0em 1.3em;
 	}
 
 	ol {
 		counter-reset: item;
-		margin-bottom: 1.5em;
-		margin-left: 1.3em;
-		padding-left: 1.3em;
+		margin: 0em 0em 1.5em 1.3em;
+		padding: 0em 0em 0em 1.3em;
 
 		li {
 			display: block;
