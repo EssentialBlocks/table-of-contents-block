@@ -9495,8 +9495,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("block/table-of-contents-block", {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Table Of Contents", "create-block"),
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__["registerBlockType"])("table-of-contents-block/table-of-contents-block", {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Table Of Contents", "table-of-contents-block"),
   description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website", "table-of-contents-block"),
   category: "widgets",
   icon: _icon__WEBPACK_IMPORTED_MODULE_6__["default"],
