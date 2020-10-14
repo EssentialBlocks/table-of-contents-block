@@ -121,11 +121,7 @@ const attributes = {
 	},
 	contentLineHeight: {
 		type: "number",
-		default: 26,
-	},
-	contentLineHeightUnit: {
-		type: "string",
-		default: "px",
+		default: 1.4,
 	},
 	isSmooth: {
 		type: "boolean",

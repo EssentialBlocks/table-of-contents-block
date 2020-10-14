@@ -20,7 +20,6 @@ class List extends Component {
 			contentLetterSpacing,
 			contentLetterSpacingUnit,
 			contentLineHeight,
-			contentLineHeightUnit,
 			listSeperatorWidth,
 			listSeperatorStyle,
 			listSeperatorColor,
@@ -39,7 +38,7 @@ class List extends Component {
 			fontSize: contentFontSize + contentSizeUnit,
 			fontWeight: contentFontWeight,
 			letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-			lineHeight: contentLineHeight + contentLineHeightUnit,
+			lineHeight: contentLineHeight,
 			textTransform: contentTextTransform,
 		};
 

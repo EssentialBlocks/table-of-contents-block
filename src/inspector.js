@@ -66,7 +66,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentLetterSpacing,
 		contentLetterSpacingUnit,
 		contentLineHeight,
-		contentLineHeightUnit,
 		isSmooth,
 		seperator,
 		seperatorSize,
@@ -147,9 +146,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
 	const CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
-
-	const CONTENT_LINE_HEIGHT_STEP = contentLineHeightUnit === "em" ? 0.1 : 1;
-	const CONTENT_LINE_HEIGHT_MAX = contentLineHeightUnit === "em" ? 10 : 100;
 
 	const CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
 	const CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
@@ -592,17 +588,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 									step={CONTENT_SPACING_STEP}
 								/>
 
-								<UnitControl
-									selectedUnit={contentLineHeightUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(contentLineHeightUnit) =>
-										setAttributes({ contentLineHeightUnit })
-									}
-								/>
-
 								<RangeControl
 									label={__("Line Height")}
 									value={contentLineHeight}
@@ -610,8 +595,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 										setAttributes({ contentLineHeight })
 									}
 									min={0}
-									max={CONTENT_LINE_HEIGHT_MAX}
-									step={CONTENT_LINE_HEIGHT_STEP}
+									max={10}
+									step={0.1}
 								/>
 							</div>
 						)}
