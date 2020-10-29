@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
- * Description:     Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website
+ * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
  * Version:         1.0.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
