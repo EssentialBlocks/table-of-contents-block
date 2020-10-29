@@ -77,62 +77,69 @@
 		},
 
 		_scrollToTop: function () {
-			// Create go to top element
-			const goTop = document.createElement("div");
-			goTop.setAttribute(
-				"class",
-				"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
-			);
-			document.body.insertBefore(goTop, document.body.lastChild);
+			let container = document.querySelector(".eb-toc-container");
+			let hasScrollTop =
+				container && container.getAttribute("data-scroll-top") == "true";
 
-			// Add click event
-			goTop.addEventListener("click", function () {
-				document.body.scrollTop = 0;
-				document.documentElement.scrollTop = 0;
-			});
+			if (hasScrollTop) {
+				// Create go to top element
+				const goTop = document.createElement("div");
+				goTop.setAttribute(
+					"class",
+					"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
+				);
+				document.body.insertBefore(goTop, document.body.lastChild);
 
-			function hideScroll() {
-				goTop.classList.remove("show-scroll");
-				goTop.classList.add("hide-scroll");
-			}
+				// Add click event
+				goTop.addEventListener("click", function () {
+					document.body.scrollTop = 0;
+					document.documentElement.scrollTop = 0;
+				});
 
-			function showScroll() {
-				goTop.classList.remove("hide-scroll");
-				goTop.classList.add("show-scroll");
-			}
+				function hideScroll() {
+					goTop.classList.remove("show-scroll");
+					goTop.classList.add("hide-scroll");
+				}
 
-			function onScrollPage() {
-				document.body.scrollTop > 30 || document.documentElement.scrollTop > 20
-					? showScroll()
-					: hideScroll();
-			}
+				function showScroll() {
+					goTop.classList.remove("hide-scroll");
+					goTop.classList.add("show-scroll");
+				}
 
-			function setArrowStyles(height, width, bg, color) {
-				if (height) goTop.style.height = height + "px";
-				if (width) goTop.style.width = width + "px";
-				if (bg) goTop.style.background = bg;
-				if (color) goTop.style.color = color;
-			}
+				function onScrollPage() {
+					document.body.scrollTop > 30 ||
+					document.documentElement.scrollTop > 20
+						? showScroll()
+						: hideScroll();
+				}
 
-			const containers = document.querySelectorAll(".eb-toc-container");
+				function setArrowStyles(height, width, bg, color) {
+					if (height) goTop.style.height = height + "px";
+					if (width) goTop.style.width = width + "px";
+					if (bg) goTop.style.background = bg;
+					if (color) goTop.style.color = color;
+				}
 
-			for (container of containers) {
-				const goToTop = container.getAttribute("data-scroll-top") === "true";
-				const height = container.getAttribute("data-arrow-height");
-				const width = container.getAttribute("data-arrow-width");
-				const bg = container.getAttribute("data-arrow-bg");
-				const color = container.getAttribute("data-arrow-color");
+				const containers = document.querySelectorAll(".eb-toc-container");
 
-				if (goToTop) {
-					// Add scroll event
-					window.addEventListener("scroll", onScrollPage);
+				for (container of containers) {
+					const goToTop = container.getAttribute("data-scroll-top") === "true";
+					const height = container.getAttribute("data-arrow-height");
+					const width = container.getAttribute("data-arrow-width");
+					const bg = container.getAttribute("data-arrow-bg");
+					const color = container.getAttribute("data-arrow-color");
 
-					// Set arrow styles
-					setArrowStyles(height, width, bg, color);
+					if (goToTop) {
+						// Add scroll event
+						window.addEventListener("scroll", onScrollPage);
 
-					showScroll();
-				} else {
-					hideScroll();
+						// Set arrow styles
+						setArrowStyles(height, width, bg, color);
+
+						showScroll();
+					} else {
+						hideScroll();
+					}
 				}
 			}
 		},
