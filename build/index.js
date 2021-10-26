@@ -9,39 +9,6 @@
 
 // extracted by mini-css-extract-plugin
 
-/***/ }),
-
-/***/ "./util/color-control/style.css":
-/*!**************************************!*\
-  !*** ./util/color-control/style.css ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./util/dimensions-control/style.scss":
-/*!********************************************!*\
-  !*** ./util/dimensions-control/style.scss ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "./util/unit-control/style.scss":
-/*!**************************************!*\
-  !*** ./util/unit-control/style.scss ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
 /***/ })
 
 }]);
@@ -10804,8 +10771,12 @@ function save(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ "./util/color-control/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -10818,7 +10789,6 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var __ = wp.i18n.__;
 var _wp$element = wp.element,
     useState = _wp$element.useState,
     useEffect = _wp$element.useEffect;
@@ -10828,58 +10798,62 @@ var _wp$components = wp.components,
     Tooltip = _wp$components.Tooltip,
     ColorPicker = _wp$components.ColorPicker,
     Button = _wp$components.Button;
-
+var colorBallStyles = {
+  padding: 2,
+  borderRadius: 0,
+  background: "white",
+  border: "1px solid #ebebeb"
+};
+var colorStyles = {
+  height: 16,
+  width: 16,
+  borderRadius: "0%",
+  boxShadow: "inset 0 0 0 1px rgba(0,0,0,.1)"
+};
 
 var ColorControl = function ColorControl(_ref) {
   var label = _ref.label,
       color = _ref.color,
       onChange = _ref.onChange;
 
-  var _useState = useState(color),
+  var _useState = useState(null),
       _useState2 = _slicedToArray(_useState, 2),
       bgColor = _useState2[0],
       setBgColor = _useState2[1];
 
   useEffect(function () {
+    onChange(bgColor);
+  }, [bgColor]);
+  useEffect(function () {
     setBgColor(color);
-  }, [color]);
-
-  var _onChangeComplete = function onChangeComplete(_ref2) {
-    var rgb = _ref2.rgb,
-        hex = _ref2.hex;
-    var color = rgb ? "rgba(".concat(rgb.r, ",").concat(rgb.g, ",").concat(rgb.b, ",").concat(rgb.a, ")") : hex;
-    onChange(color);
-  };
-
+  }, []);
   return /*#__PURE__*/React.createElement(BaseControl, {
     label: label || "",
     className: "eb-color-base"
   }, /*#__PURE__*/React.createElement(Dropdown, {
-    renderToggle: function renderToggle(_ref3) {
-      var isOpen = _ref3.isOpen,
-          onToggle = _ref3.onToggle;
+    renderToggle: function renderToggle(_ref2) {
+      var isOpen = _ref2.isOpen,
+          onToggle = _ref2.onToggle;
       return /*#__PURE__*/React.createElement(Tooltip, {
-        text: color || "default"
+        text: bgColor || "default"
       }, /*#__PURE__*/React.createElement("div", {
-        className: "eb-color-ball"
+        className: "eb-color-ball",
+        style: bgColor && colorBallStyles
       }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          height: 32,
-          width: 32,
-          borderRadius: "50%",
-          boxShadow: "inset 0 0 0 1px rgba(0,0,0,.1)",
+        style: _objectSpread(_objectSpread({}, colorStyles), {}, {
           backgroundColor: bgColor
-        },
+        }),
         "aria-expanded": isOpen,
         onClick: onToggle,
-        "aria-label": color || "default"
+        "aria-label": bgColor || "default"
       })));
     },
     renderContent: function renderContent() {
       return /*#__PURE__*/React.createElement(ColorPicker, {
-        color: color,
-        onChangeComplete: function onChangeComplete(color) {
-          return _onChangeComplete(color);
+        color: bgColor,
+        onChangeComplete: function onChangeComplete(_ref3) {
+          var rgb = _ref3.rgb;
+          setBgColor("rgba(".concat(rgb.r, ",").concat(rgb.g, ",").concat(rgb.b, ",").concat(rgb.a, ")"));
         }
       });
     }
@@ -10887,8 +10861,11 @@ var ColorControl = function ColorControl(_ref) {
     isSmall: true,
     className: "eb-color-undo",
     icon: "image-rotate",
+    style: {
+      transform: "scaleX(-1) rotate(90deg)"
+    },
     onClick: function onClick() {
-      return onChange(undefined);
+      setBgColor(undefined);
     }
   }));
 };
@@ -10906,12 +10883,10 @@ var ColorControl = function ColorControl(_ref) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./util/dimensions-control/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -10935,7 +10910,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -11033,57 +11007,57 @@ var DimensionsControl = /*#__PURE__*/function (_Component) {
           bottom = _this$state4.bottom,
           left = _this$state4.left,
           isLinked = _this$state4.isLinked;
-      return /*#__PURE__*/React.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dimention-container"
-      }, /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dimention-label"
-      }, this.props.label), /*#__PURE__*/React.createElement("div", {
+      }, this.props.label), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-container"
-      }, /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-wrapper"
-      }, /*#__PURE__*/React.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "top",
         value: top || 0,
         onChange: this.onInputChange
-      }), /*#__PURE__*/React.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "dimentions-input-label"
-      }, "Top")), /*#__PURE__*/React.createElement("div", {
+      }, "Top")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-wrapper"
-      }, /*#__PURE__*/React.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "right",
         value: right || 0,
         onChange: this.onInputChange
-      }), /*#__PURE__*/React.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "dimentions-input-label"
-      }, "Right")), /*#__PURE__*/React.createElement("div", {
+      }, "Right")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-wrapper"
-      }, /*#__PURE__*/React.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "bottom",
         value: bottom || 0,
         onChange: this.onInputChange
-      }), /*#__PURE__*/React.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "dimentions-input-label"
-      }, "Bottom")), /*#__PURE__*/React.createElement("div", {
+      }, "Bottom")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-wrapper"
-      }, /*#__PURE__*/React.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "number",
         name: "left",
         value: left || 0,
         onChange: this.onInputChange
-      }), /*#__PURE__*/React.createElement("label", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
         className: "dimentions-input-label"
-      }, "Left")), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", {
+      }, "Left")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "linked-btn components-button is-button dashicons dashicons-".concat(isLinked ? "admin-links is-primary" : "editor-unlink is-default"),
         onClick: this.onButtonClick
-      }))));
+      })));
     }
   }]);
 
   return DimensionsControl;
-}(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 DimensionsControl.propTypes = {
   label: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
@@ -11352,31 +11326,21 @@ var TRANSFORMS = [{
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./util/unit-control/style.scss");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
-/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
-
-
 /**
  * WordPress dependencies
  */
-
-
-
+var _wp$components = wp.components,
+    ButtonGroup = _wp$components.ButtonGroup,
+    Button = _wp$components.Button;
 
 var UnitControl = function UnitControl(_ref) {
   var selectedUnit = _ref.selectedUnit,
       unitTypes = _ref.unitTypes,
       _onClick = _ref.onClick;
-  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ButtonGroup"], {
+  return /*#__PURE__*/React.createElement(ButtonGroup, {
     className: "eb-unit-control-btn-group"
   }, unitTypes.map(function (unit) {
-    return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+    return /*#__PURE__*/React.createElement(Button, {
       className: "eb-unit-control-btn ".concat(unit.value === selectedUnit && "eb-unit-active"),
       isSmall: true,
       isPrimary: unit.value === selectedUnit,
@@ -11387,14 +11351,6 @@ var UnitControl = function UnitControl(_ref) {
   }));
 };
 
-UnitControl.propTypes = {
-  selectedUnit: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string.isRequired,
-  unitTypes: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
-    label: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
-    value: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
-  }),
-  onClick: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.func.isRequired
-};
 /* harmony default export */ __webpack_exports__["default"] = (UnitControl);
 
 /***/ }),

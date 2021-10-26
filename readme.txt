@@ -1,9 +1,9 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, alam789
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
-Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 1.0.0
+Requires at least: 5.6
+Tested up to: 5.8
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,15 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.1.0 - (hanzala-dev) =
+* Added: Dynamic asset generation for inline styles
+* Added: Responsive control
+* Improved: Controls and structure
+* Improved: Inspector Panel Design & controls
+* Improved: Responsive Device Preview improved. Now the preview options synced with the wordpress's default preview button.
+* Improved: Security for asset generation
+
 
 = 1.0.0 =
 * Initial Release

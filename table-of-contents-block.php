@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.0.0
+ * Version:         1.1.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -22,54 +23,67 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
-function create_block_table_of_content_block_init() {
-	$dir = dirname( __FILE__ );
+
+function create_block_table_of_content_block_init()
+{
+	$dir = dirname(__FILE__);
 
 	$script_asset_path = "$dir/build/index.asset.php";
-	if ( ! file_exists( $script_asset_path ) ) {
+	if (!file_exists($script_asset_path)) {
 		throw new Error(
 			'You need to run `npm start` or `npm run build` for the "table-of-contents-block/table-of-contents-block" block first.'
 		);
 	}
+
 	$index_js     = 'build/index.js';
-	$script_asset = require( $script_asset_path );
 	wp_register_script(
 		'create-block-table-of-content-block-editor',
-		plugins_url( $index_js, __FILE__ ),
-		$script_asset['dependencies'],
-		$script_asset['version']
+		plugins_url($index_js, __FILE__),
+		array(
+			'wp-blocks',
+			'wp-i18n',
+			'wp-element',
+			'wp-block-editor',
+			'wp-editor',
+		),
+		filemtime("$dir/$index_js")
 	);
 
 	$editor_css = 'build/index.css';
 	wp_register_style(
 		'create-block-table-of-content-block-editor',
-		plugins_url( $editor_css, __FILE__ ),
+		plugins_url($editor_css, __FILE__),
 		array()
 	);
 
 	$style_css = 'build/style-index.css';
 	wp_register_style(
 		'create-block-table-of-content-block',
-		plugins_url( $style_css, __FILE__ ),
+		plugins_url($style_css, __FILE__),
 		array()
 	);
 
-  if (!is_admin()) {
-    $frontend_js = 'src/frontend.js';
-    wp_enqueue_script(
-      'essential-blocks-toc-frontend',
-      plugins_url( $frontend_js, __FILE__),
-      array( "jquery","wp-editor"),
-      true
-    );
-  }
+	$frontend_js = 'build/frontend.js';
+	wp_register_script(
+		'essential-blocks-toc-frontend',
+		plugins_url($frontend_js, __FILE__),
+		array("jquery", "wp-editor"),
+		true
+	);
 
-
-	register_block_type( 'table-of-contents-block/table-of-contents-block', array(
+	register_block_type('table-of-contents-block/table-of-contents-block', array(
 		'editor_script' => 'create-block-table-of-content-block-editor',
 		'editor_style'  => 'create-block-table-of-content-block-editor',
-		'style'         => 'create-block-table-of-content-block',
-	) );
+		// 'style'         => 'create-block-table-of-content-block',
+		'render_callback' => function ($attribs, $content) {
+			wp_enqueue_style('create-block-table-of-content-block');
+			if (!is_admin()) {
+				wp_enqueue_script('essential-blocks-toc-frontend');
+			}
+			return $content;
+		}
+	));
 }
-add_action( 'init', 'create_block_table_of_content_block_init' );
+add_action('init', 'create_block_table_of_content_block_init');

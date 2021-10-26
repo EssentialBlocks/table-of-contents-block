@@ -1,3 +1,4 @@
+console.log("-------------TOC")
 (function ($) {
 	var parseTocSlug = function (slug) {
 		// If not have the element then return false!
