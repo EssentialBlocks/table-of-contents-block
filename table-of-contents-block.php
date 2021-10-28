@@ -23,6 +23,7 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+require_once __DIR__ . '/includes/admin-enqueue.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 
@@ -78,8 +79,8 @@ function create_block_table_of_content_block_init()
 		'editor_style'  => 'create-block-table-of-content-block-editor',
 		// 'style'         => 'create-block-table-of-content-block',
 		'render_callback' => function ($attribs, $content) {
-			wp_enqueue_style('create-block-table-of-content-block');
 			if (!is_admin()) {
+				wp_enqueue_style('create-block-table-of-content-block');
 				wp_enqueue_script('essential-blocks-toc-frontend');
 			}
 			return $content;

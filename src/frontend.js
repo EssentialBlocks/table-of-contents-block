@@ -1,4 +1,4 @@
-console.log("-------------TOC")
+console.log("-------------TOC with 'wp' object on window")
 (function ($) {
 	var parseTocSlug = function (slug) {
 		// If not have the element then return false!

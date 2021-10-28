@@ -1,5 +1,9 @@
-import { __ } from "@wordpress/i18n";
-import { Component } from "@wordpress/element";
+/**
+ * WordPress dependencies
+ */
+
+const { __ } = wp.i18n;
+const { Component } = wp.element;
 
 class List extends Component {
 	render() {

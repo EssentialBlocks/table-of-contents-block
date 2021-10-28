@@ -1,25 +1,95 @@
 /**
  * WordPress dependencies
  */
-import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
-import {
+
+const { __ } = wp.i18n;
+const { InspectorControls, MediaUpload } = wp.blockEditor;
+const { useState, useEffect } = wp.element;
+const { select } = wp.data;
+const {
 	PanelBody,
 	BaseControl,
 	ToggleControl,
 	RangeControl,
+	TextControl,
+	TabPanel,
 	SelectControl,
 	ButtonGroup,
 	Button,
 	Dropdown,
-} from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import Select from "react-select";
+} = wp.components;
 
 /**
  * Internal dependencies
  */
+
+import Select from "react-select";
+
+import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
+import faIcons from "../util/faIcons.js";
+import TypographyDropdown from "../util/typography-control-v2";
+import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
+import ResponsiveRangeController from "../util/responsive-range-control";
+import ImageAvatar from "../util/image-avatar/";
+import GradientColorControl from "../util/gradient-color-controller";
+import ColorControl from "../util/color-control";
+import BorderShadowControl from "../util/border-shadow-control";
+import BackgroundControl from "../util/background-control";
+import UnitControl from "../util/unit-control";
+import FontPicker from "../util/typography-control/FontPicker";
+import DimensionsControl from "../util/dimensions-control";
+
+import { infoWrapBg, infoBtnBg } from "./constants/backgroundsConstants";
+import { wrpBdShadow, btnBdShd } from "./constants/borderShadowConstants";
+
+import objAttributes from "./attributes";
+
 import {
+	mimmikCssForResBtns,
+	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} from "../util/helpers";
+
+import {
+	typoPrefix_title,
+	typoPrefix_content,
+	typoPrefix_number,
+	typoPrefix_subTitle,
+	typoPrefix_buttonText,
+} from "./constants/typographyPrefixConstants";
+
+import {
+	mediaIconSize,
+	mediaImageWidth,
+	mediaImageHeight,
+	mediaContentGap,
+} from "./constants/rangeNames";
+
+import {
+	mediaBackground,
+	mediaBgMargin,
+	mediaBgRadius,
+	buttonPadding,
+	// buttonRadius,
+	subTitlePadding,
+	contentPadding,
+	titlePadding,
+	wrapperMargin,
+	wrapperPadding,
+} from "./constants/dimensionsConstants";
+
+import {
+	LAYOUT_TYPES,
+	MEDIA_TYPES,
+	ICON_IMAGE_BG_TYPES,
+	sizeUnitTypes,
+	HEADER_TAGS,
+	CONTENTS_ALIGNMENTS,
+	MEDIA_ALIGNMENTS_ON_FLEX_COLUMN,
+	MEDIA_ALIGNMENTS_ON_FLEX_ROW,
+	HOVER_EFFECT,
+	imgHeightUnits,
+
+	//
 	HEADERS,
 	ALIGNS,
 	FONT_WEIGHTS,
@@ -27,10 +97,6 @@ import {
 	TEXT_DECORATION,
 	BORDER_STYLES,
 } from "./constants";
-import UnitControl from "../util/unit-control";
-import FontPicker from "../util/typography-control/FontPicker";
-import ColorControl from "../util/color-control/index";
-import DimensionsControl from "../util/dimensions-control";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {

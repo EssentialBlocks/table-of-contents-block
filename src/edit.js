@@ -1,15 +1,32 @@
 /**
  * WordPress dependencies
  */
-import { __ } from "@wordpress/i18n";
-import {
+
+const { __ } = wp.i18n;
+const {
 	BlockControls,
 	RichText,
 	BlockAlignmentToolbar,
-} from "@wordpress/block-editor";
-import { Toolbar, ToolbarButton } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+	useBlockProps,
+} = wp.blockEditor;
+const { useState, useEffect } = wp.element;
+const { select, useSelect } = wp.data;
+const {
+	PanelBody,
+	BaseControl,
+	ToggleControl,
+	RangeControl,
+	TextControl,
+	TabPanel,
+	SelectControl,
+	ButtonGroup,
+	Button,
+	Dropdown,
+
+	//
+	Toolbar,
+	ToolbarButton,
+} = wp.components;
 
 /*
  * External dependencies
@@ -18,8 +35,25 @@ import striptags from "striptags";
 
 /**
  * Internal dependencies
+ *
+ *
+ *
  */
-import Inspector from "./inspector";
+
+import "./editor.scss";
+
+
+import {
+	softMinifyCssStrings,
+	generateBackgroundControlStyles,
+	generateDimensionsControlStyles,
+	generateTypographyStyles,
+	generateBorderShadowStyles,
+	generateResponsiveRangeStyles,
+	mimmikCssForPreviewBtnClick,
+	duplicateBlockIdFix,
+} from "../util/helpers";
+
 import {
 	supportedHeaders,
 	isCoreHeading,
@@ -39,7 +73,39 @@ import {
 	isElegantHeading,
 	parseTocSlug,
 } from "./helper";
-import "./editor.scss";
+
+import Inspector from "./inspector";
+import {
+	typoPrefix_content,
+	typoPrefix_title,
+	typoPrefix_subTitle,
+	typoPrefix_number,
+	typoPrefix_buttonText,
+} from "./constants/typographyPrefixConstants";
+
+import {
+	mediaBackground,
+	mediaBgMargin,
+	mediaBgRadius,
+	// buttonRadius,
+	buttonPadding,
+	titlePadding,
+	contentPadding,
+	subTitlePadding,
+	wrapperPadding,
+	wrapperMargin,
+} from "./constants/dimensionsConstants";
+
+import { infoWrapBg, infoBtnBg } from "./constants/backgroundsConstants";
+import { wrpBdShadow, btnBdShd } from "./constants/borderShadowConstants";
+
+import {
+	mediaIconSize,
+	mediaImageWidth,
+	mediaImageHeight,
+	mediaContentGap,
+} from "./constants/rangeNames";
+
 import List from "./list";
 
 function getArrayFromBlocks(headerBlocks) {
@@ -189,7 +255,12 @@ const useHeader = () => {
 	return headerList;
 };
 
-export default function Edit({ isSelected, attributes, setAttributes }) {
+export default function Edit({
+	isSelected,
+	attributes,
+	setAttributes,
+	clientId,
+}) {
 	const {
 		headers,
 		title,
