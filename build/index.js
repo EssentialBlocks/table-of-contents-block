@@ -10663,6 +10663,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var attributes = {
+  // the following 4 attributes is must required for responsive options and asset generation for frontend
+  // responsive control attributes ⬇
+  resOption: {
+    type: "string",
+    "default": "Desktop"
+  },
+  // blockId attribute for making unique className and other uniqueness ⬇
+  blockId: {
+    type: "string"
+  },
+  blockRoot: {
+    type: "string",
+    "default": "essential_block"
+  },
+  // blockMeta is for keeping all the styles ⬇
+  blockMeta: {
+    type: "object"
+  },
+  //
   headers: {
     type: "array",
     "default": []
@@ -11689,7 +11708,10 @@ function Edit(_ref) {
       attributes = _ref.attributes,
       setAttributes = _ref.setAttributes,
       clientId = _ref.clientId;
-  var headers = attributes.headers,
+  var resOption = attributes.resOption,
+      blockId = attributes.blockId,
+      blockMeta = attributes.blockMeta,
+      headers = attributes.headers,
       title = attributes.title,
       collapsible = attributes.collapsible,
       listType = attributes.listType,
@@ -11807,7 +11829,336 @@ function Edit(_ref) {
     display: visible ? "block" : "none",
     background: contentBg,
     padding: "".concat(contentPaddingTop || 0).concat(contentPaddingUnit, " ").concat(contentPaddingRight || 0).concat(contentPaddingUnit, " ").concat(contentPaddingBottom || 0).concat(contentPaddingUnit, " ").concat(contentPaddingLeft || 0).concat(contentPaddingUnit)
-  };
+  }; //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  // this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
+
+  useEffect(function () {
+    setAttributes({
+      resOption: select("core/edit-post").__experimentalGetPreviewDeviceType()
+    });
+  }, []); // this useEffect is for creating a unique blockId for each block's unique className
+
+  useEffect(function () {
+    var BLOCK_PREFIX = "eb-toc";
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["duplicateBlockIdFix"])({
+      BLOCK_PREFIX: BLOCK_PREFIX,
+      blockId: blockId,
+      setAttributes: setAttributes,
+      select: select,
+      clientId: clientId
+    });
+  }, []); // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+
+  useEffect(function () {
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["mimmikCssForPreviewBtnClick"])({
+      domObj: document,
+      select: select
+    });
+  }, []);
+  var blockProps = useBlockProps({
+    className: "eb-guten-block-main-parent-wrapper"
+  }); //
+  // styling codes start from here
+  //
+  // // styles related to generateResponsiveRangeStyles start ⬇
+  // const {
+  // 	rangeStylesDesktop: wrapWidthDesktop,
+  // 	rangeStylesTab: wrapWidthTab,
+  // 	rangeStylesMobile: wrapWidthMobile,
+  // } = generateResponsiveRangeStyles({
+  // 	controlName: wrapperWidth,
+  // 	customUnit: "px",
+  // 	property: "max-width",
+  // 	attributes,
+  // });
+  // const {
+  // 	rangeStylesDesktop: BoxsSpaceBetweenDesktop,
+  // 	rangeStylesTab: BoxsSpaceBetweenTab,
+  // 	rangeStylesMobile: BoxsSpaceBetweenMobile,
+  // } = generateResponsiveRangeStyles({
+  // 	controlName: boxsSpaceConst,
+  // 	customUnit: "px",
+  // 	property: flexDirection === "row" ? "margin-left" : "margin-top",
+  // 	attributes,
+  // });
+  // const {
+  // 	rangeStylesDesktop: SeparatorTopDesktop,
+  // 	rangeStylesTab: SeparatorTopTab,
+  // 	rangeStylesMobile: SeparatorTopMobile,
+  // } = generateResponsiveRangeStyles({
+  // 	controlName: separatorPosTop,
+  // 	property: "top",
+  // 	attributes,
+  // });
+  // const {
+  // 	rangeStylesDesktop: SeparatorRightDesktop,
+  // 	rangeStylesTab: SeparatorRightTab,
+  // 	rangeStylesMobile: SeparatorRightMobile,
+  // } = generateResponsiveRangeStyles({
+  // 	controlName: separatorPosRight,
+  // 	property: "padding-right",
+  // 	attributes,
+  // });
+  // // styles related to generateResponsiveRangeStyles end
+  // // styles related to generateTypographyStyles start ⬇
+  // const {
+  // 	typoStylesDesktop: digitsTypoStylesDesktop,
+  // 	typoStylesTab: digitsTypoStylesTab,
+  // 	typoStylesMobile: digitsTypoStylesMobile,
+  // } = generateTypographyStyles({
+  // 	attributes,
+  // 	prefixConstant: typoPrefix_digits,
+  // 	defaultFontSize: 40,
+  // });
+  // const {
+  // 	typoStylesDesktop: labelsTypoStylesDesktop,
+  // 	typoStylesTab: labelsTypoStylesTab,
+  // 	typoStylesMobile: labelsTypoStylesMobile,
+  // } = generateTypographyStyles({
+  // 	attributes,
+  // 	prefixConstant: typoPrefix_labels,
+  // 	defaultFontSize: 18,
+  // });
+  // const {
+  // 	typoStylesDesktop: separatorTypoStylesDesktop,
+  // 	typoStylesTab: separatorTypoStylesTab,
+  // 	typoStylesMobile: separatorTypoStylesMobile,
+  // } = generateTypographyStyles({
+  // 	attributes,
+  // 	prefixConstant: typoPrefix_separator,
+  // 	defaultFontSize: 44,
+  // });
+  // // styles related to generateTypographyStyles end
+  // // styles related to generateBackgroundControlStyles start ⬇
+  // const {
+  // 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+  // 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+  // 	backgroundStylesTab: wrpBackgroundStylesTab,
+  // 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+  // 	backgroundStylesMobile: wrpBackgroundStylesMobile,
+  // 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+  // 	overlayStylesDesktop: wrpOverlayStylesDesktop,
+  // 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+  // 	overlayStylesTab: wrpOverlayStylesTab,
+  // 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+  // 	overlayStylesMobile: wrpOverlayStylesMobile,
+  // 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+  // 	bgTransitionStyle: wrpBgTransitionStyle,
+  // 	ovlTransitionStyle: wrpOvlTransitionStyle,
+  // } = generateBackgroundControlStyles({
+  // 	attributes,
+  // 	controlName: WrpBgConst,
+  // 	// noOverlay: true,
+  // 	// noMainBgi: true,
+  // 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // });
+  // const {
+  // 	backgroundStylesDesktop: boxsBackgroundStylesDesktop,
+  // 	hoverBackgroundStylesDesktop: boxsHoverBackgroundStylesDesktop,
+  // 	backgroundStylesTab: boxsBackgroundStylesTab,
+  // 	hoverBackgroundStylesTab: boxsHoverBackgroundStylesTab,
+  // 	backgroundStylesMobile: boxsBackgroundStylesMobile,
+  // 	hoverBackgroundStylesMobile: boxsHoverBackgroundStylesMobile,
+  // 	bgTransitionStyle: boxsBgTransitionStyle,
+  // } = generateBackgroundControlStyles({
+  // 	attributes,
+  // 	controlName: cdBoxsBgConst,
+  // 	noOverlay: true,
+  // 	noMainBgi: true,
+  // 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // });
+  // const {
+  // 	backgroundStylesDesktop: dayBoxBgStylesDesktop = "",
+  // 	hoverBackgroundStylesDesktop: dayBoxHoverBgStylesDesktop = "",
+  // 	backgroundStylesTab: dayBoxBgStylesTab = "",
+  // 	hoverBackgroundStylesTab: dayBoxHoverBgStylesTab = "",
+  // 	backgroundStylesMobile: dayBoxBgStylesMobile = "",
+  // 	hoverBackgroundStylesMobile: dayBoxHoverBgStylesMobile = "",
+  // } = showDays
+  // 	? generateBackgroundControlStyles({
+  // 			noTransition: true,
+  // 			attributes,
+  // 			controlName: cdDayBoxBgConst,
+  // 			noOverlay: true,
+  // 			noMainBgi: true,
+  // 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // 	  })
+  // 	: {};
+  // const {
+  // 	backgroundStylesDesktop: hourBoxBgStylesDesktop = "",
+  // 	hoverBackgroundStylesDesktop: hourBoxHoverBgStylesDesktop = "",
+  // 	backgroundStylesTab: hourBoxBgStylesTab = "",
+  // 	hoverBackgroundStylesTab: hourBoxHoverBgStylesTab = "",
+  // 	backgroundStylesMobile: hourBoxBgStylesMobile = "",
+  // 	hoverBackgroundStylesMobile: hourBoxHoverBgStylesMobile = "",
+  // } = showHours
+  // 	? generateBackgroundControlStyles({
+  // 			noTransition: true,
+  // 			attributes,
+  // 			controlName: cdHourBoxBgConst,
+  // 			noOverlay: true,
+  // 			noMainBgi: true,
+  // 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // 	  })
+  // 	: {};
+  // const {
+  // 	backgroundStylesDesktop: minuteBoxBgStylesDesktop = "",
+  // 	hoverBackgroundStylesDesktop: minuteBoxHoverBgStylesDesktop = "",
+  // 	backgroundStylesTab: minuteBoxBgStylesTab = "",
+  // 	hoverBackgroundStylesTab: minuteBoxHoverBgStylesTab = "",
+  // 	backgroundStylesMobile: minuteBoxBgStylesMobile = "",
+  // 	hoverBackgroundStylesMobile: minuteBoxHoverBgStylesMobile = "",
+  // } = showMinutes
+  // 	? generateBackgroundControlStyles({
+  // 			noTransition: true,
+  // 			attributes,
+  // 			controlName: cdMinuteBoxBgConst,
+  // 			noOverlay: true,
+  // 			noMainBgi: true,
+  // 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // 	  })
+  // 	: {};
+  // const {
+  // 	backgroundStylesDesktop: secondBoxBgStylesDesktop = "",
+  // 	hoverBackgroundStylesDesktop: secondBoxHoverBgStylesDesktop = "",
+  // 	backgroundStylesTab: secondBoxBgStylesTab = "",
+  // 	hoverBackgroundStylesTab: secondBoxHoverBgStylesTab = "",
+  // 	backgroundStylesMobile: secondBoxBgStylesMobile = "",
+  // 	hoverBackgroundStylesMobile: secondBoxHoverBgStylesMobile = "",
+  // } = showSeconds
+  // 	? generateBackgroundControlStyles({
+  // 			noTransition: true,
+  // 			attributes,
+  // 			controlName: cdSecondBoxBgConst,
+  // 			noOverlay: true,
+  // 			noMainBgi: true,
+  // 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // 	  })
+  // 	: {};
+  // // styles related to generateBackgroundControlStyles end
+  // // styles related to generateDimensionsControlStyles start ⬇
+  // const {
+  // 	dimensionStylesDesktop: wrpMarginDesktop,
+  // 	dimensionStylesTab: wrpMarginTab,
+  // 	dimensionStylesMobile: wrpMarginMobile,
+  // } = generateDimensionsControlStyles({
+  // 	attributes,
+  // 	controlName: cdWrapMarginConst,
+  // 	styleFor: "margin",
+  // });
+  // const {
+  // 	dimensionStylesDesktop: wrpPaddingDesktop,
+  // 	dimensionStylesTab: wrpPaddingTab,
+  // 	dimensionStylesMobile: wrpPaddingMobile,
+  // } = generateDimensionsControlStyles({
+  // 	attributes,
+  // 	controlName: cdWrapPaddingConst,
+  // 	styleFor: "padding",
+  // });
+  // const {
+  // 	dimensionStylesDesktop: boxsPaddingDesktop,
+  // 	dimensionStylesTab: boxsPaddingTab,
+  // 	dimensionStylesMobile: boxsPaddingMobile,
+  // } = generateDimensionsControlStyles({
+  // 	attributes,
+  // 	controlName: cdBoxsPaddingConst,
+  // 	styleFor: "padding",
+  // });
+  // const {
+  // 	dimensionStylesDesktop: digitsPaddingDesktop,
+  // 	dimensionStylesTab: digitsPaddingTab,
+  // 	dimensionStylesMobile: digitsPaddingMobile,
+  // } = generateDimensionsControlStyles({
+  // 	attributes,
+  // 	controlName: cdDigitsPaddingConst,
+  // 	styleFor: "padding",
+  // });
+  // const {
+  // 	dimensionStylesDesktop: labelsPaddingDesktop,
+  // 	dimensionStylesTab: labelsPaddingTab,
+  // 	dimensionStylesMobile: labelsPaddingMobile,
+  // } = generateDimensionsControlStyles({
+  // 	attributes,
+  // 	controlName: cdLabelsPaddingConst,
+  // 	styleFor: "padding",
+  // });
+  // // styles related to generateDimensionsControlStyles end
+  // // styles related to generateBorderShadowStyles start ⬇
+  // const {
+  // 	styesDesktop: wrpBdShdStyesDesktop,
+  // 	styesTab: wrpBdShdStyesTab,
+  // 	styesMobile: wrpBdShdStyesMobile,
+  // 	stylesHoverDesktop: wrpBdShdStylesHoverDesktop,
+  // 	stylesHoverTab: wrpBdShdStylesHoverTab,
+  // 	stylesHoverMobile: wrpBdShdStylesHoverMobile,
+  // 	transitionStyle: wrpBdShdTransitionStyle,
+  // } = generateBorderShadowStyles({
+  // 	controlName: WrpBdShadowConst,
+  // 	attributes,
+  // 	// noShadow: true,
+  // 	// noBorder: true,
+  // });
+  // const {
+  // 	styesDesktop: boxsbdShadowStyesDesktop,
+  // 	styesTab: boxsbdShadowStyesTab,
+  // 	styesMobile: boxsbdShadowStyesMobile,
+  // 	stylesHoverDesktop: boxsbdShadowStylesHoverDesktop,
+  // 	stylesHoverTab: boxsbdShadowStylesHoverTab,
+  // 	stylesHoverMobile: boxsbdShadowStylesHoverMobile,
+  // 	transitionStyle: boxsbdShadowTransitionStyle,
+  // } = generateBorderShadowStyles({
+  // 	controlName: cdBoxsBdShadowConst,
+  // 	attributes,
+  // 	// noShadow: true,
+  // 	// noBorder: true,
+  // });
+  // // styles related to generateBorderShadowStyles end
+
+  var wrapperStylesDesktop = "\n\t\t\n\t";
+  var wrapperStylesTab = "\n\t\t\n\t";
+  var wrapperStylesMobile = "\n\t\t\n\t"; // all css styles for large screen width (desktop/laptop) in strings ⬇
+
+  var desktopAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\t\t\n\t\t".concat(wrapperStylesDesktop, "\n\n\n\t")); // all css styles for Tab in strings ⬇
+
+  var tabAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(wrapperStylesTab, "\n\n\n\t")); // all css styles for Mobile in strings ⬇
+
+  var mobileAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(wrapperStylesMobile, "\n\n\n\t")); //
+  // styling codes End here
+  //
+  // Set All Style in "blockMeta" Attribute
+
+  useEffect(function () {
+    var styleObject = {
+      desktop: desktopAllStyles,
+      tab: tabAllStyles,
+      mobile: mobileAllStyles
+    };
+
+    if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
+      setAttributes({
+        blockMeta: styleObject
+      });
+    }
+  }, [attributes]);
   return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
@@ -11846,8 +12197,8 @@ function Edit(_ref) {
         listType: "none"
       });
     }
-  }))), /*#__PURE__*/React.createElement("div", {
-    className: "eb-toc-container",
+  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    className: "".concat(blockId, " eb-toc-container"),
     style: wrapperStyle
   }, /*#__PURE__*/React.createElement("div", {
     onClick: function onClick() {
@@ -11868,7 +12219,7 @@ function Edit(_ref) {
     style: contentStyle
   }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_10__["default"], {
     attributes: attributes
-  })) : /*#__PURE__*/React.createElement("p", null, "Add header to generate table of contents"))];
+  })) : /*#__PURE__*/React.createElement("p", null, "Add header to generate table of contents")))];
 }
 
 /***/ }),
@@ -12032,6 +12383,16 @@ var name = _block_json__WEBPACK_IMPORTED_MODULE_5__.name,
 registerBlockType(name, {
   title: __("Table Of Contents", "table-of-contents-block"),
   description: __("Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website", "table-of-contents-block"),
+  supports: {
+    // inserter: false,
+    // reusable: false,
+    // html: false,
+    // anchor: true,
+    // Declare support for specific alignment options.
+    // align: ["wide", "full"],
+    align: ["wide", "full"]
+  },
+  keywords: [__("countdown", "essential-blocks"), __("eb counter", "essential-blocks"), __("eb countdown", "essential-blocks")],
   category: category,
   icon: _util_icons__WEBPACK_IMPORTED_MODULE_1__["TOC_Icon"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -12138,7 +12499,8 @@ var _wp$components = wp.components,
 var Inspector = function Inspector(_ref) {
   var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
-  var visibleHeaders = attributes.visibleHeaders,
+  var resOption = attributes.resOption,
+      visibleHeaders = attributes.visibleHeaders,
       collapsible = attributes.collapsible,
       initialCollapse = attributes.initialCollapse,
       titleBg = attributes.titleBg,
@@ -12223,11 +12585,39 @@ var Inspector = function Inspector(_ref) {
       setDefaultOptions = _useState4[1];
 
   useEffect(function () {
-    setDefaultVisible();
-  }, []);
+    // this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
+    setAttributes({
+      resOption: select("core/edit-post").__experimentalGetPreviewDeviceType()
+    }); // this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+
+    var cleanUp = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_17__["mimmikCssOnPreviewBtnClickWhileBlockSelected"])({
+      domObj: document,
+      select: select,
+      setAttributes: setAttributes
+    }); //
+
+    return function () {
+      cleanUp();
+    };
+  }, []); // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+
+  useEffect(function () {
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_17__["mimmikCssForResBtns"])({
+      domObj: document,
+      resOption: resOption
+    });
+  }, [resOption]); //
+
   useEffect(function () {
     setDefaultVisible();
-  }, [visibleHeaders]);
+  }, [visibleHeaders]); //
+
+  var resRequiredProps = {
+    setAttributes: setAttributes,
+    resOption: resOption,
+    attributes: attributes,
+    objAttributes: _attributes__WEBPACK_IMPORTED_MODULE_16__["default"]
+  };
 
   var setDefaultVisible = function setDefaultVisible() {
     var defaultOptions = [];
@@ -13225,7 +13615,9 @@ __webpack_require__.r(__webpack_exports__);
 /*
  * WordPress dependencies
  */
-var RichText = wp.blockEditor.RichText;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    useBlockProps = _wp$blockEditor.useBlockProps;
 /*
  * Internal dependencies
  */
@@ -13233,7 +13625,8 @@ var RichText = wp.blockEditor.RichText;
 
 function save(_ref) {
   var attributes = _ref.attributes;
-  var displayTitle = attributes.displayTitle,
+  var blockId = attributes.blockId,
+      displayTitle = attributes.displayTitle,
       title = attributes.title,
       titleFontFamily = attributes.titleFontFamily,
       titleFontSize = attributes.titleFontSize,
@@ -13330,8 +13723,8 @@ function save(_ref) {
     return /*#__PURE__*/React.createElement("div", null);
   }
 
-  return /*#__PURE__*/React.createElement("div", {
-    className: "eb-toc-container",
+  return /*#__PURE__*/React.createElement("div", useBlockProps.save(), /*#__PURE__*/React.createElement("div", {
+    className: "".concat(blockId, " eb-toc-container"),
     style: wrapperStyle,
     "data-collapsible": collapsible,
     "data-initial-collapse": initialCollapse,
@@ -13365,7 +13758,7 @@ function save(_ref) {
     attributes: attributes
   })), isSticky && /*#__PURE__*/React.createElement("button", {
     className: "eb-toc-button"
-  }, displayTitle && title ? title : "Table of Contents"));
+  }, displayTitle && title ? title : "Table of Contents")));
 }
 
 /***/ }),

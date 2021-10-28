@@ -100,6 +100,10 @@ import {
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
+		// responsive control attributes ⬇
+		resOption,
+
+		//
 		visibleHeaders,
 		collapsible,
 		initialCollapse,
@@ -179,12 +183,44 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const [defaultOptions, setDefaultOptions] = useState([]);
 
 	useEffect(() => {
-		setDefaultVisible();
+		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
+		setAttributes({
+			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+		});
+
+		// this useEffect is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+			domObj: document,
+			select,
+			setAttributes,
+		});
+
+		//
+		return () => {
+			cleanUp();
+		};
 	}, []);
 
+	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	useEffect(() => {
+		mimmikCssForResBtns({
+			domObj: document,
+			resOption,
+		});
+	}, [resOption]);
+
+	//
 	useEffect(() => {
 		setDefaultVisible();
 	}, [visibleHeaders]);
+
+	//
+	const resRequiredProps = {
+		setAttributes,
+		resOption,
+		attributes,
+		objAttributes,
+	};
 
 	const setDefaultVisible = () => {
 		let defaultOptions = [];

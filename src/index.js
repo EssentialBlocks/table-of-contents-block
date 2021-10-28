@@ -26,6 +26,20 @@ registerBlockType(name, {
 		"Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 		"table-of-contents-block"
 	),
+	supports: {
+		// inserter: false,
+		// reusable: false,
+		// html: false,
+		// anchor: true,
+		// Declare support for specific alignment options.
+		// align: ["wide", "full"],
+		align: ["wide", "full"],
+	},
+	keywords: [
+		__("countdown", "essential-blocks"),
+		__("eb counter", "essential-blocks"),
+		__("eb countdown", "essential-blocks"),
+	],
 	category,
 	icon: TOC_Icon,
 	attributes,

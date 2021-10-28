@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 
-const { RichText } = wp.blockEditor;
+const { RichText, useBlockProps } = wp.blockEditor;
 
 /*
  * Internal dependencies
@@ -11,6 +11,9 @@ import List from "./list";
 
 export default function save({ attributes }) {
 	const {
+		blockId,
+
+		//
 		displayTitle,
 		title,
 		titleFontFamily,
@@ -125,46 +128,48 @@ export default function save({ attributes }) {
 	}
 
 	return (
-		<div
-			className="eb-toc-container"
-			style={wrapperStyle}
-			data-collapsible={collapsible}
-			data-initial-collapse={initialCollapse}
-			data-scroll-top={scrollToTop}
-			data-arrow-height={arrowHeight}
-			data-arrow-width={arrowWidth}
-			data-arrow-bg={arrowBg}
-			data-arrow-color={arrowColor}
-			data-sticky={isSticky}
-			data-text-color={contentColor}
-			data-hover-color={contentHoverColor}
-			data-hide-mobile={hideOnMobile}
-			data-title-bg={titleBg}
-			data-title-color={titleColor}
-		>
-			<div className="eb-toc-header">
-				{isSticky && <span className="eb-toc-close"></span>}
-				<RichText.Content
-					tagName="div"
-					className="eb-toc-title"
-					value={title}
-					style={titleStyle}
-				/>
-			</div>
+		<div {...useBlockProps.save()}>
 			<div
-				className="eb-toc-wrapper"
-				style={contentStyle}
-				data-headers={JSON.stringify(headers)}
-				data-visible={JSON.stringify(visibleHeaders)}
-				data-smooth={isSmooth}
+				className={`${blockId} eb-toc-container`}
+				style={wrapperStyle}
+				data-collapsible={collapsible}
+				data-initial-collapse={initialCollapse}
+				data-scroll-top={scrollToTop}
+				data-arrow-height={arrowHeight}
+				data-arrow-width={arrowWidth}
+				data-arrow-bg={arrowBg}
+				data-arrow-color={arrowColor}
+				data-sticky={isSticky}
+				data-text-color={contentColor}
+				data-hover-color={contentHoverColor}
+				data-hide-mobile={hideOnMobile}
+				data-title-bg={titleBg}
+				data-title-color={titleColor}
 			>
-				<List attributes={attributes} />
+				<div className="eb-toc-header">
+					{isSticky && <span className="eb-toc-close"></span>}
+					<RichText.Content
+						tagName="div"
+						className="eb-toc-title"
+						value={title}
+						style={titleStyle}
+					/>
+				</div>
+				<div
+					className="eb-toc-wrapper"
+					style={contentStyle}
+					data-headers={JSON.stringify(headers)}
+					data-visible={JSON.stringify(visibleHeaders)}
+					data-smooth={isSmooth}
+				>
+					<List attributes={attributes} />
+				</div>
+				{isSticky && (
+					<button className="eb-toc-button">
+						{displayTitle && title ? title : "Table of Contents"}
+					</button>
+				)}
 			</div>
-			{isSticky && (
-				<button className="eb-toc-button">
-					{displayTitle && title ? title : "Table of Contents"}
-				</button>
-			)}
 		</div>
 	);
 }
