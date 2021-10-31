@@ -1,20 +1,19 @@
 import * as typoPrefixs from "./constants/typographyPrefixConstants";
+
 import {
-	mediaBackground,
-	mediaBgRadius,
-	mediaBgMargin,
-	// buttonRadius,
-	buttonPadding,
-	contentPadding,
-	titlePadding,
-	subTitlePadding,
-	wrapperMargin,
-	wrapperPadding,
+	//
+	WrpMarginConst,
+	WrpPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import { infoWrapBg, infoBtnBg } from "./constants/backgroundsConstants";
-
-import { wrpBdShadow, btnBdShd } from "./constants/borderShadowConstants";
+import {
+	//
+	WrpBgConst,
+} from "./constants/backgroundsConstants";
+import {
+	//
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
 
 import {
 	mediaIconSize,
@@ -334,6 +333,22 @@ const attributes = {
 		type: "number",
 		default: 100,
 	},
+
+	//
+	...generateBackgroundAttributes(WrpBgConst, {
+		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	}),
+
+	//
+	...generateBorderShadowAttributes(WrpBdShadowConst, {
+		// noShadow: true,
+		// noBorder: true,
+	}),
+
+	//
+	...generateDimensionsAttributes(WrpMarginConst),
+	...generateDimensionsAttributes(WrpPaddingConst),
 };
 
 export default attributes;

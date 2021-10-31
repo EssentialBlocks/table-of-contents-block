@@ -83,20 +83,19 @@ import {
 } from "./constants/typographyPrefixConstants";
 
 import {
-	mediaBackground,
-	mediaBgMargin,
-	mediaBgRadius,
-	// buttonRadius,
-	buttonPadding,
-	titlePadding,
-	contentPadding,
-	subTitlePadding,
-	wrapperPadding,
-	wrapperMargin,
+	//
+	WrpMarginConst,
+	WrpPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import { infoWrapBg, infoBtnBg } from "./constants/backgroundsConstants";
-import { wrpBdShadow, btnBdShd } from "./constants/borderShadowConstants";
+import {
+	//
+	WrpBgConst,
+} from "./constants/backgroundsConstants";
+import {
+	//
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
 
 import {
 	mediaIconSize,
@@ -541,212 +540,142 @@ export default function Edit({
 
 	// // styles related to generateBackgroundControlStyles start ⬇
 
-	// const {
-	// 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
-	// 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
-	// 	backgroundStylesTab: wrpBackgroundStylesTab,
-	// 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
-	// 	backgroundStylesMobile: wrpBackgroundStylesMobile,
-	// 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
-	// 	overlayStylesDesktop: wrpOverlayStylesDesktop,
-	// 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
-	// 	overlayStylesTab: wrpOverlayStylesTab,
-	// 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
-	// 	overlayStylesMobile: wrpOverlayStylesMobile,
-	// 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
-	// 	bgTransitionStyle: wrpBgTransitionStyle,
-	// 	ovlTransitionStyle: wrpOvlTransitionStyle,
-	// } = generateBackgroundControlStyles({
-	// 	attributes,
-	// 	controlName: WrpBgConst,
-	// 	// noOverlay: true,
-	// 	// noMainBgi: true,
-	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// });
-
-	// const {
-	// 	backgroundStylesDesktop: boxsBackgroundStylesDesktop,
-	// 	hoverBackgroundStylesDesktop: boxsHoverBackgroundStylesDesktop,
-	// 	backgroundStylesTab: boxsBackgroundStylesTab,
-	// 	hoverBackgroundStylesTab: boxsHoverBackgroundStylesTab,
-	// 	backgroundStylesMobile: boxsBackgroundStylesMobile,
-	// 	hoverBackgroundStylesMobile: boxsHoverBackgroundStylesMobile,
-	// 	bgTransitionStyle: boxsBgTransitionStyle,
-	// } = generateBackgroundControlStyles({
-	// 	attributes,
-	// 	controlName: cdBoxsBgConst,
-	// 	noOverlay: true,
-	// 	noMainBgi: true,
-	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// });
-
-	// const {
-	// 	backgroundStylesDesktop: dayBoxBgStylesDesktop = "",
-	// 	hoverBackgroundStylesDesktop: dayBoxHoverBgStylesDesktop = "",
-	// 	backgroundStylesTab: dayBoxBgStylesTab = "",
-	// 	hoverBackgroundStylesTab: dayBoxHoverBgStylesTab = "",
-	// 	backgroundStylesMobile: dayBoxBgStylesMobile = "",
-	// 	hoverBackgroundStylesMobile: dayBoxHoverBgStylesMobile = "",
-	// } = showDays
-	// 	? generateBackgroundControlStyles({
-	// 			noTransition: true,
-	// 			attributes,
-	// 			controlName: cdDayBoxBgConst,
-	// 			noOverlay: true,
-	// 			noMainBgi: true,
-	// 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// 	  })
-	// 	: {};
-
-	// const {
-	// 	backgroundStylesDesktop: hourBoxBgStylesDesktop = "",
-	// 	hoverBackgroundStylesDesktop: hourBoxHoverBgStylesDesktop = "",
-	// 	backgroundStylesTab: hourBoxBgStylesTab = "",
-	// 	hoverBackgroundStylesTab: hourBoxHoverBgStylesTab = "",
-	// 	backgroundStylesMobile: hourBoxBgStylesMobile = "",
-	// 	hoverBackgroundStylesMobile: hourBoxHoverBgStylesMobile = "",
-	// } = showHours
-	// 	? generateBackgroundControlStyles({
-	// 			noTransition: true,
-	// 			attributes,
-	// 			controlName: cdHourBoxBgConst,
-	// 			noOverlay: true,
-	// 			noMainBgi: true,
-	// 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// 	  })
-	// 	: {};
-
-	// const {
-	// 	backgroundStylesDesktop: minuteBoxBgStylesDesktop = "",
-	// 	hoverBackgroundStylesDesktop: minuteBoxHoverBgStylesDesktop = "",
-	// 	backgroundStylesTab: minuteBoxBgStylesTab = "",
-	// 	hoverBackgroundStylesTab: minuteBoxHoverBgStylesTab = "",
-	// 	backgroundStylesMobile: minuteBoxBgStylesMobile = "",
-	// 	hoverBackgroundStylesMobile: minuteBoxHoverBgStylesMobile = "",
-	// } = showMinutes
-	// 	? generateBackgroundControlStyles({
-	// 			noTransition: true,
-	// 			attributes,
-	// 			controlName: cdMinuteBoxBgConst,
-	// 			noOverlay: true,
-	// 			noMainBgi: true,
-	// 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// 	  })
-	// 	: {};
-
-	// const {
-	// 	backgroundStylesDesktop: secondBoxBgStylesDesktop = "",
-	// 	hoverBackgroundStylesDesktop: secondBoxHoverBgStylesDesktop = "",
-	// 	backgroundStylesTab: secondBoxBgStylesTab = "",
-	// 	hoverBackgroundStylesTab: secondBoxHoverBgStylesTab = "",
-	// 	backgroundStylesMobile: secondBoxBgStylesMobile = "",
-	// 	hoverBackgroundStylesMobile: secondBoxHoverBgStylesMobile = "",
-	// } = showSeconds
-	// 	? generateBackgroundControlStyles({
-	// 			noTransition: true,
-	// 			attributes,
-	// 			controlName: cdSecondBoxBgConst,
-	// 			noOverlay: true,
-	// 			noMainBgi: true,
-	// 			// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// 	  })
-	// 	: {};
+	const {
+		backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+		hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+		backgroundStylesTab: wrpBackgroundStylesTab,
+		hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+		backgroundStylesMobile: wrpBackgroundStylesMobile,
+		hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+		overlayStylesDesktop: wrpOverlayStylesDesktop,
+		hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+		overlayStylesTab: wrpOverlayStylesTab,
+		hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+		overlayStylesMobile: wrpOverlayStylesMobile,
+		hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+		bgTransitionStyle: wrpBgTransitionStyle,
+		ovlTransitionStyle: wrpOvlTransitionStyle,
+	} = generateBackgroundControlStyles({
+		attributes,
+		controlName: WrpBgConst,
+		// noOverlay: true,
+		// noMainBgi: true,
+		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	});
 
 	// // styles related to generateBackgroundControlStyles end
 
 	// // styles related to generateDimensionsControlStyles start ⬇
-	// const {
-	// 	dimensionStylesDesktop: wrpMarginDesktop,
-	// 	dimensionStylesTab: wrpMarginTab,
-	// 	dimensionStylesMobile: wrpMarginMobile,
-	// } = generateDimensionsControlStyles({
-	// 	attributes,
-	// 	controlName: cdWrapMarginConst,
-	// 	styleFor: "margin",
-	// });
+	const {
+		dimensionStylesDesktop: wrpMarginDesktop,
+		dimensionStylesTab: wrpMarginTab,
+		dimensionStylesMobile: wrpMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: WrpMarginConst,
+		styleFor: "margin",
+	});
 
-	// const {
-	// 	dimensionStylesDesktop: wrpPaddingDesktop,
-	// 	dimensionStylesTab: wrpPaddingTab,
-	// 	dimensionStylesMobile: wrpPaddingMobile,
-	// } = generateDimensionsControlStyles({
-	// 	attributes,
-	// 	controlName: cdWrapPaddingConst,
-	// 	styleFor: "padding",
-	// });
+	const {
+		dimensionStylesDesktop: wrpPaddingDesktop,
+		dimensionStylesTab: wrpPaddingTab,
+		dimensionStylesMobile: wrpPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: WrpPaddingConst,
+		styleFor: "padding",
+	});
 
-	// const {
-	// 	dimensionStylesDesktop: boxsPaddingDesktop,
-	// 	dimensionStylesTab: boxsPaddingTab,
-	// 	dimensionStylesMobile: boxsPaddingMobile,
-	// } = generateDimensionsControlStyles({
-	// 	attributes,
-	// 	controlName: cdBoxsPaddingConst,
-	// 	styleFor: "padding",
-	// });
-
-	// const {
-	// 	dimensionStylesDesktop: digitsPaddingDesktop,
-	// 	dimensionStylesTab: digitsPaddingTab,
-	// 	dimensionStylesMobile: digitsPaddingMobile,
-	// } = generateDimensionsControlStyles({
-	// 	attributes,
-	// 	controlName: cdDigitsPaddingConst,
-	// 	styleFor: "padding",
-	// });
-
-	// const {
-	// 	dimensionStylesDesktop: labelsPaddingDesktop,
-	// 	dimensionStylesTab: labelsPaddingTab,
-	// 	dimensionStylesMobile: labelsPaddingMobile,
-	// } = generateDimensionsControlStyles({
-	// 	attributes,
-	// 	controlName: cdLabelsPaddingConst,
-	// 	styleFor: "padding",
-	// });
 	// // styles related to generateDimensionsControlStyles end
 
 	// // styles related to generateBorderShadowStyles start ⬇
-	// const {
-	// 	styesDesktop: wrpBdShdStyesDesktop,
-	// 	styesTab: wrpBdShdStyesTab,
-	// 	styesMobile: wrpBdShdStyesMobile,
-	// 	stylesHoverDesktop: wrpBdShdStylesHoverDesktop,
-	// 	stylesHoverTab: wrpBdShdStylesHoverTab,
-	// 	stylesHoverMobile: wrpBdShdStylesHoverMobile,
-	// 	transitionStyle: wrpBdShdTransitionStyle,
-	// } = generateBorderShadowStyles({
-	// 	controlName: WrpBdShadowConst,
-	// 	attributes,
-	// 	// noShadow: true,
-	// 	// noBorder: true,
-	// });
+	const {
+		styesDesktop: wrpBdShdStyesDesktop,
+		styesTab: wrpBdShdStyesTab,
+		styesMobile: wrpBdShdStyesMobile,
+		stylesHoverDesktop: wrpBdShdStylesHoverDesktop,
+		stylesHoverTab: wrpBdShdStylesHoverTab,
+		stylesHoverMobile: wrpBdShdStylesHoverMobile,
+		transitionStyle: wrpBdShdTransitionStyle,
+	} = generateBorderShadowStyles({
+		controlName: WrpBdShadowConst,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
 
-	// const {
-	// 	styesDesktop: boxsbdShadowStyesDesktop,
-	// 	styesTab: boxsbdShadowStyesTab,
-	// 	styesMobile: boxsbdShadowStyesMobile,
-	// 	stylesHoverDesktop: boxsbdShadowStylesHoverDesktop,
-	// 	stylesHoverTab: boxsbdShadowStylesHoverTab,
-	// 	stylesHoverMobile: boxsbdShadowStylesHoverMobile,
-	// 	transitionStyle: boxsbdShadowTransitionStyle,
-	// } = generateBorderShadowStyles({
-	// 	controlName: cdBoxsBdShadowConst,
-	// 	attributes,
-	// 	// noShadow: true,
-	// 	// noBorder: true,
-	// });
 	// // styles related to generateBorderShadowStyles end
 
 	const wrapperStylesDesktop = `
-		
+		.${blockId}.eb-toc-container{
+			${wrpBackgroundStylesDesktop}
+			${wrpMarginDesktop}
+			${wrpPaddingDesktop}
+			${wrpBdShdStyesDesktop}
+			transition:all 0.5s, ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
+		}
+		.${blockId}.eb-toc-container:hover{
+			${wrpHoverBackgroundStylesDesktop}
+			${wrpBdShdStylesHoverDesktop}
+			
+			
+		}
+		.${blockId}.eb-toc-container:before{
+			${wrpOverlayStylesDesktop}
+			transition:all 0.5s, ${wrpOvlTransitionStyle};
+			
+		}
+		.${blockId}.eb-toc-container:hover:before{
+			${wrpHoverOverlayStylesDesktop}
+			
+		}
 	`;
 
 	const wrapperStylesTab = `
+		.${blockId}.eb-toc-container{
+			${wrpBackgroundStylesTab}
+			${wrpMarginTab}
+			${wrpPaddingTab}
+			${wrpBdShdStyesTab}
+		}
+		.${blockId}.eb-toc-container:hover{
+			${wrpHoverBackgroundStylesTab}
+			${wrpBdShdStylesHoverTab}
+			
+			
+		}
+		.${blockId}.eb-toc-container:before{
+			${wrpOverlayStylesTab}
+			
+		}
+		.${blockId}.eb-toc-container:hover:before{
+			${wrpHoverOverlayStylesTab}
+			
+		}
 		
 	`;
 
 	const wrapperStylesMobile = `
+		.${blockId}.eb-toc-container{
+			${wrpBackgroundStylesMobile}
+			${wrpMarginMobile}
+			${wrpPaddingMobile}
+			${wrpBdShdStyesMobile}
+		}
+		.${blockId}.eb-toc-container:hover{
+			${wrpHoverBackgroundStylesMobile}
+			${wrpBdShdStylesHoverMobile}
+			
+
+		}
+		.${blockId}.eb-toc-container:before{
+			${wrpOverlayStylesMobile}
+			
+		}
+		.${blockId}.eb-toc-container:hover:before{
+			${wrpHoverOverlayStylesMobile}
+			
+		}
 		
 	`;
 
@@ -822,6 +751,34 @@ export default function Edit({
 			</Toolbar>
 		</BlockControls>,
 		<div {...blockProps}>
+			<style>
+				{`
+				${desktopAllStyles}
+
+				/* mimmikcssStart */
+
+				${resOption === "Tablet" ? tabAllStyles : " "}
+				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
+
+				/* mimmikcssEnd */
+
+				@media all and (max-width: 1024px) {	
+
+					/* tabcssStart */			
+					${softMinifyCssStrings(tabAllStyles)}
+					/* tabcssEnd */			
+				
+				}
+				
+				@media all and (max-width: 767px) {
+					
+					/* mobcssStart */			
+					${softMinifyCssStrings(mobileAllStyles)}
+					/* mobcssEnd */			
+				
+				}
+				`}
+			</style>
 			<div className={`${blockId} eb-toc-container`} style={wrapperStyle}>
 				<div onClick={() => collapsible && setVisible(!visible)}>
 					<RichText
