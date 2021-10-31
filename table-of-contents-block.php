@@ -71,7 +71,8 @@ function create_block_table_of_content_block_init()
 		'essential-blocks-toc-frontend',
 		plugins_url($frontend_js, __FILE__),
 		array("jquery", "wp-editor"),
-		true
+		filemtime("$dir/$frontend_js")
+
 	);
 
 	register_block_type('table-of-contents-block/table-of-contents-block', array(

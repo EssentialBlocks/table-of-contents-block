@@ -1112,7 +1112,7 @@ body.eb-mimmik-added .eb-guten-block-main-parent-wrapper.eb-row-editor-wrap
   .eb-guten-block-main-parent-wrapper.eb-column-editor-wrap .width-dragger-change {
     display: none;
     position: absolute;
-    z-index: 888;
+    z-index: 8;
     right: -5px;
     top: 0;
     bottom: 0;
@@ -1211,6 +1211,15 @@ body.eb-mimmik-added
 .components-button {
   padding-top: 13px;
   padding-bottom: 13px; }
+
+body.eb-mimmik-added .edit-post-visual-editor .block-editor-block-toolbar {
+  position: relative;
+  z-index: 999; }
+
+body.eb-mimmik-added
+.edit-post-visual-editor
+.components-popover.block-editor-block-list__block-popover {
+  z-index: 999; }
 
 @media all and (max-width: 1024px) {
   .eb-row-wrapper

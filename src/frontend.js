@@ -1,12 +1,13 @@
-console.log("-------------TOC with 'wp' object on window")
-(function ($) {
-	var parseTocSlug = function (slug) {
+// console.log("-------------TOC with 'wp' object on window");
+
+window.addEventListener("DOMContentLoaded", function () {
+	let parseTocSlug = function (slug) {
 		// If not have the element then return false!
 		if (!slug) {
 			return slug;
 		}
 
-		var parsedSlug = slug
+		let parsedSlug = slug
 			.toString()
 			.toLowerCase()
 			.replace(/&(amp;)/g, "") // Remove &
@@ -45,6 +46,13 @@ console.log("-------------TOC with 'wp' object on window")
 				const initialCollapse =
 					container.getAttribute("data-initial-collapse") === "true";
 				const headerButton = container.querySelector(".eb-toc-button");
+
+				// console.log("--fromTocFrontend", {
+				// 	isSticky,
+				// 	collapsible,
+				// 	initialCollapse,
+				// 	headerButton,
+				// });
 
 				if (isSticky) {
 					headerButton.style.visibility = "hidden";
@@ -256,33 +264,38 @@ console.log("-------------TOC with 'wp' object on window")
 				let headers = JSON.parse(node.getAttribute("data-headers"));
 				let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
-				var allowed_h_tags = [];
+				let allowed_h_tags = [];
 				if (visibleHeaders !== undefined) {
 					visibleHeaders.forEach((h_tag, index) =>
 						h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
 					);
 				}
 
-				var allowed_h_tags_str =
+				let allowed_h_tags_str =
 					null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
 
-				var all_header =
+				let all_header =
 					undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
-						? $("body").find(allowed_h_tags_str)
-						: $("body").find("h1, h2, h3, h4, h5, h6");
+						? document.body.querySelectorAll(allowed_h_tags_str)
+						: document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
 				if (undefined !== headers && 0 !== all_header.length) {
-					headers.forEach(function (element, i) {
-						let element_text = parseTocSlug(element.text);
-						all_header.each(function () {
-							let header = $(this);
-							let header_text = parseTocSlug(header.text());
+					headers.forEach((element) => {
+						const element_text = parseTocSlug(element.text);
+
+						all_header.forEach((item) => {
+							const header_text = parseTocSlug(item.textContent);
+
+							// console.log({
+							// 	header_text,
+							// 	element_text,
+							// 	item,
+							// 	element,
+							// });
+
 							if (element_text.localeCompare(header_text) === 0) {
-								header.before(
-									'<span id="' +
-										header_text +
-										'" class="eb-toc__heading-anchor"></span>'
-								);
+								// item.before(``);
+								item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
 							}
 						});
 					});
@@ -328,7 +341,5 @@ console.log("-------------TOC with 'wp' object on window")
 		},
 	};
 
-	$(document).ready(function () {
-		EBTableOfContents.init();
-	});
-})(jQuery);
+	EBTableOfContents.init();
+});

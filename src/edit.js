@@ -7,6 +7,7 @@ const {
 	BlockControls,
 	RichText,
 	BlockAlignmentToolbar,
+	AlignmentToolbar,
 	useBlockProps,
 } = wp.blockEditor;
 const { useState, useEffect } = wp.element;
@@ -26,6 +27,7 @@ const {
 	//
 	Toolbar,
 	ToolbarButton,
+	ToolbarGroup,
 } = wp.components;
 
 /*
@@ -722,12 +724,12 @@ export default function Edit({
 		),
 
 		<BlockControls>
-			<BlockAlignmentToolbar
+			<AlignmentToolbar
 				value={contentAlign}
 				onChange={(contentAlign) => setAttributes({ contentAlign })}
 				controls={["left", "center", "right"]}
 			/>
-			<Toolbar>
+			<ToolbarGroup>
 				<ToolbarButton
 					title="Unordered"
 					icon="editor-ul"
@@ -748,8 +750,9 @@ export default function Edit({
 					isActive={listType === "none"}
 					onClick={() => setAttributes({ listType: "none" })}
 				/>
-			</Toolbar>
+			</ToolbarGroup>
 		</BlockControls>,
+
 		<div {...blockProps}>
 			<style>
 				{`

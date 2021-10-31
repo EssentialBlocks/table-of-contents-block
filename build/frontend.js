@@ -99,7 +99,8 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-console.log("-------------TOC with 'wp' object on window")(function ($) {
+// console.log("-------------TOC with 'wp' object on window");
+window.addEventListener("DOMContentLoaded", function () {
   var parseTocSlug = function parseTocSlug(slug) {
     // If not have the element then return false!
     if (!slug) {
@@ -152,7 +153,13 @@ console.log("-------------TOC with 'wp' object on window")(function ($) {
           var collapsible = container.getAttribute("data-collapsible") === "true";
           var initialCollapse = container.getAttribute("data-initial-collapse") === "true";
 
-          var _headerButton = container.querySelector(".eb-toc-button");
+          var _headerButton = container.querySelector(".eb-toc-button"); // console.log("--fromTocFrontend", {
+          // 	isSticky,
+          // 	collapsible,
+          // 	initialCollapse,
+          // 	headerButton,
+          // });
+
 
           if (isSticky) {
             _headerButton.style.visibility = "hidden";
@@ -412,17 +419,22 @@ console.log("-------------TOC with 'wp' object on window")(function ($) {
         }
 
         var allowed_h_tags_str = null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
-        var all_header = undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str ? $("body").find(allowed_h_tags_str) : $("body").find("h1, h2, h3, h4, h5, h6");
+        var all_header = undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str ? document.body.querySelectorAll(allowed_h_tags_str) : document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
         if (undefined !== headers && 0 !== all_header.length) {
-          headers.forEach(function (element, i) {
+          headers.forEach(function (element) {
             var element_text = parseTocSlug(element.text);
-            all_header.each(function () {
-              var header = $(this);
-              var header_text = parseTocSlug(header.text());
+            all_header.forEach(function (item) {
+              var header_text = parseTocSlug(item.textContent); // console.log({
+              // 	header_text,
+              // 	element_text,
+              // 	item,
+              // 	element,
+              // });
 
               if (element_text.localeCompare(header_text) === 0) {
-                header.before('<span id="' + header_text + '" class="eb-toc__heading-anchor"></span>');
+                // item.before(``);
+                item.innerHTML = "<span id=\"".concat(header_text, "\" class=\"eb-toc__heading-anchor\"></span>").concat(item.innerHTML);
               }
             });
           });
@@ -475,10 +487,8 @@ console.log("-------------TOC with 'wp' object on window")(function ($) {
       }
     }
   };
-  $(document).ready(function () {
-    EBTableOfContents.init();
-  });
-})(jQuery);
+  EBTableOfContents.init();
+});
 
 /***/ })
 

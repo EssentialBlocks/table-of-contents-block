@@ -11512,6 +11512,7 @@ var _wp$blockEditor = wp.blockEditor,
     BlockControls = _wp$blockEditor.BlockControls,
     RichText = _wp$blockEditor.RichText,
     BlockAlignmentToolbar = _wp$blockEditor.BlockAlignmentToolbar,
+    AlignmentToolbar = _wp$blockEditor.AlignmentToolbar,
     useBlockProps = _wp$blockEditor.useBlockProps;
 var _wp$element = wp.element,
     useState = _wp$element.useState,
@@ -11531,7 +11532,8 @@ var _wp$components = wp.components,
     Button = _wp$components.Button,
     Dropdown = _wp$components.Dropdown,
     Toolbar = _wp$components.Toolbar,
-    ToolbarButton = _wp$components.ToolbarButton;
+    ToolbarButton = _wp$components.ToolbarButton,
+    ToolbarGroup = _wp$components.ToolbarGroup;
 /*
  * External dependencies
  */
@@ -12027,7 +12029,7 @@ function Edit(_ref) {
   return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }), /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(BlockAlignmentToolbar, {
+  }), /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(AlignmentToolbar, {
     value: contentAlign,
     onChange: function onChange(contentAlign) {
       return setAttributes({
@@ -12035,7 +12037,7 @@ function Edit(_ref) {
       });
     },
     controls: ["left", "center", "right"]
-  }), /*#__PURE__*/React.createElement(Toolbar, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+  }), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
     title: "Unordered",
     icon: "editor-ul",
     isActive: listType === "ul",
@@ -12248,15 +12250,15 @@ var name = _block_json__WEBPACK_IMPORTED_MODULE_5__.name,
 registerBlockType(name, {
   title: __("Table Of Contents", "table-of-contents-block"),
   description: __("Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website", "table-of-contents-block"),
-  supports: {
-    // inserter: false,
-    // reusable: false,
-    // html: false,
-    // anchor: true,
-    // Declare support for specific alignment options.
-    // align: ["wide", "full"],
-    align: ["wide", "full"]
-  },
+  // supports: {
+  // 	// inserter: false,
+  // 	// reusable: false,
+  // 	// html: false,
+  // 	// anchor: true,
+  // 	// Declare support for specific alignment options.
+  // 	// align: ["wide", "full"],
+  // 	align: ["wide", "full"],
+  // },
   keywords: [__("countdown", "essential-blocks"), __("eb counter", "essential-blocks"), __("eb countdown", "essential-blocks")],
   category: category,
   icon: _util_icons__WEBPACK_IMPORTED_MODULE_1__["TOC_Icon"],
@@ -13640,7 +13642,7 @@ function save(_ref) {
     return /*#__PURE__*/React.createElement("div", null);
   }
 
-  return /*#__PURE__*/React.createElement("div", useBlockProps.save(), /*#__PURE__*/React.createElement("div", {
+  return /*#__PURE__*/React.createElement("div", {
     className: "".concat(blockId, " eb-toc-container"),
     style: wrapperStyle,
     "data-collapsible": collapsible,
@@ -13675,7 +13677,7 @@ function save(_ref) {
     attributes: attributes
   })), isSticky && /*#__PURE__*/React.createElement("button", {
     className: "eb-toc-button"
-  }, displayTitle && title ? title : "Table of Contents")));
+  }, displayTitle && title ? title : "Table of Contents"));
 }
 
 /***/ }),
