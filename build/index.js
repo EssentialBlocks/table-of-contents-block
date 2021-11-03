@@ -12000,24 +12000,28 @@ function Edit(_ref) {
       wrpBdShdTransitionStyle = _generateBorderShadow.transitionStyle; // // styles related to generateBorderShadowStyles end
 
 
-  var wrapperStylesDesktop = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesDesktop, "\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBgTransitionStyle, ", ").concat(wrpBdShdTransitionStyle, ";\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesDesktop, "\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpOvlTransitionStyle, ";\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesDesktop, "\n\t\t\t\n\t\t}\n\t");
-  var wrapperStylesTab = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesTab, "\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesTab, "\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t\n\t");
-  var wrapperStylesMobile = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesMobile, "\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesMobile, "\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t\t\n\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
+  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesDesktop, "\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBgTransitionStyle, ", ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesDesktop, "\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpOvlTransitionStyle, ";\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesDesktop, "\n\t\t\t\n\t\t}\n\t");
+  var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesTab, "\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesTab, "\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t\n\t");
+  var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrpBackgroundStylesMobile, "\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesMobile, "\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t\t\n\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t\n\t"); //
 
-  var desktopAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\t\t\n\t\t".concat(wrapperStylesDesktop, "\n\n\n\t")); // all css styles for Tab in strings ⬇
+  var desktopAllStylesEditor = "\n\t\t".concat(desktopAllStylesCommon, "\n\n\t\t");
+  var tabAllStylesEditor = "\n\t\t".concat(tabAllStylesCommon, "\n\n\t\n\t\t");
+  var mobileAllStylesEditor = "\n\t\t".concat(mobileAllStylesCommon, "\n\t\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
 
-  var tabAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(wrapperStylesTab, "\n\n\n\t")); // all css styles for Mobile in strings ⬇
+  var desktopAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(desktopAllStylesCommon, "\n\n\t")); // all css styles for Tab in strings ⬇
 
-  var mobileAllStyles = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(wrapperStylesMobile, "\n\n\n\t")); //
+  var tabAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(tabAllStylesCommon, "\n\n\t\t\n\t")); // all css styles for Mobile in strings ⬇
+
+  var mobileAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\t\n\t\t".concat(mobileAllStylesCommon, "\n\n\t")); //
   // styling codes End here
   //
   // Set All Style in "blockMeta" Attribute
 
   useEffect(function () {
     var styleObject = {
-      desktop: desktopAllStyles,
-      tab: tabAllStyles,
-      mobile: mobileAllStyles
+      desktop: desktopAllStylesFrontEnd,
+      tab: tabAllStylesFrontEnd,
+      mobile: mobileAllStylesFrontEnd
     };
 
     if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
@@ -12064,7 +12068,7 @@ function Edit(_ref) {
         listType: "none"
       });
     }
-  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStyles, "\n\n\t\t\t\t/* mimmikcssStart */\n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStyles : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(tabAllStyles), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(mobileAllStyles), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\t\t\t\t\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
+  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStylesEditor, "\n\n\t\t\t\t/* mimmikcssStart */\n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStylesEditor : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(tabAllStylesEditor), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(mobileAllStylesEditor), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
     className: "".concat(blockId, " eb-toc-container"),
     style: wrapperStyle
   }, /*#__PURE__*/React.createElement("div", {
@@ -17310,7 +17314,8 @@ function DimensionsControl(_ref) {
       bottom = _ref.bottom,
       left = _ref.left,
       onChange = _ref.onChange,
-      neededProps = _ref.neededProps;
+      neededProps = _ref.neededProps,
+      disableLeftRight = _ref.disableLeftRight;
 
   var _useState = useState({
     top: top,
@@ -17404,7 +17409,7 @@ function DimensionsControl(_ref) {
     },
     "class": "typoResButton dashicons dashicons-smartphone ".concat(resOption === "Mobile" ? "active" : " ")
   })), /*#__PURE__*/React.createElement("div", {
-    className: "input-container"
+    className: "input-container ".concat(disableLeftRight ? "left-right-disabled" : "")
   }, /*#__PURE__*/React.createElement("div", {
     className: "input-wrapper"
   }, /*#__PURE__*/React.createElement("input", {
@@ -17414,12 +17419,12 @@ function DimensionsControl(_ref) {
     onChange: onInputChange
   }), /*#__PURE__*/React.createElement("label", {
     className: "dimentions-input-label"
-  }, forBorderRadius ? " " : "Top")), /*#__PURE__*/React.createElement("div", {
+  }, forBorderRadius ? " " : "Top")), !disableLeftRight && /*#__PURE__*/React.createElement("div", {
     className: "input-wrapper"
   }, /*#__PURE__*/React.createElement("input", {
     type: "number",
     name: "right",
-    value: dimensions.right,
+    value: disableLeftRight ? undefined : dimensions.right,
     onChange: onInputChange
   }), /*#__PURE__*/React.createElement("label", {
     className: "dimentions-input-label"
@@ -17432,12 +17437,12 @@ function DimensionsControl(_ref) {
     onChange: onInputChange
   }), /*#__PURE__*/React.createElement("label", {
     className: "dimentions-input-label"
-  }, forBorderRadius ? " " : "Bottom")), /*#__PURE__*/React.createElement("div", {
+  }, forBorderRadius ? " " : "Bottom")), !disableLeftRight && /*#__PURE__*/React.createElement("div", {
     className: "input-wrapper"
   }, /*#__PURE__*/React.createElement("input", {
     type: "number",
     name: "left",
-    value: dimensions.left,
+    value: disableLeftRight ? undefined : dimensions.left,
     onChange: onInputChange
   }), /*#__PURE__*/React.createElement("label", {
     className: "dimentions-input-label"
@@ -17469,7 +17474,9 @@ function ResponsiveDimensionsControl(_ref) {
   var resRequiredProps = _ref.resRequiredProps,
       controlName = _ref.controlName,
       baseLabel = _ref.baseLabel,
-      forBorderRadius = _ref.forBorderRadius;
+      forBorderRadius = _ref.forBorderRadius,
+      _ref$disableLeftRight = _ref.disableLeftRight,
+      disableLeftRight = _ref$disableLeftRight === void 0 ? false : _ref$disableLeftRight;
   var attributes = resRequiredProps.attributes,
       setAttributes = resRequiredProps.setAttributes,
       resOption = resRequiredProps.resOption;
@@ -17519,6 +17526,7 @@ function ResponsiveDimensionsControl(_ref) {
     bottom: dimensionBottom,
     left: dimensionLeft,
     neededProps: neededProps,
+    disableLeftRight: disableLeftRight,
     onChange: function onChange(_ref2) {
       var _setAttributes2;
 
@@ -17540,6 +17548,7 @@ function ResponsiveDimensionsControl(_ref) {
     bottom: TABdimensionBottom,
     left: TABdimensionLeft,
     neededProps: neededProps,
+    disableLeftRight: disableLeftRight,
     onChange: function onChange(_ref3) {
       var _setAttributes4;
 
@@ -17561,6 +17570,7 @@ function ResponsiveDimensionsControl(_ref) {
     bottom: MOBdimensionBottom,
     left: MOBdimensionLeft,
     neededProps: neededProps,
+    disableLeftRight: disableLeftRight,
     onChange: function onChange(_ref4) {
       var _setAttributes6;
 
@@ -19334,7 +19344,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  // function to generate New Dimensions-Control's attributes for multiple Dimensions control based on the array of values(prefixs)
 
 var generateDimensionsAttributes = function generateDimensionsAttributes(controlName) {
-  var _objectSpread2, _objectSpread3;
+  var _objectSpread2, _objectSpread3, _objectSpread4;
 
   var defaults = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var top = defaults.top,
@@ -19342,7 +19352,9 @@ var generateDimensionsAttributes = function generateDimensionsAttributes(control
       bottom = defaults.bottom,
       left = defaults.left,
       _defaults$isLinked = defaults.isLinked,
-      isLinked = _defaults$isLinked === void 0 ? true : _defaults$isLinked;
+      isLinked = _defaults$isLinked === void 0 ? true : _defaults$isLinked,
+      _defaults$disableLeft = defaults.disableLeftRight,
+      disableLeftRight = _defaults$disableLeft === void 0 ? false : _defaults$disableLeft;
   var desktopTop = Object(_hasVal__WEBPACK_IMPORTED_MODULE_0__["hasVal"])(top) ? _defineProperty({}, "".concat(controlName, "Top"), {
     type: "string",
     "default": "".concat(top)
@@ -19367,16 +19379,15 @@ var generateDimensionsAttributes = function generateDimensionsAttributes(control
   }) : _defineProperty({}, "".concat(controlName, "Left"), {
     type: "string"
   });
-  return _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread((_objectSpread2 = {}, _defineProperty(_objectSpread2, "".concat(controlName, "isLinked"), {
-    type: "boolean",
-    "default": isLinked
-  }), _defineProperty(_objectSpread2, "".concat(controlName, "Unit"), {
-    type: "string",
-    "default": "px"
-  }), _objectSpread2), desktopTop), desktopRight), desktopBottom), desktopLeft), {}, (_objectSpread3 = {}, _defineProperty(_objectSpread3, "TAB".concat(controlName, "Unit"), {
-    type: "string",
-    "default": "px"
-  }), _defineProperty(_objectSpread3, "TAB".concat(controlName, "Top"), {
+  var objsAfterCaringForDisableLeftRightProp = disableLeftRight ? _objectSpread(_objectSpread(_objectSpread({}, desktopTop), desktopBottom), {}, (_objectSpread2 = {}, _defineProperty(_objectSpread2, "TAB".concat(controlName, "Top"), {
+    type: "string"
+  }), _defineProperty(_objectSpread2, "TAB".concat(controlName, "Bottom"), {
+    type: "string"
+  }), _defineProperty(_objectSpread2, "MOB".concat(controlName, "Top"), {
+    type: "string"
+  }), _defineProperty(_objectSpread2, "MOB".concat(controlName, "Bottom"), {
+    type: "string"
+  }), _objectSpread2)) : _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, desktopTop), desktopRight), desktopBottom), desktopLeft), {}, (_objectSpread3 = {}, _defineProperty(_objectSpread3, "TAB".concat(controlName, "Top"), {
     type: "string"
   }), _defineProperty(_objectSpread3, "TAB".concat(controlName, "Right"), {
     type: "string"
@@ -19384,9 +19395,6 @@ var generateDimensionsAttributes = function generateDimensionsAttributes(control
     type: "string"
   }), _defineProperty(_objectSpread3, "TAB".concat(controlName, "Left"), {
     type: "string"
-  }), _defineProperty(_objectSpread3, "MOB".concat(controlName, "Unit"), {
-    type: "string",
-    "default": "px"
   }), _defineProperty(_objectSpread3, "MOB".concat(controlName, "Top"), {
     type: "string"
   }), _defineProperty(_objectSpread3, "MOB".concat(controlName, "Right"), {
@@ -19396,13 +19404,28 @@ var generateDimensionsAttributes = function generateDimensionsAttributes(control
   }), _defineProperty(_objectSpread3, "MOB".concat(controlName, "Left"), {
     type: "string"
   }), _objectSpread3));
+  return _objectSpread((_objectSpread4 = {}, _defineProperty(_objectSpread4, "".concat(controlName, "isLinked"), {
+    type: "boolean",
+    "default": isLinked
+  }), _defineProperty(_objectSpread4, "".concat(controlName, "Unit"), {
+    type: "string",
+    "default": "px"
+  }), _defineProperty(_objectSpread4, "TAB".concat(controlName, "Unit"), {
+    type: "string",
+    "default": "px"
+  }), _defineProperty(_objectSpread4, "MOB".concat(controlName, "Unit"), {
+    type: "string",
+    "default": "px"
+  }), _objectSpread4), objsAfterCaringForDisableLeftRightProp);
 }; //
 // function to generate dimensions-controls styles for an element based on it's controlName(prefix)
 
 var generateDimensionsControlStyles = function generateDimensionsControlStyles(_ref9) {
   var controlName = _ref9.controlName,
       styleFor = _ref9.styleFor,
-      attributes = _ref9.attributes;
+      attributes = _ref9.attributes,
+      _ref9$disableLeftRigh = _ref9.disableLeftRight,
+      disableLeftRight = _ref9$disableLeftRigh === void 0 ? false : _ref9$disableLeftRigh;
   var isLinked = attributes["".concat(controlName, "isLinked")],
       dimensionUnit = attributes["".concat(controlName, "Unit")],
       dimensionTop = attributes["".concat(controlName, "Top")],
@@ -19423,7 +19446,7 @@ var generateDimensionsControlStyles = function generateDimensionsControlStyles(_
   var dimensionStylesTab = " ";
   var dimensionStylesMobile = " ";
 
-  if (isLinked === true) {
+  if (isLinked === true && disableLeftRight === false) {
     if (styleFor === "border") {
       dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "border-width: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, "; ") : " ", "\n        \n            ");
       dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-width: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
@@ -19437,9 +19460,9 @@ var generateDimensionsControlStyles = function generateDimensionsControlStyles(_
       dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "".concat(styleFor, ": ").concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
       dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "".concat(styleFor, ": ").concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
     }
-  } else {
+  } else if (isLinked === false && disableLeftRight === false) {
     if (styleFor === "border") {
-      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "border-top-width: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, "; z-index:999;") : " ", "\n            ").concat(dimensionRight ? "border-right-width: ".concat(parseFloat(dimensionRight)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionLeft ? "border-left-width: ".concat(parseFloat(dimensionLeft)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionBottom ? "border-bottom-width: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "border-top-width: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionRight ? "border-right-width: ".concat(parseFloat(dimensionRight)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionLeft ? "border-left-width: ".concat(parseFloat(dimensionLeft)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionBottom ? "border-bottom-width: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
       dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-top-width: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionRight ? "border-right-width: ".concat(parseFloat(TABdimensionRight)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionLeft ? "border-left-width: ".concat(parseFloat(TABdimensionLeft)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "border-bottom-width: ".concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
       dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "border-top-width: ".concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionRight ? "border-right-width: ".concat(parseFloat(MOBdimensionRight)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionLeft ? "border-left-width: ".concat(parseFloat(MOBdimensionLeft)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "border-bottom-width: ".concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
     } else if (styleFor === "border-radius") {
@@ -19450,6 +19473,34 @@ var generateDimensionsControlStyles = function generateDimensionsControlStyles(_
       dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionRight ? "".concat(styleFor, "-right: ").concat(parseFloat(dimensionRight)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionLeft ? "".concat(styleFor, "-left: ").concat(parseFloat(dimensionLeft)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
       dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionRight ? "".concat(styleFor, "-right: ").concat(parseFloat(TABdimensionRight)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionLeft ? "".concat(styleFor, "-left: ").concat(parseFloat(TABdimensionLeft)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
       dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionRight ? "".concat(styleFor, "-right: ").concat(parseFloat(MOBdimensionRight)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionLeft ? "".concat(styleFor, "-left: ").concat(parseFloat(MOBdimensionLeft)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    }
+  } else if (isLinked === true && disableLeftRight === true) {
+    if (styleFor === "border") {
+      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "border-top-width: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, "; ") : " ", "\n            ").concat(dimensionBottom ? "border-bottom-width: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, "; ") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-top-width: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "border-bottom-width: ".concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "border-top-width: ".concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "border-bottom-width: ".concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    } else if (styleFor === "border-radius") {
+      dimensionStylesDesktop = "\n                ".concat(dimensionTop ? "border-top-left-radius: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n                \n                ").concat(dimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-top-left-radius: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                \n                ").concat(TABdimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "border-top-left-radius: ".concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                \n                ").concat(MOBdimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    } else {
+      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n        \n            ").concat(dimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                \n                ").concat(TABdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                \n                ").concat(MOBdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    }
+  } else if (isLinked === false && disableLeftRight === true) {
+    if (styleFor === "border") {
+      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "border-top-width: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionBottom ? "border-bottom-width: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-top-width: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "border-bottom-width: ".concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "border-top-width: ".concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "border-bottom-width: ".concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    } else if (styleFor === "border-radius") {
+      dimensionStylesDesktop = "\n                ".concat(dimensionTop ? "border-top-left-radius: ".concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n                ").concat(dimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "border-top-left-radius: ".concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "border-top-left-radius: ".concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "border-bottom-right-radius: ".concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
+    } else {
+      dimensionStylesDesktop = "\n            ".concat(dimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(dimensionTop)).concat(dimensionUnit, ";") : " ", "\n            ").concat(dimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(dimensionBottom)).concat(dimensionUnit, ";") : " ", "\n        \n            ");
+      dimensionStylesTab = "\n                ".concat(TABdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(TABdimensionTop)).concat(TABdimensionUnit, ";") : " ", "\n                ").concat(TABdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(TABdimensionBottom)).concat(TABdimensionUnit, ";") : " ", "\n    \n            ");
+      dimensionStylesMobile = "\n                ".concat(MOBdimensionTop ? "".concat(styleFor, "-top: ").concat(parseFloat(MOBdimensionTop)).concat(MOBdimensionUnit, ";") : " ", "\n                ").concat(MOBdimensionBottom ? "".concat(styleFor, "-bottom: ").concat(parseFloat(MOBdimensionBottom)).concat(MOBdimensionUnit, ";") : " ", "\n    \n            ");
     }
   }
 

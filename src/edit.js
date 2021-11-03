@@ -608,13 +608,14 @@ export default function Edit({
 
 	// // styles related to generateBorderShadowStyles end
 
-	const wrapperStylesDesktop = `
+	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrpBackgroundStylesDesktop}
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
 			transition:all 0.5s, ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
+
 		}
 		.${blockId}.eb-toc-container:hover{
 			${wrpHoverBackgroundStylesDesktop}
@@ -633,7 +634,7 @@ export default function Edit({
 		}
 	`;
 
-	const wrapperStylesTab = `
+	const tabAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrpBackgroundStylesTab}
 			${wrpMarginTab}
@@ -657,7 +658,7 @@ export default function Edit({
 		
 	`;
 
-	const wrapperStylesMobile = `
+	const mobileAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrpBackgroundStylesMobile}
 			${wrpMarginMobile}
@@ -681,24 +682,39 @@ export default function Edit({
 		
 	`;
 
-	// all css styles for large screen width (desktop/laptop) in strings ⬇
-	const desktopAllStyles = softMinifyCssStrings(`		
-		${wrapperStylesDesktop}
+	//
+	const desktopAllStylesEditor = `
+		${desktopAllStylesCommon}
 
+		`;
+
+	const tabAllStylesEditor = `
+		${tabAllStylesCommon}
+
+	
+		`;
+
+	const mobileAllStylesEditor = `
+		${mobileAllStylesCommon}
+	
+	`;
+
+	// all css styles for large screen width (desktop/laptop) in strings ⬇
+	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
+		${desktopAllStylesCommon}
 
 	`);
 
 	// all css styles for Tab in strings ⬇
-	const tabAllStyles = softMinifyCssStrings(`
-		${wrapperStylesTab}
+	const tabAllStylesFrontEnd = softMinifyCssStrings(`
+		${tabAllStylesCommon}
 
-
+		
 	`);
 
 	// all css styles for Mobile in strings ⬇
-	const mobileAllStyles = softMinifyCssStrings(`
-		${wrapperStylesMobile}
-
+	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
+		${mobileAllStylesCommon}
 
 	`);
 
@@ -709,9 +725,9 @@ export default function Edit({
 	// Set All Style in "blockMeta" Attribute
 	useEffect(() => {
 		const styleObject = {
-			desktop: desktopAllStyles,
-			tab: tabAllStyles,
-			mobile: mobileAllStyles,
+			desktop: desktopAllStylesFrontEnd,
+			tab: tabAllStylesFrontEnd,
+			mobile: mobileAllStylesFrontEnd,
 		};
 		if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
 			setAttributes({ blockMeta: styleObject });
@@ -756,29 +772,29 @@ export default function Edit({
 		<div {...blockProps}>
 			<style>
 				{`
-				${desktopAllStyles}
+				${desktopAllStylesEditor}
 
 				/* mimmikcssStart */
 
-				${resOption === "Tablet" ? tabAllStyles : " "}
-				${resOption === "Mobile" ? tabAllStyles + mobileAllStyles : " "}
+				${resOption === "Tablet" ? tabAllStylesEditor : " "}
+				${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
 
 				/* mimmikcssEnd */
 
 				@media all and (max-width: 1024px) {	
 
-					/* tabcssStart */			
-					${softMinifyCssStrings(tabAllStyles)}
+					/* tabcssStart */
+					${softMinifyCssStrings(tabAllStylesEditor)}
 					/* tabcssEnd */			
-				
+
 				}
-				
+
 				@media all and (max-width: 767px) {
 					
 					/* mobcssStart */			
-					${softMinifyCssStrings(mobileAllStyles)}
+					${softMinifyCssStrings(mobileAllStylesEditor)}
 					/* mobcssEnd */			
-				
+
 				}
 				`}
 			</style>
