@@ -46,7 +46,7 @@ import "./editor.scss";
 
 import {
 	softMinifyCssStrings,
-	generateBackgroundControlStyles,
+	// generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
@@ -90,10 +90,10 @@ import {
 	WrpPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import {
-	//
-	WrpBgConst,
-} from "./constants/backgroundsConstants";
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 import {
 	//
 	WrpBdShadowConst,
@@ -521,28 +521,28 @@ export default function Edit({
 
 	// // styles related to generateBackgroundControlStyles start ⬇
 
-	const {
-		backgroundStylesDesktop: wrpBackgroundStylesDesktop,
-		hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
-		backgroundStylesTab: wrpBackgroundStylesTab,
-		hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
-		backgroundStylesMobile: wrpBackgroundStylesMobile,
-		hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
-		overlayStylesDesktop: wrpOverlayStylesDesktop,
-		hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
-		overlayStylesTab: wrpOverlayStylesTab,
-		hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
-		overlayStylesMobile: wrpOverlayStylesMobile,
-		hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
-		bgTransitionStyle: wrpBgTransitionStyle,
-		ovlTransitionStyle: wrpOvlTransitionStyle,
-	} = generateBackgroundControlStyles({
-		attributes,
-		controlName: WrpBgConst,
-		// noOverlay: true,
-		// noMainBgi: true,
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	});
+	// const {
+	// 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+	// 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+	// 	backgroundStylesTab: wrpBackgroundStylesTab,
+	// 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+	// 	backgroundStylesMobile: wrpBackgroundStylesMobile,
+	// 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+	// 	overlayStylesDesktop: wrpOverlayStylesDesktop,
+	// 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+	// 	overlayStylesTab: wrpOverlayStylesTab,
+	// 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+	// 	overlayStylesMobile: wrpOverlayStylesMobile,
+	// 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+	// 	bgTransitionStyle: wrpBgTransitionStyle,
+	// 	ovlTransitionStyle: wrpOvlTransitionStyle,
+	// } = generateBackgroundControlStyles({
+	// 	attributes,
+	// 	controlName: WrpBgConst,
+	// 	// noOverlay: true,
+	// 	// noMainBgi: true,
+	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	// });
 
 	// // styles related to generateBackgroundControlStyles end
 
@@ -590,32 +590,24 @@ export default function Edit({
 	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrapMaxWidthDesktop}
+
+			background-color:${contentBg};
 			
-			${wrpBackgroundStylesDesktop}
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
-			transition:all 0.5s, ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
+			transition:all 0.5s, ${wrpBdShdTransitionStyle};
 
 			
 
 		}
 
 		.${blockId}.eb-toc-container:hover{
-			${wrpHoverBackgroundStylesDesktop}
 			${wrpBdShdStylesHoverDesktop}
 			
 			
 		}
-		.${blockId}.eb-toc-container:before{
-			${wrpOverlayStylesDesktop}
-			transition:all 0.5s, ${wrpOvlTransitionStyle};
-			
-		}
-		.${blockId}.eb-toc-container:hover:before{
-			${wrpHoverOverlayStylesDesktop}
-			
-		}
+		
 
 
 		.${blockId}.eb-toc-container .eb-toc-title{
@@ -634,7 +626,6 @@ export default function Edit({
 
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			text-align: ${contentAlign};
-			background-color:${contentBg};
 		}
 
 	`;
@@ -643,25 +634,16 @@ export default function Edit({
 		.${blockId}.eb-toc-container{
 			${wrapMaxWidthTab}
 
-			${wrpBackgroundStylesTab}
 			${wrpMarginTab}
 			${wrpPaddingTab}
 			${wrpBdShdStyesTab}
 		}
 		.${blockId}.eb-toc-container:hover{
-			${wrpHoverBackgroundStylesTab}
 			${wrpBdShdStylesHoverTab}
 			
 			
 		}
-		.${blockId}.eb-toc-container:before{
-			${wrpOverlayStylesTab}
-			
-		}
-		.${blockId}.eb-toc-container:hover:before{
-			${wrpHoverOverlayStylesTab}
-			
-		}
+	
 		
 	`;
 
@@ -670,25 +652,16 @@ export default function Edit({
 			${wrapMaxWidthMobile}
 
 
-			${wrpBackgroundStylesMobile}
 			${wrpMarginMobile}
 			${wrpPaddingMobile}
 			${wrpBdShdStyesMobile}
 		}
 		.${blockId}.eb-toc-container:hover{
-			${wrpHoverBackgroundStylesMobile}
 			${wrpBdShdStylesHoverMobile}
 			
 
 		}
-		.${blockId}.eb-toc-container:before{
-			${wrpOverlayStylesMobile}
-			
-		}
-		.${blockId}.eb-toc-container:hover:before{
-			${wrpHoverOverlayStylesMobile}
-			
-		}
+	
 		
 	`;
 
@@ -781,35 +754,35 @@ export default function Edit({
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 		),
 
-		// <BlockControls>
-		// 	<AlignmentToolbar
-		// 		value={contentAlign}
-		// 		onChange={(contentAlign) => setAttributes({ contentAlign })}
-		// 		controls={["left", "center", "right"]}
-		// 	/>
-		// 	<ToolbarGroup>
-		// 		<ToolbarButton
-		// 			title="Unordered"
-		// 			icon="editor-ul"
-		// 			isActive={listType === "ul"}
-		// 			onClick={() => setAttributes({ listType: "ul" })}
-		// 		/>
+		<BlockControls>
+			<AlignmentToolbar
+				value={contentAlign}
+				onChange={(contentAlign) => setAttributes({ contentAlign })}
+				controls={["left", "center", "right"]}
+			/>
+			<ToolbarGroup>
+				<ToolbarButton
+					title="Unordered"
+					icon="editor-ul"
+					isActive={listType === "ul"}
+					onClick={() => setAttributes({ listType: "ul" })}
+				/>
 
-		// 		<ToolbarButton
-		// 			title="Ordered"
-		// 			icon="editor-ol"
-		// 			isActive={listType === "ol"}
-		// 			onClick={() => setAttributes({ listType: "ol" })}
-		// 		/>
+				<ToolbarButton
+					title="Ordered"
+					icon="editor-ol"
+					isActive={listType === "ol"}
+					onClick={() => setAttributes({ listType: "ol" })}
+				/>
 
-		// 		<ToolbarButton
-		// 			title="None"
-		// 			icon="minus"
-		// 			isActive={listType === "none"}
-		// 			onClick={() => setAttributes({ listType: "none" })}
-		// 		/>
-		// 	</ToolbarGroup>
-		// </BlockControls>,
+				<ToolbarButton
+					title="None"
+					icon="minus"
+					isActive={listType === "none"}
+					onClick={() => setAttributes({ listType: "none" })}
+				/>
+			</ToolbarGroup>
+		</BlockControls>,
 
 		<div {...blockProps}>
 			<style>

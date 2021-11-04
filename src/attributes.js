@@ -6,10 +6,10 @@ import {
 	WrpPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import {
-	//
-	WrpBgConst,
-} from "./constants/backgroundsConstants";
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 import {
 	//
 	WrpBdShadowConst,
@@ -28,7 +28,7 @@ import {
 import {
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
-	generateBackgroundAttributes,
+	// generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
 } from "../util/helpers";
@@ -344,11 +344,11 @@ const attributes = {
 		defaultRange: 610,
 	}),
 
-	//
-	...generateBackgroundAttributes(WrpBgConst, {
-		defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
-		// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	}),
+	// //
+	// ...generateBackgroundAttributes(WrpBgConst, {
+	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	// }),
 
 	//
 	...generateBorderShadowAttributes(WrpBdShadowConst, {

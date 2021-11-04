@@ -34,7 +34,7 @@ import ImageAvatar from "../util/image-avatar/";
 import GradientColorControl from "../util/gradient-color-controller";
 import ColorControl from "../util/color-control";
 import BorderShadowControl from "../util/border-shadow-control";
-import BackgroundControl from "../util/background-control";
+// import BackgroundControl from "../util/background-control";
 import UnitControl from "../util/unit-control";
 import FontPicker from "../util/typography-control/FontPicker";
 import DimensionsControl from "../util/dimensions-control";
@@ -70,10 +70,10 @@ import {
 	WrpPaddingConst,
 } from "./constants/dimensionsConstants";
 
-import {
-	//
-	WrpBgConst,
-} from "./constants/backgroundsConstants";
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 
 import {
 	//
@@ -961,13 +961,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 											baseLabel="Padding"
 										/>
 									</PanelBody>
-
+{/* 
 									<PanelBody title={__("Background ")} initialOpen={false}>
 										<BackgroundControl
 											controlName={WrpBgConst}
 											resRequiredProps={resRequiredProps}
 										/>
-									</PanelBody>
+									</PanelBody> */}
 
 									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
 										<BorderShadowControl

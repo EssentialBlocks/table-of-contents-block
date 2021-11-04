@@ -10652,10 +10652,9 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./constants/typographyPrefixConstants */ "./src/constants/typographyPrefixConstants.js");
 /* harmony import */ var _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./constants/dimensionsConstants */ "./src/constants/dimensionsConstants.js");
-/* harmony import */ var _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/backgroundsConstants */ "./src/constants/backgroundsConstants.js");
-/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
-/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
-/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
+/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
+/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -10663,13 +10662,16 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+ // import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 
 
 
 
 
-
-var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread({
   // the following 4 attributes is must required for responsive options and asset generation for frontend
   // responsive control attributes ⬇
   resOption: {
@@ -10969,32 +10971,14 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     type: "number",
     "default": 100
   }
-}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_4__["wrapMaxWidthPrefix"], {
+}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_3__["wrapMaxWidthPrefix"], {
   // noUnits: true,
   defaultRange: 610
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateBackgroundAttributes"])(_constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_2__["WrpBgConst"], {
-  defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)" // noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateBorderShadowAttributes"])(_constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_3__["WrpBdShadowConst"], {// noShadow: true,
+})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateBorderShadowAttributes"])(_constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_2__["WrpBdShadowConst"], {// noShadow: true,
   // noBorder: true,
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpMarginConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_5__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpPaddingConst"]));
+})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpMarginConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpPaddingConst"]));
 
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
-
-/***/ }),
-
-/***/ "./src/constants/backgroundsConstants.js":
-/*!***********************************************!*\
-  !*** ./src/constants/backgroundsConstants.js ***!
-  \***********************************************/
-/*! exports provided: WrpBgConst */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WrpBgConst", function() { return WrpBgConst; });
-// each and every const here has to be totally unique from one another
-var WrpBgConst = "wBg_";
 
 /***/ }),
 
@@ -11485,10 +11469,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _inspector__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./inspector */ "./src/inspector.js");
 /* harmony import */ var _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./constants/typographyPrefixConstants */ "./src/constants/typographyPrefixConstants.js");
 /* harmony import */ var _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./constants/dimensionsConstants */ "./src/constants/dimensionsConstants.js");
-/* harmony import */ var _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./constants/backgroundsConstants */ "./src/constants/backgroundsConstants.js");
-/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
-/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
-/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./list */ "./src/list.js");
+/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
+/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
+/* harmony import */ var _list__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./list */ "./src/list.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -11548,7 +11531,10 @@ var _wp$components = wp.components,
 
 
 
-
+ // import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 
 
 
@@ -11855,7 +11841,7 @@ function Edit(_ref) {
   // // styles related to generateResponsiveRangeStyles start ⬇
 
   var _generateResponsiveRa = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["generateResponsiveRangeStyles"])({
-    controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_9__["wrapMaxWidthPrefix"],
+    controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_8__["wrapMaxWidthPrefix"],
     property: "max-width",
     attributes: attributes
   }),
@@ -11920,29 +11906,29 @@ function Edit(_ref) {
   // });
   // // styles related to generateTypographyStyles end
   // // styles related to generateBackgroundControlStyles start ⬇
-
-
-  var _generateBackgroundCo = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["generateBackgroundControlStyles"])({
-    attributes: attributes,
-    controlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_7__["WrpBgConst"] // noOverlay: true,
-    // noMainBgi: true,
-    // noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-
-  }),
-      wrpBackgroundStylesDesktop = _generateBackgroundCo.backgroundStylesDesktop,
-      wrpHoverBackgroundStylesDesktop = _generateBackgroundCo.hoverBackgroundStylesDesktop,
-      wrpBackgroundStylesTab = _generateBackgroundCo.backgroundStylesTab,
-      wrpHoverBackgroundStylesTab = _generateBackgroundCo.hoverBackgroundStylesTab,
-      wrpBackgroundStylesMobile = _generateBackgroundCo.backgroundStylesMobile,
-      wrpHoverBackgroundStylesMobile = _generateBackgroundCo.hoverBackgroundStylesMobile,
-      wrpOverlayStylesDesktop = _generateBackgroundCo.overlayStylesDesktop,
-      wrpHoverOverlayStylesDesktop = _generateBackgroundCo.hoverOverlayStylesDesktop,
-      wrpOverlayStylesTab = _generateBackgroundCo.overlayStylesTab,
-      wrpHoverOverlayStylesTab = _generateBackgroundCo.hoverOverlayStylesTab,
-      wrpOverlayStylesMobile = _generateBackgroundCo.overlayStylesMobile,
-      wrpHoverOverlayStylesMobile = _generateBackgroundCo.hoverOverlayStylesMobile,
-      wrpBgTransitionStyle = _generateBackgroundCo.bgTransitionStyle,
-      wrpOvlTransitionStyle = _generateBackgroundCo.ovlTransitionStyle; // // styles related to generateBackgroundControlStyles end
+  // const {
+  // 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+  // 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+  // 	backgroundStylesTab: wrpBackgroundStylesTab,
+  // 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+  // 	backgroundStylesMobile: wrpBackgroundStylesMobile,
+  // 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+  // 	overlayStylesDesktop: wrpOverlayStylesDesktop,
+  // 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+  // 	overlayStylesTab: wrpOverlayStylesTab,
+  // 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+  // 	overlayStylesMobile: wrpOverlayStylesMobile,
+  // 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+  // 	bgTransitionStyle: wrpBgTransitionStyle,
+  // 	ovlTransitionStyle: wrpOvlTransitionStyle,
+  // } = generateBackgroundControlStyles({
+  // 	attributes,
+  // 	controlName: WrpBgConst,
+  // 	// noOverlay: true,
+  // 	// noMainBgi: true,
+  // 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+  // });
+  // // styles related to generateBackgroundControlStyles end
   // // styles related to generateDimensionsControlStyles start ⬇
 
 
@@ -11967,7 +11953,7 @@ function Edit(_ref) {
 
 
   var _generateBorderShadow = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["generateBorderShadowStyles"])({
-    controlName: _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_8__["WrpBdShadowConst"],
+    controlName: _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_7__["WrpBdShadowConst"],
     attributes: attributes // noShadow: true,
     // noBorder: true,
 
@@ -11981,9 +11967,9 @@ function Edit(_ref) {
       wrpBdShdTransitionStyle = _generateBorderShadow.transitionStyle; // // styles related to generateBorderShadowStyles end
 
 
-  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\t\t\t\n\t\t\t").concat(wrpBackgroundStylesDesktop, "\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBgTransitionStyle, ", ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesDesktop, "\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpOvlTransitionStyle, ";\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesDesktop, "\n\t\t\t\n\t\t}\n\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t}\n\n\t");
-  var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthTab, "\n\n\t\t\t").concat(wrpBackgroundStylesTab, "\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesTab, "\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesTab, "\n\t\t\t\n\t\t}\n\t\t\n\t");
-  var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthMobile, "\n\n\n\t\t\t").concat(wrpBackgroundStylesMobile, "\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpHoverBackgroundStylesMobile, "\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t\t\n\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:before{\n\t\t\t").concat(wrpOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover:before{\n\t\t\t").concat(wrpHoverOverlayStylesMobile, "\n\t\t\t\n\t\t}\n\t\t\n\t"); //
+  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t\t\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t\n\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t}\n\n\t");
+  var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthTab, "\n\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\n\t\t\n\t");
+  var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthMobile, "\n\n\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t\t\n\n\t\t}\n\t\n\t\t\n\t"); //
 
   var desktopAllStylesEditor = "\n\t\t".concat(desktopAllStylesCommon, "\n\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tdisplay:").concat(visible ? "block" : "none", ";\n\t\t}\n\n\n\n\t\t");
   var tabAllStylesEditor = "\n\t\t".concat(tabAllStylesCommon, "\n\n\t\n\t\t");
@@ -12014,36 +12000,42 @@ function Edit(_ref) {
   return [isSelected && /*#__PURE__*/React.createElement(_inspector__WEBPACK_IMPORTED_MODULE_4__["default"], {
     attributes: attributes,
     setAttributes: setAttributes
-  }),
-  /*#__PURE__*/
-  // <BlockControls>
-  // 	<AlignmentToolbar
-  // 		value={contentAlign}
-  // 		onChange={(contentAlign) => setAttributes({ contentAlign })}
-  // 		controls={["left", "center", "right"]}
-  // 	/>
-  // 	<ToolbarGroup>
-  // 		<ToolbarButton
-  // 			title="Unordered"
-  // 			icon="editor-ul"
-  // 			isActive={listType === "ul"}
-  // 			onClick={() => setAttributes({ listType: "ul" })}
-  // 		/>
-  // 		<ToolbarButton
-  // 			title="Ordered"
-  // 			icon="editor-ol"
-  // 			isActive={listType === "ol"}
-  // 			onClick={() => setAttributes({ listType: "ol" })}
-  // 		/>
-  // 		<ToolbarButton
-  // 			title="None"
-  // 			icon="minus"
-  // 			isActive={listType === "none"}
-  // 			onClick={() => setAttributes({ listType: "none" })}
-  // 		/>
-  // 	</ToolbarGroup>
-  // </BlockControls>,
-  React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStylesEditor, "\n\n\t\t\t\t/* mimmikcssStart */\n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStylesEditor : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(tabAllStylesEditor), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(mobileAllStylesEditor), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement(BlockControls, null, /*#__PURE__*/React.createElement(AlignmentToolbar, {
+    value: contentAlign,
+    onChange: function onChange(contentAlign) {
+      return setAttributes({
+        contentAlign: contentAlign
+      });
+    },
+    controls: ["left", "center", "right"]
+  }), /*#__PURE__*/React.createElement(ToolbarGroup, null, /*#__PURE__*/React.createElement(ToolbarButton, {
+    title: "Unordered",
+    icon: "editor-ul",
+    isActive: listType === "ul",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "ul"
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToolbarButton, {
+    title: "Ordered",
+    icon: "editor-ol",
+    isActive: listType === "ol",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "ol"
+      });
+    }
+  }), /*#__PURE__*/React.createElement(ToolbarButton, {
+    title: "None",
+    icon: "minus",
+    isActive: listType === "none",
+    onClick: function onClick() {
+      return setAttributes({
+        listType: "none"
+      });
+    }
+  }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t".concat(desktopAllStylesEditor, "\n\n\t\t\t\t/* mimmikcssStart */\n\n\t\t\t\t").concat(resOption === "Tablet" ? tabAllStylesEditor : " ", "\n\t\t\t\t").concat(resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " ", "\n\n\t\t\t\t/* mimmikcssEnd */\n\n\t\t\t\t@media all and (max-width: 1024px) {\t\n\n\t\t\t\t\t/* tabcssStart */\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(tabAllStylesEditor), "\n\t\t\t\t\t/* tabcssEnd */\t\t\t\n\n\t\t\t\t}\n\n\t\t\t\t@media all and (max-width: 767px) {\n\t\t\t\t\t\n\t\t\t\t\t/* mobcssStart */\t\t\t\n\t\t\t\t\t").concat(Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])(mobileAllStylesEditor), "\n\t\t\t\t\t/* mobcssEnd */\t\t\t\n\n\t\t\t\t}\n\t\t\t\t")), /*#__PURE__*/React.createElement("div", {
     className: "".concat(blockId, " eb-toc-container")
   }, /*#__PURE__*/React.createElement("div", {
     onClick: function onClick() {
@@ -12062,7 +12054,7 @@ function Edit(_ref) {
   })), headers.length > 0 ? /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-wrapper",
     style: contentStyle
-  }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_10__["default"], {
+  }, /*#__PURE__*/React.createElement(_list__WEBPACK_IMPORTED_MODULE_9__["default"], {
     attributes: attributes
   })) : /*#__PURE__*/React.createElement("p", null, "Add header to generate table of contents")))];
 }
@@ -12268,19 +12260,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _util_gradient_color_controller__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../util/gradient-color-controller */ "./util/gradient-color-controller/index.js");
 /* harmony import */ var _util_color_control__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../util/color-control */ "./util/color-control/index.js");
 /* harmony import */ var _util_border_shadow_control__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../util/border-shadow-control */ "./util/border-shadow-control/index.js");
-/* harmony import */ var _util_background_control__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../util/background-control */ "./util/background-control/index.js");
-/* harmony import */ var _util_unit_control__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../util/unit-control */ "./util/unit-control/index.js");
-/* harmony import */ var _util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../util/typography-control/FontPicker */ "./util/typography-control/FontPicker.js");
-/* harmony import */ var _util_dimensions_control__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../util/dimensions-control */ "./util/dimensions-control/index.js");
-/* harmony import */ var _util_reset_control__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../util/reset-control */ "./util/reset-control/index.js");
-/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
-/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
-/* harmony import */ var _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./constants/typographyPrefixConstants */ "./src/constants/typographyPrefixConstants.js");
-/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
-/* harmony import */ var _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./constants/dimensionsConstants */ "./src/constants/dimensionsConstants.js");
-/* harmony import */ var _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./constants/backgroundsConstants */ "./src/constants/backgroundsConstants.js");
-/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
-/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./constants */ "./src/constants/index.js");
+/* harmony import */ var _util_unit_control__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../util/unit-control */ "./util/unit-control/index.js");
+/* harmony import */ var _util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../util/typography-control/FontPicker */ "./util/typography-control/FontPicker.js");
+/* harmony import */ var _util_dimensions_control__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../util/dimensions-control */ "./util/dimensions-control/index.js");
+/* harmony import */ var _util_reset_control__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../util/reset-control */ "./util/reset-control/index.js");
+/* harmony import */ var _attributes__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./attributes */ "./src/attributes.js");
+/* harmony import */ var _util_helpers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../util/helpers */ "./util/helpers/index.js");
+/* harmony import */ var _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./constants/typographyPrefixConstants */ "./src/constants/typographyPrefixConstants.js");
+/* harmony import */ var _constants_rangeNames__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./constants/rangeNames */ "./src/constants/rangeNames.js");
+/* harmony import */ var _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./constants/dimensionsConstants */ "./src/constants/dimensionsConstants.js");
+/* harmony import */ var _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./constants/borderShadowConstants */ "./src/constants/borderShadowConstants.js");
+/* harmony import */ var _constants__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./constants */ "./src/constants/index.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -12328,6 +12318,7 @@ var _wp$components = wp.components,
 
 
 
+ // import BackgroundControl from "../util/background-control";
 
 
 
@@ -12337,8 +12328,10 @@ var _wp$components = wp.components,
 
 
 
-
-
+ // import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 
 
 
@@ -12421,7 +12414,7 @@ var Inspector = function Inspector(_ref) {
       zIndex = attributes.zIndex,
       containerWidth = attributes.containerWidth;
 
-  var _useState = useState(_constants__WEBPACK_IMPORTED_MODULE_22__["HEADERS"]),
+  var _useState = useState(_constants__WEBPACK_IMPORTED_MODULE_20__["HEADERS"]),
       _useState2 = _slicedToArray(_useState, 2),
       options = _useState2[0],
       setOptions = _useState2[1];
@@ -12437,7 +12430,7 @@ var Inspector = function Inspector(_ref) {
       resOption: select("core/edit-post").__experimentalGetPreviewDeviceType()
     }); // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
 
-    var cleanUp = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_16__["mimmikCssOnPreviewBtnClickWhileBlockSelected"])({
+    var cleanUp = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["mimmikCssOnPreviewBtnClickWhileBlockSelected"])({
       domObj: document,
       select: select,
       setAttributes: setAttributes
@@ -12449,7 +12442,7 @@ var Inspector = function Inspector(_ref) {
   }, []); // this useEffect is for mimmiking css for all the eb blocks on resOption changing
 
   useEffect(function () {
-    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_16__["mimmikCssForResBtns"])({
+    Object(_util_helpers__WEBPACK_IMPORTED_MODULE_15__["mimmikCssForResBtns"])({
       domObj: document,
       resOption: resOption
     });
@@ -12472,7 +12465,7 @@ var Inspector = function Inspector(_ref) {
     setAttributes: setAttributes,
     resOption: resOption,
     attributes: attributes,
-    objAttributes: _attributes__WEBPACK_IMPORTED_MODULE_15__["default"]
+    objAttributes: _attributes__WEBPACK_IMPORTED_MODULE_14__["default"]
   };
 
   var setDefaultVisible = function setDefaultVisible() {
@@ -12552,7 +12545,7 @@ var Inspector = function Inspector(_ref) {
       onChange: onHeaderChange
     })), /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement(_util_responsive_range_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       baseLabel: __("Wrapper max width"),
-      controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_18__["wrapMaxWidthPrefix"],
+      controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_17__["wrapMaxWidthPrefix"],
       resRequiredProps: resRequiredProps,
       min: 0,
       max: 2000,
@@ -12593,7 +12586,7 @@ var Inspector = function Inspector(_ref) {
           hideOnMobile: !hideOnMobile
         });
       }
-    }), /*#__PURE__*/React.createElement(_util_reset_control__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_reset_control__WEBPACK_IMPORTED_MODULE_13__["default"], {
       onReset: function onReset() {
         return setAttributes({
           contentHeight: undefined
@@ -12645,7 +12638,7 @@ var Inspector = function Inspector(_ref) {
     }, /*#__PURE__*/React.createElement(BaseControl, {
       label: __("Align"),
       className: "eb-base-control"
-    }, /*#__PURE__*/React.createElement(ButtonGroup, null, _constants__WEBPACK_IMPORTED_MODULE_22__["ALIGNS"].map(function (align, index) {
+    }, /*#__PURE__*/React.createElement(ButtonGroup, null, _constants__WEBPACK_IMPORTED_MODULE_20__["ALIGNS"].map(function (align, index) {
       return /*#__PURE__*/React.createElement(Button, {
         isSmall: true,
         isPrimary: titleAlign === align.value,
@@ -12694,7 +12687,7 @@ var Inspector = function Inspector(_ref) {
           style: {
             padding: "1rem"
           }
-        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_11__["default"], {
           label: __("Font Family"),
           value: titleFontFamily,
           onChange: function onChange(titleFontFamily) {
@@ -12702,7 +12695,7 @@ var Inspector = function Inspector(_ref) {
               titleFontFamily: titleFontFamily
             });
           }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
           selectedUnit: titleSizeUnit,
           unitTypes: [{
             label: "px",
@@ -12733,7 +12726,7 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Font Weight"),
           value: titleFontWeight,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["FONT_WEIGHTS"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["FONT_WEIGHTS"],
           onChange: function onChange(titleFontWeight) {
             return setAttributes({
               titleFontWeight: titleFontWeight
@@ -12742,7 +12735,7 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Text Transform"),
           value: titleTextTransform,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["TEXT_TRANSFORM"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_TRANSFORM"],
           onChange: function onChange(titleTextTransform) {
             return setAttributes({
               titleTextTransform: titleTextTransform
@@ -12751,13 +12744,13 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Text Decoration"),
           value: titleTextDecoration,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["TEXT_DECORATION"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_DECORATION"],
           onChange: function onChange(titleTextDecoration) {
             return setAttributes({
               titleTextDecoration: titleTextDecoration
             });
           }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
           selectedUnit: titleLetterSpacingUnit,
           unitTypes: [{
             label: "px",
@@ -12782,7 +12775,7 @@ var Inspector = function Inspector(_ref) {
           min: 0,
           max: TITLE_SPACING_MAX,
           step: TITLE_SPACING_STEP
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
           selectedUnit: titleLineHeightUnit,
           unitTypes: [{
             label: "px",
@@ -12809,7 +12802,7 @@ var Inspector = function Inspector(_ref) {
           step: TITLE_LINE_HEIGHT_STEP
         }));
       }
-    })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
       selectedUnit: titlePaddingUnit,
       unitTypes: [{
         label: "px",
@@ -12826,7 +12819,7 @@ var Inspector = function Inspector(_ref) {
           titlePaddingUnit: titlePaddingUnit
         });
       }
-    }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_12__["default"], {
       label: __("Padding"),
       top: titlePaddingTop,
       right: titlePaddingRight,
@@ -12876,7 +12869,7 @@ var Inspector = function Inspector(_ref) {
     }), /*#__PURE__*/React.createElement(SelectControl, {
       label: __("Seperator Style"),
       value: seperatorStyle,
-      options: _constants__WEBPACK_IMPORTED_MODULE_22__["BORDER_STYLES"],
+      options: _constants__WEBPACK_IMPORTED_MODULE_20__["BORDER_STYLES"],
       onChange: function onChange(seperatorStyle) {
         return setAttributes({
           seperatorStyle: seperatorStyle
@@ -12901,7 +12894,7 @@ var Inspector = function Inspector(_ref) {
           indent: indent
         });
       }
-    }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
       selectedUnit: contentGapUnit,
       unitTypes: [{
         label: "px",
@@ -12975,7 +12968,7 @@ var Inspector = function Inspector(_ref) {
           style: {
             padding: "1rem"
           }
-        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_12__["default"], {
+        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_11__["default"], {
           label: __("Font Family"),
           value: contentFontFamily,
           onChange: function onChange(contentFontFamily) {
@@ -12983,7 +12976,7 @@ var Inspector = function Inspector(_ref) {
               contentFontFamily: contentFontFamily
             });
           }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
           selectedUnit: contentSizeUnit,
           unitTypes: [{
             label: "px",
@@ -13014,7 +13007,7 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Font Weight"),
           value: contentFontWeight,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["FONT_WEIGHTS"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["FONT_WEIGHTS"],
           onChange: function onChange(contentFontWeight) {
             return setAttributes({
               contentFontWeight: contentFontWeight
@@ -13023,7 +13016,7 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Text Transform"),
           value: contentTextTransform,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["TEXT_TRANSFORM"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_TRANSFORM"],
           onChange: function onChange(contentTextTransform) {
             return setAttributes({
               contentTextTransform: contentTextTransform
@@ -13032,13 +13025,13 @@ var Inspector = function Inspector(_ref) {
         }), /*#__PURE__*/React.createElement(SelectControl, {
           label: __("Text Decoration"),
           value: contentTextDecoration,
-          options: _constants__WEBPACK_IMPORTED_MODULE_22__["TEXT_DECORATION"],
+          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_DECORATION"],
           onChange: function onChange(contentTextDecoration) {
             return setAttributes({
               contentTextDecoration: contentTextDecoration
             });
           }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
           selectedUnit: contentLetterSpacingUnit,
           unitTypes: [{
             label: "px",
@@ -13076,7 +13069,7 @@ var Inspector = function Inspector(_ref) {
           step: 0.1
         }));
       }
-    })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_11__["default"], {
+    })), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
       selectedUnit: contentPaddingUnit,
       unitTypes: [{
         label: "px",
@@ -13093,7 +13086,7 @@ var Inspector = function Inspector(_ref) {
           contentPaddingUnit: contentPaddingUnit
         });
       }
-    }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_dimensions_control__WEBPACK_IMPORTED_MODULE_12__["default"], {
       label: __("Padding"),
       top: contentPaddingTop,
       right: contentPaddingRight,
@@ -13114,7 +13107,7 @@ var Inspector = function Inspector(_ref) {
     }), /*#__PURE__*/React.createElement(SelectControl, {
       label: __("Seperator Style"),
       value: listSeperatorStyle,
-      options: _constants__WEBPACK_IMPORTED_MODULE_22__["BORDER_STYLES"],
+      options: _constants__WEBPACK_IMPORTED_MODULE_20__["BORDER_STYLES"],
       onChange: function onChange(listSeperatorStyle) {
         return setAttributes({
           listSeperatorStyle: listSeperatorStyle
@@ -13201,23 +13194,17 @@ var Inspector = function Inspector(_ref) {
 
     }, /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
       resRequiredProps: resRequiredProps,
-      controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_19__["WrpMarginConst"],
+      controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__["WrpMarginConst"],
       baseLabel: "Margin"
     }), /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
       resRequiredProps: resRequiredProps,
-      controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_19__["WrpPaddingConst"],
+      controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__["WrpPaddingConst"],
       baseLabel: "Padding"
-    })), /*#__PURE__*/React.createElement(PanelBody, {
-      title: __("Background "),
-      initialOpen: false
-    }, /*#__PURE__*/React.createElement(_util_background_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-      controlName: _constants_backgroundsConstants__WEBPACK_IMPORTED_MODULE_20__["WrpBgConst"],
-      resRequiredProps: resRequiredProps
     })), /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Border & Shadow"),
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_util_border_shadow_control__WEBPACK_IMPORTED_MODULE_9__["default"], {
-      controlName: _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_21__["WrpBdShadowConst"],
+      controlName: _constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_19__["WrpBdShadowConst"],
       resRequiredProps: resRequiredProps // noShadow
       // noBorder
 
@@ -13544,3107 +13531,6 @@ function save(_ref) {
   })), isSticky && /*#__PURE__*/React.createElement("button", {
     className: "eb-toc-button"
   }, displayTitle && title ? title : "Table of Contents")) : /*#__PURE__*/React.createElement("div", null));
-}
-
-/***/ }),
-
-/***/ "./util/background-control/bgControl.js":
-/*!**********************************************!*\
-  !*** ./util/background-control/bgControl.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return bgControl; });
-/* harmony import */ var _gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../gradient-color-controller */ "./util/gradient-color-controller/index.js");
-/* harmony import */ var _unit_control__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-control */ "./util/unit-control/index.js");
-/* harmony import */ var _color_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../color-control */ "./util/color-control/index.js");
-/* harmony import */ var _image_avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../image-avatar */ "./util/image-avatar/index.js");
-/* harmony import */ var _withResButtons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../withResButtons */ "./util/withResButtons/index.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var __ = wp.i18n.__;
-var MediaUpload = wp.blockEditor.MediaUpload;
-var _wp$components = wp.components,
-    SelectControl = _wp$components.SelectControl,
-    Button = _wp$components.Button,
-    RangeControl = _wp$components.RangeControl,
-    BaseControl = _wp$components.BaseControl,
-    ButtonGroup = _wp$components.ButtonGroup;
-/**
- * Internal dependencies
- */
-
-
-
-
-
-
-function bgControl(_ref) {
-  var resRequiredProps = _ref.resRequiredProps,
-      controlName = _ref.controlName,
-      noMainBgi = _ref.noMainBgi,
-      noTransition = _ref.noTransition;
-  var setAttributes = resRequiredProps.setAttributes,
-      attributes = resRequiredProps.attributes,
-      resOption = resRequiredProps.resOption;
-  var bg_hoverType = attributes["".concat(controlName, "bg_hoverType")],
-      bg_transition = attributes["".concat(controlName, "bg_transition")],
-      backgroundType = attributes["".concat(controlName, "backgroundType")],
-      backgroundColor = attributes["".concat(controlName, "backgroundColor")],
-      gradientColor = attributes["".concat(controlName, "gradientColor")],
-      bgImageURL = attributes["".concat(controlName, "bgImageURL")],
-      bgImageID = attributes["".concat(controlName, "bgImageID")],
-      bgImgAttachment = attributes["".concat(controlName, "bgImgAttachment")],
-      backgroundSize = attributes["".concat(controlName, "backgroundSize")],
-      bgImgCustomSize = attributes["".concat(controlName, "bgImgCustomSize")],
-      bgImgCustomSizeUnit = attributes["".concat(controlName, "bgImgCustomSizeUnit")],
-      bgImgPos = attributes["".concat(controlName, "bgImgPos")],
-      bgImgcustomPosX = attributes["".concat(controlName, "bgImgcustomPosX")],
-      bgImgcustomPosXUnit = attributes["".concat(controlName, "bgImgcustomPosXUnit")],
-      bgImgcustomPosY = attributes["".concat(controlName, "bgImgcustomPosY")],
-      bgImgcustomPosYUnit = attributes["".concat(controlName, "bgImgcustomPosYUnit")],
-      bgImgRepeat = attributes["".concat(controlName, "bgImgRepeat")],
-      TABbackgroundSize = attributes["TAB".concat(controlName, "backgroundSize")],
-      TABbgImgCustomSize = attributes["TAB".concat(controlName, "bgImgCustomSize")],
-      TABbgImgCustomSizeUnit = attributes["TAB".concat(controlName, "bgImgCustomSizeUnit")],
-      TABbgImgPos = attributes["TAB".concat(controlName, "bgImgPos")],
-      TABbgImgcustomPosX = attributes["TAB".concat(controlName, "bgImgcustomPosX")],
-      TABbgImgcustomPosXUnit = attributes["TAB".concat(controlName, "bgImgcustomPosXUnit")],
-      TABbgImgcustomPosY = attributes["TAB".concat(controlName, "bgImgcustomPosY")],
-      TABbgImgcustomPosYUnit = attributes["TAB".concat(controlName, "bgImgcustomPosYUnit")],
-      TABbgImgRepeat = attributes["TAB".concat(controlName, "bgImgRepeat")],
-      MOBbackgroundSize = attributes["MOB".concat(controlName, "backgroundSize")],
-      MOBbgImgCustomSize = attributes["MOB".concat(controlName, "bgImgCustomSize")],
-      MOBbgImgCustomSizeUnit = attributes["MOB".concat(controlName, "bgImgCustomSizeUnit")],
-      MOBbgImgPos = attributes["MOB".concat(controlName, "bgImgPos")],
-      MOBbgImgcustomPosX = attributes["MOB".concat(controlName, "bgImgcustomPosX")],
-      MOBbgImgcustomPosXUnit = attributes["MOB".concat(controlName, "bgImgcustomPosXUnit")],
-      MOBbgImgcustomPosY = attributes["MOB".concat(controlName, "bgImgcustomPosY")],
-      MOBbgImgcustomPosYUnit = attributes["MOB".concat(controlName, "bgImgcustomPosYUnit")],
-      MOBbgImgRepeat = attributes["MOB".concat(controlName, "bgImgRepeat")],
-      hov_backgroundType = attributes["hov_".concat(controlName, "backgroundType")],
-      hov_backgroundColor = attributes["hov_".concat(controlName, "backgroundColor")],
-      hov_gradientColor = attributes["hov_".concat(controlName, "gradientColor")],
-      hov_bgImageURL = attributes["hov_".concat(controlName, "bgImageURL")],
-      hov_bgImageID = attributes["hov_".concat(controlName, "bgImageID")],
-      hov_bgImgAttachment = attributes["hov_".concat(controlName, "bgImgAttachment")],
-      hov_backgroundSize = attributes["hov_".concat(controlName, "backgroundSize")],
-      hov_bgImgCustomSize = attributes["hov_".concat(controlName, "bgImgCustomSize")],
-      hov_bgImgCustomSizeUnit = attributes["hov_".concat(controlName, "bgImgCustomSizeUnit")],
-      hov_bgImgPos = attributes["hov_".concat(controlName, "bgImgPos")],
-      hov_bgImgcustomPosX = attributes["hov_".concat(controlName, "bgImgcustomPosX")],
-      hov_bgImgcustomPosXUnit = attributes["hov_".concat(controlName, "bgImgcustomPosXUnit")],
-      hov_bgImgcustomPosY = attributes["hov_".concat(controlName, "bgImgcustomPosY")],
-      hov_bgImgcustomPosYUnit = attributes["hov_".concat(controlName, "bgImgcustomPosYUnit")],
-      hov_bgImgRepeat = attributes["hov_".concat(controlName, "bgImgRepeat")],
-      hov_TABbackgroundSize = attributes["hov_TAB".concat(controlName, "backgroundSize")],
-      hov_TABbgImgCustomSize = attributes["hov_TAB".concat(controlName, "bgImgCustomSize")],
-      hov_TABbgImgCustomSizeUnit = attributes["hov_TAB".concat(controlName, "bgImgCustomSizeUnit")],
-      hov_TABbgImgPos = attributes["hov_TAB".concat(controlName, "bgImgPos")],
-      hov_TABbgImgcustomPosX = attributes["hov_TAB".concat(controlName, "bgImgcustomPosX")],
-      hov_TABbgImgcustomPosXUnit = attributes["hov_TAB".concat(controlName, "bgImgcustomPosXUnit")],
-      hov_TABbgImgcustomPosY = attributes["hov_TAB".concat(controlName, "bgImgcustomPosY")],
-      hov_TABbgImgcustomPosYUnit = attributes["hov_TAB".concat(controlName, "bgImgcustomPosYUnit")],
-      hov_TABbgImgRepeat = attributes["hov_TAB".concat(controlName, "bgImgRepeat")],
-      hov_MOBbackgroundSize = attributes["hov_MOB".concat(controlName, "backgroundSize")],
-      hov_MOBbgImgCustomSize = attributes["hov_MOB".concat(controlName, "bgImgCustomSize")],
-      hov_MOBbgImgCustomSizeUnit = attributes["hov_MOB".concat(controlName, "bgImgCustomSizeUnit")],
-      hov_MOBbgImgPos = attributes["hov_MOB".concat(controlName, "bgImgPos")],
-      hov_MOBbgImgcustomPosX = attributes["hov_MOB".concat(controlName, "bgImgcustomPosX")],
-      hov_MOBbgImgcustomPosXUnit = attributes["hov_MOB".concat(controlName, "bgImgcustomPosXUnit")],
-      hov_MOBbgImgcustomPosY = attributes["hov_MOB".concat(controlName, "bgImgcustomPosY")],
-      hov_MOBbgImgcustomPosYUnit = attributes["hov_MOB".concat(controlName, "bgImgcustomPosYUnit")],
-      hov_MOBbgImgRepeat = attributes["hov_MOB".concat(controlName, "bgImgRepeat")];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, null, /*#__PURE__*/React.createElement(ButtonGroup, null, [{
-    label: __("Normal"),
-    value: "normal"
-  }, {
-    label: __("Hover"),
-    value: "hover"
-  }].map(function (_ref2) {
-    var value = _ref2.value,
-        label = _ref2.label;
-    return /*#__PURE__*/React.createElement(Button // isSmall
-    // isLarge
-    , {
-      isPrimary: bg_hoverType === value,
-      isSecondary: bg_hoverType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "".concat(controlName, "bg_hoverType"), value));
-      }
-    }, label);
-  }))), bg_hoverType === "normal" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Background Type")
-  }, /*#__PURE__*/React.createElement(ButtonGroup, null, [{
-    label: __("Classic"),
-    value: "classic"
-  }, {
-    label: __("Gradient"),
-    value: "gradient"
-  }].map(function (_ref3) {
-    var value = _ref3.value,
-        label = _ref3.label;
-    return /*#__PURE__*/React.createElement(Button // isSmall
-    // isLarge
-    , {
-      isPrimary: backgroundType === value,
-      isSecondary: backgroundType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "".concat(controlName, "backgroundType"), value));
-      }
-    }, label);
-  }))), backgroundType === "classic" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_color_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __("Background Color"),
-    color: backgroundColor,
-    onChange: function onChange(backgroundColor) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "backgroundColor"), backgroundColor));
-    }
-  }), noMainBgi === false && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Background Image")
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(_ref4) {
-      var _setAttributes4;
-
-      var url = _ref4.url,
-          id = _ref4.id;
-      return setAttributes((_setAttributes4 = {}, _defineProperty(_setAttributes4, "".concat(controlName, "bgImageURL"), url), _defineProperty(_setAttributes4, "".concat(controlName, "bgImageID"), id), _setAttributes4));
-    },
-    type: "image",
-    value: bgImageID,
-    render: function render(_ref5) {
-      var open = _ref5.open;
-      return !bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-        className: "eb-background-control-inspector-panel-img-btn components-button",
-        label: __("Upload Image"),
-        icon: "format-image",
-        onClick: open
-      }), /*#__PURE__*/React.createElement("span", {
-        style: {
-          padding: "10px 0",
-          display: "block"
-        }
-      }));
-    }
-  }), bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_image_avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    imageUrl: bgImageURL,
-    onDeleteImage: function onDeleteImage() {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImageURL"), null));
-    }
-  }), resOption === "Desktop" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(bgImgPos) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgPos"), bgImgPos));
-    }
-  })), bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgcustomPosXUnit"), bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: bgImgcustomPosX,
-    min: -2000,
-    max: // bgImgcustomPosXUnit === "px" ? 
-    2000 //  : 100
-    ,
-    onChange: function onChange(bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgcustomPosX"), bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgcustomPosYUnit"), bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: bgImgcustomPosY,
-    min: -2000,
-    max: // bgImgcustomPosYUnit === "px" ? 
-    2000 // : 100
-    ,
-    step: bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgcustomPosY"), bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgAttachment"), bgImgAttachment));
-    }
-  }), bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgRepeat"), bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(backgroundSize) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "backgroundSize"), backgroundSize));
-    }
-  })), backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgCustomSizeUnit"), bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: bgImgCustomSize,
-    min: 0,
-    max: bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgCustomSize"), bgImgCustomSize));
-    }
-  })))), resOption === "Tablet" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABbgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(TABbgImgPos) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgPos"), TABbgImgPos));
-    }
-  })), TABbgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABbgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABbgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgcustomPosXUnit"), TABbgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABbgImgcustomPosX,
-    min: 0,
-    max: TABbgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(TABbgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgcustomPosX"), TABbgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABbgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABbgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgcustomPosYUnit"), TABbgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABbgImgcustomPosY,
-    min: 0,
-    max: TABbgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: TABbgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(TABbgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgcustomPosY"), TABbgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgAttachment"), bgImgAttachment));
-    }
-  }), bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABbgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(TABbgImgRepeat) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgRepeat"), TABbgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABbackgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(TABbackgroundSize) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "backgroundSize"), TABbackgroundSize));
-    }
-  })), TABbackgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABbgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABbgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgCustomSizeUnit"), TABbgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABbgImgCustomSize,
-    min: 0,
-    max: TABbgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: TABbgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(TABbgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "bgImgCustomSize"), TABbgImgCustomSize));
-    }
-  })))), resOption === "Mobile" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBbgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(MOBbgImgPos) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgPos"), MOBbgImgPos));
-    }
-  })), MOBbgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBbgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBbgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgcustomPosXUnit"), MOBbgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBbgImgcustomPosX,
-    min: 0,
-    max: MOBbgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(MOBbgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgcustomPosX"), MOBbgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBbgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBbgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgcustomPosYUnit"), MOBbgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBbgImgcustomPosY,
-    min: 0,
-    max: MOBbgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: MOBbgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(MOBbgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgcustomPosY"), MOBbgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bgImgAttachment"), bgImgAttachment));
-    }
-  }), bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBbgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(MOBbgImgRepeat) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgRepeat"), MOBbgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBbackgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(MOBbackgroundSize) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "backgroundSize"), MOBbackgroundSize));
-    }
-  })), MOBbackgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBbgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBbgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgCustomSizeUnit"), MOBbgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBbgImgCustomSize,
-    min: 0,
-    max: MOBbgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: MOBbgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(MOBbgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "bgImgCustomSize"), MOBbgImgCustomSize));
-    }
-  }))))))), backgroundType === "gradient" && /*#__PURE__*/React.createElement(_gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    gradientColor: gradientColor,
-    onChange: function onChange(gradientColor) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "gradientColor"), gradientColor));
-    }
-  })), bg_hoverType === "hover" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Background Type")
-  }, /*#__PURE__*/React.createElement(ButtonGroup, null, [{
-    label: __("Classic"),
-    value: "classic"
-  }, {
-    label: __("Gradient"),
-    value: "gradient"
-  }].map(function (_ref6) {
-    var value = _ref6.value,
-        label = _ref6.label;
-    return /*#__PURE__*/React.createElement(Button // isSmall
-    // isLarge
-    , {
-      isPrimary: hov_backgroundType === value,
-      isSecondary: hov_backgroundType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "hov_".concat(controlName, "backgroundType"), value));
-      }
-    }, label);
-  }))), hov_backgroundType === "classic" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_color_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __("Background Color"),
-    color: hov_backgroundColor,
-    onChange: function onChange(hov_backgroundColor) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "backgroundColor"), hov_backgroundColor));
-    }
-  }), noMainBgi === false && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Background Image")
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(_ref7) {
-      var _setAttributes39;
-
-      var url = _ref7.url,
-          id = _ref7.id;
-      return setAttributes((_setAttributes39 = {}, _defineProperty(_setAttributes39, "hov_".concat(controlName, "bgImageURL"), url), _defineProperty(_setAttributes39, "hov_".concat(controlName, "bgImageID"), id), _setAttributes39));
-    },
-    type: "image",
-    value: hov_bgImageID,
-    render: function render(_ref8) {
-      var open = _ref8.open;
-      return !hov_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-        className: "eb-background-control-inspector-panel-img-btn components-button",
-        label: __("Upload Image"),
-        icon: "format-image",
-        onClick: open
-      }), /*#__PURE__*/React.createElement("span", {
-        style: {
-          padding: "10px 0",
-          display: "block"
-        }
-      }));
-    }
-  }), hov_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_image_avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    imageUrl: hov_bgImageURL,
-    onDeleteImage: function onDeleteImage() {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImageURL"), null));
-    }
-  }), resOption === "Desktop" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_bgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgPos"), hov_bgImgPos));
-    }
-  })), hov_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgcustomPosXUnit"), hov_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_bgImgcustomPosX,
-    min: 0,
-    max: hov_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgcustomPosX"), hov_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgcustomPosYUnit"), hov_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_bgImgcustomPosY,
-    min: 0,
-    max: hov_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgcustomPosY"), hov_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgAttachment"), hov_bgImgAttachment));
-    }
-  }), hov_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgRepeat"), hov_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_backgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "backgroundSize"), hov_backgroundSize));
-    }
-  })), hov_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgCustomSizeUnit"), hov_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_bgImgCustomSize,
-    min: 0,
-    max: hov_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgCustomSize"), hov_bgImgCustomSize));
-    }
-  })))), resOption === "Tablet" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABbgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_TABbgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgPos"), hov_TABbgImgPos));
-    }
-  })), hov_TABbgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABbgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABbgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgcustomPosXUnit"), hov_TABbgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABbgImgcustomPosX,
-    min: 0,
-    max: hov_TABbgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_TABbgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgcustomPosX"), hov_TABbgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABbgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABbgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgcustomPosYUnit"), hov_TABbgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABbgImgcustomPosY,
-    min: 0,
-    max: hov_TABbgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_TABbgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_TABbgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgcustomPosY"), hov_TABbgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgAttachment"), hov_bgImgAttachment));
-    }
-  }), hov_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABbgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_TABbgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgRepeat"), hov_TABbgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABbackgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_TABbackgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "backgroundSize"), hov_TABbackgroundSize));
-    }
-  })), hov_TABbackgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABbgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABbgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgCustomSizeUnit"), hov_TABbgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABbgImgCustomSize,
-    min: 0,
-    max: hov_TABbgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_TABbgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_TABbgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "bgImgCustomSize"), hov_TABbgImgCustomSize));
-    }
-  })))), resOption === "Mobile" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBbgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_MOBbgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgPos"), hov_MOBbgImgPos));
-    }
-  })), hov_MOBbgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBbgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBbgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgcustomPosXUnit"), hov_MOBbgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBbgImgcustomPosX,
-    min: 0,
-    max: hov_MOBbgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_MOBbgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgcustomPosX"), hov_MOBbgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBbgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBbgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgcustomPosYUnit"), hov_MOBbgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBbgImgcustomPosY,
-    min: 0,
-    max: hov_MOBbgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_MOBbgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_MOBbgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgcustomPosY"), hov_MOBbgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "bgImgAttachment"), hov_bgImgAttachment));
-    }
-  }), hov_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBbgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_MOBbgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgRepeat"), hov_MOBbgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBbackgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_MOBbackgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "backgroundSize"), hov_MOBbackgroundSize));
-    }
-  })), hov_MOBbackgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBbgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBbgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgCustomSizeUnit"), hov_MOBbgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBbgImgCustomSize,
-    min: 0,
-    max: hov_MOBbgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_MOBbgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_MOBbgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "bgImgCustomSize"), hov_MOBbgImgCustomSize));
-    }
-  }))))))), hov_backgroundType === "gradient" && /*#__PURE__*/React.createElement(_gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    gradientColor: hov_gradientColor,
-    onChange: function onChange(hov_gradientColor) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "gradientColor"), hov_gradientColor));
-    }
-  }), !noTransition && /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Background Transition"),
-    value: bg_transition,
-    min: 0,
-    max: 5,
-    step: 0.1,
-    onChange: function onChange(bg_transition) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "bg_transition"), bg_transition));
-    }
-  })));
-}
-
-/***/ }),
-
-/***/ "./util/background-control/index.js":
-/*!******************************************!*\
-  !*** ./util/background-control/index.js ***!
-  \******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BackgroundControl; });
-/* harmony import */ var _overlayControl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./overlayControl */ "./util/background-control/overlayControl.js");
-/* harmony import */ var _bgControl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bgControl */ "./util/background-control/bgControl.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-/**
- * WordPress dependencies
- */
-var __ = wp.i18n.__;
-var ToggleControl = wp.components.ToggleControl;
-/**
- * Internal dependencies
- */
-
-
-
-function BackgroundControl(_ref) {
-  var resRequiredProps = _ref.resRequiredProps,
-      controlName = _ref.controlName,
-      _ref$noOverlay = _ref.noOverlay,
-      noOverlay = _ref$noOverlay === void 0 ? false : _ref$noOverlay,
-      _ref$noMainBgi = _ref.noMainBgi,
-      noMainBgi = _ref$noMainBgi === void 0 ? false : _ref$noMainBgi,
-      _ref$noOverlayBgi = _ref.noOverlayBgi,
-      noOverlayBgi = _ref$noOverlayBgi === void 0 ? false : _ref$noOverlayBgi,
-      _ref$noTransition = _ref.noTransition,
-      noTransition = _ref$noTransition === void 0 ? false : _ref$noTransition,
-      _ref$forButton = _ref.forButton,
-      forButton = _ref$forButton === void 0 ? false : _ref$forButton;
-  var setAttributes = resRequiredProps.setAttributes,
-      attributes = resRequiredProps.attributes;
-  var isBgOverlay = attributes["".concat(controlName, "isBgOverlay")];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_bgControl__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    resRequiredProps: resRequiredProps,
-    controlName: controlName,
-    noMainBgi: forButton === true ? true : noMainBgi,
-    noTransition: noTransition
-  }), noOverlay === false && forButton == false && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __("Enable Overlay"),
-    checked: isBgOverlay,
-    onChange: function onChange() {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "isBgOverlay"), !isBgOverlay));
-    }
-  }), isBgOverlay && /*#__PURE__*/React.createElement(_overlayControl__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    resRequiredProps: resRequiredProps,
-    controlName: controlName,
-    noOverlayBgi: noOverlayBgi,
-    noTransition: noTransition
-  })));
-}
-
-/***/ }),
-
-/***/ "./util/background-control/overlayControl.js":
-/*!***************************************************!*\
-  !*** ./util/background-control/overlayControl.js ***!
-  \***************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return overlayControl; });
-/* harmony import */ var _gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../gradient-color-controller */ "./util/gradient-color-controller/index.js");
-/* harmony import */ var _unit_control__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../unit-control */ "./util/unit-control/index.js");
-/* harmony import */ var _color_control__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../color-control */ "./util/color-control/index.js");
-/* harmony import */ var _image_avatar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../image-avatar */ "./util/image-avatar/index.js");
-/* harmony import */ var _withResButtons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../withResButtons */ "./util/withResButtons/index.js");
-/* harmony import */ var _reset_control__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../reset-control */ "./util/reset-control/index.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var __ = wp.i18n.__;
-var MediaUpload = wp.blockEditor.MediaUpload;
-var _wp$components = wp.components,
-    SelectControl = _wp$components.SelectControl,
-    Button = _wp$components.Button,
-    RangeControl = _wp$components.RangeControl,
-    BaseControl = _wp$components.BaseControl,
-    ButtonGroup = _wp$components.ButtonGroup,
-    ToggleControl = _wp$components.ToggleControl;
-/**
- * Internal dependencies
- */
-
-
-
-
-
-
-
-function overlayControl(_ref) {
-  var resRequiredProps = _ref.resRequiredProps,
-      controlName = _ref.controlName,
-      noOverlayBgi = _ref.noOverlayBgi,
-      noTransition = _ref.noTransition;
-  var setAttributes = resRequiredProps.setAttributes,
-      attributes = resRequiredProps.attributes,
-      resOption = resRequiredProps.resOption;
-  var ovl_hoverType = attributes["".concat(controlName, "ovl_hoverType")],
-      ovl_bg_transition = attributes["".concat(controlName, "ovl_bg_transition")],
-      ovl_filtersTransition = attributes["".concat(controlName, "ovl_filtersTransition")],
-      ovl_opacityTransition = attributes["".concat(controlName, "ovl_opacityTransition")],
-      overlayType = attributes["".concat(controlName, "overlayType")],
-      overlayColor = attributes["".concat(controlName, "overlayColor")],
-      overlayGradient = attributes["".concat(controlName, "overlayGradient")],
-      ovl_bgImageURL = attributes["".concat(controlName, "ovl_bgImageURL")],
-      ovl_bgImageID = attributes["".concat(controlName, "ovl_bgImageID")],
-      ovl_bgImgAttachment = attributes["".concat(controlName, "ovl_bgImgAttachment")],
-      ovl_opacity = attributes["".concat(controlName, "ovl_opacity")],
-      ovl_blendMode = attributes["".concat(controlName, "ovl_blendMode")],
-      ovl_allowFilters = attributes["".concat(controlName, "ovl_allowFilters")],
-      ovl_fltrBrightness = attributes["".concat(controlName, "ovl_fltrBrightness")],
-      ovl_fltrContrast = attributes["".concat(controlName, "ovl_fltrContrast")],
-      ovl_fltrSaturation = attributes["".concat(controlName, "ovl_fltrSaturation")],
-      ovl_fltrBlur = attributes["".concat(controlName, "ovl_fltrBlur")],
-      ovl_fltrHue = attributes["".concat(controlName, "ovl_fltrHue")],
-      ovl_backgroundSize = attributes["".concat(controlName, "ovl_backgroundSize")],
-      ovl_bgImgCustomSize = attributes["".concat(controlName, "ovl_bgImgCustomSize")],
-      ovl_bgImgCustomSizeUnit = attributes["".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      ovl_bgImgPos = attributes["".concat(controlName, "ovl_bgImgPos")],
-      ovl_bgImgcustomPosX = attributes["".concat(controlName, "ovl_bgImgcustomPosX")],
-      ovl_bgImgcustomPosXUnit = attributes["".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      ovl_bgImgcustomPosY = attributes["".concat(controlName, "ovl_bgImgcustomPosY")],
-      ovl_bgImgcustomPosYUnit = attributes["".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      ovl_bgImgRepeat = attributes["".concat(controlName, "ovl_bgImgRepeat")],
-      TABovl_backgroundSize = attributes["TAB".concat(controlName, "ovl_backgroundSize")],
-      TABovl_bgImgCustomSize = attributes["TAB".concat(controlName, "ovl_bgImgCustomSize")],
-      TABovl_bgImgCustomSizeUnit = attributes["TAB".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      TABovl_bgImgPos = attributes["TAB".concat(controlName, "ovl_bgImgPos")],
-      TABovl_bgImgcustomPosX = attributes["TAB".concat(controlName, "ovl_bgImgcustomPosX")],
-      TABovl_bgImgcustomPosXUnit = attributes["TAB".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      TABovl_bgImgcustomPosY = attributes["TAB".concat(controlName, "ovl_bgImgcustomPosY")],
-      TABovl_bgImgcustomPosYUnit = attributes["TAB".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      TABovl_bgImgRepeat = attributes["TAB".concat(controlName, "ovl_bgImgRepeat")],
-      MOBovl_backgroundSize = attributes["MOB".concat(controlName, "ovl_backgroundSize")],
-      MOBovl_bgImgCustomSize = attributes["MOB".concat(controlName, "ovl_bgImgCustomSize")],
-      MOBovl_bgImgCustomSizeUnit = attributes["MOB".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      MOBovl_bgImgPos = attributes["MOB".concat(controlName, "ovl_bgImgPos")],
-      MOBovl_bgImgcustomPosX = attributes["MOB".concat(controlName, "ovl_bgImgcustomPosX")],
-      MOBovl_bgImgcustomPosXUnit = attributes["MOB".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      MOBovl_bgImgcustomPosY = attributes["MOB".concat(controlName, "ovl_bgImgcustomPosY")],
-      MOBovl_bgImgcustomPosYUnit = attributes["MOB".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      MOBovl_bgImgRepeat = attributes["MOB".concat(controlName, "ovl_bgImgRepeat")],
-      hov_overlayType = attributes["hov_".concat(controlName, "overlayType")],
-      hov_overlayColor = attributes["hov_".concat(controlName, "overlayColor")],
-      hov_overlayGradient = attributes["hov_".concat(controlName, "overlayGradient")],
-      hov_ovl_bgImageURL = attributes["hov_".concat(controlName, "ovl_bgImageURL")],
-      hov_ovl_bgImageID = attributes["hov_".concat(controlName, "ovl_bgImageID")],
-      hov_ovl_bgImgAttachment = attributes["hov_".concat(controlName, "ovl_bgImgAttachment")],
-      hov_ovl_opacity = attributes["hov_".concat(controlName, "ovl_opacity")],
-      hov_ovl_blendMode = attributes["hov_".concat(controlName, "ovl_blendMode")],
-      hov_ovl_allowFilters = attributes["hov_".concat(controlName, "ovl_allowFilters")],
-      hov_ovl_fltrBrightness = attributes["hov_".concat(controlName, "ovl_fltrBrightness")],
-      hov_ovl_fltrContrast = attributes["hov_".concat(controlName, "ovl_fltrContrast")],
-      hov_ovl_fltrSaturation = attributes["hov_".concat(controlName, "ovl_fltrSaturation")],
-      hov_ovl_fltrBlur = attributes["hov_".concat(controlName, "ovl_fltrBlur")],
-      hov_ovl_fltrHue = attributes["hov_".concat(controlName, "ovl_fltrHue")],
-      hov_ovl_backgroundSize = attributes["hov_".concat(controlName, "ovl_backgroundSize")],
-      hov_ovl_bgImgCustomSize = attributes["hov_".concat(controlName, "ovl_bgImgCustomSize")],
-      hov_ovl_bgImgCustomSizeUnit = attributes["hov_".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      hov_ovl_bgImgPos = attributes["hov_".concat(controlName, "ovl_bgImgPos")],
-      hov_ovl_bgImgcustomPosX = attributes["hov_".concat(controlName, "ovl_bgImgcustomPosX")],
-      hov_ovl_bgImgcustomPosXUnit = attributes["hov_".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      hov_ovl_bgImgcustomPosY = attributes["hov_".concat(controlName, "ovl_bgImgcustomPosY")],
-      hov_ovl_bgImgcustomPosYUnit = attributes["hov_".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      hov_ovl_bgImgRepeat = attributes["hov_".concat(controlName, "ovl_bgImgRepeat")],
-      hov_TABovl_backgroundSize = attributes["hov_TAB".concat(controlName, "ovl_backgroundSize")],
-      hov_TABovl_bgImgCustomSize = attributes["hov_TAB".concat(controlName, "ovl_bgImgCustomSize")],
-      hov_TABovl_bgImgCustomSizeUnit = attributes["hov_TAB".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      hov_TABovl_bgImgPos = attributes["hov_TAB".concat(controlName, "ovl_bgImgPos")],
-      hov_TABovl_bgImgcustomPosX = attributes["hov_TAB".concat(controlName, "ovl_bgImgcustomPosX")],
-      hov_TABovl_bgImgcustomPosXUnit = attributes["hov_TAB".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      hov_TABovl_bgImgcustomPosY = attributes["hov_TAB".concat(controlName, "ovl_bgImgcustomPosY")],
-      hov_TABovl_bgImgcustomPosYUnit = attributes["hov_TAB".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      hov_TABovl_bgImgRepeat = attributes["hov_TAB".concat(controlName, "ovl_bgImgRepeat")],
-      hov_MOBovl_backgroundSize = attributes["hov_MOB".concat(controlName, "ovl_backgroundSize")],
-      hov_MOBovl_bgImgCustomSize = attributes["hov_MOB".concat(controlName, "ovl_bgImgCustomSize")],
-      hov_MOBovl_bgImgCustomSizeUnit = attributes["hov_MOB".concat(controlName, "ovl_bgImgCustomSizeUnit")],
-      hov_MOBovl_bgImgPos = attributes["hov_MOB".concat(controlName, "ovl_bgImgPos")],
-      hov_MOBovl_bgImgcustomPosX = attributes["hov_MOB".concat(controlName, "ovl_bgImgcustomPosX")],
-      hov_MOBovl_bgImgcustomPosXUnit = attributes["hov_MOB".concat(controlName, "ovl_bgImgcustomPosXUnit")],
-      hov_MOBovl_bgImgcustomPosY = attributes["hov_MOB".concat(controlName, "ovl_bgImgcustomPosY")],
-      hov_MOBovl_bgImgcustomPosYUnit = attributes["hov_MOB".concat(controlName, "ovl_bgImgcustomPosYUnit")],
-      hov_MOBovl_bgImgRepeat = attributes["hov_MOB".concat(controlName, "ovl_bgImgRepeat")];
-  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Background Overlay")
-  }), /*#__PURE__*/React.createElement(BaseControl, null, /*#__PURE__*/React.createElement(ButtonGroup, null, [{
-    label: __("Normal"),
-    value: "normal"
-  }, {
-    label: __("Hover"),
-    value: "hover"
-  }].map(function (_ref2) {
-    var value = _ref2.value,
-        label = _ref2.label;
-    return /*#__PURE__*/React.createElement(Button // isSmall
-    // isLarge
-    , {
-      isPrimary: ovl_hoverType === value,
-      isSecondary: ovl_hoverType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_hoverType"), value));
-      }
-    }, label);
-  }))), ovl_hoverType === "normal" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Overlay Type")
-  }, /*#__PURE__*/React.createElement(ButtonGroup, {
-    id: "eb-background-control-new"
-  }, [{
-    label: "Classic",
-    value: "classic"
-  }, {
-    label: "Gradient",
-    value: "gradient"
-  }].map(function (_ref3) {
-    var value = _ref3.value,
-        label = _ref3.label;
-    return /*#__PURE__*/React.createElement(Button, {
-      isLarge: true,
-      isPrimary: overlayType === value,
-      isSecondary: overlayType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "".concat(controlName, "overlayType"), value));
-      }
-    }, label);
-  }))), overlayType === "classic" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_color_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __("Overlay Color"),
-    color: overlayColor,
-    onChange: function onChange(overlayColor) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "overlayColor"), overlayColor));
-    }
-  }), noOverlayBgi === false && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Overlay Image")
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(_ref4) {
-      var _setAttributes4;
-
-      var url = _ref4.url,
-          id = _ref4.id;
-      return setAttributes((_setAttributes4 = {}, _defineProperty(_setAttributes4, "".concat(controlName, "ovl_bgImageURL"), url), _defineProperty(_setAttributes4, "".concat(controlName, "ovl_bgImageID"), id), _setAttributes4));
-    },
-    type: "image",
-    value: ovl_bgImageID,
-    render: function render(_ref5) {
-      var open = _ref5.open;
-      return !ovl_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-        className: "eb-background-control-inspector-panel-img-btn components-button",
-        label: __("Upload Image"),
-        icon: "format-image",
-        onClick: open
-      }), /*#__PURE__*/React.createElement("span", {
-        style: {
-          padding: "10px 0",
-          display: "block"
-        }
-      }));
-    }
-  }), ovl_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_image_avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    imageUrl: ovl_bgImageURL,
-    onDeleteImage: function onDeleteImage() {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImageURL"), null));
-    }
-  }), resOption === "Desktop" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: ovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(ovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgPos"), ovl_bgImgPos));
-    }
-  })), ovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: ovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(ovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgcustomPosXUnit"), ovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: ovl_bgImgcustomPosX,
-    min: 0,
-    max: ovl_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(ovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgcustomPosX"), ovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: ovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(ovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgcustomPosYUnit"), ovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: ovl_bgImgcustomPosY,
-    min: 0,
-    max: ovl_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: ovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(ovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgcustomPosY"), ovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgAttachment"), ovl_bgImgAttachment));
-    }
-  }), ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: ovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(ovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgRepeat"), ovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: ovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(ovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_backgroundSize"), ovl_backgroundSize));
-    }
-  })), ovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: ovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(ovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgCustomSizeUnit"), ovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: ovl_bgImgCustomSize,
-    min: 0,
-    max: ovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: ovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(ovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgCustomSize"), ovl_bgImgCustomSize));
-    }
-  })))), resOption === "Tablet" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(TABovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgPos"), TABovl_bgImgPos));
-    }
-  })), TABovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgcustomPosXUnit"), TABovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABovl_bgImgcustomPosX,
-    min: -2000,
-    max: // TABovl_bgImgcustomPosXUnit === "px"
-    //   ? 
-    2000 // : 100
-    ,
-    onChange: function onChange(TABovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgcustomPosX"), TABovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgcustomPosYUnit"), TABovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABovl_bgImgcustomPosY,
-    min: -2000,
-    max: // TABovl_bgImgcustomPosYUnit === "px"
-    //   ? 
-    2000 // : 100
-    ,
-    step: TABovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(TABovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgcustomPosY"), TABovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgAttachment"), ovl_bgImgAttachment));
-    }
-  }), ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(TABovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgRepeat"), TABovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: TABovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(TABovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_backgroundSize"), TABovl_backgroundSize));
-    }
-  })), TABovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: TABovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(TABovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgCustomSizeUnit"), TABovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: TABovl_bgImgCustomSize,
-    min: 0,
-    max: TABovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: TABovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(TABovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "TAB".concat(controlName, "ovl_bgImgCustomSize"), TABovl_bgImgCustomSize));
-    }
-  })))), resOption === "Mobile" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(MOBovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgPos"), MOBovl_bgImgPos));
-    }
-  })), MOBovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgcustomPosXUnit"), MOBovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBovl_bgImgcustomPosX,
-    min: 0,
-    max: MOBovl_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(MOBovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgcustomPosX"), MOBovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgcustomPosYUnit"), MOBovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBovl_bgImgcustomPosY,
-    min: 0,
-    max: MOBovl_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: MOBovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(MOBovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgcustomPosY"), MOBovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bgImgAttachment"), ovl_bgImgAttachment));
-    }
-  }), ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(MOBovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgRepeat"), MOBovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: MOBovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(MOBovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_backgroundSize"), MOBovl_backgroundSize));
-    }
-  })), MOBovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: MOBovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(MOBovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgCustomSizeUnit"), MOBovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: MOBovl_bgImgCustomSize,
-    min: 0,
-    max: MOBovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: MOBovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(MOBovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "MOB".concat(controlName, "ovl_bgImgCustomSize"), MOBovl_bgImgCustomSize));
-    }
-  }))))))), overlayType === "gradient" && /*#__PURE__*/React.createElement(_gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    gradientColor: overlayGradient,
-    onChange: function onChange(overlayGradient) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "overlayGradient"), overlayGradient));
-    }
-  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Opacity"),
-    value: ovl_opacity,
-    onChange: function onChange(ovl_opacity) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_opacity"), ovl_opacity));
-    },
-    step: 0.01,
-    min: 0,
-    max: 1
-  }), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __("Blend Mode"),
-    value: ovl_blendMode,
-    options: [{
-      label: __("Normal"),
-      value: ""
-    }, {
-      label: __("Multiply"),
-      value: "multiply"
-    }, {
-      label: __("Screen"),
-      value: "screen"
-    }, {
-      label: __("Overlay"),
-      value: "overlay"
-    }, {
-      label: __("Darken"),
-      value: "darken"
-    }, {
-      label: __("Lighten"),
-      value: "lighten"
-    }, {
-      label: __("Color Dodge"),
-      value: "color-dodge"
-    }, {
-      label: __("Saturation"),
-      value: "saturation"
-    }, {
-      label: __("Color"),
-      value: "color"
-    }, {
-      label: __("Luminosity"),
-      value: "luminosity"
-    }],
-    onChange: function onChange(ovl_blendMode) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_blendMode"), ovl_blendMode));
-    }
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __("CSS Filters"),
-    checked: ovl_allowFilters,
-    onChange: function onChange() {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_allowFilters"), !ovl_allowFilters));
-    }
-  }), ovl_allowFilters && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Blur"),
-    value: ovl_fltrBlur,
-    onChange: function onChange(ovl_fltrBlur) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_fltrBlur"), ovl_fltrBlur));
-    },
-    step: 0.1,
-    min: 0,
-    max: 10
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Brightness"),
-    value: ovl_fltrBrightness,
-    onChange: function onChange(ovl_fltrBrightness) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_fltrBrightness"), ovl_fltrBrightness));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Contrast"),
-    value: ovl_fltrContrast,
-    onChange: function onChange(ovl_fltrContrast) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_fltrContrast"), ovl_fltrContrast));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Saturation"),
-    value: ovl_fltrSaturation,
-    onChange: function onChange(ovl_fltrSaturation) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_fltrSaturation"), ovl_fltrSaturation));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Hue"),
-    value: ovl_fltrHue,
-    onChange: function onChange(ovl_fltrHue) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_fltrHue"), ovl_fltrHue));
-    },
-    step: 1,
-    min: 0,
-    max: 360
-  }))), ovl_hoverType === "hover" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Overlay Type")
-  }, /*#__PURE__*/React.createElement(ButtonGroup, {
-    id: "eb-background-control-new"
-  }, [{
-    label: "Classic",
-    value: "classic"
-  }, {
-    label: "Gradient",
-    value: "gradient"
-  }].map(function (_ref6) {
-    var value = _ref6.value,
-        label = _ref6.label;
-    return /*#__PURE__*/React.createElement(Button, {
-      isLarge: true,
-      isPrimary: hov_overlayType === value,
-      isSecondary: hov_overlayType !== value,
-      onClick: function onClick() {
-        return setAttributes(_defineProperty({}, "hov_".concat(controlName, "overlayType"), value));
-      }
-    }, label);
-  }))), hov_overlayType === "classic" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_color_control__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    label: __("Overlay Color"),
-    color: hov_overlayColor,
-    onChange: function onChange(hov_overlayColor) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "overlayColor"), hov_overlayColor));
-    }
-  }), noOverlayBgi === false && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(BaseControl, {
-    label: __("Overlay Image")
-  }), /*#__PURE__*/React.createElement(MediaUpload, {
-    onSelect: function onSelect(_ref7) {
-      var _setAttributes47;
-
-      var url = _ref7.url,
-          id = _ref7.id;
-      return setAttributes((_setAttributes47 = {}, _defineProperty(_setAttributes47, "hov_".concat(controlName, "ovl_bgImageURL"), url), _defineProperty(_setAttributes47, "hov_".concat(controlName, "ovl_bgImageID"), id), _setAttributes47));
-    },
-    type: "image",
-    value: hov_ovl_bgImageID,
-    render: function render(_ref8) {
-      var open = _ref8.open;
-      return !hov_ovl_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Button, {
-        className: "eb-background-control-inspector-panel-img-btn components-button",
-        label: __("Upload Image"),
-        icon: "format-image",
-        onClick: open
-      }), /*#__PURE__*/React.createElement("span", {
-        style: {
-          padding: "10px 0",
-          display: "block"
-        }
-      }));
-    }
-  }), hov_ovl_bgImageURL && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_image_avatar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    imageUrl: hov_ovl_bgImageURL,
-    onDeleteImage: function onDeleteImage() {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImageURL"), null));
-    }
-  }), resOption === "Desktop" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_ovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_ovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgPos"), hov_ovl_bgImgPos));
-    }
-  })), hov_ovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_ovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_ovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgcustomPosXUnit"), hov_ovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_ovl_bgImgcustomPosX,
-    min: 0,
-    max: hov_ovl_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_ovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgcustomPosX"), hov_ovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_ovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_ovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgcustomPosYUnit"), hov_ovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_ovl_bgImgcustomPosY,
-    min: 0,
-    max: hov_ovl_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_ovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_ovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgcustomPosY"), hov_ovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgAttachment"), hov_ovl_bgImgAttachment));
-    }
-  }), hov_ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_ovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_ovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgRepeat"), hov_ovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_ovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_ovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_backgroundSize"), hov_ovl_backgroundSize));
-    }
-  })), hov_ovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_ovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_ovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgCustomSizeUnit"), hov_ovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_ovl_bgImgCustomSize,
-    min: 0,
-    max: hov_ovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_ovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_ovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgCustomSize"), hov_ovl_bgImgCustomSize));
-    }
-  })))), resOption === "Tablet" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_TABovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgPos"), hov_TABovl_bgImgPos));
-    }
-  })), hov_TABovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgcustomPosXUnit"), hov_TABovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABovl_bgImgcustomPosX,
-    min: 0,
-    max: hov_TABovl_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_TABovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgcustomPosX"), hov_TABovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgcustomPosYUnit"), hov_TABovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABovl_bgImgcustomPosY,
-    min: 0,
-    max: hov_TABovl_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_TABovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_TABovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgcustomPosY"), hov_TABovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgAttachment"), hov_ovl_bgImgAttachment));
-    }
-  }), hov_ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_TABovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgRepeat"), hov_TABovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_TABovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_TABovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_backgroundSize"), hov_TABovl_backgroundSize));
-    }
-  })), hov_TABovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_TABovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_TABovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgCustomSizeUnit"), hov_TABovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_TABovl_bgImgCustomSize,
-    min: 0,
-    max: hov_TABovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_TABovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_TABovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_TAB".concat(controlName, "ovl_bgImgCustomSize"), hov_TABovl_bgImgCustomSize));
-    }
-  })))), resOption === "Mobile" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Position"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBovl_bgImgPos,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Center Center"),
-      value: "center center"
-    }, {
-      label: __("Center Left"),
-      value: "center left"
-    }, {
-      label: __("Center Right"),
-      value: "center right"
-    }, {
-      label: __("Top Center"),
-      value: "top center"
-    }, {
-      label: __("Top Left"),
-      value: "top left"
-    }, {
-      label: __("Top Right"),
-      value: "top right"
-    }, {
-      label: __("Bottom Center"),
-      value: "bottom center"
-    }, {
-      label: __("Bottom Left"),
-      value: "bottom left"
-    }, {
-      label: __("Bottom Right"),
-      value: "bottom right"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_MOBovl_bgImgPos) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgPos"), hov_MOBovl_bgImgPos));
-    }
-  })), hov_MOBovl_bgImgPos === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBovl_bgImgcustomPosXUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBovl_bgImgcustomPosXUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgcustomPosXUnit"), hov_MOBovl_bgImgcustomPosXUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "X Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBovl_bgImgcustomPosX,
-    min: 0,
-    max: hov_MOBovl_bgImgcustomPosXUnit === "px" ? 2000 : 100,
-    onChange: function onChange(hov_MOBovl_bgImgcustomPosX) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgcustomPosX"), hov_MOBovl_bgImgcustomPosX));
-    }
-  })), /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBovl_bgImgcustomPosYUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBovl_bgImgcustomPosYUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgcustomPosYUnit"), hov_MOBovl_bgImgcustomPosYUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Y Position"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBovl_bgImgcustomPosY,
-    min: 0,
-    max: hov_MOBovl_bgImgcustomPosYUnit === "px" ? 2000 : 100,
-    step: hov_MOBovl_bgImgcustomPosYUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_MOBovl_bgImgcustomPosY) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgcustomPosY"), hov_MOBovl_bgImgcustomPosY));
-    }
-  }))), /*#__PURE__*/React.createElement(SelectControl, {
-    label: "Attachment",
-    value: hov_ovl_bgImgAttachment,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Scroll"),
-      value: "scroll"
-    }, {
-      label: __("Fixed"),
-      value: "fixed"
-    }],
-    onChange: function onChange(hov_ovl_bgImgAttachment) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_bgImgAttachment"), hov_ovl_bgImgAttachment));
-    }
-  }), hov_ovl_bgImgAttachment === "fixed" && /*#__PURE__*/React.createElement("p", {
-    style: {
-      marginTop: "-10px",
-      paddingBottom: "10px"
-    }
-  }, /*#__PURE__*/React.createElement("i", null, "Note: Attachment Fixed works only on desktop.")), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Repeat"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBovl_bgImgRepeat,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("No-repeat"),
-      value: "no-repeat"
-    }, {
-      label: __("Repeat"),
-      value: "repeat"
-    }, {
-      label: __("Repeat-x"),
-      value: "repeat-x"
-    }, {
-      label: __("Repeat-y"),
-      value: "repeat-y"
-    }],
-    onChange: function onChange(hov_MOBovl_bgImgRepeat) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgRepeat"), hov_MOBovl_bgImgRepeat));
-    }
-  })), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Size"
-  }, /*#__PURE__*/React.createElement(SelectControl, {
-    value: hov_MOBovl_backgroundSize,
-    options: [{
-      label: __("Default"),
-      value: ""
-    }, {
-      label: __("Auto"),
-      value: "auto"
-    }, {
-      label: __("Cover"),
-      value: "cover"
-    }, {
-      label: __("Contain"),
-      value: "contain"
-    }, {
-      label: __("Custom"),
-      value: "custom"
-    }],
-    onChange: function onChange(hov_MOBovl_backgroundSize) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_backgroundSize"), hov_MOBovl_backgroundSize));
-    }
-  })), hov_MOBovl_backgroundSize === "custom" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_unit_control__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    selectedUnit: hov_MOBovl_bgImgCustomSizeUnit,
-    unitTypes: [{
-      label: "px",
-      value: "px"
-    }, {
-      label: "em",
-      value: "em"
-    }, {
-      label: "%",
-      value: "%"
-    }],
-    onClick: function onClick(hov_MOBovl_bgImgCustomSizeUnit) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgCustomSizeUnit"), hov_MOBovl_bgImgCustomSizeUnit));
-    }
-  }), /*#__PURE__*/React.createElement(_withResButtons__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    resRequiredProps: resRequiredProps,
-    label: "Width"
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    value: hov_MOBovl_bgImgCustomSize,
-    min: 0,
-    max: hov_MOBovl_bgImgCustomSizeUnit === "px" ? 2000 : 100,
-    step: hov_MOBovl_bgImgCustomSizeUnit === "px" ? 1 : 0.1,
-    onChange: function onChange(hov_MOBovl_bgImgCustomSize) {
-      return setAttributes(_defineProperty({}, "hov_MOB".concat(controlName, "ovl_bgImgCustomSize"), hov_MOBovl_bgImgCustomSize));
-    }
-  }))))))), hov_overlayType === "gradient" && /*#__PURE__*/React.createElement(_gradient_color_controller__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    gradientColor: hov_overlayGradient,
-    onChange: function onChange(hov_overlayGradient) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "overlayGradient"), hov_overlayGradient));
-    }
-  }), /*#__PURE__*/React.createElement("hr", null), !noTransition && /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Overlay Transition"),
-    value: ovl_bg_transition,
-    min: 0,
-    max: 5,
-    step: 0.1,
-    onChange: function onChange(ovl_bg_transition) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_bg_transition"), ovl_bg_transition));
-    }
-  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(_reset_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    onReset: function onReset() {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_opacity"), undefined));
-    }
-  }, /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Opacity"),
-    value: hov_ovl_opacity,
-    onChange: function onChange(hov_ovl_opacity) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_opacity"), hov_ovl_opacity));
-    },
-    step: 0.01,
-    min: 0,
-    max: 1
-  })), !noTransition && hov_ovl_opacity && /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Opacity Transition"),
-    value: ovl_opacityTransition,
-    onChange: function onChange(ovl_opacityTransition) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_opacityTransition"), ovl_opacityTransition));
-    },
-    step: 0.01,
-    min: 0,
-    max: 5
-  }), /*#__PURE__*/React.createElement("hr", null), /*#__PURE__*/React.createElement(SelectControl, {
-    label: __("Blend Mode"),
-    value: hov_ovl_blendMode,
-    options: [{
-      label: __("Normal"),
-      value: ""
-    }, {
-      label: __("multiply"),
-      value: "multiply"
-    }, {
-      label: __("screen"),
-      value: "screen"
-    }, {
-      label: __("overlay"),
-      value: "overlay"
-    }, {
-      label: __("darken"),
-      value: "darken"
-    }, {
-      label: __("lighten"),
-      value: "lighten"
-    }, {
-      label: __("color-dodge"),
-      value: "Color Dodge"
-    }, {
-      label: __("saturation"),
-      value: "saturation"
-    }, {
-      label: __("color"),
-      value: "color"
-    }, {
-      label: __("luminosity"),
-      value: "luminosity"
-    }],
-    onChange: function onChange(hov_ovl_blendMode) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_blendMode"), hov_ovl_blendMode));
-    }
-  }), /*#__PURE__*/React.createElement(ToggleControl, {
-    label: __("CSS Filters"),
-    checked: hov_ovl_allowFilters,
-    onChange: function onChange() {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_allowFilters"), !hov_ovl_allowFilters));
-    }
-  }), hov_ovl_allowFilters && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Blur"),
-    value: hov_ovl_fltrBlur,
-    onChange: function onChange(hov_ovl_fltrBlur) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_fltrBlur"), hov_ovl_fltrBlur));
-    },
-    step: 0.1,
-    min: 0,
-    max: 10
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Brightness"),
-    value: hov_ovl_fltrBrightness,
-    onChange: function onChange(hov_ovl_fltrBrightness) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_fltrBrightness"), hov_ovl_fltrBrightness));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Contrast"),
-    value: hov_ovl_fltrContrast,
-    onChange: function onChange(hov_ovl_fltrContrast) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_fltrContrast"), hov_ovl_fltrContrast));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Saturation"),
-    value: hov_ovl_fltrSaturation,
-    onChange: function onChange(hov_ovl_fltrSaturation) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_fltrSaturation"), hov_ovl_fltrSaturation));
-    },
-    step: 1,
-    min: 0,
-    max: 200
-  }), /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Hue"),
-    value: hov_ovl_fltrHue,
-    onChange: function onChange(hov_ovl_fltrHue) {
-      return setAttributes(_defineProperty({}, "hov_".concat(controlName, "ovl_fltrHue"), hov_ovl_fltrHue));
-    },
-    step: 1,
-    min: 0,
-    max: 360
-  }), /*#__PURE__*/React.createElement("hr", null), !noTransition && /*#__PURE__*/React.createElement(RangeControl, {
-    label: __("Css Filters Transition"),
-    value: ovl_filtersTransition,
-    onChange: function onChange(ovl_filtersTransition) {
-      return setAttributes(_defineProperty({}, "".concat(controlName, "ovl_filtersTransition"), ovl_filtersTransition));
-    },
-    step: 0.01,
-    min: 0,
-    max: 5
-  }))));
 }
 
 /***/ }),
