@@ -31,20 +31,6 @@ class List extends Component {
 		} = this.props.attributes;
 
 		// Style objects
-		const listStyle = {
-			listStyle: listType === "none" ? "none" : undefined,
-			color: listType !== "none" ? listColor : undefined,
-			marginLeft: indent,
-		};
-
-		const listItemStyle = {
-			fontFamily: contentFontFamily,
-			fontSize: contentFontSize + contentSizeUnit,
-			fontWeight: contentFontWeight,
-			letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-			lineHeight: contentLineHeight,
-			textTransform: contentTextTransform,
-		};
 
 		const linkStyle = {
 			color: contentColor,
@@ -110,13 +96,14 @@ class List extends Component {
 						<li
 							key={counter}
 							style={{
-								...listItemStyle,
 								paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
 								paddingBottom:
 									counter < list.length && contentGap / 2 + contentGapUnit,
 								borderBottom:
 									counter < list.length &&
-									`${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor}`,
+									`${listSeperatorWidth || 0}px ${
+										listSeperatorStyle || "solid"
+									} ${listSeperatorColor || "transparent"}`,
 							}}
 						>
 							<a
@@ -124,7 +111,6 @@ class List extends Component {
 								dangerouslySetInnerHTML={{
 									__html: item.text,
 								}}
-								style={linkStyle}
 							/>
 						</li>
 					);
@@ -133,11 +119,7 @@ class List extends Component {
 			});
 			ul_counter++;
 			return (
-				<ListTag
-					key={counter + "-" + ul_counter}
-					className="eb-toc__list"
-					style={listStyle}
-				>
+				<ListTag key={counter + "-" + ul_counter} className="eb-toc__list">
 					{items}
 				</ListTag>
 			);

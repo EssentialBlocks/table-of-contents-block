@@ -10671,7 +10671,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
+var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({
   // the following 4 attributes is must required for responsive options and asset generation for frontend
   // responsive control attributes ⬇
   resOption: {
@@ -10975,12 +10975,15 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     type: "number",
     "default": 100
   }
-}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_3__["wrapMaxWidthPrefix"], {
+}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateTypographyAttributes"])(Object.values(_constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_0__))), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_3__["wrapMaxWidthPrefix"], {
   // noUnits: true,
   defaultRange: 610
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateBorderShadowAttributes"])(_constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_2__["WrpBdShadowConst"], {// noShadow: true,
   // noBorder: true,
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpMarginConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpPaddingConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["titlePaddingConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["contentPaddingConst"]));
+})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpMarginConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpPaddingConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["titlePaddingConst"], {
+  left: 10,
+  isLinked: false
+})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["contentPaddingConst"]));
 
 /* harmony default export */ __webpack_exports__["default"] = (attributes);
 
@@ -11439,22 +11442,16 @@ var wrapMaxWidthPrefix = "wrpW";
 /*!****************************************************!*\
   !*** ./src/constants/typographyPrefixConstants.js ***!
   \****************************************************/
-/*! exports provided: typoPrefix_number, typoPrefix_title, typoPrefix_subTitle, typoPrefix_content, typoPrefix_buttonText */
+/*! exports provided: typoPrefix_title, typoPrefix_content */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typoPrefix_number", function() { return typoPrefix_number; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typoPrefix_title", function() { return typoPrefix_title; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typoPrefix_subTitle", function() { return typoPrefix_subTitle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typoPrefix_content", function() { return typoPrefix_content; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "typoPrefix_buttonText", function() { return typoPrefix_buttonText; });
 // each and every const here has to be totally unique from one another
-var typoPrefix_number = "number";
 var typoPrefix_title = "title";
-var typoPrefix_subTitle = "subTitle";
 var typoPrefix_content = "content";
-var typoPrefix_buttonText = "buttonText";
 
 /***/ }),
 
@@ -11706,6 +11703,7 @@ function Edit(_ref) {
       _attributes$contentCo = attributes.contentColor,
       contentColor = _attributes$contentCo === void 0 ? "#707070" : _attributes$contentCo,
       mainBgc = attributes.mainBgc,
+      contentHoverColor = attributes.contentHoverColor,
       displayTitle = attributes.displayTitle,
       titleAlign = attributes.titleAlign,
       titleFontFamily = attributes.titleFontFamily,
@@ -11750,7 +11748,9 @@ function Edit(_ref) {
       containerWidth = attributes.containerWidth,
       isSticky = attributes.isSticky,
       topSpace = attributes.topSpace,
-      contentHeight = attributes.contentHeight;
+      contentHeight = attributes.contentHeight,
+      indent = attributes.indent,
+      hasUnderline = attributes.hasUnderline;
 
   var _useState = useState(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -11880,34 +11880,25 @@ function Edit(_ref) {
   // });
   // // styles related to generateResponsiveRangeStyles end
   // // styles related to generateTypographyStyles start ⬇
-  // const {
-  // 	typoStylesDesktop: digitsTypoStylesDesktop,
-  // 	typoStylesTab: digitsTypoStylesTab,
-  // 	typoStylesMobile: digitsTypoStylesMobile,
-  // } = generateTypographyStyles({
-  // 	attributes,
-  // 	prefixConstant: typoPrefix_digits,
-  // 	defaultFontSize: 40,
-  // });
-  // const {
-  // 	typoStylesDesktop: labelsTypoStylesDesktop,
-  // 	typoStylesTab: labelsTypoStylesTab,
-  // 	typoStylesMobile: labelsTypoStylesMobile,
-  // } = generateTypographyStyles({
-  // 	attributes,
-  // 	prefixConstant: typoPrefix_labels,
-  // 	defaultFontSize: 18,
-  // });
-  // const {
-  // 	typoStylesDesktop: separatorTypoStylesDesktop,
-  // 	typoStylesTab: separatorTypoStylesTab,
-  // 	typoStylesMobile: separatorTypoStylesMobile,
-  // } = generateTypographyStyles({
-  // 	attributes,
-  // 	prefixConstant: typoPrefix_separator,
-  // 	defaultFontSize: 44,
-  // });
-  // // styles related to generateTypographyStyles end
+
+
+  var _generateTypographySt = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_5__["typoPrefix_title"],
+    defaultFontSize: 22
+  }),
+      titleTypoStylesDesktop = _generateTypographySt.typoStylesDesktop,
+      titleTypoStylesTab = _generateTypographySt.typoStylesTab,
+      titleTypoStylesMobile = _generateTypographySt.typoStylesMobile;
+
+  var _generateTypographySt2 = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["generateTypographyStyles"])({
+    attributes: attributes,
+    prefixConstant: _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_5__["typoPrefix_content"],
+    defaultFontSize: 20
+  }),
+      contentTypoStylesDesktop = _generateTypographySt2.typoStylesDesktop,
+      contentTypoStylesTab = _generateTypographySt2.typoStylesTab,
+      contentTypoStylesMobile = _generateTypographySt2.typoStylesMobile; // // styles related to generateTypographyStyles end
   // // styles related to generateBackgroundControlStyles start ⬇
   // const {
   // 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
@@ -11988,9 +11979,9 @@ function Edit(_ref) {
       wrpBdShdTransitionStyle = _generateBorderShadow.transitionStyle; // // styles related to generateBorderShadowStyles end
 
 
-  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\t\t\t\n\t\t\t").concat(mainBgc ? "background-color:".concat(mainBgc, ";") : "", "\n\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t\t").concat(titlePaddingDesktop, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\n\t");
-  var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthTab, "\n\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingTab, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingTab, "\n\t\t}\n\t\n\t\t\n\t");
-  var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthMobile, "\n\n\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingMobile, "\n\t\t}\n\t\n\t\t\n\t"); //
+  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\t\t\t\n\t\t\t").concat(mainBgc ? "background-color:".concat(mainBgc, ";") : "", "\n\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t\t").concat(titlePaddingDesktop, "\n\t\t\t").concat(titleTypoStylesDesktop, "\n\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ul,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ol\n\t\t{\n\t\t\t").concat(listType === "none" ? "list-style: none;" : "", "\n\t\t\t").concat(indent ? "margin-left:".concat(indent, "px;") : "", " \n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li {\n\t\t\tcolor:").concat(contentColor, ";\n\t\t\t").concat(contentTypoStylesDesktop, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li:hover{\n\t\t\tcolor:").concat(contentHoverColor, ";\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a{\n\t\t\tcolor:inherit;\n\t\t}\n\t\t\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a:focus{\n\t\t\t").concat(!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;", "\n\t\t\tbackground:none;\n\t\t}\n\n\t");
+  var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthTab, "\n\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingTab, "\n\t\t\t").concat(titleTypoStylesTab, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingTab, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li{\n\t\t\t").concat(contentTypoStylesTab, "\n\t\t}\n\n\t");
+  var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthMobile, "\n\n\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingMobile, "\n\t\t\t").concat(titleTypoStylesMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li{\n\t\t\t").concat(contentTypoStylesMobile, "\n\t\t}\n\n\t"); //
 
   var desktopAllStylesEditor = "\n\t\t".concat(desktopAllStylesCommon, "\n\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tdisplay:").concat(visible ? "block" : "none", ";\n\t\t}\n\n\n\n\t\t");
   var tabAllStylesEditor = "\n\t\t".concat(tabAllStylesCommon, "\n\n\t\n\t\t");
@@ -12685,144 +12676,12 @@ var Inspector = function Inspector(_ref) {
           titleColor: titleColor
         });
       }
-    }), /*#__PURE__*/React.createElement(BaseControl, {
-      label: __("Typography"),
-      className: "eb-typography-base"
-    }, /*#__PURE__*/React.createElement(Dropdown, {
-      className: "eb-typography-dropdown",
-      contentClassName: "my-popover-content-classname",
-      position: "bottom right",
-      renderToggle: function renderToggle(_ref2) {
-        var isOpen = _ref2.isOpen,
-            onToggle = _ref2.onToggle;
-        return /*#__PURE__*/React.createElement(Button, {
-          isSmall: true,
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          icon: "edit"
-        });
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          style: {
-            padding: "1rem"
-          }
-        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          label: __("Font Family"),
-          value: titleFontFamily,
-          onChange: function onChange(titleFontFamily) {
-            return setAttributes({
-              titleFontFamily: titleFontFamily
-            });
-          }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          selectedUnit: titleSizeUnit,
-          unitTypes: [{
-            label: "px",
-            value: "px"
-          }, {
-            label: "%",
-            value: "%"
-          }, {
-            label: "em",
-            value: "em"
-          }],
-          onClick: function onClick(titleSizeUnit) {
-            return setAttributes({
-              titleSizeUnit: titleSizeUnit
-            });
-          }
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Font Size"),
-          value: titleFontSize,
-          onChange: function onChange(titleFontSize) {
-            return setAttributes({
-              titleFontSize: titleFontSize
-            });
-          },
-          step: TITLE_SIZE_STEP,
-          min: 0,
-          max: TITLE_SIZE_MAX
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Font Weight"),
-          value: titleFontWeight,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["FONT_WEIGHTS"],
-          onChange: function onChange(titleFontWeight) {
-            return setAttributes({
-              titleFontWeight: titleFontWeight
-            });
-          }
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Text Transform"),
-          value: titleTextTransform,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_TRANSFORM"],
-          onChange: function onChange(titleTextTransform) {
-            return setAttributes({
-              titleTextTransform: titleTextTransform
-            });
-          }
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Text Decoration"),
-          value: titleTextDecoration,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_DECORATION"],
-          onChange: function onChange(titleTextDecoration) {
-            return setAttributes({
-              titleTextDecoration: titleTextDecoration
-            });
-          }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          selectedUnit: titleLetterSpacingUnit,
-          unitTypes: [{
-            label: "px",
-            value: "px"
-          }, {
-            label: "em",
-            value: "em"
-          }],
-          onClick: function onClick(titleLetterSpacingUnit) {
-            return setAttributes({
-              titleLetterSpacingUnit: titleLetterSpacingUnit
-            });
-          }
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Letter Spacing"),
-          value: titleLetterSpacing,
-          onChange: function onChange(titleLetterSpacing) {
-            return setAttributes({
-              titleLetterSpacing: titleLetterSpacing
-            });
-          },
-          min: 0,
-          max: TITLE_SPACING_MAX,
-          step: TITLE_SPACING_STEP
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          selectedUnit: titleLineHeightUnit,
-          unitTypes: [{
-            label: "px",
-            value: "px"
-          }, {
-            label: "em",
-            value: "em"
-          }],
-          onClick: function onClick(titleLineHeightUnit) {
-            return setAttributes({
-              titleLineHeightUnit: titleLineHeightUnit
-            });
-          }
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Line Height"),
-          value: titleLineHeight,
-          onChange: function onChange(titleLineHeight) {
-            return setAttributes({
-              titleLineHeight: titleLineHeight
-            });
-          },
-          min: 0,
-          max: TITLE_LINE_HEIGHT_MAX,
-          step: TITLE_LINE_HEIGHT_STEP
-        }));
-      }
-    })), /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_typography_control_v2__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      baseLabel: "Typography",
+      typographyPrefixConstant: _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_16__["typoPrefix_title"],
+      resRequiredProps: resRequiredProps,
+      defaultFontSize: 22
+    }), /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
       resRequiredProps: resRequiredProps,
       controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__["titlePaddingConst"],
       baseLabel: "Padding"
@@ -12935,130 +12794,12 @@ var Inspector = function Inspector(_ref) {
           contentHoverColor: contentHoverColor
         });
       }
-    }), /*#__PURE__*/React.createElement(BaseControl, {
-      label: __("Typography"),
-      className: "eb-typography-base"
-    }, /*#__PURE__*/React.createElement(Dropdown, {
-      className: "eb-typography-dropdown",
-      contentClassName: "my-popover-content-classname",
-      position: "bottom right",
-      renderToggle: function renderToggle(_ref3) {
-        var isOpen = _ref3.isOpen,
-            onToggle = _ref3.onToggle;
-        return /*#__PURE__*/React.createElement(Button, {
-          isSmall: true,
-          onClick: onToggle,
-          "aria-expanded": isOpen,
-          icon: "edit"
-        });
-      },
-      renderContent: function renderContent() {
-        return /*#__PURE__*/React.createElement("div", {
-          style: {
-            padding: "1rem"
-          }
-        }, /*#__PURE__*/React.createElement(_util_typography_control_FontPicker__WEBPACK_IMPORTED_MODULE_11__["default"], {
-          label: __("Font Family"),
-          value: contentFontFamily,
-          onChange: function onChange(contentFontFamily) {
-            return setAttributes({
-              contentFontFamily: contentFontFamily
-            });
-          }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          selectedUnit: contentSizeUnit,
-          unitTypes: [{
-            label: "px",
-            value: "px"
-          }, {
-            label: "%",
-            value: "%"
-          }, {
-            label: "em",
-            value: "em"
-          }],
-          onClick: function onClick(contentSizeUnit) {
-            return setAttributes({
-              contentSizeUnit: contentSizeUnit
-            });
-          }
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Font Size"),
-          value: contentFontSize,
-          onChange: function onChange(contentFontSize) {
-            return setAttributes({
-              contentFontSize: contentFontSize
-            });
-          },
-          step: CONTENT_SIZE_STEP,
-          min: 0,
-          max: CONTENT_SIZE_MAX
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Font Weight"),
-          value: contentFontWeight,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["FONT_WEIGHTS"],
-          onChange: function onChange(contentFontWeight) {
-            return setAttributes({
-              contentFontWeight: contentFontWeight
-            });
-          }
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Text Transform"),
-          value: contentTextTransform,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_TRANSFORM"],
-          onChange: function onChange(contentTextTransform) {
-            return setAttributes({
-              contentTextTransform: contentTextTransform
-            });
-          }
-        }), /*#__PURE__*/React.createElement(SelectControl, {
-          label: __("Text Decoration"),
-          value: contentTextDecoration,
-          options: _constants__WEBPACK_IMPORTED_MODULE_20__["TEXT_DECORATION"],
-          onChange: function onChange(contentTextDecoration) {
-            return setAttributes({
-              contentTextDecoration: contentTextDecoration
-            });
-          }
-        }), /*#__PURE__*/React.createElement(_util_unit_control__WEBPACK_IMPORTED_MODULE_10__["default"], {
-          selectedUnit: contentLetterSpacingUnit,
-          unitTypes: [{
-            label: "px",
-            value: "px"
-          }, {
-            label: "em",
-            value: "em"
-          }],
-          onClick: function onClick(contentLetterSpacingUnit) {
-            return setAttributes({
-              contentLetterSpacingUnit: contentLetterSpacingUnit
-            });
-          }
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Letter Spacing"),
-          value: contentLetterSpacing,
-          onChange: function onChange(contentLetterSpacing) {
-            return setAttributes({
-              contentLetterSpacing: contentLetterSpacing
-            });
-          },
-          min: 0,
-          max: CONTENT_SPACING_MAX,
-          step: CONTENT_SPACING_STEP
-        }), /*#__PURE__*/React.createElement(RangeControl, {
-          label: __("Line Height"),
-          value: contentLineHeight,
-          onChange: function onChange(contentLineHeight) {
-            return setAttributes({
-              contentLineHeight: contentLineHeight
-            });
-          },
-          min: 0,
-          max: 10,
-          step: 0.1
-        }));
-      }
-    })), /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_typography_control_v2__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      baseLabel: "Typography",
+      typographyPrefixConstant: _constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_16__["typoPrefix_content"],
+      resRequiredProps: resRequiredProps,
+      defaultFontSize: 20
+    }), /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
       resRequiredProps: resRequiredProps,
       controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__["contentPaddingConst"],
       baseLabel: "Padding"
@@ -13195,12 +12936,6 @@ var Inspector = function Inspector(_ref) {
 __webpack_require__.r(__webpack_exports__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -13263,19 +12998,6 @@ var List = /*#__PURE__*/function (_Component) {
           listSeperatorColor = _this$props$attribute.listSeperatorColor,
           hasUnderline = _this$props$attribute.hasUnderline; // Style objects
 
-      var listStyle = {
-        listStyle: listType === "none" ? "none" : undefined,
-        color: listType !== "none" ? listColor : undefined,
-        marginLeft: indent
-      };
-      var listItemStyle = {
-        fontFamily: contentFontFamily,
-        fontSize: contentFontSize + contentSizeUnit,
-        fontWeight: contentFontWeight,
-        letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-        lineHeight: contentLineHeight,
-        textTransform: contentTextTransform
-      };
       var linkStyle = {
         color: contentColor,
         textDecoration: hasUnderline ? "underline" : "none"
@@ -13335,17 +13057,16 @@ var List = /*#__PURE__*/function (_Component) {
           } else {
             items.push( /*#__PURE__*/React.createElement("li", {
               key: counter,
-              style: _objectSpread(_objectSpread({}, listItemStyle), {}, {
+              style: {
                 paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
                 paddingBottom: counter < list.length && contentGap / 2 + contentGapUnit,
-                borderBottom: counter < list.length && "".concat(listSeperatorWidth, "px ").concat(listSeperatorStyle, " ").concat(listSeperatorColor)
-              })
+                borderBottom: counter < list.length && "".concat(listSeperatorWidth || 0, "px ").concat(listSeperatorStyle || "solid", " ").concat(listSeperatorColor || "transparent")
+              }
             }, /*#__PURE__*/React.createElement("a", {
               href: "#".concat(item.link),
               dangerouslySetInnerHTML: {
                 __html: item.text
-              },
-              style: linkStyle
+              }
             })));
             counter++;
           }
@@ -13353,8 +13074,7 @@ var List = /*#__PURE__*/function (_Component) {
         ul_counter++;
         return /*#__PURE__*/React.createElement(ListTag, {
           key: counter + "-" + ul_counter,
-          className: "eb-toc__list",
-          style: listStyle
+          className: "eb-toc__list"
         }, items);
       };
 
@@ -20535,7 +20255,8 @@ var _wp$components = wp.components,
 function TypographyDropdown(_ref) {
   var baseLabel = _ref.baseLabel,
       typographyPrefixConstant = _ref.typographyPrefixConstant,
-      resRequiredProps = _ref.resRequiredProps;
+      resRequiredProps = _ref.resRequiredProps,
+      defaultFontSize = _ref.defaultFontSize;
   var attributes = resRequiredProps.attributes,
       setAttributes = resRequiredProps.setAttributes,
       resOption = resRequiredProps.resOption;
@@ -20544,7 +20265,8 @@ function TypographyDropdown(_ref) {
       fontStyle = attributes["".concat(typographyPrefixConstant, "FontStyle")],
       textTransform = attributes["".concat(typographyPrefixConstant, "TextTransform")],
       textDecoration = attributes["".concat(typographyPrefixConstant, "TextDecoration")],
-      fontSize = attributes["".concat(typographyPrefixConstant, "FontSize")],
+      _attributes$ = attributes["".concat(typographyPrefixConstant, "FontSize")],
+      fontSize = _attributes$ === void 0 ? defaultFontSize || undefined : _attributes$,
       sizeUnit = attributes["".concat(typographyPrefixConstant, "SizeUnit")],
       letterSpacing = attributes["".concat(typographyPrefixConstant, "LetterSpacing")],
       letterSpacingUnit = attributes["".concat(typographyPrefixConstant, "LetterSpacingUnit")],

@@ -48,11 +48,13 @@ import {
 } from "../util/helpers";
 
 import {
+	// typoPrefix_number,
+	// typoPrefix_subTitle,
+	// typoPrefix_buttonText,
+
+	//
 	typoPrefix_title,
 	typoPrefix_content,
-	typoPrefix_number,
-	typoPrefix_subTitle,
-	typoPrefix_buttonText,
 } from "./constants/typographyPrefixConstants";
 
 import {
@@ -452,129 +454,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 												/>
 
-												<BaseControl
-													label={__("Typography")}
-													className="eb-typography-base"
-												>
-													<Dropdown
-														className="eb-typography-dropdown"
-														contentClassName="my-popover-content-classname"
-														position="bottom right"
-														renderToggle={({ isOpen, onToggle }) => (
-															<Button
-																isSmall
-																onClick={onToggle}
-																aria-expanded={isOpen}
-																icon="edit"
-															></Button>
-														)}
-														renderContent={() => (
-															<div style={{ padding: "1rem" }}>
-																<FontPicker
-																	label={__("Font Family")}
-																	value={titleFontFamily}
-																	onChange={(titleFontFamily) =>
-																		setAttributes({ titleFontFamily })
-																	}
-																/>
-
-																<UnitControl
-																	selectedUnit={titleSizeUnit}
-																	unitTypes={[
-																		{ label: "px", value: "px" },
-																		{ label: "%", value: "%" },
-																		{ label: "em", value: "em" },
-																	]}
-																	onClick={(titleSizeUnit) =>
-																		setAttributes({ titleSizeUnit })
-																	}
-																/>
-
-																<RangeControl
-																	label={__("Font Size")}
-																	value={titleFontSize}
-																	onChange={(titleFontSize) =>
-																		setAttributes({ titleFontSize })
-																	}
-																	step={TITLE_SIZE_STEP}
-																	min={0}
-																	max={TITLE_SIZE_MAX}
-																/>
-
-																<SelectControl
-																	label={__("Font Weight")}
-																	value={titleFontWeight}
-																	options={FONT_WEIGHTS}
-																	onChange={(titleFontWeight) =>
-																		setAttributes({ titleFontWeight })
-																	}
-																/>
-
-																<SelectControl
-																	label={__("Text Transform")}
-																	value={titleTextTransform}
-																	options={TEXT_TRANSFORM}
-																	onChange={(titleTextTransform) =>
-																		setAttributes({ titleTextTransform })
-																	}
-																/>
-
-																<SelectControl
-																	label={__("Text Decoration")}
-																	value={titleTextDecoration}
-																	options={TEXT_DECORATION}
-																	onChange={(titleTextDecoration) =>
-																		setAttributes({ titleTextDecoration })
-																	}
-																/>
-
-																<UnitControl
-																	selectedUnit={titleLetterSpacingUnit}
-																	unitTypes={[
-																		{ label: "px", value: "px" },
-																		{ label: "em", value: "em" },
-																	]}
-																	onClick={(titleLetterSpacingUnit) =>
-																		setAttributes({ titleLetterSpacingUnit })
-																	}
-																/>
-
-																<RangeControl
-																	label={__("Letter Spacing")}
-																	value={titleLetterSpacing}
-																	onChange={(titleLetterSpacing) =>
-																		setAttributes({ titleLetterSpacing })
-																	}
-																	min={0}
-																	max={TITLE_SPACING_MAX}
-																	step={TITLE_SPACING_STEP}
-																/>
-
-																<UnitControl
-																	selectedUnit={titleLineHeightUnit}
-																	unitTypes={[
-																		{ label: "px", value: "px" },
-																		{ label: "em", value: "em" },
-																	]}
-																	onClick={(titleLineHeightUnit) =>
-																		setAttributes({ titleLineHeightUnit })
-																	}
-																/>
-
-																<RangeControl
-																	label={__("Line Height")}
-																	value={titleLineHeight}
-																	onChange={(titleLineHeight) =>
-																		setAttributes({ titleLineHeight })
-																	}
-																	min={0}
-																	max={TITLE_LINE_HEIGHT_MAX}
-																	step={TITLE_LINE_HEIGHT_STEP}
-																/>
-															</div>
-														)}
-													/>
-												</BaseControl>
+												<TypographyDropdown
+													baseLabel="Typography"
+													typographyPrefixConstant={typoPrefix_title}
+													resRequiredProps={resRequiredProps}
+													defaultFontSize={22}
+												/>
 
 												<ResponsiveDimensionsControl
 													resRequiredProps={resRequiredProps}
@@ -687,118 +572,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											}
 										/>
 
-										<BaseControl
-											label={__("Typography")}
-											className="eb-typography-base"
-										>
-											<Dropdown
-												className="eb-typography-dropdown"
-												contentClassName="my-popover-content-classname"
-												position="bottom right"
-												renderToggle={({ isOpen, onToggle }) => (
-													<Button
-														isSmall
-														onClick={onToggle}
-														aria-expanded={isOpen}
-														icon="edit"
-													></Button>
-												)}
-												renderContent={() => (
-													<div style={{ padding: "1rem" }}>
-														<FontPicker
-															label={__("Font Family")}
-															value={contentFontFamily}
-															onChange={(contentFontFamily) =>
-																setAttributes({ contentFontFamily })
-															}
-														/>
-
-														<UnitControl
-															selectedUnit={contentSizeUnit}
-															unitTypes={[
-																{ label: "px", value: "px" },
-																{ label: "%", value: "%" },
-																{ label: "em", value: "em" },
-															]}
-															onClick={(contentSizeUnit) =>
-																setAttributes({ contentSizeUnit })
-															}
-														/>
-
-														<RangeControl
-															label={__("Font Size")}
-															value={contentFontSize}
-															onChange={(contentFontSize) =>
-																setAttributes({ contentFontSize })
-															}
-															step={CONTENT_SIZE_STEP}
-															min={0}
-															max={CONTENT_SIZE_MAX}
-														/>
-
-														<SelectControl
-															label={__("Font Weight")}
-															value={contentFontWeight}
-															options={FONT_WEIGHTS}
-															onChange={(contentFontWeight) =>
-																setAttributes({ contentFontWeight })
-															}
-														/>
-
-														<SelectControl
-															label={__("Text Transform")}
-															value={contentTextTransform}
-															options={TEXT_TRANSFORM}
-															onChange={(contentTextTransform) =>
-																setAttributes({ contentTextTransform })
-															}
-														/>
-
-														<SelectControl
-															label={__("Text Decoration")}
-															value={contentTextDecoration}
-															options={TEXT_DECORATION}
-															onChange={(contentTextDecoration) =>
-																setAttributes({ contentTextDecoration })
-															}
-														/>
-
-														<UnitControl
-															selectedUnit={contentLetterSpacingUnit}
-															unitTypes={[
-																{ label: "px", value: "px" },
-																{ label: "em", value: "em" },
-															]}
-															onClick={(contentLetterSpacingUnit) =>
-																setAttributes({ contentLetterSpacingUnit })
-															}
-														/>
-
-														<RangeControl
-															label={__("Letter Spacing")}
-															value={contentLetterSpacing}
-															onChange={(contentLetterSpacing) =>
-																setAttributes({ contentLetterSpacing })
-															}
-															min={0}
-															max={CONTENT_SPACING_MAX}
-															step={CONTENT_SPACING_STEP}
-														/>
-
-														<RangeControl
-															label={__("Line Height")}
-															value={contentLineHeight}
-															onChange={(contentLineHeight) =>
-																setAttributes({ contentLineHeight })
-															}
-															min={0}
-															max={10}
-															step={0.1}
-														/>
-													</div>
-												)}
-											/>
-										</BaseControl>
+										<TypographyDropdown
+											baseLabel="Typography"
+											typographyPrefixConstant={typoPrefix_content}
+											resRequiredProps={resRequiredProps}
+											defaultFontSize={20}
+										/>
 
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}

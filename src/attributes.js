@@ -343,7 +343,9 @@ const attributes = {
 		default: 100,
 	},
 
-	//
+	// typography attributes
+	...generateTypographyAttributes(Object.values(typoPrefixs)),
+
 	//
 	...generateResponsiveRangeAttributes(wrapMaxWidthPrefix, {
 		// noUnits: true,
@@ -365,7 +367,10 @@ const attributes = {
 	//
 	...generateDimensionsAttributes(WrpMarginConst),
 	...generateDimensionsAttributes(WrpPaddingConst),
-	...generateDimensionsAttributes(titlePaddingConst),
+	...generateDimensionsAttributes(titlePaddingConst, {
+		left: 10,
+		isLinked: false,
+	}),
 	...generateDimensionsAttributes(contentPaddingConst),
 };
 

@@ -77,11 +77,13 @@ import {
 
 import Inspector from "./inspector";
 import {
+	// typoPrefix_subTitle,
+	// typoPrefix_number,
+	// typoPrefix_buttonText,
+
+	//
 	typoPrefix_content,
 	typoPrefix_title,
-	typoPrefix_subTitle,
-	typoPrefix_number,
-	typoPrefix_buttonText,
 } from "./constants/typographyPrefixConstants";
 
 import {
@@ -281,6 +283,7 @@ export default function Edit({
 		contentBg = "#fff6f3",
 		contentColor = "#707070",
 		mainBgc,
+		contentHoverColor,
 		displayTitle,
 		titleAlign,
 		titleFontFamily,
@@ -327,6 +330,8 @@ export default function Edit({
 		isSticky,
 		topSpace,
 		contentHeight,
+		indent,
+		hasUnderline,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -475,35 +480,25 @@ export default function Edit({
 	// // styles related to generateResponsiveRangeStyles end
 
 	// // styles related to generateTypographyStyles start ⬇
-	// const {
-	// 	typoStylesDesktop: digitsTypoStylesDesktop,
-	// 	typoStylesTab: digitsTypoStylesTab,
-	// 	typoStylesMobile: digitsTypoStylesMobile,
-	// } = generateTypographyStyles({
-	// 	attributes,
-	// 	prefixConstant: typoPrefix_digits,
-	// 	defaultFontSize: 40,
-	// });
+	const {
+		typoStylesDesktop: titleTypoStylesDesktop,
+		typoStylesTab: titleTypoStylesTab,
+		typoStylesMobile: titleTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_title,
+		defaultFontSize: 22,
+	});
 
-	// const {
-	// 	typoStylesDesktop: labelsTypoStylesDesktop,
-	// 	typoStylesTab: labelsTypoStylesTab,
-	// 	typoStylesMobile: labelsTypoStylesMobile,
-	// } = generateTypographyStyles({
-	// 	attributes,
-	// 	prefixConstant: typoPrefix_labels,
-	// 	defaultFontSize: 18,
-	// });
-
-	// const {
-	// 	typoStylesDesktop: separatorTypoStylesDesktop,
-	// 	typoStylesTab: separatorTypoStylesTab,
-	// 	typoStylesMobile: separatorTypoStylesMobile,
-	// } = generateTypographyStyles({
-	// 	attributes,
-	// 	prefixConstant: typoPrefix_separator,
-	// 	defaultFontSize: 44,
-	// });
+	const {
+		typoStylesDesktop: contentTypoStylesDesktop,
+		typoStylesTab: contentTypoStylesTab,
+		typoStylesMobile: contentTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_content,
+		defaultFontSize: 20,
+	});
 	// // styles related to generateTypographyStyles end
 
 	// // styles related to generateBackgroundControlStyles start ⬇
@@ -628,12 +623,41 @@ export default function Edit({
 					: ""
 			}
 			${titlePaddingDesktop}
+			${titleTypoStylesDesktop}
+
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			background-color:${contentBg};
 			text-align: ${contentAlign};
 			${contentPaddingDesktop}
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper ul,
+		.${blockId}.eb-toc-container .eb-toc-wrapper ol
+		{
+			${listType === "none" ? `list-style: none;` : ""}
+			${indent ? `margin-left:${indent}px;` : ""} 
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li {
+			color:${contentColor};
+			${contentTypoStylesDesktop}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
+			color:${contentHoverColor};
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a{
+			color:inherit;
+		}
+		
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a,
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
+			${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
+			background:none;
 		}
 
 	`;
@@ -652,13 +676,17 @@ export default function Edit({
 
 		.${blockId}.eb-toc-container .eb-toc-title{
 			${titlePaddingTab}
+			${titleTypoStylesTab}
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			${contentPaddingTab}
 		}
-	
 		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li{
+			${contentTypoStylesTab}
+		}
+
 	`;
 
 	const mobileAllStylesCommon = `
@@ -677,13 +705,17 @@ export default function Edit({
 
 		.${blockId}.eb-toc-container .eb-toc-title{
 			${titlePaddingMobile}
+			${titleTypoStylesMobile}
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			${contentPaddingMobile}
 		}
-	
 		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li{
+			${contentTypoStylesMobile}
+		}
+
 	`;
 
 	//

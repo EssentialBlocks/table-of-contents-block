@@ -132,9 +132,8 @@ window.addEventListener("DOMContentLoaded", function () {
 
       this._hide();
 
-      this._show();
+      this._show(); // this._hover();
 
-      this._hover();
 
       this._hideOnMobileView();
 
@@ -319,39 +318,24 @@ window.addEventListener("DOMContentLoaded", function () {
     /**
      * Hover color
      */
-    _hover: function _hover() {
-      var nodes = document.querySelectorAll(".eb-toc-container");
-
-      var _iterator6 = _createForOfIteratorHelper(nodes),
-          _step6;
-
-      try {
-        var _loop = function _loop() {
-          node = _step6.value;
-          var defaultColor = node.getAttribute("data-text-color");
-          var hoverColor = node.getAttribute("data-hover-color");
-          var lists = node.querySelectorAll("li");
-          lists.forEach(function (list) {
-            list.addEventListener("mouseenter", function () {
-              this.style.color = hoverColor;
-              this.firstChild.style.color = hoverColor;
-            });
-            list.addEventListener("mouseleave", function () {
-              this.style.color = defaultColor;
-              this.firstChild.style.color = defaultColor;
-            });
-          });
-        };
-
-        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-          _loop();
-        }
-      } catch (err) {
-        _iterator6.e(err);
-      } finally {
-        _iterator6.f();
-      }
-    },
+    // _hover: function () {
+    // 	let nodes = document.querySelectorAll(".eb-toc-container");
+    // 	for (node of nodes) {
+    // 		const defaultColor = node.getAttribute("data-text-color");
+    // 		const hoverColor = node.getAttribute("data-hover-color");
+    // 		const lists = node.querySelectorAll("li");
+    // 		lists.forEach((list) => {
+    // 			list.addEventListener("mouseenter", function () {
+    // 				this.style.color = hoverColor;
+    // 				this.firstChild.style.color = hoverColor;
+    // 			});
+    // 			list.addEventListener("mouseleave", function () {
+    // 				this.style.color = defaultColor;
+    // 				this.firstChild.style.color = defaultColor;
+    // 			});
+    // 		});
+    // 	}
+    // },
 
     /**
      * Alter the_content.
@@ -359,12 +343,12 @@ window.addEventListener("DOMContentLoaded", function () {
     _run: function _run() {
       var containers = document.querySelectorAll(".eb-toc-container");
 
-      var _iterator7 = _createForOfIteratorHelper(containers),
-          _step7;
+      var _iterator6 = _createForOfIteratorHelper(containers),
+          _step6;
 
       try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          container = _step7.value;
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          container = _step6.value;
 
           if (container) {
             // Save container border
@@ -411,9 +395,9 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         }
       } catch (err) {
-        _iterator7.e(err);
+        _iterator6.e(err);
       } finally {
-        _iterator7.f();
+        _iterator6.f();
       }
     },
 
@@ -439,12 +423,12 @@ window.addEventListener("DOMContentLoaded", function () {
     _changeHeaderColors: function _changeHeaderColors() {
       var containers = document.querySelectorAll(".eb-toc-container");
 
-      var _iterator8 = _createForOfIteratorHelper(containers),
-          _step8;
+      var _iterator7 = _createForOfIteratorHelper(containers),
+          _step7;
 
       try {
-        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          container = _step8.value;
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          container = _step7.value;
           var isSticky = container.getAttribute("data-sticky") === "true";
 
           if (isSticky) {
@@ -456,9 +440,9 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         }
       } catch (err) {
-        _iterator8.e(err);
+        _iterator7.e(err);
       } finally {
-        _iterator8.f();
+        _iterator7.f();
       }
     }
   };

@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", function () {
 			this._scrollToTop();
 			this._hide();
 			this._show();
-			this._hover();
+			// this._hover();
 			this._hideOnMobileView();
 			this._changeHeaderColors();
 		},
@@ -180,27 +180,27 @@ window.addEventListener("DOMContentLoaded", function () {
 		/**
 		 * Hover color
 		 */
-		_hover: function () {
-			let nodes = document.querySelectorAll(".eb-toc-container");
+		// _hover: function () {
+		// 	let nodes = document.querySelectorAll(".eb-toc-container");
 
-			for (node of nodes) {
-				const defaultColor = node.getAttribute("data-text-color");
-				const hoverColor = node.getAttribute("data-hover-color");
-				const lists = node.querySelectorAll("li");
+		// 	for (node of nodes) {
+		// 		const defaultColor = node.getAttribute("data-text-color");
+		// 		const hoverColor = node.getAttribute("data-hover-color");
+		// 		const lists = node.querySelectorAll("li");
 
-				lists.forEach((list) => {
-					list.addEventListener("mouseenter", function () {
-						this.style.color = hoverColor;
-						this.firstChild.style.color = hoverColor;
-					});
+		// 		lists.forEach((list) => {
+		// 			list.addEventListener("mouseenter", function () {
+		// 				this.style.color = hoverColor;
+		// 				this.firstChild.style.color = hoverColor;
+		// 			});
 
-					list.addEventListener("mouseleave", function () {
-						this.style.color = defaultColor;
-						this.firstChild.style.color = defaultColor;
-					});
-				});
-			}
-		},
+		// 			list.addEventListener("mouseleave", function () {
+		// 				this.style.color = defaultColor;
+		// 				this.firstChild.style.color = defaultColor;
+		// 			});
+		// 		});
+		// 	}
+		// },
 
 		/**
 		 * Alter the_content.
