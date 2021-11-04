@@ -1,7 +1,7 @@
 // console.log("-------------TOC with 'wp' object on window");
 
 window.addEventListener("DOMContentLoaded", function () {
-	let parseTocSlug = function (slug) {
+	const parseTocSlug = function (slug) {
 		// If not have the element then return false!
 		if (!slug) {
 			return slug;
@@ -23,7 +23,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		return decodeURI(encodeURIComponent(parsedSlug));
 	};
 
-	EBTableOfContents = {
+	const EBTableOfContents = {
 		init: function () {
 			this._run();
 			this._scroll();
@@ -43,38 +43,10 @@ window.addEventListener("DOMContentLoaded", function () {
 				const isSticky = container.getAttribute("data-sticky") === "true";
 				const collapsible =
 					container.getAttribute("data-collapsible") === "true";
-				const initialCollapse =
-					container.getAttribute("data-initial-collapse") === "true";
-				const headerButton = container.querySelector(".eb-toc-button");
-
-				// console.log("--fromTocFrontend", {
-				// 	isSticky,
-				// 	collapsible,
-				// 	initialCollapse,
-				// 	headerButton,
-				// });
-
-				if (isSticky) {
-					headerButton.style.visibility = "hidden";
-					headerButton.style.display = "none";
-				}
 
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
-
-					if (initialCollapse) {
-						if (isSticky) {
-							container.style.visibility = "hidden";
-							content.style.height = "0";
-							headerButton.style.visibility = "visible";
-							headerButton.style.display = "inline-block";
-						} else {
-							content.classList.add("hide-content");
-						}
-					} else {
-						container.style.visibility = "none";
-					}
 
 					if (!isSticky) {
 						title.addEventListener("click", function () {
@@ -185,16 +157,9 @@ window.addEventListener("DOMContentLoaded", function () {
 			for (crossButton of crossButtons) {
 				crossButton.addEventListener("click", function () {
 					const container = crossButton.closest(".eb-toc-container");
-					const contentNode = container.querySelector(".eb-toc-wrapper");
-					const headerButton = container.lastChild;
 
-					container.style.visibility = "hidden";
-					contentNode.style.height = "0";
-					headerButton.style.visibility = "visible";
-					headerButton.style.display = "inline-block";
-
-					// Remove container border
-					container.style.border = 0;
+					container.classList.add("eb-toc-content-hidden");
+					container.classList.remove("eb-toc-content-visible");
 				});
 			}
 		},
@@ -205,14 +170,9 @@ window.addEventListener("DOMContentLoaded", function () {
 			for (headerButton of headerButtons) {
 				headerButton.addEventListener("click", function () {
 					const container = headerButton.closest(".eb-toc-container");
-					const contentNode = container.querySelector(".eb-toc-wrapper");
 
-					container.style.visibility = "visible";
-					container.style.border = window.ebTocBorder;
-
-					contentNode.style.height = window.ebTocHeight || "200px";
-					this.style.visibility = "hidden";
-					this.style.display = "none";
+					container.classList.remove("eb-toc-content-hidden");
+					container.classList.add("eb-toc-content-visible");
 				});
 			}
 		},
@@ -246,59 +206,57 @@ window.addEventListener("DOMContentLoaded", function () {
 		 * Alter the_content.
 		 */
 		_run: function () {
-			let container = document.querySelector(".eb-toc-container");
+			let containers = document.querySelectorAll(".eb-toc-container");
 
-			if (container) {
-				// Save container border
-				const tocBorder = container.style.border;
-				window.ebTocBorder = tocBorder;
-			}
-
-			let node = document.querySelector(".eb-toc-wrapper");
-
-			if (node) {
-				// Save container height
-				const tocHeight = node.style.height;
-				window.ebTocHeight = tocHeight;
-
-				let headers = JSON.parse(node.getAttribute("data-headers"));
-				let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
-
-				let allowed_h_tags = [];
-				if (visibleHeaders !== undefined) {
-					visibleHeaders.forEach((h_tag, index) =>
-						h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
-					);
+			for (container of containers) {
+				if (container) {
+					// Save container border
+					const tocBorder = container.style.border;
+					window.ebTocBorder = tocBorder;
 				}
 
-				let allowed_h_tags_str =
-					null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+				let node = document.querySelector(".eb-toc-wrapper");
 
-				let all_header =
-					undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
-						? document.body.querySelectorAll(allowed_h_tags_str)
-						: document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
+				if (node) {
+					let headers = JSON.parse(node.getAttribute("data-headers"));
+					let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
-				if (undefined !== headers && 0 !== all_header.length) {
-					headers.forEach((element) => {
-						const element_text = parseTocSlug(element.text);
+					let allowed_h_tags = [];
+					if (visibleHeaders !== undefined) {
+						visibleHeaders.forEach((h_tag, index) =>
+							h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
+						);
+					}
 
-						all_header.forEach((item) => {
-							const header_text = parseTocSlug(item.textContent);
+					let allowed_h_tags_str =
+						null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
 
-							// console.log({
-							// 	header_text,
-							// 	element_text,
-							// 	item,
-							// 	element,
-							// });
+					let all_header =
+						undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
+							? document.body.querySelectorAll(allowed_h_tags_str)
+							: document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
-							if (element_text.localeCompare(header_text) === 0) {
-								// item.before(``);
-								item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
-							}
+					if (undefined !== headers && 0 !== all_header.length) {
+						headers.forEach((element) => {
+							const element_text = parseTocSlug(element.text);
+
+							all_header.forEach((item) => {
+								const header_text = parseTocSlug(item.textContent);
+
+								// console.log({
+								// 	header_text,
+								// 	element_text,
+								// 	item,
+								// 	element,
+								// });
+
+								if (element_text.localeCompare(header_text) === 0) {
+									// item.before(``);
+									item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
+								}
+							});
 						});
-					});
+					}
 				}
 			}
 		},

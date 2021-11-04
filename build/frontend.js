@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", function () {
     return decodeURI(encodeURIComponent(parsedSlug));
   };
 
-  EBTableOfContents = {
+  var EBTableOfContents = {
     init: function init() {
       this._run();
 
@@ -151,38 +151,11 @@ window.addEventListener("DOMContentLoaded", function () {
           container = _step.value;
           var isSticky = container.getAttribute("data-sticky") === "true";
           var collapsible = container.getAttribute("data-collapsible") === "true";
-          var initialCollapse = container.getAttribute("data-initial-collapse") === "true";
-
-          var _headerButton = container.querySelector(".eb-toc-button"); // console.log("--fromTocFrontend", {
-          // 	isSticky,
-          // 	collapsible,
-          // 	initialCollapse,
-          // 	headerButton,
-          // });
-
-
-          if (isSticky) {
-            _headerButton.style.visibility = "hidden";
-            _headerButton.style.display = "none";
-          }
 
           if (collapsible) {
             (function () {
               var title = container.querySelector(".eb-toc-title");
               var content = container.querySelector(".eb-toc-wrapper");
-
-              if (initialCollapse) {
-                if (isSticky) {
-                  container.style.visibility = "hidden";
-                  content.style.height = "0";
-                  _headerButton.style.visibility = "visible";
-                  _headerButton.style.display = "inline-block";
-                } else {
-                  content.classList.add("hide-content");
-                }
-              } else {
-                container.style.visibility = "none";
-              }
 
               if (!isSticky) {
                 title.addEventListener("click", function () {
@@ -311,14 +284,8 @@ window.addEventListener("DOMContentLoaded", function () {
           crossButton = _step4.value;
           crossButton.addEventListener("click", function () {
             var container = crossButton.closest(".eb-toc-container");
-            var contentNode = container.querySelector(".eb-toc-wrapper");
-            var headerButton = container.lastChild;
-            container.style.visibility = "hidden";
-            contentNode.style.height = "0";
-            headerButton.style.visibility = "visible";
-            headerButton.style.display = "inline-block"; // Remove container border
-
-            container.style.border = 0;
+            container.classList.add("eb-toc-content-hidden");
+            container.classList.remove("eb-toc-content-visible");
           });
         }
       } catch (err) {
@@ -338,12 +305,8 @@ window.addEventListener("DOMContentLoaded", function () {
           headerButton = _step5.value;
           headerButton.addEventListener("click", function () {
             var container = headerButton.closest(".eb-toc-container");
-            var contentNode = container.querySelector(".eb-toc-wrapper");
-            container.style.visibility = "visible";
-            container.style.border = window.ebTocBorder;
-            contentNode.style.height = window.ebTocHeight || "200px";
-            this.style.visibility = "hidden";
-            this.style.display = "none";
+            container.classList.remove("eb-toc-content-hidden");
+            container.classList.add("eb-toc-content-visible");
           });
         }
       } catch (err) {
@@ -394,51 +357,63 @@ window.addEventListener("DOMContentLoaded", function () {
      * Alter the_content.
      */
     _run: function _run() {
-      var container = document.querySelector(".eb-toc-container");
+      var containers = document.querySelectorAll(".eb-toc-container");
 
-      if (container) {
-        // Save container border
-        var tocBorder = container.style.border;
-        window.ebTocBorder = tocBorder;
-      }
+      var _iterator7 = _createForOfIteratorHelper(containers),
+          _step7;
 
-      var node = document.querySelector(".eb-toc-wrapper");
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          container = _step7.value;
 
-      if (node) {
-        // Save container height
-        var tocHeight = node.style.height;
-        window.ebTocHeight = tocHeight;
-        var headers = JSON.parse(node.getAttribute("data-headers"));
-        var visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
-        var allowed_h_tags = [];
+          if (container) {
+            // Save container border
+            var tocBorder = container.style.border;
+            window.ebTocBorder = tocBorder;
+          }
 
-        if (visibleHeaders !== undefined) {
-          visibleHeaders.forEach(function (h_tag, index) {
-            return h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null;
-          });
-        }
+          var _node = document.querySelector(".eb-toc-wrapper");
 
-        var allowed_h_tags_str = null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
-        var all_header = undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str ? document.body.querySelectorAll(allowed_h_tags_str) : document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
+          if (_node) {
+            (function () {
+              var headers = JSON.parse(_node.getAttribute("data-headers"));
+              var visibleHeaders = JSON.parse(_node.getAttribute("data-visible"));
+              var allowed_h_tags = [];
 
-        if (undefined !== headers && 0 !== all_header.length) {
-          headers.forEach(function (element) {
-            var element_text = parseTocSlug(element.text);
-            all_header.forEach(function (item) {
-              var header_text = parseTocSlug(item.textContent); // console.log({
-              // 	header_text,
-              // 	element_text,
-              // 	item,
-              // 	element,
-              // });
-
-              if (element_text.localeCompare(header_text) === 0) {
-                // item.before(``);
-                item.innerHTML = "<span id=\"".concat(header_text, "\" class=\"eb-toc__heading-anchor\"></span>").concat(item.innerHTML);
+              if (visibleHeaders !== undefined) {
+                visibleHeaders.forEach(function (h_tag, index) {
+                  return h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null;
+                });
               }
-            });
-          });
+
+              var allowed_h_tags_str = null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+              var all_header = undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str ? document.body.querySelectorAll(allowed_h_tags_str) : document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+              if (undefined !== headers && 0 !== all_header.length) {
+                headers.forEach(function (element) {
+                  var element_text = parseTocSlug(element.text);
+                  all_header.forEach(function (item) {
+                    var header_text = parseTocSlug(item.textContent); // console.log({
+                    // 	header_text,
+                    // 	element_text,
+                    // 	item,
+                    // 	element,
+                    // });
+
+                    if (element_text.localeCompare(header_text) === 0) {
+                      // item.before(``);
+                      item.innerHTML = "<span id=\"".concat(header_text, "\" class=\"eb-toc__heading-anchor\"></span>").concat(item.innerHTML);
+                    }
+                  });
+                });
+              }
+            })();
+          }
         }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
       }
     },
 
@@ -464,12 +439,12 @@ window.addEventListener("DOMContentLoaded", function () {
     _changeHeaderColors: function _changeHeaderColors() {
       var containers = document.querySelectorAll(".eb-toc-container");
 
-      var _iterator7 = _createForOfIteratorHelper(containers),
-          _step7;
+      var _iterator8 = _createForOfIteratorHelper(containers),
+          _step8;
 
       try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          container = _step7.value;
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          container = _step8.value;
           var isSticky = container.getAttribute("data-sticky") === "true";
 
           if (isSticky) {
@@ -481,9 +456,9 @@ window.addEventListener("DOMContentLoaded", function () {
           }
         }
       } catch (err) {
-        _iterator7.e(err);
+        _iterator8.e(err);
       } finally {
-        _iterator7.f();
+        _iterator8.f();
       }
     }
   };

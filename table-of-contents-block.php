@@ -56,14 +56,16 @@ function create_block_table_of_content_block_init()
 	wp_register_style(
 		'create-block-table-of-content-block-editor',
 		plugins_url($editor_css, __FILE__),
-		array()
+		array(),
+		filemtime("$dir/$editor_css")
 	);
 
 	$style_css = 'build/style-index.css';
 	wp_register_style(
 		'create-block-table-of-content-block',
 		plugins_url($style_css, __FILE__),
-		array()
+		array(),
+		filemtime("$dir/$style_css")
 	);
 
 	$frontend_js = 'build/frontend.js';
@@ -72,7 +74,6 @@ function create_block_table_of_content_block_init()
 		plugins_url($frontend_js, __FILE__),
 		array("jquery", "wp-editor"),
 		filemtime("$dir/$frontend_js")
-
 	);
 
 	register_block_type('table-of-contents-block/table-of-contents-block', array(

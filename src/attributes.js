@@ -16,10 +16,13 @@ import {
 } from "./constants/borderShadowConstants";
 
 import {
-	mediaIconSize,
-	mediaImageWidth,
-	mediaImageHeight,
-	mediaContentGap,
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	//
+	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
 import {
@@ -79,19 +82,19 @@ const attributes = {
 	},
 	titleBg: {
 		type: "string",
-		default: "#ff7d50",
+		// default: "#ff7d50",
 	},
 	titleColor: {
 		type: "string",
-		default: "white",
+		// default: "white",
 	},
 	contentBg: {
 		type: "string",
-		default: "#fff6f3",
+		// default: "#fff6f3",
 	},
 	contentColor: {
 		type: "string",
-		default: "#707070",
+		// default: "#707070",
 	},
 	contentHoverColor: {
 		type: "string",
@@ -187,7 +190,7 @@ const attributes = {
 	},
 	seperatorColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	seperatorSize: {
 		type: "number",
@@ -201,7 +204,7 @@ const attributes = {
 	},
 	borderColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	borderStyle: {
 		type: "string",
@@ -257,7 +260,7 @@ const attributes = {
 	},
 	shadowColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	contentPaddingTop: {
 		type: "number",
@@ -333,6 +336,13 @@ const attributes = {
 		type: "number",
 		default: 100,
 	},
+
+	//
+	//
+	...generateResponsiveRangeAttributes(wrapMaxWidthPrefix, {
+		// noUnits: true,
+		defaultRange: 610,
+	}),
 
 	//
 	...generateBackgroundAttributes(WrpBgConst, {

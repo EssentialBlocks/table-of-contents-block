@@ -100,10 +100,13 @@ import {
 } from "./constants/borderShadowConstants";
 
 import {
-	mediaIconSize,
-	mediaImageWidth,
-	mediaImageHeight,
-	mediaContentGap,
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	//
+	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
 import List from "./list";
@@ -271,10 +274,10 @@ export default function Edit({
 		title,
 		collapsible,
 		listType,
-		titleBg,
-		titleColor,
-		contentBg,
-		contentColor,
+		titleBg = "#ff7d50",
+		titleColor = "#fff",
+		contentBg = "#fff6f3",
+		contentColor = "#707070",
 		displayTitle,
 		titleAlign,
 		titleFontFamily,
@@ -289,7 +292,7 @@ export default function Edit({
 		titleLineHeightUnit,
 		seperator,
 		seperatorSize,
-		seperatorColor,
+		seperatorColor = "#000",
 		seperatorStyle,
 		borderWidth,
 		borderColor,
@@ -316,6 +319,11 @@ export default function Edit({
 		contentPaddingUnit,
 		contentAlign,
 		containerWidth,
+
+		//
+		isSticky,
+		topSpace,
+		contentHeight,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -364,31 +372,7 @@ export default function Edit({
 		}
 	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
 
-	const wrapperStyle = {
-		width: containerWidth + "%",
-		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
-		background: contentBg,
-		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
-			spread || 0
-		}px ${shadowColor || "black"}`,
-	};
-
 	const titleStyle = {
-		display: displayTitle ? "block" : "none",
-		fontFamily: titleFontFamily,
-		fontSize: titleFontSize + titleSizeUnit,
-		fontWeight: titleFontWeight,
-		textTransform: titleTextTransform,
-		textDecoration: titleTextDecoration,
-		letterSpacing: titleLetterSpacing + titleLetterSpacingUnit,
-		lineHeight: titleLineHeight + titleLineHeightUnit,
-		textAlign: titleAlign,
-		cursor: collapsible ? "pointer" : "default",
-		color: titleColor,
-		background: titleBg,
-		borderBottom: seperator
-			? `${seperatorSize || 0}px ${seperatorStyle} ${seperatorColor}`
-			: "none",
 		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
 			titlePaddingRight || 0
 		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
@@ -397,10 +381,6 @@ export default function Edit({
 	};
 
 	const contentStyle = {
-		textAlign: contentAlign,
-		color: contentColor,
-		display: visible ? "block" : "none",
-		background: contentBg,
 		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
 			contentPaddingRight || 0
 		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
@@ -465,16 +445,15 @@ export default function Edit({
 	//
 
 	// // styles related to generateResponsiveRangeStyles start ⬇
-	// const {
-	// 	rangeStylesDesktop: wrapWidthDesktop,
-	// 	rangeStylesTab: wrapWidthTab,
-	// 	rangeStylesMobile: wrapWidthMobile,
-	// } = generateResponsiveRangeStyles({
-	// 	controlName: wrapperWidth,
-	// 	customUnit: "px",
-	// 	property: "max-width",
-	// 	attributes,
-	// });
+	const {
+		rangeStylesDesktop: wrapMaxWidthDesktop,
+		rangeStylesTab: wrapMaxWidthTab,
+		rangeStylesMobile: wrapMaxWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: wrapMaxWidthPrefix,
+		property: "max-width",
+		attributes,
+	});
 
 	// const {
 	// 	rangeStylesDesktop: BoxsSpaceBetweenDesktop,
@@ -610,13 +589,18 @@ export default function Edit({
 
 	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
+			${wrapMaxWidthDesktop}
+			
 			${wrpBackgroundStylesDesktop}
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
 			transition:all 0.5s, ${wrpBgTransitionStyle}, ${wrpBdShdTransitionStyle};
 
+			
+
 		}
+
 		.${blockId}.eb-toc-container:hover{
 			${wrpHoverBackgroundStylesDesktop}
 			${wrpBdShdStylesHoverDesktop}
@@ -632,10 +616,33 @@ export default function Edit({
 			${wrpHoverOverlayStylesDesktop}
 			
 		}
+
+
+		.${blockId}.eb-toc-container .eb-toc-title{
+			text-align: ${titleAlign};
+			cursor:${collapsible ? "pointer" : "default"};
+			color: ${titleColor};
+			background-color:${titleBg};
+			${
+				seperator
+					? `border-bottom:${
+							seperatorSize || 0
+					  }px ${seperatorStyle} ${seperatorColor};`
+					: ""
+			}
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			text-align: ${contentAlign};
+			background-color:${contentBg};
+		}
+
 	`;
 
 	const tabAllStylesCommon = `
 		.${blockId}.eb-toc-container{
+			${wrapMaxWidthTab}
+
 			${wrpBackgroundStylesTab}
 			${wrpMarginTab}
 			${wrpPaddingTab}
@@ -660,6 +667,9 @@ export default function Edit({
 
 	const mobileAllStylesCommon = `
 		.${blockId}.eb-toc-container{
+			${wrapMaxWidthMobile}
+
+
 			${wrpBackgroundStylesMobile}
 			${wrpMarginMobile}
 			${wrpPaddingMobile}
@@ -686,6 +696,13 @@ export default function Edit({
 	const desktopAllStylesEditor = `
 		${desktopAllStylesCommon}
 
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			display:${visible ? "block" : "none"};
+		}
+
+
+
 		`;
 
 	const tabAllStylesEditor = `
@@ -702,6 +719,31 @@ export default function Edit({
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
 		${desktopAllStylesCommon}
+
+		.${blockId}.eb-toc-container{
+			${
+				isSticky
+					? `
+				position:fixed;
+				top: ${topSpace || 25}%;
+				left:0;
+				z-index:999;
+			`
+					: ""
+			}
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			${
+				isSticky
+					? `
+					overflow:scroll;
+					${contentHeight ? `min-height:${contentHeight}px;` : ""}
+					`
+					: ""
+			}
+		}
+
 
 	`);
 
@@ -739,35 +781,35 @@ export default function Edit({
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 		),
 
-		<BlockControls>
-			<AlignmentToolbar
-				value={contentAlign}
-				onChange={(contentAlign) => setAttributes({ contentAlign })}
-				controls={["left", "center", "right"]}
-			/>
-			<ToolbarGroup>
-				<ToolbarButton
-					title="Unordered"
-					icon="editor-ul"
-					isActive={listType === "ul"}
-					onClick={() => setAttributes({ listType: "ul" })}
-				/>
+		// <BlockControls>
+		// 	<AlignmentToolbar
+		// 		value={contentAlign}
+		// 		onChange={(contentAlign) => setAttributes({ contentAlign })}
+		// 		controls={["left", "center", "right"]}
+		// 	/>
+		// 	<ToolbarGroup>
+		// 		<ToolbarButton
+		// 			title="Unordered"
+		// 			icon="editor-ul"
+		// 			isActive={listType === "ul"}
+		// 			onClick={() => setAttributes({ listType: "ul" })}
+		// 		/>
 
-				<ToolbarButton
-					title="Ordered"
-					icon="editor-ol"
-					isActive={listType === "ol"}
-					onClick={() => setAttributes({ listType: "ol" })}
-				/>
+		// 		<ToolbarButton
+		// 			title="Ordered"
+		// 			icon="editor-ol"
+		// 			isActive={listType === "ol"}
+		// 			onClick={() => setAttributes({ listType: "ol" })}
+		// 		/>
 
-				<ToolbarButton
-					title="None"
-					icon="minus"
-					isActive={listType === "none"}
-					onClick={() => setAttributes({ listType: "none" })}
-				/>
-			</ToolbarGroup>
-		</BlockControls>,
+		// 		<ToolbarButton
+		// 			title="None"
+		// 			icon="minus"
+		// 			isActive={listType === "none"}
+		// 			onClick={() => setAttributes({ listType: "none" })}
+		// 		/>
+		// 	</ToolbarGroup>
+		// </BlockControls>,
 
 		<div {...blockProps}>
 			<style>
@@ -798,15 +840,17 @@ export default function Edit({
 				}
 				`}
 			</style>
-			<div className={`${blockId} eb-toc-container`} style={wrapperStyle}>
+			<div className={`${blockId} eb-toc-container`}>
 				<div onClick={() => collapsible && setVisible(!visible)}>
-					<RichText
-						className="eb-toc-title"
-						style={titleStyle}
-						placeholder="Table of content"
-						value={title}
-						onChange={(title) => setAttributes({ title })}
-					/>
+					{displayTitle && (
+						<RichText
+							className="eb-toc-title"
+							style={titleStyle}
+							placeholder="Table of content"
+							value={title}
+							onChange={(title) => setAttributes({ title })}
+						/>
+					)}
 				</div>
 				{headers.length > 0 ? (
 					<div className="eb-toc-wrapper" style={contentStyle}>
