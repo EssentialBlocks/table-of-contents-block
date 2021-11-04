@@ -202,8 +202,13 @@ window.addEventListener("DOMContentLoaded", function () {
         document.body.insertBefore(goTop, document.body.lastChild); // Add click event
 
         goTop.addEventListener("click", function () {
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
+          // document.body.scrollTop = 0;
+          // document.documentElement.scrollTop = 0;
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "smooth"
+          });
         });
         var containers = document.querySelectorAll(".eb-toc-container");
 
