@@ -308,16 +308,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<div className={"eb-tab-controls" + tab.name} key={tab.name}>
 							{tab.name === "general" && (
 								<>
-									<div className="fix-select-over-lapping">
-										<PanelBody title={__("Visible Headers")}>
+									<style>
+										{`
+										.fix-select-over-lapping>div>div{
+											z-index:999999 !important;
+										}
+										
+										
+										`}
+									</style>
+									<PanelBody title={__("Visible Headers")}>
+										<div className="fix-select-over-lapping">
 											<Select
 												options={options}
 												defaultValue={defaultOptions}
 												isMulti
 												onChange={onHeaderChange}
 											/>
-										</PanelBody>
-									</div>
+										</div>
+									</PanelBody>
 
 									<PanelBody>
 										<ResponsiveRangeController
