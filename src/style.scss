@@ -58,10 +58,14 @@
 	position: fixed;
 	bottom: 50px;
 	right: 50px;
-	background: #ccd0d4;
+	background: #811;
+	color: #fff;
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+	transform: rotate(-90deg);
+	padding-bottom: 5px;
+	font-size: 20px;
 }
 
 .show-scroll {

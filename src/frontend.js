@@ -64,11 +64,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
 			if (hasScrollTop) {
 				// Create go to top element
-				const goTop = document.createElement("div");
-				goTop.setAttribute(
-					"class",
-					"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
-				);
+				const goTop = document.createElement("span");
+				goTop.setAttribute("class", "eb-toc-go-top ");
+				goTop.innerHTML = ">";
 				document.body.insertBefore(goTop, document.body.lastChild);
 
 				// Add click event
@@ -99,28 +97,14 @@ window.addEventListener("DOMContentLoaded", function () {
 						: hideScroll();
 				}
 
-				function setArrowStyles(height, width, bg, color) {
-					if (height) goTop.style.height = height + "px";
-					if (width) goTop.style.width = width + "px";
-					if (bg) goTop.style.background = bg;
-					if (color) goTop.style.color = color;
-				}
-
 				const containers = document.querySelectorAll(".eb-toc-container");
 
 				for (container of containers) {
 					const goToTop = container.getAttribute("data-scroll-top") === "true";
-					const height = container.getAttribute("data-arrow-height");
-					const width = container.getAttribute("data-arrow-width");
-					const bg = container.getAttribute("data-arrow-bg");
-					const color = container.getAttribute("data-arrow-color");
 
 					if (goToTop) {
 						// Add scroll event
 						window.addEventListener("scroll", onScrollPage);
-
-						// Set arrow styles
-						setArrowStyles(height, width, bg, color);
 
 						showScroll();
 					} else {

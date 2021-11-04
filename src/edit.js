@@ -345,11 +345,9 @@ export default function Edit({
 	}, [headerList]);
 
 	useEffect(() => {
-		const goTop = document.createElement("div");
-		goTop.setAttribute(
-			"class",
-			"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
-		);
+		const goTop = document.createElement("span");
+		goTop.innerHTML = ">";
+		goTop.setAttribute("class", "eb-toc-go-top ");
 		goTop.style.right = "300px";
 		document.body.insertBefore(goTop, document.body.lastChild);
 	}, []);
@@ -365,20 +363,6 @@ export default function Edit({
 			scrollElement.classList.remove("show-scroll");
 		}
 	}, [scrollToTop]);
-
-	useEffect(() => {
-		const scrollElement = document.querySelector(".eb-toc-go-top");
-
-		if (scrollElement) {
-			if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
-
-			if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
-
-			if (arrowBg) scrollElement.style.background = arrowBg;
-
-			if (arrowColor) scrollElement.style.color = arrowColor;
-		}
-	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
 
 	//
 	//
@@ -660,6 +644,19 @@ export default function Edit({
 			background:none;
 		}
 
+		${
+			scrollToTop
+				? `
+					span.show-scroll.eb-toc-go-top {
+						${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
+						${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+						${arrowBg ? `background-color: ${arrowBg};` : ""}
+						${arrowColor ? `color: ${arrowColor};` : ""}
+					}
+				`
+				: ""
+		}
+
 	`;
 
 	const tabAllStylesCommon = `
@@ -727,8 +724,7 @@ export default function Edit({
 			display:${visible ? "block" : "none"};
 		}
 
-
-
+		
 		`;
 
 	const tabAllStylesEditor = `

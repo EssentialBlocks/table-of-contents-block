@@ -313,10 +313,66 @@ const Inspector = ({ attributes, setAttributes }) => {
 										.fix-select-over-lapping>div>div{
 											z-index:999999 !important;
 										}
-										
-										
 										`}
 									</style>
+
+									<PanelBody
+										title={__("Scroll")}
+										// initialOpen={false}
+									>
+										<ToggleControl
+											label={__("Smooth Scroll")}
+											checked={isSmooth}
+											onChange={() => setAttributes({ isSmooth: !isSmooth })}
+										/>
+
+										<ToggleControl
+											label={__("Scroll To Top")}
+											checked={scrollToTop}
+											onChange={() =>
+												setAttributes({ scrollToTop: !scrollToTop })
+											}
+										/>
+
+										{scrollToTop && (
+											<>
+												<RangeControl
+													label={__("Arrow Height")}
+													value={arrowHeight}
+													onChange={(arrowHeight) =>
+														setAttributes({ arrowHeight })
+													}
+													min={0}
+													max={100}
+												/>
+
+												<RangeControl
+													label={__("Arrow Width")}
+													value={arrowWidth}
+													onChange={(arrowWidth) =>
+														setAttributes({ arrowWidth })
+													}
+													min={0}
+													max={100}
+												/>
+
+												<ColorControl
+													label={__("Arrow Background")}
+													color={arrowBg}
+													onChange={(arrowBg) => setAttributes({ arrowBg })}
+												/>
+
+												<ColorControl
+													label={__("Arrow Color")}
+													color={arrowColor}
+													onChange={(arrowColor) =>
+														setAttributes({ arrowColor })
+													}
+												/>
+											</>
+										)}
+									</PanelBody>
+
 									<PanelBody title={__("Visible Headers")}>
 										<div className="fix-select-over-lapping">
 											<Select
@@ -625,60 +681,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 												min={0}
 												max={100}
 											/>
-										)}
-									</PanelBody>
-
-									<PanelBody title={__("Scroll")} initialOpen={false}>
-										<ToggleControl
-											label={__("Smooth Scroll")}
-											checked={isSmooth}
-											onChange={() => setAttributes({ isSmooth: !isSmooth })}
-										/>
-
-										<ToggleControl
-											label={__("Scroll To Top")}
-											checked={scrollToTop}
-											onChange={() =>
-												setAttributes({ scrollToTop: !scrollToTop })
-											}
-										/>
-
-										{scrollToTop && (
-											<>
-												<RangeControl
-													label={__("Arrow Height")}
-													value={arrowHeight}
-													onChange={(arrowHeight) =>
-														setAttributes({ arrowHeight })
-													}
-													min={0}
-													max={100}
-												/>
-
-												<RangeControl
-													label={__("Arrow Width")}
-													value={arrowWidth}
-													onChange={(arrowWidth) =>
-														setAttributes({ arrowWidth })
-													}
-													min={0}
-													max={100}
-												/>
-
-												<ColorControl
-													label={__("Arrow Background")}
-													color={arrowBg}
-													onChange={(arrowBg) => setAttributes({ arrowBg })}
-												/>
-
-												<ColorControl
-													label={__("Arrow Color")}
-													color={arrowColor}
-													onChange={(arrowColor) =>
-														setAttributes({ arrowColor })
-													}
-												/>
-											</>
 										)}
 									</PanelBody>
 								</>
