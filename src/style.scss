@@ -191,9 +191,12 @@
 // .eb-toc-container:not(.eb-toc-content-visible):not(.eb-toc-content-hidden).eb-toc-initially-not-collapsed.eb-toc-is-not-sticky {
 // }
 
-// .eb-toc-container:not(.eb-toc-content-visible):not(.eb-toc-content-hidden).eb-toc-collapsible.eb-toc-initially-collapsed.eb-toc-is-sticky {
-// 	visibility: hidden;
-// }
+//
+//
+//
+.eb-toc-container:not(.eb-toc-content-visible):not(.eb-toc-content-hidden).eb-toc-collapsible.eb-toc-initially-collapsed.eb-toc-is-sticky {
+	visibility: hidden;
+}
 
 .eb-toc-container:not(.eb-toc-content-visible):not(.eb-toc-content-hidden).eb-toc-collapsible.eb-toc-initially-collapsed.eb-toc-is-sticky
 	.eb-toc-wrapper {

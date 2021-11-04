@@ -12534,11 +12534,12 @@ var Inspector = function Inspector(_ref) {
       name: "general",
       title: "General",
       className: "eb-tab general"
-    }, {
-      name: "styles",
-      title: "Styles",
-      className: "eb-tab styles"
-    }, {
+    }, // {
+    // 	name: "styles",
+    // 	title: "Styles",
+    // 	className: "eb-tab styles",
+    // },
+    {
       name: "advance",
       title: "Advance",
       className: "eb-tab advance"
@@ -12547,14 +12548,16 @@ var Inspector = function Inspector(_ref) {
     return /*#__PURE__*/React.createElement("div", {
       className: "eb-tab-controls" + tab.name,
       key: tab.name
-    }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+    }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      className: "fix-select-over-lapping"
+    }, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Visible Headers")
     }, /*#__PURE__*/React.createElement(react_select__WEBPACK_IMPORTED_MODULE_0__["default"], {
       options: options,
       defaultValue: defaultOptions,
       isMulti: true,
       onChange: onHeaderChange
-    })), /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement(_util_responsive_range_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }))), /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement(_util_responsive_range_control__WEBPACK_IMPORTED_MODULE_5__["default"], {
       baseLabel: __("Wrapper max width"),
       controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_17__["wrapMaxWidthPrefix"],
       resRequiredProps: resRequiredProps,
@@ -12885,10 +12888,7 @@ var Inspector = function Inspector(_ref) {
           arrowColor: arrowColor
         });
       }
-    })))), tab.name === "styles" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
-      title: __("Styles") //  initialOpen={false}
-
-    }, /*#__PURE__*/React.createElement("h3", null, "Styles"))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+    })))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Margin & Padding") // initialOpen={true}
 
     }, /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {

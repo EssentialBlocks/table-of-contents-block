@@ -292,11 +292,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 							title: "General",
 							className: "eb-tab general",
 						},
-						{
-							name: "styles",
-							title: "Styles",
-							className: "eb-tab styles",
-						},
+						// {
+						// 	name: "styles",
+						// 	title: "Styles",
+						// 	className: "eb-tab styles",
+						// },
 						{
 							name: "advance",
 							title: "Advance",
@@ -308,14 +308,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<div className={"eb-tab-controls" + tab.name} key={tab.name}>
 							{tab.name === "general" && (
 								<>
-									<PanelBody title={__("Visible Headers")}>
-										<Select
-											options={options}
-											defaultValue={defaultOptions}
-											isMulti
-											onChange={onHeaderChange}
-										/>
-									</PanelBody>
+									<div className="fix-select-over-lapping">
+										<PanelBody title={__("Visible Headers")}>
+											<Select
+												options={options}
+												defaultValue={defaultOptions}
+												isMulti
+												onChange={onHeaderChange}
+											/>
+										</PanelBody>
+									</div>
 
 									<PanelBody>
 										<ResponsiveRangeController
@@ -672,7 +674,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 									</PanelBody>
 								</>
 							)}
-							{tab.name === "styles" && (
+							{/* {tab.name === "styles" && (
 								<>
 									<PanelBody
 										title={__("Styles")}
@@ -681,7 +683,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<h3>Styles</h3>
 									</PanelBody>
 								</>
-							)}
+							)} */}
 							{tab.name === "advance" && (
 								<>
 									<PanelBody
