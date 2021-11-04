@@ -11,12 +11,10 @@ const {
 	BaseControl,
 	ToggleControl,
 	RangeControl,
-	TextControl,
 	TabPanel,
 	SelectControl,
 	ButtonGroup,
 	Button,
-	Dropdown,
 } = wp.components;
 
 /**
@@ -25,19 +23,19 @@ const {
 
 import Select from "react-select";
 
-import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-import faIcons from "../util/faIcons.js";
+// import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
+// import faIcons from "../util/faIcons.js";
 import TypographyDropdown from "../util/typography-control-v2";
 import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
 import ResponsiveRangeController from "../util/responsive-range-control";
-import ImageAvatar from "../util/image-avatar/";
-import GradientColorControl from "../util/gradient-color-controller";
+// import ImageAvatar from "../util/image-avatar/";
+// import GradientColorControl from "../util/gradient-color-controller";
 import ColorControl from "../util/color-control";
 import BorderShadowControl from "../util/border-shadow-control";
 // import BackgroundControl from "../util/background-control";
 import UnitControl from "../util/unit-control";
-import FontPicker from "../util/typography-control/FontPicker";
-import DimensionsControl from "../util/dimensions-control";
+// import FontPicker from "../util/typography-control/FontPicker";
+// import DimensionsControl from "../util/dimensions-control";
 import ResetControl from "../util/reset-control";
 
 import objAttributes from "./attributes";
@@ -85,23 +83,9 @@ import {
 } from "./constants/borderShadowConstants";
 
 import {
-	LAYOUT_TYPES,
-	MEDIA_TYPES,
-	ICON_IMAGE_BG_TYPES,
-	sizeUnitTypes,
-	HEADER_TAGS,
-	CONTENTS_ALIGNMENTS,
-	MEDIA_ALIGNMENTS_ON_FLEX_COLUMN,
-	MEDIA_ALIGNMENTS_ON_FLEX_ROW,
-	HOVER_EFFECT,
-	imgHeightUnits,
-
 	//
 	HEADERS,
 	ALIGNS,
-	FONT_WEIGHTS,
-	TEXT_TRANSFORM,
-	TEXT_DECORATION,
 	BORDER_STYLES,
 } from "./constants";
 
@@ -125,66 +109,24 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentGapUnit,
 		displayTitle,
 		titleAlign,
-		titleFontFamily,
-		titleSizeUnit,
-		titleFontSize,
-		titleFontWeight,
-		titleTextTransform,
-		titleTextDecoration,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
-		contentFontFamily,
-		contentSizeUnit,
-		contentFontSize,
-		contentFontWeight,
-		contentTextTransform,
-		contentTextDecoration,
-		contentLetterSpacing,
-		contentLetterSpacingUnit,
-		contentLineHeight,
 		isSmooth,
 		seperator,
 		seperatorSize,
 		seperatorColor,
 		seperatorStyle,
-		borderWidth,
-		borderColor,
-		borderStyle,
-		titlePaddingTop,
-		titlePaddingRight,
-		titlePaddingBottom,
-		titlePaddingLeft,
-		titlePaddingUnit,
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
 		arrowBg,
 		arrowColor,
-		shadowColor,
-		hOffset,
-		vOffset,
-		blur,
-		spread,
-		contentPaddingTop,
-		contentPaddingRight,
-		contentPaddingBottom,
-		contentPaddingLeft,
-		contentPaddingUnit,
-		radius,
-		radiusUnit,
 		listSeperatorWidth,
 		listSeperatorStyle,
 		listSeperatorColor,
 		hasUnderline,
 		isSticky,
 		contentHeight,
-		contentWidth,
 		topSpace,
 		hideOnMobile,
-		zIndex,
-		containerWidth,
 
 		//
 		showListSeparator,
@@ -252,23 +194,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setDefaultOptions(defaultOptions);
 	};
 
-	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
-	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
-
-	const TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
-	const TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
-
-	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
-	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
-
 	const CONTENT_GAP_STEP = contentGapUnit === "em" ? 0.1 : 1;
 	const CONTENT_GAP_MAX = contentGapUnit === "em" ? 10 : 100;
-
-	const CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
-	const CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
-
-	const CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
-	const CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
 
 	const onHeaderChange = (options) => {
 		if (options) {

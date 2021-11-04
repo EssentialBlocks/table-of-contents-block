@@ -6,29 +6,12 @@ const { __ } = wp.i18n;
 const {
 	BlockControls,
 	RichText,
-	BlockAlignmentToolbar,
 	AlignmentToolbar,
 	useBlockProps,
 } = wp.blockEditor;
 const { useState, useEffect } = wp.element;
 const { select, useSelect } = wp.data;
-const {
-	PanelBody,
-	BaseControl,
-	ToggleControl,
-	RangeControl,
-	TextControl,
-	TabPanel,
-	SelectControl,
-	ButtonGroup,
-	Button,
-	Dropdown,
-
-	//
-	Toolbar,
-	ToolbarButton,
-	ToolbarGroup,
-} = wp.components;
+const { ToolbarButton, ToolbarGroup } = wp.components;
 
 /*
  * External dependencies
@@ -286,45 +269,16 @@ export default function Edit({
 		contentHoverColor,
 		displayTitle,
 		titleAlign,
-		titleFontFamily,
-		titleSizeUnit,
-		titleFontSize,
-		titleFontWeight,
-		titleTextTransform,
-		titleTextDecoration,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
 		seperator,
 		seperatorSize,
 		seperatorColor = "#000",
 		seperatorStyle,
-		borderWidth,
-		borderColor,
-		borderStyle,
-		titlePaddingTop,
-		titlePaddingRight,
-		titlePaddingBottom,
-		titlePaddingLeft,
-		titlePaddingUnit,
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
 		arrowBg,
 		arrowColor,
-		shadowColor,
-		hOffset,
-		vOffset,
-		blur,
-		spread,
-		contentPaddingTop,
-		contentPaddingRight,
-		contentPaddingBottom,
-		contentPaddingLeft,
-		contentPaddingUnit,
 		contentAlign,
-		containerWidth,
 
 		//
 		isSticky,
@@ -345,6 +299,7 @@ export default function Edit({
 	}, [headerList]);
 
 	useEffect(() => {
+		if (document.querySelector(".eb-toc-go-top")) return () => {};
 		const goTop = document.createElement("span");
 		goTop.innerHTML = ">";
 		goTop.setAttribute("class", "eb-toc-go-top ");
@@ -363,27 +318,6 @@ export default function Edit({
 			scrollElement.classList.remove("show-scroll");
 		}
 	}, [scrollToTop]);
-
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
-	//
 
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
@@ -431,36 +365,6 @@ export default function Edit({
 		attributes,
 	});
 
-	// const {
-	// 	rangeStylesDesktop: BoxsSpaceBetweenDesktop,
-	// 	rangeStylesTab: BoxsSpaceBetweenTab,
-	// 	rangeStylesMobile: BoxsSpaceBetweenMobile,
-	// } = generateResponsiveRangeStyles({
-	// 	controlName: boxsSpaceConst,
-	// 	customUnit: "px",
-	// 	property: flexDirection === "row" ? "margin-left" : "margin-top",
-	// 	attributes,
-	// });
-
-	// const {
-	// 	rangeStylesDesktop: SeparatorTopDesktop,
-	// 	rangeStylesTab: SeparatorTopTab,
-	// 	rangeStylesMobile: SeparatorTopMobile,
-	// } = generateResponsiveRangeStyles({
-	// 	controlName: separatorPosTop,
-	// 	property: "top",
-	// 	attributes,
-	// });
-
-	// const {
-	// 	rangeStylesDesktop: SeparatorRightDesktop,
-	// 	rangeStylesTab: SeparatorRightTab,
-	// 	rangeStylesMobile: SeparatorRightMobile,
-	// } = generateResponsiveRangeStyles({
-	// 	controlName: separatorPosRight,
-	// 	property: "padding-right",
-	// 	attributes,
-	// });
 	// // styles related to generateResponsiveRangeStyles end
 
 	// // styles related to generateTypographyStyles start ⬇
