@@ -10926,7 +10926,7 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
   },
   listSeperatorStyle: {
     type: "string",
-    "default": "none"
+    "default": "solid"
   },
   listSeperatorColor: {
     type: "string"
@@ -10978,7 +10978,12 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
 }, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateTypographyAttributes"])(Object.values(_constants_typographyPrefixConstants__WEBPACK_IMPORTED_MODULE_0__))), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateResponsiveRangeAttributes"])(_constants_rangeNames__WEBPACK_IMPORTED_MODULE_3__["wrapMaxWidthPrefix"], {
   // noUnits: true,
   defaultRange: 610
-})), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateBorderShadowAttributes"])(_constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_2__["WrpBdShadowConst"], {// noShadow: true,
+})), {}, {
+  showListSeparator: {
+    type: "boolean",
+    "default": false
+  }
+}, Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateBorderShadowAttributes"])(_constants_borderShadowConstants__WEBPACK_IMPORTED_MODULE_2__["WrpBdShadowConst"], {// noShadow: true,
   // noBorder: true,
 })), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpMarginConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["WrpPaddingConst"])), Object(_util_helpers__WEBPACK_IMPORTED_MODULE_4__["generateDimensionsAttributes"])(_constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_1__["titlePaddingConst"], {
   left: 10,
@@ -12414,7 +12419,8 @@ var Inspector = function Inspector(_ref) {
       topSpace = attributes.topSpace,
       hideOnMobile = attributes.hideOnMobile,
       zIndex = attributes.zIndex,
-      containerWidth = attributes.containerWidth;
+      containerWidth = attributes.containerWidth,
+      showListSeparator = attributes.showListSeparator;
 
   var _useState = useState(_constants__WEBPACK_IMPORTED_MODULE_20__["HEADERS"]),
       _useState2 = _slicedToArray(_useState, 2),
@@ -12852,7 +12858,15 @@ var Inspector = function Inspector(_ref) {
       resRequiredProps: resRequiredProps,
       controlName: _constants_dimensionsConstants__WEBPACK_IMPORTED_MODULE_18__["contentPaddingConst"],
       baseLabel: "Padding"
-    }), /*#__PURE__*/React.createElement(SelectControl, {
+    }), /*#__PURE__*/React.createElement(ToggleControl, {
+      label: __("Show Separator"),
+      checked: showListSeparator,
+      onChange: function onChange() {
+        return setAttributes({
+          showListSeparator: !showListSeparator
+        });
+      }
+    }), showListSeparator && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(SelectControl, {
       label: __("Seperator Style"),
       value: listSeperatorStyle,
       options: _constants__WEBPACK_IMPORTED_MODULE_20__["BORDER_STYLES"],
@@ -12861,7 +12875,7 @@ var Inspector = function Inspector(_ref) {
           listSeperatorStyle: listSeperatorStyle
         });
       }
-    }), listSeperatorStyle !== "none" && /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    }), /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
       label: __("Seperator Color"),
       color: listSeperatorColor,
       onChange: function onChange(listSeperatorColor) {
@@ -12869,7 +12883,7 @@ var Inspector = function Inspector(_ref) {
           listSeperatorColor: listSeperatorColor
         });
       }
-    }), listSeperatorStyle !== "none" && /*#__PURE__*/React.createElement(RangeControl, {
+    }), /*#__PURE__*/React.createElement(RangeControl, {
       label: __("Seperator Size"),
       value: listSeperatorWidth,
       onChange: function onChange(listSeperatorWidth) {
@@ -12879,7 +12893,7 @@ var Inspector = function Inspector(_ref) {
       },
       min: 0,
       max: 100
-    }))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
+    })))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Margin & Padding") // initialOpen={true}
 
     }, /*#__PURE__*/React.createElement(_util_dimensions_control_v2__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -12974,8 +12988,10 @@ var List = /*#__PURE__*/function (_Component) {
           listColor = _this$props$attribute.listColor,
           contentColor = _this$props$attribute.contentColor,
           indent = _this$props$attribute.indent,
-          contentGap = _this$props$attribute.contentGap,
-          contentGapUnit = _this$props$attribute.contentGapUnit,
+          _this$props$attribute2 = _this$props$attribute.contentGap,
+          contentGap = _this$props$attribute2 === void 0 ? 20 : _this$props$attribute2,
+          _this$props$attribute3 = _this$props$attribute.contentGapUnit,
+          contentGapUnit = _this$props$attribute3 === void 0 ? "px" : _this$props$attribute3,
           contentFontFamily = _this$props$attribute.contentFontFamily,
           contentSizeUnit = _this$props$attribute.contentSizeUnit,
           contentFontSize = _this$props$attribute.contentFontSize,
@@ -12984,15 +13000,15 @@ var List = /*#__PURE__*/function (_Component) {
           contentLetterSpacing = _this$props$attribute.contentLetterSpacing,
           contentLetterSpacingUnit = _this$props$attribute.contentLetterSpacingUnit,
           contentLineHeight = _this$props$attribute.contentLineHeight,
-          listSeperatorWidth = _this$props$attribute.listSeperatorWidth,
-          listSeperatorStyle = _this$props$attribute.listSeperatorStyle,
-          listSeperatorColor = _this$props$attribute.listSeperatorColor,
-          hasUnderline = _this$props$attribute.hasUnderline; // Style objects
+          hasUnderline = _this$props$attribute.hasUnderline,
+          _this$props$attribute4 = _this$props$attribute.listSeperatorWidth,
+          listSeperatorWidth = _this$props$attribute4 === void 0 ? 10 : _this$props$attribute4,
+          _this$props$attribute5 = _this$props$attribute.listSeperatorStyle,
+          listSeperatorStyle = _this$props$attribute5 === void 0 ? "solid" : _this$props$attribute5,
+          _this$props$attribute6 = _this$props$attribute.listSeperatorColor,
+          listSeperatorColor = _this$props$attribute6 === void 0 ? "#000" : _this$props$attribute6,
+          showListSeparator = _this$props$attribute.showListSeparator; // Style objects
 
-      var linkStyle = {
-        color: contentColor,
-        textDecoration: hasUnderline ? "underline" : "none"
-      };
       var ListTag = listType === "ol" ? "ol" : "ul";
 
       var makeHeaderArray = function makeHeaderArray(origHeaders) {
@@ -13049,9 +13065,9 @@ var List = /*#__PURE__*/function (_Component) {
             items.push( /*#__PURE__*/React.createElement("li", {
               key: counter,
               style: {
-                paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
-                paddingBottom: counter < list.length && contentGap / 2 + contentGapUnit,
-                borderBottom: counter < list.length && "".concat(listSeperatorWidth || 0, "px ").concat(listSeperatorStyle || "solid", " ").concat(listSeperatorColor || "transparent")
+                paddingTop: counter > 0 ? "".concat(contentGap / 2, " ").concat(contentGapUnit) : undefined,
+                paddingBottom: counter < list.length ? "".concat(contentGap / 2, " ").concat(contentGapUnit) : undefined,
+                borderBottom: counter < list.length && showListSeparator ? "".concat(listSeperatorWidth, "px ").concat(listSeperatorStyle, " ").concat(listSeperatorColor) : undefined
               }
             }, /*#__PURE__*/React.createElement("a", {
               href: "#".concat(item.link),

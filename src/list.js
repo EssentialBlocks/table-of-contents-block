@@ -14,8 +14,8 @@ class List extends Component {
 			listColor,
 			contentColor,
 			indent,
-			contentGap,
-			contentGapUnit,
+			contentGap = 20,
+			contentGapUnit = "px",
 			contentFontFamily,
 			contentSizeUnit,
 			contentFontSize,
@@ -24,18 +24,14 @@ class List extends Component {
 			contentLetterSpacing,
 			contentLetterSpacingUnit,
 			contentLineHeight,
-			listSeperatorWidth,
-			listSeperatorStyle,
-			listSeperatorColor,
 			hasUnderline,
+			listSeperatorWidth = 10,
+			listSeperatorStyle = "solid",
+			listSeperatorColor = "#000",
+			showListSeparator,
 		} = this.props.attributes;
 
 		// Style objects
-
-		const linkStyle = {
-			color: contentColor,
-			textDecoration: hasUnderline ? "underline" : "none",
-		};
 
 		const ListTag = listType === "ol" ? "ol" : "ul";
 
@@ -96,14 +92,18 @@ class List extends Component {
 						<li
 							key={counter}
 							style={{
-								paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
+								paddingTop:
+									counter > 0
+										? `${contentGap / 2} ${contentGapUnit}`
+										: undefined,
 								paddingBottom:
-									counter < list.length && contentGap / 2 + contentGapUnit,
+									counter < list.length
+										? `${contentGap / 2} ${contentGapUnit}`
+										: undefined,
 								borderBottom:
-									counter < list.length &&
-									`${listSeperatorWidth || 0}px ${
-										listSeperatorStyle || "solid"
-									} ${listSeperatorColor || "transparent"}`,
+									counter < list.length && showListSeparator
+										? `${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor}`
+										: undefined,
 							}}
 						>
 							<a

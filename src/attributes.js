@@ -293,7 +293,7 @@ const attributes = {
 	},
 	listSeperatorStyle: {
 		type: "string",
-		default: "none",
+		default: "solid",
 	},
 	listSeperatorColor: {
 		type: "string",
@@ -352,6 +352,10 @@ const attributes = {
 		defaultRange: 610,
 	}),
 
+	showListSeparator: {
+		type: "boolean",
+		default: false,
+	},
 	// //
 	// ...generateBackgroundAttributes(WrpBgConst, {
 	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",

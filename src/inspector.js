@@ -185,6 +185,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		hideOnMobile,
 		zIndex,
 		containerWidth,
+
+		//
+		showListSeparator,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
@@ -652,35 +655,43 @@ const Inspector = ({ attributes, setAttributes }) => {
 											baseLabel="Padding"
 										/>
 
-										<SelectControl
-											label={__("Seperator Style")}
-											value={listSeperatorStyle}
-											options={BORDER_STYLES}
-											onChange={(listSeperatorStyle) =>
-												setAttributes({ listSeperatorStyle })
+										<ToggleControl
+											label={__("Show Separator")}
+											checked={showListSeparator}
+											onChange={() =>
+												setAttributes({ showListSeparator: !showListSeparator })
 											}
 										/>
 
-										{listSeperatorStyle !== "none" && (
-											<ColorControl
-												label={__("Seperator Color")}
-												color={listSeperatorColor}
-												onChange={(listSeperatorColor) =>
-													setAttributes({ listSeperatorColor })
-												}
-											/>
-										)}
+										{showListSeparator && (
+											<>
+												<SelectControl
+													label={__("Seperator Style")}
+													value={listSeperatorStyle}
+													options={BORDER_STYLES}
+													onChange={(listSeperatorStyle) =>
+														setAttributes({ listSeperatorStyle })
+													}
+												/>
 
-										{listSeperatorStyle !== "none" && (
-											<RangeControl
-												label={__("Seperator Size")}
-												value={listSeperatorWidth}
-												onChange={(listSeperatorWidth) =>
-													setAttributes({ listSeperatorWidth })
-												}
-												min={0}
-												max={100}
-											/>
+												<ColorControl
+													label={__("Seperator Color")}
+													color={listSeperatorColor}
+													onChange={(listSeperatorColor) =>
+														setAttributes({ listSeperatorColor })
+													}
+												/>
+
+												<RangeControl
+													label={__("Seperator Size")}
+													value={listSeperatorWidth}
+													onChange={(listSeperatorWidth) =>
+														setAttributes({ listSeperatorWidth })
+													}
+													min={0}
+													max={100}
+												/>
+											</>
 										)}
 									</PanelBody>
 								</>
