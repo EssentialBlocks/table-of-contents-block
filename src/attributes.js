@@ -4,6 +4,8 @@ import {
 	//
 	WrpMarginConst,
 	WrpPaddingConst,
+	titlePaddingConst,
+	contentPaddingConst,
 } from "./constants/dimensionsConstants";
 
 // import {
@@ -79,6 +81,10 @@ const attributes = {
 	initialCollapse: {
 		type: "boolean",
 		default: false,
+	},
+	mainBgc: {
+		type: "string",
+		// default: "#ff7d50",
 	},
 	titleBg: {
 		type: "string",
@@ -359,6 +365,8 @@ const attributes = {
 	//
 	...generateDimensionsAttributes(WrpMarginConst),
 	...generateDimensionsAttributes(WrpPaddingConst),
+	...generateDimensionsAttributes(titlePaddingConst),
+	...generateDimensionsAttributes(contentPaddingConst),
 };
 
 export default attributes;

@@ -88,6 +88,8 @@ import {
 	//
 	WrpMarginConst,
 	WrpPaddingConst,
+	contentPaddingConst,
+	titlePaddingConst,
 } from "./constants/dimensionsConstants";
 
 // import {
@@ -278,6 +280,7 @@ export default function Edit({
 		titleColor = "#fff",
 		contentBg = "#fff6f3",
 		contentColor = "#707070",
+		mainBgc,
 		displayTitle,
 		titleAlign,
 		titleFontFamily,
@@ -371,22 +374,6 @@ export default function Edit({
 			if (arrowColor) scrollElement.style.color = arrowColor;
 		}
 	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
-
-	const titleStyle = {
-		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
-			titlePaddingRight || 0
-		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
-			titlePaddingLeft || 0
-		}${titlePaddingUnit}`,
-	};
-
-	const contentStyle = {
-		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
-			contentPaddingRight || 0
-		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
-			contentPaddingLeft || 0
-		}${contentPaddingUnit}`,
-	};
 
 	//
 	//
@@ -567,6 +554,26 @@ export default function Edit({
 		styleFor: "padding",
 	});
 
+	const {
+		dimensionStylesDesktop: titlePaddingDesktop,
+		dimensionStylesTab: titlePaddingTab,
+		dimensionStylesMobile: titlePaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: titlePaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: contentPaddingDesktop,
+		dimensionStylesTab: contentPaddingTab,
+		dimensionStylesMobile: contentPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: contentPaddingConst,
+		styleFor: "padding",
+	});
+
 	// // styles related to generateDimensionsControlStyles end
 
 	// // styles related to generateBorderShadowStyles start ⬇
@@ -590,9 +597,9 @@ export default function Edit({
 	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrapMaxWidthDesktop}
-
-			background-color:${contentBg};
 			
+			${mainBgc ? `background-color:${mainBgc};` : ""}
+
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
@@ -608,8 +615,6 @@ export default function Edit({
 			
 		}
 		
-
-
 		.${blockId}.eb-toc-container .eb-toc-title{
 			text-align: ${titleAlign};
 			cursor:${collapsible ? "pointer" : "default"};
@@ -622,10 +627,13 @@ export default function Edit({
 					  }px ${seperatorStyle} ${seperatorColor};`
 					: ""
 			}
+			${titlePaddingDesktop}
 		}
-
+		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			background-color:${contentBg};
 			text-align: ${contentAlign};
+			${contentPaddingDesktop}
 		}
 
 	`;
@@ -640,8 +648,14 @@ export default function Edit({
 		}
 		.${blockId}.eb-toc-container:hover{
 			${wrpBdShdStylesHoverTab}
-			
-			
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-title{
+			${titlePaddingTab}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			${contentPaddingTab}
 		}
 	
 		
@@ -656,10 +670,17 @@ export default function Edit({
 			${wrpPaddingMobile}
 			${wrpBdShdStyesMobile}
 		}
+		
 		.${blockId}.eb-toc-container:hover{
 			${wrpBdShdStylesHoverMobile}
-			
+		}
 
+		.${blockId}.eb-toc-container .eb-toc-title{
+			${titlePaddingMobile}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			${contentPaddingMobile}
 		}
 	
 		
@@ -818,7 +839,6 @@ export default function Edit({
 					{displayTitle && (
 						<RichText
 							className="eb-toc-title"
-							style={titleStyle}
 							placeholder="Table of content"
 							value={title}
 							onChange={(title) => setAttributes({ title })}
@@ -826,7 +846,7 @@ export default function Edit({
 					)}
 				</div>
 				{headers.length > 0 ? (
-					<div className="eb-toc-wrapper" style={contentStyle}>
+					<div className="eb-toc-wrapper">
 						<List attributes={attributes} />
 					</div>
 				) : (

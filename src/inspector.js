@@ -68,6 +68,8 @@ import {
 	//
 	WrpMarginConst,
 	WrpPaddingConst,
+	titlePaddingConst,
+	contentPaddingConst,
 } from "./constants/dimensionsConstants";
 
 // import {
@@ -110,6 +112,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		visibleHeaders,
 		collapsible,
 		initialCollapse,
+		mainBgc,
 		titleBg,
 		titleColor,
 		contentBg,
@@ -573,32 +576,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 													/>
 												</BaseControl>
 
-												<UnitControl
-													selectedUnit={titlePaddingUnit}
-													unitTypes={[
-														{ label: "px", value: "px" },
-														{ label: "%", value: "%" },
-														{ label: "em", value: "em" },
-													]}
-													onClick={(titlePaddingUnit) =>
-														setAttributes({ titlePaddingUnit })
-													}
-												/>
-
-												<DimensionsControl
-													label={__("Padding")}
-													top={titlePaddingTop}
-													right={titlePaddingRight}
-													bottom={titlePaddingBottom}
-													left={titlePaddingLeft}
-													onChange={({ top, right, bottom, left }) =>
-														setAttributes({
-															titlePaddingTop: top,
-															titlePaddingRight: right,
-															titlePaddingBottom: bottom,
-															titlePaddingLeft: left,
-														})
-													}
+												<ResponsiveDimensionsControl
+													resRequiredProps={resRequiredProps}
+													controlName={titlePaddingConst}
+													baseLabel="Padding"
 												/>
 											</PanelBody>
 										)}
@@ -819,32 +800,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 											/>
 										</BaseControl>
 
-										<UnitControl
-											selectedUnit={contentPaddingUnit}
-											unitTypes={[
-												{ label: "px", value: "px" },
-												{ label: "%", value: "%" },
-												{ label: "em", value: "em" },
-											]}
-											onClick={(contentPaddingUnit) =>
-												setAttributes({ contentPaddingUnit })
-											}
-										/>
-
-										<DimensionsControl
-											label={__("Padding")}
-											top={contentPaddingTop}
-											right={contentPaddingRight}
-											bottom={contentPaddingBottom}
-											left={contentPaddingLeft}
-											onChange={({ top, right, bottom, left }) =>
-												setAttributes({
-													contentPaddingTop: top,
-													contentPaddingRight: right,
-													contentPaddingBottom: bottom,
-													contentPaddingLeft: left,
-												})
-											}
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={contentPaddingConst}
+											baseLabel="Padding"
 										/>
 
 										<SelectControl
@@ -961,13 +920,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 											baseLabel="Padding"
 										/>
 									</PanelBody>
-{/* 
-									<PanelBody title={__("Background ")} initialOpen={false}>
-										<BackgroundControl
-											controlName={WrpBgConst}
-											resRequiredProps={resRequiredProps}
+
+									<PanelBody title={__("Background ")}>
+										<ColorControl
+											label={__("Background Color")}
+											color={mainBgc}
+											onChange={(mainBgc) => setAttributes({ mainBgc })}
 										/>
-									</PanelBody> */}
+									</PanelBody>
 
 									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
 										<BorderShadowControl
