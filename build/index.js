@@ -10940,8 +10940,7 @@ var attributes = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_object
     "default": 25
   },
   contentHeight: {
-    type: "number",
-    "default": 200
+    type: "number"
   },
   contentHeightUnit: {
     type: "string",
@@ -11975,15 +11974,17 @@ function Edit(_ref) {
       wrpBdShdTransitionStyle = _generateBorderShadow.transitionStyle; // // styles related to generateBorderShadowStyles end
 
 
-  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\t\t\t\n\t\t\t").concat(mainBgc ? "background-color:".concat(mainBgc, ";") : "", "\n\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t\t").concat(titlePaddingDesktop, "\n\t\t\t").concat(titleTypoStylesDesktop, "\n\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ul,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ol\n\t\t{\n\t\t\t").concat(listType === "none" ? "list-style: none;" : "", "\n\t\t\t").concat(indent ? "margin-left:".concat(indent, "px;") : "", " \n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li {\n\t\t\tcolor:").concat(contentColor, ";\n\t\t\t").concat(contentTypoStylesDesktop, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li:hover{\n\t\t\tcolor:").concat(contentHoverColor, ";\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a{\n\t\t\tcolor:inherit;\n\t\t}\n\t\t\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a:focus{\n\t\t\t").concat(!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;", "\n\t\t\tbackground:none;\n\t\t}\n\n\t\t").concat(scrollToTop ? "\n\t\t\t\t\tspan.show-scroll.eb-toc-go-top {\n\t\t\t\t\t\t".concat(arrowHeight ? "height: ".concat(arrowHeight, "px;") : "", "\t\n\t\t\t\t\t\t").concat(arrowWidth ? "width: ".concat(arrowWidth, "px;") : "", "\t\n\t\t\t\t\t\t").concat(arrowBg ? "background-color: ".concat(arrowBg, ";") : "", "\n\t\t\t\t\t\t").concat(arrowColor ? "color: ".concat(arrowColor, ";") : "", "\n\t\t\t\t\t}\n\t\t\t\t") : "", "\n\n\t");
+  var desktopAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthDesktop, "\n\t\t\t\n\t\t\t").concat(mainBgc ? "background-color:".concat(mainBgc, ";") : "", "\n\n\t\t\t").concat(wrpMarginDesktop, "\n\t\t\t").concat(wrpPaddingDesktop, "\n\t\t\t").concat(wrpBdShdStyesDesktop, "\n\t\t\ttransition:all 0.5s, ").concat(wrpBdShdTransitionStyle, ";\n\n\t\t\t\n\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverDesktop, "\n\t\t\t\n\t\t\t\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\ttext-align: ").concat(titleAlign, ";\n\t\t\tcursor:").concat(collapsible ? "pointer" : "default", ";\n\t\t\tcolor: ").concat(titleColor, ";\n\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t").concat(seperator ? "border-bottom:".concat(seperatorSize || 0, "px ").concat(seperatorStyle, " ").concat(seperatorColor, ";") : "", "\n\t\t\t").concat(titlePaddingDesktop, "\n\t\t\t").concat(titleTypoStylesDesktop, "\n\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tbackground-color:").concat(contentBg, ";\n\t\t\ttext-align: ").concat(contentAlign, ";\n\t\t\t").concat(contentPaddingDesktop, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ul,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper ol\n\t\t{\n\t\t\t").concat(listType === "none" ? "list-style: none;" : "", "\n\t\t\t").concat(indent ? "margin-left:".concat(indent, "px;") : "", " \n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li {\n\t\t\tcolor:").concat(contentColor, ";\n\t\t\t").concat(contentTypoStylesDesktop, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li:hover{\n\t\t\tcolor:").concat(contentHoverColor, ";\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a{\n\t\t\tcolor:inherit;\n\t\t}\n\t\t\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a,\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li a:focus{\n\t\t\t").concat(!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;", "\n\t\t\tbackground:none;\n\t\t}\n\n\t\t").concat(scrollToTop ? "\n\t\t\t.eb-toc-go-top.show-scroll {\n\t\t\t\t".concat(arrowHeight ? "height: ".concat(arrowHeight, "px;") : "", "\t\n\t\t\t\t").concat(arrowWidth ? "width: ".concat(arrowWidth, "px;") : "", "\t\n\t\t\t\t").concat(arrowBg ? "background-color: ".concat(arrowBg, ";") : "", "\n\t\t\t\t").concat(arrowColor ? "color: ".concat(arrowColor, ";") : "", "\n\t\t\t}\n\t\t\t") : // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+  "", "\n\n\t");
   var tabAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthTab, "\n\n\t\t\t").concat(wrpMarginTab, "\n\t\t\t").concat(wrpPaddingTab, "\n\t\t\t").concat(wrpBdShdStyesTab, "\n\t\t}\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverTab, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingTab, "\n\t\t\t").concat(titleTypoStylesTab, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingTab, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li{\n\t\t\t").concat(contentTypoStylesTab, "\n\t\t}\n\n\t");
   var mobileAllStylesCommon = "\n\t\t.".concat(blockId, ".eb-toc-container{\n\t\t\t").concat(wrapMaxWidthMobile, "\n\n\n\t\t\t").concat(wrpMarginMobile, "\n\t\t\t").concat(wrpPaddingMobile, "\n\t\t\t").concat(wrpBdShdStyesMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container:hover{\n\t\t\t").concat(wrpBdShdStylesHoverMobile, "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-title{\n\t\t\t").concat(titlePaddingMobile, "\n\t\t\t").concat(titleTypoStylesMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(contentPaddingMobile, "\n\t\t}\n\t\t\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper li{\n\t\t\t").concat(contentTypoStylesMobile, "\n\t\t}\n\n\t"); //
 
   var desktopAllStylesEditor = "\n\t\t".concat(desktopAllStylesCommon, "\n\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\tdisplay:").concat(visible ? "block" : "none", ";\n\t\t}\n\n\t\t\n\t\t");
   var tabAllStylesEditor = "\n\t\t".concat(tabAllStylesCommon, "\n\n\t\n\t\t");
-  var mobileAllStylesEditor = "\n\t\t".concat(mobileAllStylesCommon, "\n\t\n\t"); // all css styles for large screen width (desktop/laptop) in strings ⬇
+  var mobileAllStylesEditor = "\n\t\t".concat(mobileAllStylesCommon, "\n\t\n\t"); // console.log("----------edit theke", { isSticky, scrollToTop });
+  // all css styles for large screen width (desktop/laptop) in strings ⬇
 
-  var desktopAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(desktopAllStylesCommon, "\n\n\t\t.").concat(blockId, ".eb-toc-container{\n\t\t\t").concat(isSticky ? "\n\t\t\t\tposition:fixed;\n\t\t\t\ttop: ".concat(topSpace || 25, "%;\n\t\t\t\tleft:0;\n\t\t\t\tz-index:999;\n\t\t\t") : "", "\n\t\t}\n\n\t\t.").concat(blockId, ".eb-toc-container .eb-toc-wrapper{\n\t\t\t").concat(isSticky ? "\n\t\t\t\t\toverflow:scroll;\n\t\t\t\t\t".concat(contentHeight ? "min-height:".concat(contentHeight, "px;") : "", "\n\t\t\t\t\t") : "", "\n\t\t}\n\n\n\t")); // all css styles for Tab in strings ⬇
+  var desktopAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(desktopAllStylesCommon, "\n\t\t").concat(isSticky ? "\n\t\t\t\t\n\t\t\t\t.".concat(blockId, ".eb-toc-container.eb-toc-is-sticky{\n\t\t\t\t\tposition:fixed;\n\t\t\t\t\ttop: ").concat(topSpace || 25, "%;\n\t\t\t\t\tleft:0;\n\t\t\t\t\tz-index:999;\n\t\t\t\t}\n\t\t\t\n\t\t\t\t.").concat(blockId, ".eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{\n\t\t\t\t\toverflow:scroll;\n\t\t\t\t\t").concat(contentHeight ? "min-height:".concat(contentHeight, "px;") : "", "\n\t\t\t\t}\n\t\t\t\n\t\t\t\t.").concat(blockId, ".eb-toc-container.eb-toc-is-sticky button.eb-toc-button{\n\t\t\t\t\tcolor:").concat(titleColor, ";\n\t\t\t\t\tbackground-color:").concat(titleBg, ";\n\t\t\t\t}\n\t\t\t\t") : "", "\n\n\n\t")); // all css styles for Tab in strings ⬇
 
   var tabAllStylesFrontEnd = Object(_util_helpers__WEBPACK_IMPORTED_MODULE_2__["softMinifyCssStrings"])("\n\t\t".concat(tabAllStylesCommon, "\n\n\t\t\n\t")); // all css styles for Mobile in strings ⬇
 
@@ -12546,61 +12547,6 @@ var Inspector = function Inspector(_ref) {
       className: "eb-tab-controls" + tab.name,
       key: tab.name
     }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t\t\t\t\t\t\t.fix-select-over-lapping>div>div{\n\t\t\t\t\t\t\t\t\t\t\tz-index:999999 !important;\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t"), /*#__PURE__*/React.createElement(PanelBody, {
-      title: __("Scroll") // initialOpen={false}
-
-    }, /*#__PURE__*/React.createElement(ToggleControl, {
-      label: __("Smooth Scroll"),
-      checked: isSmooth,
-      onChange: function onChange() {
-        return setAttributes({
-          isSmooth: !isSmooth
-        });
-      }
-    }), /*#__PURE__*/React.createElement(ToggleControl, {
-      label: __("Scroll To Top"),
-      checked: scrollToTop,
-      onChange: function onChange() {
-        return setAttributes({
-          scrollToTop: !scrollToTop
-        });
-      }
-    }), scrollToTop && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RangeControl, {
-      label: __("Arrow Height"),
-      value: arrowHeight,
-      onChange: function onChange(arrowHeight) {
-        return setAttributes({
-          arrowHeight: arrowHeight
-        });
-      },
-      min: 0,
-      max: 100
-    }), /*#__PURE__*/React.createElement(RangeControl, {
-      label: __("Arrow Width"),
-      value: arrowWidth,
-      onChange: function onChange(arrowWidth) {
-        return setAttributes({
-          arrowWidth: arrowWidth
-        });
-      },
-      min: 0,
-      max: 100
-    }), /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      label: __("Arrow Background"),
-      color: arrowBg,
-      onChange: function onChange(arrowBg) {
-        return setAttributes({
-          arrowBg: arrowBg
-        });
-      }
-    }), /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      label: __("Arrow Color"),
-      color: arrowColor,
-      onChange: function onChange(arrowColor) {
-        return setAttributes({
-          arrowColor: arrowColor
-        });
-      }
-    }))), /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Visible Headers")
     }, /*#__PURE__*/React.createElement("div", {
       className: "fix-select-over-lapping"
@@ -12680,16 +12626,6 @@ var Inspector = function Inspector(_ref) {
       },
       min: 0,
       max: 100
-    }), /*#__PURE__*/React.createElement(RangeControl, {
-      label: __("Z-Index"),
-      value: zIndex,
-      onChange: function onChange(zIndex) {
-        return setAttributes({
-          zIndex: zIndex
-        });
-      },
-      min: 0,
-      max: 9999
     })), !isSticky && /*#__PURE__*/React.createElement(ToggleControl, {
       label: __("Display Title"),
       checked: displayTitle,
@@ -12893,6 +12829,61 @@ var Inspector = function Inspector(_ref) {
       },
       min: 0,
       max: 100
+    }))), /*#__PURE__*/React.createElement(PanelBody, {
+      title: __("Scroll"),
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(ToggleControl, {
+      label: __("Smooth Scroll"),
+      checked: isSmooth,
+      onChange: function onChange() {
+        return setAttributes({
+          isSmooth: !isSmooth
+        });
+      }
+    }), /*#__PURE__*/React.createElement(ToggleControl, {
+      label: __("Scroll To Top"),
+      checked: scrollToTop,
+      onChange: function onChange() {
+        return setAttributes({
+          scrollToTop: !scrollToTop
+        });
+      }
+    }), scrollToTop && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(RangeControl, {
+      label: __("Arrow Height"),
+      value: arrowHeight,
+      onChange: function onChange(arrowHeight) {
+        return setAttributes({
+          arrowHeight: arrowHeight
+        });
+      },
+      min: 0,
+      max: 100
+    }), /*#__PURE__*/React.createElement(RangeControl, {
+      label: __("Arrow Width"),
+      value: arrowWidth,
+      onChange: function onChange(arrowWidth) {
+        return setAttributes({
+          arrowWidth: arrowWidth
+        });
+      },
+      min: 0,
+      max: 100
+    }), /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      label: __("Arrow Background"),
+      color: arrowBg,
+      onChange: function onChange(arrowBg) {
+        return setAttributes({
+          arrowBg: arrowBg
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_util_color_control__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      label: __("Arrow Color"),
+      color: arrowColor,
+      onChange: function onChange(arrowColor) {
+        return setAttributes({
+          arrowColor: arrowColor
+        });
+      }
     })))), tab.name === "advance" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Margin & Padding") // initialOpen={true}
 
@@ -13195,19 +13186,10 @@ function save(_ref) {
       containerWidth = attributes.containerWidth;
   return /*#__PURE__*/React.createElement("div", useBlockProps.save(), headers.length !== 0 ? /*#__PURE__*/React.createElement("div", {
     className: "".concat(blockId, " eb-toc-container ").concat(collapsible ? "eb-toc-collapsible" : "eb-toc-not-collapsible", " ").concat(initialCollapse ? "eb-toc-initially-collapsed" : "eb-toc-initially-not-collapsed", " ").concat(isSticky ? "eb-toc-is-sticky" : "eb-toc-is-not-sticky", " ").concat(scrollToTop ? "eb-toc-scrollToTop" : "eb-toc-not-scrollToTop", "    "),
-    "data-collapsible": collapsible,
-    "data-initial-collapse": initialCollapse,
     "data-scroll-top": scrollToTop,
-    "data-arrow-height": arrowHeight,
-    "data-arrow-width": arrowWidth,
-    "data-arrow-bg": arrowBg,
-    "data-arrow-color": arrowColor,
-    "data-sticky": isSticky,
-    "data-text-color": contentColor,
-    "data-hover-color": contentHoverColor,
+    "data-collapsible": collapsible,
     "data-hide-mobile": hideOnMobile,
-    "data-title-bg": titleBg,
-    "data-title-color": titleColor
+    "data-sticky": isSticky
   }, /*#__PURE__*/React.createElement("div", {
     className: "eb-toc-header"
   }, isSticky && /*#__PURE__*/React.createElement("span", {

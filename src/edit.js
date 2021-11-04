@@ -647,14 +647,15 @@ export default function Edit({
 		${
 			scrollToTop
 				? `
-					span.show-scroll.eb-toc-go-top {
-						${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
-						${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
-						${arrowBg ? `background-color: ${arrowBg};` : ""}
-						${arrowColor ? `color: ${arrowColor};` : ""}
-					}
-				`
-				: ""
+			.eb-toc-go-top.show-scroll {
+				${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
+				${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+				${arrowBg ? `background-color: ${arrowBg};` : ""}
+				${arrowColor ? `color: ${arrowColor};` : ""}
+			}
+			`
+				: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+				  ""
 		}
 
 	`;
@@ -738,32 +739,32 @@ export default function Edit({
 	
 	`;
 
+	// console.log("----------edit theke", { isSticky, scrollToTop });
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
 		${desktopAllStylesCommon}
-
-		.${blockId}.eb-toc-container{
-			${
-				isSticky
-					? `
-				position:fixed;
-				top: ${topSpace || 25}%;
-				left:0;
-				z-index:999;
-			`
-					: ""
-			}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			${
-				isSticky
-					? `
+		${
+			isSticky
+				? `
+				
+				.${blockId}.eb-toc-container.eb-toc-is-sticky{
+					position:fixed;
+					top: ${topSpace || 25}%;
+					left:0;
+					z-index:999;
+				}
+			
+				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
 					overflow:scroll;
 					${contentHeight ? `min-height:${contentHeight}px;` : ""}
-					`
-					: ""
-			}
+				}
+			
+				.${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
+					color:${titleColor};
+					background-color:${titleBg};
+				}
+				`
+				: ""
 		}
 
 

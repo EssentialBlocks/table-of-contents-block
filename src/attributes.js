@@ -308,7 +308,6 @@ const attributes = {
 	},
 	contentHeight: {
 		type: "number",
-		default: 200,
 	},
 	contentHeightUnit: {
 		type: "string",

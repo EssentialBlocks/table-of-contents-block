@@ -132,12 +132,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
       this._hide();
 
-      this._show(); // this._hover();
-
+      this._show();
 
       this._hideOnMobileView();
-
-      this._changeHeaderColors();
     },
     _toggleCollapse: function _toggleCollapse() {
       var containers = document.querySelectorAll(".eb-toc-container");
@@ -309,28 +306,6 @@ window.addEventListener("DOMContentLoaded", function () {
     },
 
     /**
-     * Hover color
-     */
-    // _hover: function () {
-    // 	let nodes = document.querySelectorAll(".eb-toc-container");
-    // 	for (node of nodes) {
-    // 		const defaultColor = node.getAttribute("data-text-color");
-    // 		const hoverColor = node.getAttribute("data-hover-color");
-    // 		const lists = node.querySelectorAll("li");
-    // 		lists.forEach((list) => {
-    // 			list.addEventListener("mouseenter", function () {
-    // 				this.style.color = hoverColor;
-    // 				this.firstChild.style.color = hoverColor;
-    // 			});
-    // 			list.addEventListener("mouseleave", function () {
-    // 				this.style.color = defaultColor;
-    // 				this.firstChild.style.color = defaultColor;
-    // 			});
-    // 		});
-    // 	}
-    // },
-
-    /**
      * Alter the_content.
      */
     _run: function _run() {
@@ -407,35 +382,6 @@ window.addEventListener("DOMContentLoaded", function () {
         if (isSticky && hideOnMobile && window.screen.width < 420) {
           container.style.display = "none";
         }
-      }
-    },
-
-    /**
-     * Change collapsible header colors for sticky content
-     */
-    _changeHeaderColors: function _changeHeaderColors() {
-      var containers = document.querySelectorAll(".eb-toc-container");
-
-      var _iterator7 = _createForOfIteratorHelper(containers),
-          _step7;
-
-      try {
-        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          container = _step7.value;
-          var isSticky = container.getAttribute("data-sticky") === "true";
-
-          if (isSticky) {
-            var titleBg = container.getAttribute("data-title-bg");
-            var titleColor = container.getAttribute("data-title-color");
-            var button = container.querySelector(".eb-toc-button");
-            button.style.color = titleColor;
-            button.style.background = titleBg;
-          }
-        }
-      } catch (err) {
-        _iterator7.e(err);
-      } finally {
-        _iterator7.f();
       }
     }
   };

@@ -87,19 +87,10 @@ export default function save({ attributes }) {
 					} ${isSticky ? "eb-toc-is-sticky" : "eb-toc-is-not-sticky"} ${
 						scrollToTop ? "eb-toc-scrollToTop" : "eb-toc-not-scrollToTop"
 					}    `}
-					data-collapsible={collapsible}
-					data-initial-collapse={initialCollapse}
 					data-scroll-top={scrollToTop}
-					data-arrow-height={arrowHeight}
-					data-arrow-width={arrowWidth}
-					data-arrow-bg={arrowBg}
-					data-arrow-color={arrowColor}
-					data-sticky={isSticky}
-					data-text-color={contentColor}
-					data-hover-color={contentHoverColor}
+					data-collapsible={collapsible}
 					data-hide-mobile={hideOnMobile}
-					data-title-bg={titleBg}
-					data-title-color={titleColor}
+					data-sticky={isSticky}
 				>
 					<div className="eb-toc-header">
 						{isSticky && <span className="eb-toc-close"></span>}
