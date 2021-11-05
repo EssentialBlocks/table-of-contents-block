@@ -10160,7 +10160,7 @@ var Inspector = function Inspector(_ref) {
     return /*#__PURE__*/React.createElement("div", {
       className: "eb-tab-controls" + tab.name,
       key: tab.name
-    }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t\t\t\t\t\t\t.fix-select-over-lapping>div>div{\n\t\t\t\t\t\t\t\t\t\t\tz-index:999999 !important;\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t"), /*#__PURE__*/React.createElement(PanelBody, {
+    }, tab.name === "general" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t\t\t\t\t\t\t.fix-select-over-lapping>div>div{\n\t\t\t\t\t\t\t\t\t\t\tz-index:999999 !important;\n\t\t\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t\t\t\t.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .responsive-btn-wrapper > .responsive-btn > .responsive-btn-label{\n\t\t\t\t\t\t\t\t\t\t\tdisplay:block;\n\t\t\t\t\t\t\t\t\t\t\tpadding-bottom:5px;\n\t\t\t\t\t\t\t\t\t\t}\n\n\n\t\t\t\t\t\t\t\t\t\t.wrap-width-range-fix-style .responsiveRangeControllerWrapper{\n\t\t\t\t\t\t\t\t\t\t\tpadding-top:15px;\n\t\t\t\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t\t\t\t\t.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .components-button-group.eb-unit-control-btn-group{\n\t\t\t\t\t\t\t\t\t\t\tmargin-bottom:-40px;\n\t\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\t"), /*#__PURE__*/React.createElement(PanelBody, {
       title: __("Visible Headers")
     }, /*#__PURE__*/React.createElement("div", {
       className: "fix-select-over-lapping"
@@ -10169,14 +10169,16 @@ var Inspector = function Inspector(_ref) {
       defaultValue: defaultOptions,
       isMulti: true,
       onChange: onHeaderChange
-    }))), /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement(_util_responsive_range_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      baseLabel: __("Wrapper max width"),
+    }))), /*#__PURE__*/React.createElement(PanelBody, null, /*#__PURE__*/React.createElement("div", {
+      className: "wrap-width-range-fix-style"
+    }, /*#__PURE__*/React.createElement(_util_responsive_range_control__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      baseLabel: __("".concat(isSticky ? "sticky content max width" : "Container max width")),
       controlName: _constants_rangeNames__WEBPACK_IMPORTED_MODULE_11__["wrapMaxWidthPrefix"],
       resRequiredProps: resRequiredProps,
       min: 0,
       max: 2000,
       step: 1
-    }), displayTitle && !isSticky && /*#__PURE__*/React.createElement(ToggleControl, {
+    })), displayTitle && !isSticky && /*#__PURE__*/React.createElement(ToggleControl, {
       label: __("Collapsible"),
       checked: collapsible,
       onChange: function onChange() {

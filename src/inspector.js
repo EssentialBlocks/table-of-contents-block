@@ -243,6 +243,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 										.fix-select-over-lapping>div>div{
 											z-index:999999 !important;
 										}
+
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .responsive-btn-wrapper > .responsive-btn > .responsive-btn-label{
+											display:block;
+											padding-bottom:5px;
+										}
+
+
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper{
+											padding-top:15px;
+										}
+
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .components-button-group.eb-unit-control-btn-group{
+											margin-bottom:-40px;
+										}
 										`}
 									</style>
 
@@ -258,14 +272,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 									</PanelBody>
 
 									<PanelBody>
-										<ResponsiveRangeController
-											baseLabel={__("Wrapper max width")}
-											controlName={wrapMaxWidthPrefix}
-											resRequiredProps={resRequiredProps}
-											min={0}
-											max={2000}
-											step={1}
-										/>
+										<div className="wrap-width-range-fix-style">
+											<ResponsiveRangeController
+												baseLabel={__(
+													`${
+														isSticky
+															? "sticky content max width"
+															: "Container max width"
+													}`
+												)}
+												controlName={wrapMaxWidthPrefix}
+												resRequiredProps={resRequiredProps}
+												min={0}
+												max={2000}
+												step={1}
+											/>
+										</div>
 
 										{displayTitle && !isSticky && (
 											<ToggleControl
