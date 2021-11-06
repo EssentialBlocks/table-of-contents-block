@@ -333,7 +333,7 @@ input {
 
 .eb-panel-control .eb-range-controller-container .eb-range-reset-button {
   height: 26px;
-  margin-top: 26px;
+  margin-top: 20px;
   width: 20px;
   background: transparent;
   border: none;
@@ -342,6 +342,12 @@ input {
   padding: 0;
   margin-left: 2px;
   cursor: pointer; }
+
+.eb-panel-control
+.eb-reset-button-margin-fix
+.eb-range-controller-container
+.eb-range-reset-button {
+  margin-top: 26px; }
 
 .eb-panel-control
 .eb-range-controller-container

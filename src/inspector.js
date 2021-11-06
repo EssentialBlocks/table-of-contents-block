@@ -331,23 +331,24 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 												/>
 
-												<ResetControl
-													onReset={() =>
-														setAttributes({ contentHeight: undefined })
-													}
-												>
-													<RangeControl
-														label={__("Content min-height")}
-														help={__("Visible on frontend only")}
-														value={contentHeight}
-														onChange={(contentHeight) =>
-															setAttributes({ contentHeight })
+												<div className="eb-reset-button-margin-fix">
+													<ResetControl
+														onReset={() =>
+															setAttributes({ contentHeight: undefined })
 														}
-														min={0}
-														max={1000}
-													/>
-												</ResetControl>
-
+													>
+														<RangeControl
+															label={__("Content min-height")}
+															help={__("Visible on frontend only")}
+															value={contentHeight}
+															onChange={(contentHeight) =>
+																setAttributes({ contentHeight })
+															}
+															min={0}
+															max={1000}
+														/>
+													</ResetControl>
+												</div>
 												<RangeControl
 													label={__("Top Space")}
 													help={__("Visible on frontend only")}

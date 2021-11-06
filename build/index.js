@@ -10214,7 +10214,9 @@ var Inspector = function Inspector(_ref) {
           hideOnMobile: !hideOnMobile
         });
       }
-    }), /*#__PURE__*/React.createElement(_util_reset_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    }), /*#__PURE__*/React.createElement("div", {
+      className: "eb-reset-button-margin-fix"
+    }, /*#__PURE__*/React.createElement(_util_reset_control__WEBPACK_IMPORTED_MODULE_7__["default"], {
       onReset: function onReset() {
         return setAttributes({
           contentHeight: undefined
@@ -10231,7 +10233,7 @@ var Inspector = function Inspector(_ref) {
       },
       min: 0,
       max: 1000
-    })), /*#__PURE__*/React.createElement(RangeControl, {
+    }))), /*#__PURE__*/React.createElement(RangeControl, {
       label: __("Top Space"),
       help: __("Visible on frontend only"),
       value: topSpace,
