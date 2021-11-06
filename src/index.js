@@ -36,9 +36,9 @@ registerBlockType(name, {
 		align: ["wide", "full"],
 	},
 	keywords: [
-		__("countdown", "essential-blocks"),
-		__("eb counter", "essential-blocks"),
-		__("eb countdown", "essential-blocks"),
+		__("TOC", "essential-blocks"),
+		__("Table Of Contents", "essential-blocks"),
+		__("eb table of contents", "essential-blocks"),
 	],
 	category,
 	icon: TOC_Icon,

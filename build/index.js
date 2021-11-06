@@ -9911,7 +9911,7 @@ registerBlockType(name, {
     // align: ["wide", "full"],
     align: ["wide", "full"]
   },
-  keywords: [__("countdown", "essential-blocks"), __("eb counter", "essential-blocks"), __("eb countdown", "essential-blocks")],
+  keywords: [__("TOC", "essential-blocks"), __("Table Of Contents", "essential-blocks"), __("eb table of contents", "essential-blocks")],
   category: category,
   icon: _util_icons__WEBPACK_IMPORTED_MODULE_1__["TOC_Icon"],
   attributes: _attributes__WEBPACK_IMPORTED_MODULE_4__["default"],
