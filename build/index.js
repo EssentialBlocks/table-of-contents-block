@@ -10662,8 +10662,8 @@ var List = /*#__PURE__*/function (_Component) {
             items.push( /*#__PURE__*/React.createElement("li", {
               key: counter,
               style: {
-                paddingTop: counter > 0 ? "".concat(contentGap / 2, " ").concat(contentGapUnit) : undefined,
-                paddingBottom: counter < list.length ? "".concat(contentGap / 2, " ").concat(contentGapUnit) : undefined,
+                paddingTop: counter > 0 ? "".concat(contentGap / 2).concat(contentGapUnit) : undefined,
+                paddingBottom: counter < list.length ? "".concat(contentGap / 2).concat(contentGapUnit) : undefined,
                 borderBottom: counter < list.length && showListSeparator ? "".concat(listSeperatorWidth, "px ").concat(listSeperatorStyle, " ").concat(listSeperatorColor) : undefined
               }
             }, /*#__PURE__*/React.createElement("a", {

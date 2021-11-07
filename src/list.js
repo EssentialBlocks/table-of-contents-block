@@ -82,11 +82,11 @@ class List extends Component {
 							style={{
 								paddingTop:
 									counter > 0
-										? `${contentGap / 2} ${contentGapUnit}`
+										? `${contentGap / 2}${contentGapUnit}`
 										: undefined,
 								paddingBottom:
 									counter < list.length
-										? `${contentGap / 2} ${contentGapUnit}`
+										? `${contentGap / 2}${contentGapUnit}`
 										: undefined,
 								borderBottom:
 									counter < list.length && showListSeparator
