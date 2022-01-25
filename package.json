@@ -16,6 +16,10 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^19.2.2",
 		"prop-types": "^15.7.2",
+		"@babel/core": "^7.16.5",
+		"@babel/plugin-proposal-class-properties": "^7.16.5",
+		"@babel/preset-env": "^7.16.5",
+		"@babel/preset-react": "^7.16.5",
 		"striptags": "^3.2.0"
 	},
 	"dependencies": {
