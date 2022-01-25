@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.1 25/01/2022 =
 * Fixed: Some minor bugs
 
 = 1.0.0 =
