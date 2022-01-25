@@ -1,12 +1,11 @@
 /**
  * WordPress dependencies
  */
-
-const { __ } = wp.i18n;
-const { InspectorControls, MediaUpload } = wp.blockEditor;
-const { useState, useEffect } = wp.element;
-const { select } = wp.data;
-const {
+import { __ } from "@wordpress/i18n";
+import { InspectorControls } from "@wordpress/block-editor";
+import { useState, useEffect } from "@wordpress/element";
+import { select } from "@wordpress/data";
+import {
 	PanelBody,
 	BaseControl,
 	ToggleControl,
@@ -15,35 +14,40 @@ const {
 	SelectControl,
 	ButtonGroup,
 	Button,
-} = wp.components;
+} from "@wordpress/components";
 
 /**
  * Internal dependencies
  */
 
-import Select from "react-select";
+import Select2 from "react-select";
 
 // import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-// import faIcons from "../util/faIcons.js";
-import TypographyDropdown from "../util/typography-control-v2";
-import ResponsiveDimensionsControl from "../util/dimensions-control-v2";
-import ResponsiveRangeController from "../util/responsive-range-control";
-// import ImageAvatar from "../util/image-avatar/";
-// import GradientColorControl from "../util/gradient-color-controller";
-import ColorControl from "../util/color-control";
-import BorderShadowControl from "../util/border-shadow-control";
-// import BackgroundControl from "../util/background-control";
-import UnitControl from "../util/unit-control";
-// import FontPicker from "../util/typography-control/FontPicker";
-// import DimensionsControl from "../util/dimensions-control";
-import ResetControl from "../util/reset-control";
+// import faIcons from "../controls/src/controls/faIcons.js";
+import TypographyDropdown from "../controls/src/controls/typography-control-v2";
+import ResponsiveDimensionsControl from "../controls/src/controls/dimensions-control-v2";
+import ResponsiveRangeController from "../controls/src/controls/responsive-range-control";
+// import ImageAvatar from "../controls/src/controls/image-avatar/";
+// import GradientColorControl from "../controls/src/controls/gradient-color-controller";
+import ColorControl from "../controls/src/controls/color-control";
+import BorderShadowControl from "../controls/src/controls/border-shadow-control";
+// import BackgroundControl from "../controls/src/controls/background-control";
+import UnitControl from "../controls/src/controls/unit-control";
+// import FontPicker from "../controls/src/controls/typography-control/FontPicker";
+// import DimensionsControl from "../controls/src/controls/dimensions-control";
+import ResetControl from "../controls/src/controls/reset-control";
 
 import objAttributes from "./attributes";
 
 import {
 	mimmikCssForResBtns,
 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-} from "../util/helpers";
+} from "../controls/src/helpers";
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import {
 	// typoPrefix_number,
@@ -138,30 +142,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	useEffect(() => {
 		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
-
-		// this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-		const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-			domObj: document,
-			select,
-			setAttributes,
-		});
-
-		// all cleanups inside the return
-		return () => {
-			cleanUp();
-		};
 	}, []);
-
-	// this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	useEffect(() => {
-		mimmikCssForResBtns({
-			domObj: document,
-			resOption,
-		});
-	}, [resOption]);
-
 	//
 	useEffect(() => {
 		setDefaultVisible();
@@ -229,7 +214,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						// },
 						{
 							name: "advance",
-							title: "Advance",
+							title: "Advanced",
 							className: "eb-tab advance",
 						},
 					]}
@@ -260,9 +245,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 										`}
 									</style>
 
-									<PanelBody title={__("Visible Headers")}>
+									<PanelBody title={__("Visible Headers", "essential-blocks")}>
 										<div className="fix-select-over-lapping">
-											<Select
+											<Select2
 												options={options}
 												defaultValue={defaultOptions}
 												isMulti
@@ -291,7 +276,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && !isSticky && (
 											<ToggleControl
-												label={__("Collapsible")}
+												label={__("Collapsible", "essential-blocks")}
 												checked={collapsible}
 												onChange={() =>
 													setAttributes({ collapsible: !collapsible })
@@ -301,7 +286,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && collapsible && (
 											<ToggleControl
-												label={__("Collapsed initially")}
+												label={__("Collapsed initially", "essential-blocks")}
 												checked={initialCollapse}
 												onChange={() =>
 													setAttributes({ initialCollapse: !initialCollapse })
@@ -310,7 +295,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										)}
 
 										<ToggleControl
-											label={__("Sticky contents")}
+											label={__("Sticky contents", "essential-blocks")}
 											help={__(
 												"Always show contents on sidebar (Visible on frontend only)"
 											)}
@@ -320,11 +305,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{isSticky && (
 											<PanelBody
-												title={__("Sticky settings")}
+												title={__("Sticky settings", "essential-blocks")}
 												initialOpen={false}
 											>
 												<ToggleControl
-													label={__("Hide on Mobile")}
+													label={__("Hide on Mobile", "essential-blocks")}
 													checked={hideOnMobile}
 													onChange={() =>
 														setAttributes({ hideOnMobile: !hideOnMobile })
@@ -338,8 +323,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 														}
 													>
 														<RangeControl
-															label={__("Content min-height")}
-															help={__("Visible on frontend only")}
+															label={__(
+																"Content min-height",
+																"essential-blocks"
+															)}
+															help={__(
+																"Visible on frontend only",
+																"essential-blocks"
+															)}
 															value={contentHeight}
 															onChange={(contentHeight) =>
 																setAttributes({ contentHeight })
@@ -350,8 +341,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 													</ResetControl>
 												</div>
 												<RangeControl
-													label={__("Top Space")}
-													help={__("Visible on frontend only")}
+													label={__("Top Space", "essential-blocks")}
+													help={__(
+														"Visible on frontend only",
+														"essential-blocks"
+													)}
 													value={topSpace}
 													onChange={(topSpace) => setAttributes({ topSpace })}
 													min={0}
@@ -362,7 +356,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{!isSticky && (
 											<ToggleControl
-												label={__("Display Title")}
+												label={__("Display Title", "essential-blocks")}
 												checked={displayTitle}
 												onChange={() =>
 													setAttributes({ displayTitle: !displayTitle })
@@ -372,11 +366,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && (
 											<PanelBody
-												title={__("Title Settings")}
+												title={__("Title Settings", "essential-blocks")}
 												initialOpen={false}
 											>
 												<BaseControl
-													label={__("Align")}
+													label={__("Align", "essential-blocks")}
 													className="eb-base-control"
 												>
 													<ButtonGroup>
@@ -396,13 +390,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 												</BaseControl>
 
 												<ColorControl
-													label={__("Background Color")}
+													label={__("Background Color", "essential-blocks")}
 													color={titleBg}
 													onChange={(titleBg) => setAttributes({ titleBg })}
 												/>
 
 												<ColorControl
-													label={__("Text Color")}
+													label={__("Text Color", "essential-blocks")}
 													color={titleColor}
 													onChange={(titleColor) =>
 														setAttributes({ titleColor })
@@ -426,7 +420,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && (
 											<ToggleControl
-												label={__("Title Seperator")}
+												label={__("Title Seperator", "essential-blocks")}
 												checked={seperator}
 												onChange={() =>
 													setAttributes({ seperator: !seperator })
@@ -436,11 +430,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && seperator && (
 											<PanelBody
-												title={__("Title seperator settings")}
+												title={__(
+													"Title seperator settings",
+													"essential-blocks"
+												)}
 												initialOpen={false}
 											>
 												<RangeControl
-													label={__("Seperator Size")}
+													label={__("Seperator Size", "essential-blocks")}
 													value={seperatorSize}
 													onChange={(seperatorSize) =>
 														setAttributes({ seperatorSize })
@@ -450,7 +447,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<ColorControl
-													label={__("Seperator Color")}
+													label={__("Seperator Color", "essential-blocks")}
 													color={seperatorColor}
 													onChange={(seperatorColor) =>
 														setAttributes({ seperatorColor })
@@ -458,7 +455,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<SelectControl
-													label={__("Seperator Style")}
+													label={__("Seperator Style", "essential-blocks")}
 													value={seperatorStyle}
 													options={BORDER_STYLES}
 													onChange={(seperatorStyle) =>
@@ -469,9 +466,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 										)}
 									</PanelBody>
 
-									<PanelBody title={__("Content Settings")} initialOpen={false}>
+									<PanelBody
+										title={__("Content Settings", "essential-blocks")}
+										initialOpen={false}
+									>
 										<ToggleControl
-											label={__("Display Underline")}
+											label={__("Display Underline", "essential-blocks")}
 											checked={hasUnderline}
 											onChange={() =>
 												setAttributes({ hasUnderline: !hasUnderline })
@@ -479,7 +479,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 
 										<RangeControl
-											label={__("Indent")}
+											label={__("Indent", "essential-blocks")}
 											value={indent}
 											onChange={(indent) => setAttributes({ indent })}
 										/>
@@ -497,7 +497,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 
 										<RangeControl
-											label={__("Content Gap")}
+											label={__("Content Gap", "essential-blocks")}
 											value={contentGap}
 											onChange={(contentGap) => setAttributes({ contentGap })}
 											min={0}
@@ -506,13 +506,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 
 										<ColorControl
-											label={__("Background Color")}
+											label={__("Background Color", "essential-blocks")}
 											color={contentBg}
 											onChange={(contentBg) => setAttributes({ contentBg })}
 										/>
 
 										<ColorControl
-											label={__("Text Color")}
+											label={__("Text Color", "essential-blocks")}
 											color={contentColor}
 											onChange={(contentColor) =>
 												setAttributes({ contentColor })
@@ -520,7 +520,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 
 										<ColorControl
-											label={__("Hover Color")}
+											label={__("Hover Color", "essential-blocks")}
 											color={contentHoverColor}
 											onChange={(contentHoverColor) =>
 												setAttributes({ contentHoverColor })
@@ -541,7 +541,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 
 										<ToggleControl
-											label={__("Show Separator")}
+											label={__("Show Separator", "essential-blocks")}
 											checked={showListSeparator}
 											onChange={() =>
 												setAttributes({ showListSeparator: !showListSeparator })
@@ -551,7 +551,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										{showListSeparator && (
 											<>
 												<SelectControl
-													label={__("Seperator Style")}
+													label={__("Seperator Style", "essential-blocks")}
 													value={listSeperatorStyle}
 													options={BORDER_STYLES}
 													onChange={(listSeperatorStyle) =>
@@ -560,7 +560,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<ColorControl
-													label={__("Seperator Color")}
+													label={__("Seperator Color", "essential-blocks")}
 													color={listSeperatorColor}
 													onChange={(listSeperatorColor) =>
 														setAttributes({ listSeperatorColor })
@@ -568,7 +568,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<RangeControl
-													label={__("Seperator Size")}
+													label={__("Seperator Size", "essential-blocks")}
 													value={listSeperatorWidth}
 													onChange={(listSeperatorWidth) =>
 														setAttributes({ listSeperatorWidth })
@@ -580,15 +580,18 @@ const Inspector = ({ attributes, setAttributes }) => {
 										)}
 									</PanelBody>
 
-									<PanelBody title={__("Scroll")} initialOpen={false}>
+									<PanelBody
+										title={__("Scroll", "essential-blocks")}
+										initialOpen={false}
+									>
 										<ToggleControl
-											label={__("Smooth Scroll")}
+											label={__("Smooth Scroll", "essential-blocks")}
 											checked={isSmooth}
 											onChange={() => setAttributes({ isSmooth: !isSmooth })}
 										/>
 
 										<ToggleControl
-											label={__("Scroll To Top")}
+											label={__("Scroll To Top", "essential-blocks")}
 											checked={scrollToTop}
 											onChange={() =>
 												setAttributes({ scrollToTop: !scrollToTop })
@@ -598,7 +601,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										{scrollToTop && (
 											<>
 												<RangeControl
-													label={__("Arrow Height")}
+													label={__("Arrow Height", "essential-blocks")}
 													value={arrowHeight}
 													onChange={(arrowHeight) =>
 														setAttributes({ arrowHeight })
@@ -608,7 +611,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<RangeControl
-													label={__("Arrow Width")}
+													label={__("Arrow Width", "essential-blocks")}
 													value={arrowWidth}
 													onChange={(arrowWidth) =>
 														setAttributes({ arrowWidth })
@@ -618,13 +621,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<ColorControl
-													label={__("Arrow Background")}
+													label={__("Arrow Background", "essential-blocks")}
 													color={arrowBg}
 													onChange={(arrowBg) => setAttributes({ arrowBg })}
 												/>
 
 												<ColorControl
-													label={__("Arrow Color")}
+													label={__("Arrow Color", "essential-blocks")}
 													color={arrowColor}
 													onChange={(arrowColor) =>
 														setAttributes({ arrowColor })
@@ -638,7 +641,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							{/* {tab.name === "styles" && (
 								<>
 									<PanelBody
-										title={__("Styles")}
+										title={__("Styles", "essential-blocks")}
 										//  initialOpen={false}
 									>
 										<h3>Styles</h3>
@@ -663,9 +666,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Background ")}>
+									<PanelBody title={__("Background ", "essential-blocks")}>
 										<ColorControl
-											label={__("Background Color")}
+											label={__("Background Color", "essential-blocks")}
 											color={mainBgc}
 											onChange={(mainBgc) => setAttributes({ mainBgc })}
 										/>

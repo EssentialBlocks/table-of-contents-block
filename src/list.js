@@ -1,9 +1,8 @@
 /**
  * WordPress dependencies
  */
-
-const { __ } = wp.i18n;
-const { Component } = wp.element;
+import { __ } from "@wordpress/i18n";
+import { Component } from "@wordpress/element";
 
 class List extends Component {
 	render() {
@@ -127,7 +126,7 @@ class List extends Component {
 		} else {
 			return (
 				<p className="eb_table-of-contents-placeholder">
-					{__("Add a header to begin generating the table of contents")}
+					{__("Add a header to begin generating the table of contents", "essential-blocks")}
 				</p>
 			);
 		}

@@ -1,8 +1,8 @@
 /**
  * WordPress dependencies
  */
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+import { __ } from "@wordpress/i18n";
+import { registerBlockType } from "@wordpress/blocks";
 
 /**
  * Internal dependencies
@@ -10,11 +10,11 @@ const { registerBlockType } = wp.blocks;
 
 import "./style.scss";
 
-import { TOC_Icon } from "../util/icons";
+import { TOC_Icon } from "./icon";
 import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
-import metadata from "../block.json";
+import metadata from "./block.json";
 
 import example from "./example";
 
@@ -26,6 +26,7 @@ registerBlockType(name, {
 		"Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 		"table-of-contents-block"
 	),
+	apiVersion: 2,
 	supports: {
 		// inserter: false,
 		// reusable: false,
