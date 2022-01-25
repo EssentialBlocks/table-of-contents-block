@@ -32,6 +32,7 @@ function create_block_table_of_content_block_init()
 	$dir = dirname(__FILE__);
 
 	$script_asset_path = "$dir/build/index.asset.php";
+	$script_dependencies = require_once "$dir/build/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
 			'You need to run `npm start` or `npm run build` for the "table-of-contents-block/table-of-contents-block" block first.'
@@ -50,8 +51,8 @@ function create_block_table_of_content_block_init()
 		// 	'wp-block-editor',
 		// 	'wp-editor',
 		// ),
-		array_merge($script_asset_path['dependencies'], array("essential-blocks-edit-post")),
-		$script_asset_path['version']
+		array_merge($script_dependencies['dependencies'], array("essential-blocks-edit-post")),
+		$script_dependencies['version']
 	);
 
 	$editor_css = 'build/index.css';
