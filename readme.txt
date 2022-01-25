@@ -1,32 +1,32 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, alam789
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 1.0.0
+Tested up to: 5.9
+Stable tag: 1.0.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Automatically Add Table of Contents Block for your WordPress Posts & Pages 
+Automatically Add Table of Contents Block for your WordPress Posts & Pages
 
 == Description ==
 
 **Table of Contents** is a roadmap for your whole content and helps your readers to locate specific parts of the page to go directly to that section.
 
-Using Table of Contents Block (TOC), you can improve the reading experience, accessibility, page SEO score & help your visitors to easily navigate. 
+Using Table of Contents Block (TOC), you can improve the reading experience, accessibility, page SEO score & help your visitors to easily navigate.
 
 You don’t need any coding to create TOC in Gutenberg. Just install this block plugin & use Table of Content within Block Editor for WordPress.
 
 
-**⚙️ Completely Customizable:** You can customize and pick the heading tags which you want to appear on your Table of Contents. 
+**⚙️ Completely Customizable:** You can customize and pick the heading tags which you want to appear on your Table of Contents.
 
-**⚡ Super Light-weight:** No extra resources used and it's highly optimized to automatically add Table of Contents inside your post or pages. 
+**⚡ Super Light-weight:** No extra resources used and it's highly optimized to automatically add Table of Contents inside your post or pages.
 
 **🧑‍💻 Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
 ## 🎁 GET ACCESS TO 22+ MORE FREE BLOCKS FOR WORDPRESS BLOCK EDITOR ##
 
-Get [Essential Blocks Gutenberg](https://wordpress.org/plugins/essential-blocks/) editor - an advanced blocks library to power up your Gutenberg design experience. It brings stunning blocks including: 
+Get [Essential Blocks Gutenberg](https://wordpress.org/plugins/essential-blocks/) editor - an advanced blocks library to power up your Gutenberg design experience. It brings stunning blocks including:
 
 - [EB Infobox](https://essential-blocks.com/docs/infobox/)
 - [EB Heading](https://essential-blocks.com/docs/heading/)
@@ -56,7 +56,7 @@ Get [Essential Blocks Gutenberg](https://wordpress.org/plugins/essential-blocks/
 This Block plugin is brought to you by WPDeveloper, the team behind the most popular elements library Essential Addons for Elementor (used by almost 800,000+ happy users from around 180 countries).
 
 
-## ⚡ SUPPORT & DOCUMENTATION ## 
+## ⚡ SUPPORT & DOCUMENTATION ##
 
 🧑‍💻 If you have any more questions, visit our support on the Plugin’s Forum
 
@@ -66,9 +66,9 @@ This Block plugin is brought to you by WPDeveloper, the team behind the most pop
 
 - 🎦 Subscribe to our Youtube Channel to watch video tutorials on WordPress
 - 🤝 Join our Facebook Community & get connected with expert web creators like yourself
-- 🧡 LOVED this plugin? Rate us on WordPress Repository 
+- 🧡 LOVED this plugin? Rate us on WordPress Repository
 
-## 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE ## 
+## 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE ##
 
 Consider checking out our other WordPress solutions & boost your WordPress website:
 
@@ -118,6 +118,9 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed: Some minor bugs
 
 = 1.0.0 =
 * Initial Release
