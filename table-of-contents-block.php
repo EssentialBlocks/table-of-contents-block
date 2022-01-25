@@ -38,25 +38,27 @@ function create_block_table_of_content_block_init()
 		);
 	}
 
-	$index_js     = 'build/index.js';
+	$index_js = 'build/index.js';
+
 	wp_register_script(
 		'create-block-table-of-content-block-editor',
 		plugins_url($index_js, __FILE__),
-		array(
-			'wp-blocks',
-			'wp-i18n',
-			'wp-element',
-			'wp-block-editor',
-			'wp-editor',
-		),
-		filemtime("$dir/$index_js")
+		// array(
+		// 	'wp-blocks',
+		// 	'wp-i18n',
+		// 	'wp-element',
+		// 	'wp-block-editor',
+		// 	'wp-editor',
+		// ),
+		array_merge($script_asset_path['dependencies'], array("essential-blocks-edit-post")),
+		$script_asset_path['version']
 	);
 
 	$editor_css = 'build/index.css';
 	wp_register_style(
 		'create-block-table-of-content-block-editor',
 		plugins_url($editor_css, __FILE__),
-		array(),
+		array("create-block-table-of-content-block"),
 		filemtime("$dir/$editor_css")
 	);
 
