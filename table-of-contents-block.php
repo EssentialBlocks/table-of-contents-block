@@ -3,7 +3,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.0.0
+ * Version:         1.0.1
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -22,8 +22,11 @@
 
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
+define('EB_TOC_VERSION', '1.0.1');
 
 function create_block_table_of_content_block_init() {
+	eb_migrate_old_blocks('table-of-contents-block/table-of-contents-block', 'essential-blocks/table-of-contents-block');
+
 	$dir = dirname( __FILE__ );
 
 	$script_asset_path = "$dir/build/index.asset.php";
@@ -73,3 +76,13 @@ function create_block_table_of_content_block_init() {
 	) );
 }
 add_action( 'init', 'create_block_table_of_content_block_init' );
+
+if(!function_exists('eb_migrate_old_blocks')){
+	function eb_migrate_old_blocks($old_namespace, $new_namespace){
+		global $wpdb;
+		$posts = $wpdb->query("select * from  ".$wpdb->prefix."posts where `post_content` like '%".$old_namespace."%'");
+		if($posts){
+			$wpdb->query("update ".$wpdb->prefix."posts set `post_content`= replace(post_content, '".$old_namespace."', '".$new_namespace."') where `post_content` like '%".$old_namespace."%'");
+		}
+	}
+}
