@@ -6,7 +6,7 @@ module.exports = {
 	entry: {
 		index: path.resolve(__dirname, "src/index.js"),
 		frontend: path.resolve(__dirname, "src/frontend.js"),
-		"../lib/style-handler/dist/index": "./lib/style-handler/style-handler.js",
+		"./lib/style-handler/dist/index": "./lib/style-handler/style-handler.js",
 	},
 	output: {
 		...defaultConfig.output,
