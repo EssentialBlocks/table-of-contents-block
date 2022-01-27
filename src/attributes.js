@@ -1,4 +1,63 @@
+import * as typoPrefixs from "./constants/typographyPrefixConstants";
+
+import {
+	//
+	WrpMarginConst,
+	WrpPaddingConst,
+	titlePaddingConst,
+	contentPaddingConst,
+} from "./constants/dimensionsConstants";
+
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
+import {
+	//
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
+
+import {
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	//
+	wrapMaxWidthPrefix,
+} from "./constants/rangeNames";
+
+import {
+	generateDimensionsAttributes,
+	generateTypographyAttributes,
+	// generateBackgroundAttributes,
+	generateBorderShadowAttributes,
+	generateResponsiveRangeAttributes,
+} from "../controls/src/helpers";
+
 const attributes = {
+	// the following 4 attributes is must required for responsive options and asset generation for frontend
+	// responsive control attributes ⬇
+	resOption: {
+		type: "string",
+		default: "Desktop",
+	},
+
+	// blockId attribute for making unique className and other uniqueness ⬇
+	blockId: {
+		type: "string",
+	},
+	blockRoot: {
+		type: "string",
+		default: "essential_block",
+	},
+
+	// blockMeta is for keeping all the styles ⬇
+	blockMeta: {
+		type: "object",
+	},
+
+	//
 	headers: {
 		type: "array",
 		default: [],
@@ -23,21 +82,25 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	mainBgc: {
+		type: "string",
+		// default: "#ff7d50",
+	},
 	titleBg: {
 		type: "string",
-		default: "#ff7d50",
+		// default: "#ff7d50",
 	},
 	titleColor: {
 		type: "string",
-		default: "white",
+		// default: "white",
 	},
 	contentBg: {
 		type: "string",
-		default: "#fff6f3",
+		// default: "#fff6f3",
 	},
 	contentColor: {
 		type: "string",
-		default: "#707070",
+		// default: "#707070",
 	},
 	contentHoverColor: {
 		type: "string",
@@ -133,7 +196,7 @@ const attributes = {
 	},
 	seperatorColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	seperatorSize: {
 		type: "number",
@@ -147,7 +210,7 @@ const attributes = {
 	},
 	borderColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	borderStyle: {
 		type: "string",
@@ -203,7 +266,7 @@ const attributes = {
 	},
 	shadowColor: {
 		type: "string",
-		default: "black",
+		// default: "black",
 	},
 	contentPaddingTop: {
 		type: "number",
@@ -230,7 +293,7 @@ const attributes = {
 	},
 	listSeperatorStyle: {
 		type: "string",
-		default: "none",
+		default: "solid",
 	},
 	listSeperatorColor: {
 		type: "string",
@@ -245,7 +308,6 @@ const attributes = {
 	},
 	contentHeight: {
 		type: "number",
-		default: 200,
 	},
 	contentHeightUnit: {
 		type: "string",
@@ -279,6 +341,40 @@ const attributes = {
 		type: "number",
 		default: 100,
 	},
+
+	// typography attributes
+	...generateTypographyAttributes(Object.values(typoPrefixs)),
+
+	//
+	...generateResponsiveRangeAttributes(wrapMaxWidthPrefix, {
+		// noUnits: true,
+		defaultRange: 610,
+	}),
+
+	showListSeparator: {
+		type: "boolean",
+		default: false,
+	},
+	// //
+	// ...generateBackgroundAttributes(WrpBgConst, {
+	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
+	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	// }),
+
+	//
+	...generateBorderShadowAttributes(WrpBdShadowConst, {
+		// noShadow: true,
+		// noBorder: true,
+	}),
+
+	//
+	...generateDimensionsAttributes(WrpMarginConst),
+	...generateDimensionsAttributes(WrpPaddingConst),
+	...generateDimensionsAttributes(titlePaddingConst, {
+		left: 10,
+		isLinked: false,
+	}),
+	...generateDimensionsAttributes(contentPaddingConst),
 };
 
 export default attributes;

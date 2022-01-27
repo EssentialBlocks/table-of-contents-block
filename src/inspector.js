@@ -3,40 +3,106 @@
  */
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
+import { useState, useEffect } from "@wordpress/element";
+import { select } from "@wordpress/data";
 import {
 	PanelBody,
 	BaseControl,
 	ToggleControl,
 	RangeControl,
+	TabPanel,
 	SelectControl,
 	ButtonGroup,
 	Button,
-	Dropdown,
 } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import Select from "react-select";
 
 /**
  * Internal dependencies
  */
+
+import Select2 from "react-select";
+
+// import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
+// import faIcons from "../controls/src/controls/faIcons.js";
+import TypographyDropdown from "../controls/src/controls/typography-control-v2";
+import ResponsiveDimensionsControl from "../controls/src/controls/dimensions-control-v2";
+import ResponsiveRangeController from "../controls/src/controls/responsive-range-control";
+// import ImageAvatar from "../controls/src/controls/image-avatar/";
+// import GradientColorControl from "../controls/src/controls/gradient-color-controller";
+import ColorControl from "../controls/src/controls/color-control";
+import BorderShadowControl from "../controls/src/controls/border-shadow-control";
+// import BackgroundControl from "../controls/src/controls/background-control";
+import UnitControl from "../controls/src/controls/unit-control";
+// import FontPicker from "../controls/src/controls/typography-control/FontPicker";
+// import DimensionsControl from "../controls/src/controls/dimensions-control";
+import ResetControl from "../controls/src/controls/reset-control";
+
+import objAttributes from "./attributes";
+
 import {
+	mimmikCssForResBtns,
+	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} from "../controls/src/helpers";
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
+import {
+	// typoPrefix_number,
+	// typoPrefix_subTitle,
+	// typoPrefix_buttonText,
+
+	//
+	typoPrefix_title,
+	typoPrefix_content,
+} from "./constants/typographyPrefixConstants";
+
+import {
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	wrapMaxWidthPrefix,
+} from "./constants/rangeNames";
+
+import {
+	//
+	WrpMarginConst,
+	WrpPaddingConst,
+	titlePaddingConst,
+	contentPaddingConst,
+} from "./constants/dimensionsConstants";
+
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
+
+import {
+	//
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
+
+import {
+	//
 	HEADERS,
 	ALIGNS,
-	FONT_WEIGHTS,
-	TEXT_TRANSFORM,
-	TEXT_DECORATION,
 	BORDER_STYLES,
 } from "./constants";
-import UnitControl from "../util/unit-control";
-import FontPicker from "../util/typography-control/FontPicker";
-import ColorControl from "../util/color-control/index";
-import DimensionsControl from "../util/dimensions-control";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
+		// responsive control attributes ⬇
+		resOption,
+
+		//
 		visibleHeaders,
 		collapsible,
 		initialCollapse,
+		mainBgc,
 		titleBg,
 		titleColor,
 		contentBg,
@@ -47,78 +113,59 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentGapUnit,
 		displayTitle,
 		titleAlign,
-		titleFontFamily,
-		titleSizeUnit,
-		titleFontSize,
-		titleFontWeight,
-		titleTextTransform,
-		titleTextDecoration,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
-		contentFontFamily,
-		contentSizeUnit,
-		contentFontSize,
-		contentFontWeight,
-		contentTextTransform,
-		contentTextDecoration,
-		contentLetterSpacing,
-		contentLetterSpacingUnit,
-		contentLineHeight,
 		isSmooth,
 		seperator,
 		seperatorSize,
 		seperatorColor,
 		seperatorStyle,
-		borderWidth,
-		borderColor,
-		borderStyle,
-		titlePaddingTop,
-		titlePaddingRight,
-		titlePaddingBottom,
-		titlePaddingLeft,
-		titlePaddingUnit,
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
 		arrowBg,
 		arrowColor,
-		shadowColor,
-		hOffset,
-		vOffset,
-		blur,
-		spread,
-		contentPaddingTop,
-		contentPaddingRight,
-		contentPaddingBottom,
-		contentPaddingLeft,
-		contentPaddingUnit,
-		radius,
-		radiusUnit,
 		listSeperatorWidth,
 		listSeperatorStyle,
 		listSeperatorColor,
 		hasUnderline,
 		isSticky,
 		contentHeight,
-		contentWidth,
 		topSpace,
 		hideOnMobile,
-		zIndex,
-		containerWidth,
+
+		//
+		showListSeparator,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
 	const [defaultOptions, setDefaultOptions] = useState([]);
 
 	useEffect(() => {
-		setDefaultVisible();
+		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
+		setAttributes({
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
+		});
 	}, []);
-
+	//
 	useEffect(() => {
 		setDefaultVisible();
 	}, [visibleHeaders]);
+
+	//
+	useEffect(() => {
+		if (isSticky) {
+			setAttributes({ displayTitle: true, collapsible: true });
+		}
+	}, [isSticky]);
+
+	//
+	const resRequiredProps = {
+		setAttributes,
+		resOption,
+		attributes,
+		objAttributes,
+	};
 
 	const setDefaultVisible = () => {
 		let defaultOptions = [];
@@ -132,23 +179,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		setDefaultOptions(defaultOptions);
 	};
 
-	const TITLE_SIZE_STEP = titleSizeUnit === "em" ? 0.1 : 1;
-	const TITLE_SIZE_MAX = titleSizeUnit === "em" ? 10 : 100;
-
-	const TITLE_LINE_HEIGHT_STEP = titleLineHeightUnit === "em" ? 0.1 : 1;
-	const TITLE_LINE_HEIGHT_MAX = titleLineHeightUnit === "em" ? 10 : 100;
-
-	const TITLE_SPACING_STEP = titleLetterSpacingUnit === "em" ? 0.1 : 1;
-	const TITLE_SPACING_MAX = titleLetterSpacingUnit === "em" ? 10 : 100;
-
 	const CONTENT_GAP_STEP = contentGapUnit === "em" ? 0.1 : 1;
 	const CONTENT_GAP_MAX = contentGapUnit === "em" ? 10 : 100;
-
-	const CONTENT_SIZE_STEP = contentSizeUnit === "em" ? 0.1 : 1;
-	const CONTENT_SIZE_MAX = contentSizeUnit === "em" ? 10 : 100;
-
-	const CONTENT_SPACING_STEP = contentLetterSpacingUnit === "em" ? 0.1 : 1;
-	const CONTENT_SPACING_MAX = contentLetterSpacingUnit === "em" ? 10 : 100;
 
 	const onHeaderChange = (options) => {
 		if (options) {
@@ -164,642 +196,498 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	return (
 		<InspectorControls key="controls">
-			<PanelBody title={__("Visible Headers")}>
-				<Select
-					options={options}
-					defaultValue={defaultOptions}
-					isMulti
-					onChange={onHeaderChange}
-				/>
-			</PanelBody>
-
-			<PanelBody>
-				<ToggleControl
-					label={__("Sticky contents")}
-					help={__("Always show contents on sidebar")}
-					checked={isSticky}
-					onChange={() => setAttributes({ isSticky: !isSticky })}
-				/>
-
-				<ToggleControl
-					label={__("Display Title")}
-					checked={displayTitle}
-					onChange={() => setAttributes({ displayTitle: !displayTitle })}
-				/>
-
-				{displayTitle && !isSticky && (
-					<ToggleControl
-						label={__("Collapsible")}
-						checked={collapsible}
-						onChange={() => setAttributes({ collapsible: !collapsible })}
-					/>
-				)}
-
-				{displayTitle && collapsible && (
-					<ToggleControl
-						label={__("Initial Collapse")}
-						checked={initialCollapse}
-						onChange={() =>
-							setAttributes({ initialCollapse: !initialCollapse })
-						}
-					/>
-				)}
-
-				{displayTitle && (
-					<ToggleControl
-						label={__("Title Seperator")}
-						checked={seperator}
-						onChange={() => setAttributes({ seperator: !seperator })}
-					/>
-				)}
-			</PanelBody>
-
-			{isSticky && (
-				<PanelBody title={__("Sticky settings")}>
-					<ToggleControl
-						label={__("Hide on Mobile")}
-						checked={hideOnMobile}
-						onChange={() => setAttributes({ hideOnMobile: !hideOnMobile })}
-					/>
-
-					<RangeControl
-						label={__("Top Space")}
-						help={__("Visible on frontend only")}
-						value={topSpace}
-						onChange={(topSpace) => setAttributes({ topSpace })}
-						min={0}
-						max={100}
-					/>
-
-					<RangeControl
-						label={__("Content Height")}
-						help={__("Visible on frontend only")}
-						value={contentHeight}
-						onChange={(contentHeight) => setAttributes({ contentHeight })}
-						min={0}
-						max={1000}
-					/>
-
-					<RangeControl
-						label={__("Content Width")}
-						help={__("Visible on frontend only")}
-						value={contentWidth}
-						onChange={(contentWidth) => setAttributes({ contentWidth })}
-						min={0}
-						max={1000}
-					/>
-
-					<RangeControl
-						label={__("Z-Index")}
-						value={zIndex}
-						onChange={(zIndex) => setAttributes({ zIndex })}
-						min={0}
-						max={9999}
-					/>
-				</PanelBody>
-			)}
-
-			{displayTitle && (
-				<PanelBody title={__("Title Settings")} initialOpen={false}>
-					<BaseControl label={__("Align")} className="eb-base-control">
-						<ButtonGroup>
-							{ALIGNS.map((align, index) => (
-								<Button
-									isSmall
-									isPrimary={titleAlign === align.value}
-									isSecondary={titleAlign !== align.value}
-									onClick={() => setAttributes({ titleAlign: align.value })}
-								>
-									{align.label}
-								</Button>
-							))}
-						</ButtonGroup>
-					</BaseControl>
-
-					<ColorControl
-						label={__("Background Color")}
-						color={titleBg}
-						onChange={(titleBg) => setAttributes({ titleBg })}
-					/>
-
-					<ColorControl
-						label={__("Text Color")}
-						color={titleColor}
-						onChange={(titleColor) => setAttributes({ titleColor })}
-					/>
-
-					<BaseControl label={__("Typography")} className="eb-typography-base">
-						<Dropdown
-							className="eb-typography-dropdown"
-							contentClassName="my-popover-content-classname"
-							position="bottom right"
-							renderToggle={({ isOpen, onToggle }) => (
-								<Button
-									isSmall
-									onClick={onToggle}
-									aria-expanded={isOpen}
-									icon="edit"
-								></Button>
-							)}
-							renderContent={() => (
-								<div style={{ padding: "1rem" }}>
-									<FontPicker
-										label={__("Font Family")}
-										value={titleFontFamily}
-										onChange={(titleFontFamily) =>
-											setAttributes({ titleFontFamily })
-										}
-									/>
-
-									<UnitControl
-										selectedUnit={titleSizeUnit}
-										unitTypes={[
-											{ label: "px", value: "px" },
-											{ label: "%", value: "%" },
-											{ label: "em", value: "em" },
-										]}
-										onClick={(titleSizeUnit) =>
-											setAttributes({ titleSizeUnit })
-										}
-									/>
-
-									<RangeControl
-										label={__("Font Size")}
-										value={titleFontSize}
-										onChange={(titleFontSize) =>
-											setAttributes({ titleFontSize })
-										}
-										step={TITLE_SIZE_STEP}
-										min={0}
-										max={TITLE_SIZE_MAX}
-									/>
-
-									<SelectControl
-										label={__("Font Weight")}
-										value={titleFontWeight}
-										options={FONT_WEIGHTS}
-										onChange={(titleFontWeight) =>
-											setAttributes({ titleFontWeight })
-										}
-									/>
-
-									<SelectControl
-										label={__("Text Transform")}
-										value={titleTextTransform}
-										options={TEXT_TRANSFORM}
-										onChange={(titleTextTransform) =>
-											setAttributes({ titleTextTransform })
-										}
-									/>
-
-									<SelectControl
-										label={__("Text Decoration")}
-										value={titleTextDecoration}
-										options={TEXT_DECORATION}
-										onChange={(titleTextDecoration) =>
-											setAttributes({ titleTextDecoration })
-										}
-									/>
-
-									<UnitControl
-										selectedUnit={titleLetterSpacingUnit}
-										unitTypes={[
-											{ label: "px", value: "px" },
-											{ label: "em", value: "em" },
-										]}
-										onClick={(titleLetterSpacingUnit) =>
-											setAttributes({ titleLetterSpacingUnit })
-										}
-									/>
-
-									<RangeControl
-										label={__("Letter Spacing")}
-										value={titleLetterSpacing}
-										onChange={(titleLetterSpacing) =>
-											setAttributes({ titleLetterSpacing })
-										}
-										min={0}
-										max={TITLE_SPACING_MAX}
-										step={TITLE_SPACING_STEP}
-									/>
-
-									<UnitControl
-										selectedUnit={titleLineHeightUnit}
-										unitTypes={[
-											{ label: "px", value: "px" },
-											{ label: "em", value: "em" },
-										]}
-										onClick={(titleLineHeightUnit) =>
-											setAttributes({ titleLineHeightUnit })
-										}
-									/>
-
-									<RangeControl
-										label={__("Line Height")}
-										value={titleLineHeight}
-										onChange={(titleLineHeight) =>
-											setAttributes({ titleLineHeight })
-										}
-										min={0}
-										max={TITLE_LINE_HEIGHT_MAX}
-										step={TITLE_LINE_HEIGHT_STEP}
-									/>
-								</div>
-							)}
-						/>
-					</BaseControl>
-
-					<UnitControl
-						selectedUnit={titlePaddingUnit}
-						unitTypes={[
-							{ label: "px", value: "px" },
-							{ label: "%", value: "%" },
-							{ label: "em", value: "em" },
-						]}
-						onClick={(titlePaddingUnit) => setAttributes({ titlePaddingUnit })}
-					/>
-
-					<DimensionsControl
-						label={__("Padding")}
-						top={titlePaddingTop}
-						right={titlePaddingRight}
-						bottom={titlePaddingBottom}
-						left={titlePaddingLeft}
-						onChange={({ top, right, bottom, left }) =>
-							setAttributes({
-								titlePaddingTop: top,
-								titlePaddingRight: right,
-								titlePaddingBottom: bottom,
-								titlePaddingLeft: left,
-							})
-						}
-					/>
-				</PanelBody>
-			)}
-
-			<PanelBody title={__("Content Settings")} initialOpen={false}>
-				<ToggleControl
-					label={__("Display Underline")}
-					checked={hasUnderline}
-					onChange={() => setAttributes({ hasUnderline: !hasUnderline })}
-				/>
-
-				<RangeControl
-					label={__("Indent")}
-					value={indent}
-					onChange={(indent) => setAttributes({ indent })}
-				/>
-
-				<UnitControl
-					selectedUnit={contentGapUnit}
-					unitTypes={[
-						{ label: "px", value: "px" },
-						{ label: "%", value: "%" },
-						{ label: "em", value: "em" },
+			<div className="eb-panel-control">
+				<TabPanel
+					className="eb-parent-tab-panel"
+					activeClass="active-tab"
+					// onSelect={onSelect}
+					tabs={[
+						{
+							name: "general",
+							title: "General",
+							className: "eb-tab general",
+						},
+						// {
+						// 	name: "styles",
+						// 	title: "Styles",
+						// 	className: "eb-tab styles",
+						// },
+						{
+							name: "advance",
+							title: "Advanced",
+							className: "eb-tab advance",
+						},
 					]}
-					onClick={(contentGapUnit) => setAttributes({ contentGapUnit })}
-				/>
+				>
+					{(tab) => (
+						<div className={"eb-tab-controls" + tab.name} key={tab.name}>
+							{tab.name === "general" && (
+								<>
+									<style>
+										{`
+										.fix-select-over-lapping>div>div{
+											z-index:999999 !important;
+										}
 
-				<RangeControl
-					label={__("Content Gap")}
-					value={contentGap}
-					onChange={(contentGap) => setAttributes({ contentGap })}
-					min={0}
-					max={CONTENT_GAP_MAX}
-					step={CONTENT_GAP_STEP}
-				/>
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .responsive-btn-wrapper > .responsive-btn > .responsive-btn-label{
+											display:block;
+											padding-bottom:5px;
+										}
 
-				<RangeControl
-					label={__("Container Width")}
-					value={containerWidth}
-					onChange={(containerWidth) => setAttributes({ containerWidth })}
-				/>
 
-				<ColorControl
-					label={__("Background Color")}
-					color={contentBg}
-					onChange={(contentBg) => setAttributes({ contentBg })}
-				/>
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper{
+											padding-top:15px;
+										}
 
-				<ColorControl
-					label={__("Text Color")}
-					color={contentColor}
-					onChange={(contentColor) => setAttributes({ contentColor })}
-				/>
+										.wrap-width-range-fix-style .responsiveRangeControllerWrapper> .components-button-group.eb-unit-control-btn-group{
+											margin-bottom:-40px;
+										}
+										`}
+									</style>
 
-				<ColorControl
-					label={__("Hover Color")}
-					color={contentHoverColor}
-					onChange={(contentHoverColor) => setAttributes({ contentHoverColor })}
-				/>
+									<PanelBody title={__("Visible Headers", "essential-blocks")}>
+										<div className="fix-select-over-lapping">
+											<Select2
+												options={options}
+												defaultValue={defaultOptions}
+												isMulti
+												onChange={onHeaderChange}
+											/>
+										</div>
+									</PanelBody>
 
-				<BaseControl label={__("Typography")} className="eb-typography-base">
-					<Dropdown
-						className="eb-typography-dropdown"
-						contentClassName="my-popover-content-classname"
-						position="bottom right"
-						renderToggle={({ isOpen, onToggle }) => (
-							<Button
-								isSmall
-								onClick={onToggle}
-								aria-expanded={isOpen}
-								icon="edit"
-							></Button>
-						)}
-						renderContent={() => (
-							<div style={{ padding: "1rem" }}>
-								<FontPicker
-									label={__("Font Family")}
-									value={contentFontFamily}
-									onChange={(contentFontFamily) =>
-										setAttributes({ contentFontFamily })
-									}
-								/>
+									<PanelBody>
+										<div className="wrap-width-range-fix-style">
+											<ResponsiveRangeController
+												baseLabel={__(
+													`${
+														isSticky
+															? "sticky content max width"
+															: "Container max width"
+													}`
+												)}
+												controlName={wrapMaxWidthPrefix}
+												resRequiredProps={resRequiredProps}
+												min={0}
+												max={2000}
+												step={1}
+											/>
+										</div>
 
-								<UnitControl
-									selectedUnit={contentSizeUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "%", value: "%" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(contentSizeUnit) =>
-										setAttributes({ contentSizeUnit })
-									}
-								/>
+										{displayTitle && !isSticky && (
+											<ToggleControl
+												label={__("Collapsible", "essential-blocks")}
+												checked={collapsible}
+												onChange={() =>
+													setAttributes({ collapsible: !collapsible })
+												}
+											/>
+										)}
 
-								<RangeControl
-									label={__("Font Size")}
-									value={contentFontSize}
-									onChange={(contentFontSize) =>
-										setAttributes({ contentFontSize })
-									}
-									step={CONTENT_SIZE_STEP}
-									min={0}
-									max={CONTENT_SIZE_MAX}
-								/>
+										{displayTitle && collapsible && (
+											<ToggleControl
+												label={__("Collapsed initially", "essential-blocks")}
+												checked={initialCollapse}
+												onChange={() =>
+													setAttributes({ initialCollapse: !initialCollapse })
+												}
+											/>
+										)}
 
-								<SelectControl
-									label={__("Font Weight")}
-									value={contentFontWeight}
-									options={FONT_WEIGHTS}
-									onChange={(contentFontWeight) =>
-										setAttributes({ contentFontWeight })
-									}
-								/>
+										<ToggleControl
+											label={__("Sticky contents", "essential-blocks")}
+											help={__(
+												"Always show contents on sidebar (Visible on frontend only)"
+											)}
+											checked={isSticky}
+											onChange={() => setAttributes({ isSticky: !isSticky })}
+										/>
 
-								<SelectControl
-									label={__("Text Transform")}
-									value={contentTextTransform}
-									options={TEXT_TRANSFORM}
-									onChange={(contentTextTransform) =>
-										setAttributes({ contentTextTransform })
-									}
-								/>
+										{isSticky && (
+											<PanelBody
+												title={__("Sticky settings", "essential-blocks")}
+												initialOpen={false}
+											>
+												<ToggleControl
+													label={__("Hide on Mobile", "essential-blocks")}
+													checked={hideOnMobile}
+													onChange={() =>
+														setAttributes({ hideOnMobile: !hideOnMobile })
+													}
+												/>
 
-								<SelectControl
-									label={__("Text Decoration")}
-									value={contentTextDecoration}
-									options={TEXT_DECORATION}
-									onChange={(contentTextDecoration) =>
-										setAttributes({ contentTextDecoration })
-									}
-								/>
+												<div className="eb-reset-button-margin-fix">
+													<ResetControl
+														onReset={() =>
+															setAttributes({ contentHeight: undefined })
+														}
+													>
+														<RangeControl
+															label={__(
+																"Content min-height",
+																"essential-blocks"
+															)}
+															help={__(
+																"Visible on frontend only",
+																"essential-blocks"
+															)}
+															value={contentHeight}
+															onChange={(contentHeight) =>
+																setAttributes({ contentHeight })
+															}
+															min={0}
+															max={1000}
+														/>
+													</ResetControl>
+												</div>
+												<RangeControl
+													label={__("Top Space", "essential-blocks")}
+													help={__(
+														"Visible on frontend only",
+														"essential-blocks"
+													)}
+													value={topSpace}
+													onChange={(topSpace) => setAttributes({ topSpace })}
+													min={0}
+													max={100}
+												/>
+											</PanelBody>
+										)}
 
-								<UnitControl
-									selectedUnit={contentLetterSpacingUnit}
-									unitTypes={[
-										{ label: "px", value: "px" },
-										{ label: "em", value: "em" },
-									]}
-									onClick={(contentLetterSpacingUnit) =>
-										setAttributes({ contentLetterSpacingUnit })
-									}
-								/>
+										{!isSticky && (
+											<ToggleControl
+												label={__("Display Title", "essential-blocks")}
+												checked={displayTitle}
+												onChange={() =>
+													setAttributes({ displayTitle: !displayTitle })
+												}
+											/>
+										)}
 
-								<RangeControl
-									label={__("Letter Spacing")}
-									value={contentLetterSpacing}
-									onChange={(contentLetterSpacing) =>
-										setAttributes({ contentLetterSpacing })
-									}
-									min={0}
-									max={CONTENT_SPACING_MAX}
-									step={CONTENT_SPACING_STEP}
-								/>
+										{displayTitle && (
+											<PanelBody
+												title={__("Title Settings", "essential-blocks")}
+												initialOpen={false}
+											>
+												<BaseControl
+													label={__("Align", "essential-blocks")}
+													className="eb-base-control"
+												>
+													<ButtonGroup>
+														{ALIGNS.map((align, index) => (
+															<Button
+																isSmall
+																isPrimary={titleAlign === align.value}
+																isSecondary={titleAlign !== align.value}
+																onClick={() =>
+																	setAttributes({ titleAlign: align.value })
+																}
+															>
+																{align.label}
+															</Button>
+														))}
+													</ButtonGroup>
+												</BaseControl>
 
-								<RangeControl
-									label={__("Line Height")}
-									value={contentLineHeight}
-									onChange={(contentLineHeight) =>
-										setAttributes({ contentLineHeight })
-									}
-									min={0}
-									max={10}
-									step={0.1}
-								/>
-							</div>
-						)}
-					/>
-				</BaseControl>
+												<ColorControl
+													label={__("Background Color", "essential-blocks")}
+													color={titleBg}
+													onChange={(titleBg) => setAttributes({ titleBg })}
+												/>
 
-				<UnitControl
-					selectedUnit={contentPaddingUnit}
-					unitTypes={[
-						{ label: "px", value: "px" },
-						{ label: "%", value: "%" },
-						{ label: "em", value: "em" },
-					]}
-					onClick={(contentPaddingUnit) =>
-						setAttributes({ contentPaddingUnit })
-					}
-				/>
+												<ColorControl
+													label={__("Text Color", "essential-blocks")}
+													color={titleColor}
+													onChange={(titleColor) =>
+														setAttributes({ titleColor })
+													}
+												/>
 
-				<DimensionsControl
-					label={__("Padding")}
-					top={contentPaddingTop}
-					right={contentPaddingRight}
-					bottom={contentPaddingBottom}
-					left={contentPaddingLeft}
-					onChange={({ top, right, bottom, left }) =>
-						setAttributes({
-							contentPaddingTop: top,
-							contentPaddingRight: right,
-							contentPaddingBottom: bottom,
-							contentPaddingLeft: left,
-						})
-					}
-				/>
+												<TypographyDropdown
+													baseLabel="Typography"
+													typographyPrefixConstant={typoPrefix_title}
+													resRequiredProps={resRequiredProps}
+													defaultFontSize={22}
+												/>
 
-				<SelectControl
-					label={__("Seperator Style")}
-					value={listSeperatorStyle}
-					options={BORDER_STYLES}
-					onChange={(listSeperatorStyle) =>
-						setAttributes({ listSeperatorStyle })
-					}
-				/>
+												<ResponsiveDimensionsControl
+													resRequiredProps={resRequiredProps}
+													controlName={titlePaddingConst}
+													baseLabel="Padding"
+												/>
+											</PanelBody>
+										)}
 
-				{listSeperatorStyle !== "none" && (
-					<ColorControl
-						label={__("Seperator Color")}
-						color={listSeperatorColor}
-						onChange={(listSeperatorColor) =>
-							setAttributes({ listSeperatorColor })
-						}
-					/>
-				)}
+										{displayTitle && (
+											<ToggleControl
+												label={__("Title Seperator", "essential-blocks")}
+												checked={seperator}
+												onChange={() =>
+													setAttributes({ seperator: !seperator })
+												}
+											/>
+										)}
 
-				{listSeperatorStyle !== "none" && (
-					<RangeControl
-						label={__("Seperator Size")}
-						value={listSeperatorWidth}
-						onChange={(listSeperatorWidth) =>
-							setAttributes({ listSeperatorWidth })
-						}
-						min={0}
-						max={100}
-					/>
-				)}
-			</PanelBody>
+										{displayTitle && seperator && (
+											<PanelBody
+												title={__(
+													"Title seperator settings",
+													"essential-blocks"
+												)}
+												initialOpen={false}
+											>
+												<RangeControl
+													label={__("Seperator Size", "essential-blocks")}
+													value={seperatorSize}
+													onChange={(seperatorSize) =>
+														setAttributes({ seperatorSize })
+													}
+													min={0}
+													max={100}
+												/>
 
-			{seperator && (
-				<PanelBody title={__("Seperator")}>
-					<RangeControl
-						label={__("Seperator Size")}
-						value={seperatorSize}
-						onChange={(seperatorSize) => setAttributes({ seperatorSize })}
-						min={0}
-						max={100}
-					/>
+												<ColorControl
+													label={__("Seperator Color", "essential-blocks")}
+													color={seperatorColor}
+													onChange={(seperatorColor) =>
+														setAttributes({ seperatorColor })
+													}
+												/>
 
-					<ColorControl
-						label={__("Seperator Color")}
-						color={seperatorColor}
-						onChange={(seperatorColor) => setAttributes({ seperatorColor })}
-					/>
+												<SelectControl
+													label={__("Seperator Style", "essential-blocks")}
+													value={seperatorStyle}
+													options={BORDER_STYLES}
+													onChange={(seperatorStyle) =>
+														setAttributes({ seperatorStyle })
+													}
+												/>
+											</PanelBody>
+										)}
+									</PanelBody>
 
-					<SelectControl
-						label={__("Seperator Style")}
-						value={seperatorStyle}
-						options={BORDER_STYLES}
-						onChange={(seperatorStyle) => setAttributes({ seperatorStyle })}
-					/>
-				</PanelBody>
-			)}
+									<PanelBody
+										title={__("Content Settings", "essential-blocks")}
+										initialOpen={false}
+									>
+										<ToggleControl
+											label={__("Display Underline", "essential-blocks")}
+											checked={hasUnderline}
+											onChange={() =>
+												setAttributes({ hasUnderline: !hasUnderline })
+											}
+										/>
 
-			<PanelBody title={__("Scroll")} initialOpen={false}>
-				<ToggleControl
-					label={__("Smooth Scroll")}
-					checked={isSmooth}
-					onChange={() => setAttributes({ isSmooth: !isSmooth })}
-				/>
+										<RangeControl
+											label={__("Indent", "essential-blocks")}
+											value={indent}
+											onChange={(indent) => setAttributes({ indent })}
+										/>
 
-				<ToggleControl
-					label={__("Scroll To Top")}
-					checked={scrollToTop}
-					onChange={() => setAttributes({ scrollToTop: !scrollToTop })}
-				/>
+										<UnitControl
+											selectedUnit={contentGapUnit}
+											unitTypes={[
+												{ label: "px", value: "px" },
+												{ label: "%", value: "%" },
+												{ label: "em", value: "em" },
+											]}
+											onClick={(contentGapUnit) =>
+												setAttributes({ contentGapUnit })
+											}
+										/>
 
-				{scrollToTop && (
-					<RangeControl
-						label={__("Arrow Height")}
-						value={arrowHeight}
-						onChange={(arrowHeight) => setAttributes({ arrowHeight })}
-						min={0}
-						max={100}
-					/>
-				)}
+										<RangeControl
+											label={__("Content Gap", "essential-blocks")}
+											value={contentGap}
+											onChange={(contentGap) => setAttributes({ contentGap })}
+											min={0}
+											max={CONTENT_GAP_MAX}
+											step={CONTENT_GAP_STEP}
+										/>
 
-				{scrollToTop && (
-					<RangeControl
-						label={__("Arrow Width")}
-						value={arrowWidth}
-						onChange={(arrowWidth) => setAttributes({ arrowWidth })}
-						min={0}
-						max={100}
-					/>
-				)}
+										<ColorControl
+											label={__("Background Color", "essential-blocks")}
+											color={contentBg}
+											onChange={(contentBg) => setAttributes({ contentBg })}
+										/>
 
-				{scrollToTop && (
-					<ColorControl
-						label={__("Arrow Background")}
-						color={arrowBg}
-						onChange={(arrowBg) => setAttributes({ arrowBg })}
-					/>
-				)}
+										<ColorControl
+											label={__("Text Color", "essential-blocks")}
+											color={contentColor}
+											onChange={(contentColor) =>
+												setAttributes({ contentColor })
+											}
+										/>
 
-				{scrollToTop && (
-					<ColorControl
-						label={__("Arrow Color")}
-						color={arrowColor}
-						onChange={(arrowColor) => setAttributes({ arrowColor })}
-					/>
-				)}
-			</PanelBody>
+										<ColorControl
+											label={__("Hover Color", "essential-blocks")}
+											color={contentHoverColor}
+											onChange={(contentHoverColor) =>
+												setAttributes({ contentHoverColor })
+											}
+										/>
 
-			<PanelBody title={__("Border")} initialOpen={false}>
-				<RangeControl
-					label={__("Border Width")}
-					value={borderWidth}
-					onChange={(borderWidth) => setAttributes({ borderWidth })}
-					min={0}
-					max={100}
-				/>
+										<TypographyDropdown
+											baseLabel="Typography"
+											typographyPrefixConstant={typoPrefix_content}
+											resRequiredProps={resRequiredProps}
+											defaultFontSize={20}
+										/>
 
-				<SelectControl
-					label={__("Border Style")}
-					value={borderStyle}
-					options={BORDER_STYLES}
-					onChange={(borderStyle) => setAttributes({ borderStyle })}
-				/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={contentPaddingConst}
+											baseLabel="Padding"
+										/>
 
-				<ColorControl
-					label={__("Border Color")}
-					color={borderColor}
-					onChange={(borderColor) => setAttributes({ borderColor })}
-				/>
-			</PanelBody>
+										<ToggleControl
+											label={__("Show Separator", "essential-blocks")}
+											checked={showListSeparator}
+											onChange={() =>
+												setAttributes({ showListSeparator: !showListSeparator })
+											}
+										/>
 
-			<PanelBody title={__("Shadow")} initialOpen={false}>
-				<ColorControl
-					label={__("Shadow Color")}
-					color={shadowColor}
-					onChange={(shadowColor) => setAttributes({ shadowColor })}
-				/>
+										{showListSeparator && (
+											<>
+												<SelectControl
+													label={__("Seperator Style", "essential-blocks")}
+													value={listSeperatorStyle}
+													options={BORDER_STYLES}
+													onChange={(listSeperatorStyle) =>
+														setAttributes({ listSeperatorStyle })
+													}
+												/>
 
-				<RangeControl
-					label={__("Horizontal Offset")}
-					value={hOffset}
-					onChange={(hOffset) => setAttributes({ hOffset })}
-					min={0}
-					max={30}
-				/>
+												<ColorControl
+													label={__("Seperator Color", "essential-blocks")}
+													color={listSeperatorColor}
+													onChange={(listSeperatorColor) =>
+														setAttributes({ listSeperatorColor })
+													}
+												/>
 
-				<RangeControl
-					label={__("Vertical Offset")}
-					value={vOffset}
-					onChange={(vOffset) => setAttributes({ vOffset })}
-					min={0}
-					max={30}
-				/>
+												<RangeControl
+													label={__("Seperator Size", "essential-blocks")}
+													value={listSeperatorWidth}
+													onChange={(listSeperatorWidth) =>
+														setAttributes({ listSeperatorWidth })
+													}
+													min={0}
+													max={100}
+												/>
+											</>
+										)}
+									</PanelBody>
 
-				<RangeControl
-					label={__("Blur")}
-					value={blur}
-					onChange={(blur) => setAttributes({ blur })}
-					min={0}
-					max={30}
-				/>
+									<PanelBody
+										title={__("Scroll", "essential-blocks")}
+										initialOpen={false}
+									>
+										<ToggleControl
+											label={__("Smooth Scroll", "essential-blocks")}
+											checked={isSmooth}
+											onChange={() => setAttributes({ isSmooth: !isSmooth })}
+										/>
 
-				<RangeControl
-					label={__("Spread")}
-					value={spread}
-					onChange={(spread) => setAttributes({ spread })}
-					min={0}
-					max={30}
-				/>
-			</PanelBody>
+										<ToggleControl
+											label={__("Scroll To Top", "essential-blocks")}
+											checked={scrollToTop}
+											onChange={() =>
+												setAttributes({ scrollToTop: !scrollToTop })
+											}
+										/>
+
+										{scrollToTop && (
+											<>
+												<RangeControl
+													label={__("Arrow Height", "essential-blocks")}
+													value={arrowHeight}
+													onChange={(arrowHeight) =>
+														setAttributes({ arrowHeight })
+													}
+													min={0}
+													max={100}
+												/>
+
+												<RangeControl
+													label={__("Arrow Width", "essential-blocks")}
+													value={arrowWidth}
+													onChange={(arrowWidth) =>
+														setAttributes({ arrowWidth })
+													}
+													min={0}
+													max={100}
+												/>
+
+												<ColorControl
+													label={__("Arrow Background", "essential-blocks")}
+													color={arrowBg}
+													onChange={(arrowBg) => setAttributes({ arrowBg })}
+												/>
+
+												<ColorControl
+													label={__("Arrow Color", "essential-blocks")}
+													color={arrowColor}
+													onChange={(arrowColor) =>
+														setAttributes({ arrowColor })
+													}
+												/>
+											</>
+										)}
+									</PanelBody>
+								</>
+							)}
+							{/* {tab.name === "styles" && (
+								<>
+									<PanelBody
+										title={__("Styles", "essential-blocks")}
+										//  initialOpen={false}
+									>
+										<h3>Styles</h3>
+									</PanelBody>
+								</>
+							)} */}
+							{tab.name === "advance" && (
+								<>
+									<PanelBody
+										title={__("Margin & Padding")}
+										// initialOpen={true}
+									>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={WrpMarginConst}
+											baseLabel="Margin"
+										/>
+										<ResponsiveDimensionsControl
+											resRequiredProps={resRequiredProps}
+											controlName={WrpPaddingConst}
+											baseLabel="Padding"
+										/>
+									</PanelBody>
+
+									<PanelBody title={__("Background ", "essential-blocks")}>
+										<ColorControl
+											label={__("Background Color", "essential-blocks")}
+											color={mainBgc}
+											onChange={(mainBgc) => setAttributes({ mainBgc })}
+										/>
+									</PanelBody>
+
+									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
+										<BorderShadowControl
+											controlName={WrpBdShadowConst}
+											resRequiredProps={resRequiredProps}
+											// noShadow
+											// noBorder
+										/>
+									</PanelBody>
+								</>
+							)}
+						</div>
+					)}
+				</TabPanel>
+			</div>
 		</InspectorControls>
 	);
 };
