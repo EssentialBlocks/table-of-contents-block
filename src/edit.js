@@ -1,42 +1,37 @@
 /**
  * WordPress dependencies
  */
-
-const { __ } = wp.i18n;
-const {
+import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from "@wordpress/element";
+import {
 	BlockControls,
 	RichText,
 	AlignmentToolbar,
 	useBlockProps,
-} = wp.blockEditor;
-const { useState, useEffect } = wp.element;
-const { select, useSelect } = wp.data;
-const { ToolbarButton, ToolbarGroup } = wp.components;
+} from "@wordpress/block-editor";
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import { select, useSelect } from "@wordpress/data";
 
 /*
  * External dependencies
  */
 import striptags from "striptags";
 
-/**
- * Internal dependencies
- *
- *
- *
- */
-
-import "./editor.scss";
-
-import {
+const {
 	softMinifyCssStrings,
 	// generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../util/helpers";
+} = window.EBControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
 
 import {
 	supportedHeaders,
@@ -57,6 +52,8 @@ import {
 	isElegantHeading,
 	parseTocSlug,
 } from "./helper";
+
+import classnames from "classnames";
 
 import Inspector from "./inspector";
 import {
@@ -234,8 +231,6 @@ const useHeader = () => {
 		select("core/block-editor").getBlocks()
 	);
 
-	// console.log(allBlocks);
-
 	const headerBlocks = allBlocks.filter((block) =>
 		supportedHeaders.includes(block.name)
 	);
@@ -250,6 +245,7 @@ export default function Edit({
 	attributes,
 	setAttributes,
 	clientId,
+	className,
 }) {
 	const {
 		resOption,
@@ -322,7 +318,9 @@ export default function Edit({
 	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
 		setAttributes({
-			resOption: select("core/edit-post").__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 	}, []);
 
@@ -338,16 +336,16 @@ export default function Edit({
 		});
 	}, []);
 
-	// this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	useEffect(() => {
-		mimmikCssForPreviewBtnClick({
-			domObj: document,
-			select,
-		});
-	}, []);
+	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+	// useEffect(() => {
+	// 	mimmikCssForPreviewBtnClick({
+	// 		domObj: document,
+	// 		select,
+	// 	});
+	// }, []);
 
 	const blockProps = useBlockProps({
-		className: `eb-guten-block-main-parent-wrapper`,
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
 
 	//
