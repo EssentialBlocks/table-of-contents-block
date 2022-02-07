@@ -1,8 +1,12 @@
 {
 	"name": "table-of-contents-block/table-of-contents-block",
 	"title": "Table Of Contents",
+	"apiVersion": 2,
 	"category": "widgets",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"textdomain": "table-of-contents-block",
+	"supports": {
+		"align": ["wide", "full"]
+	},
 	"editorScript": "file:./dist/index.js"
 }
