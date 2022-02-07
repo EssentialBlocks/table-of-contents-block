@@ -14,7 +14,6 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"node-sass": "^6.0.1",
 		"postcss-loader": "^5.3.0",
 		"@babel/plugin-proposal-class-properties": "^7.10.4",
 		"@wordpress/scripts": "^12.1.1",
