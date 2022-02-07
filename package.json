@@ -4,7 +4,7 @@
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"main": "Gruntfile.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",

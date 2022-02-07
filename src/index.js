@@ -17,7 +17,7 @@ import metadata from "../block.json";
 
 import example from "./example";
 
-const { ebConditionalRegisterBlockType } = EBControls;
+const { ebConditionalRegisterBlockType } = EBTOCControls;
 
 ebConditionalRegisterBlockType(metadata, {
 	keywords: [

@@ -43,7 +43,7 @@ const {
 	// generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
-} = window.EBControls;
+} = window.EBTOCControls;
 
 const attributes = {
 	// the following 4 attributes is must required for responsive options and asset generation for frontend

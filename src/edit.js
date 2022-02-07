@@ -26,7 +26,7 @@ const {
 	generateResponsiveRangeStyles,
 	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} = window.EBControls;
+} = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
 	eb_style_handler.editor_type === "edit-site"
