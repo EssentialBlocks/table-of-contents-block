@@ -28,7 +28,7 @@ require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_table_of_content_block_init()
 {
-	define('TOC_BLOCK_VERSION', "53.1.1");
+	define('TOC_BLOCK_VERSION', "1.1.0");
 	define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
 	define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
