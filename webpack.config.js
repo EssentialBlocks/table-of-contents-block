@@ -11,6 +11,7 @@ const plugins = defaultConfig.plugins.filter(
 let allEntries = {
 	dist: "./src/index.js",
 	"lib/style-handler/dist": "./lib/style-handler/style-handler.js",
+	"./dist/frontend": "./src/frontend.js",
 };
 
 const config = {

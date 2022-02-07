@@ -28,8 +28,7 @@ require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_table_of_content_block_init()
 {
-
-	define('TOC_BLOCK_VERSION', "1.2.0");
+	define('TOC_BLOCK_VERSION', "1.1.0");
 	define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
 	define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
@@ -65,12 +64,12 @@ function create_block_table_of_content_block_init()
 		TOC_BLOCK_VERSION
 	);
 
-	$frontend_js = 'dist/frontend.js';
+	$frontend_js = TOC_BLOCK_ADMIN_URL . 'dist/frontend/index.js';
 	wp_register_script(
 		'essential-blocks-toc-frontend',
-		plugins_url($frontend_js, __FILE__),
-		array("jquery", "wp-editor"),
-		filemtime("$dir/$frontend_js")
+		$frontend_js,
+		array(),
+		TOC_BLOCK_VERSION
 	);
 
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/table-of-contents')) {

@@ -14,16 +14,14 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"postcss-loader": "^5.3.0",
-		"@babel/plugin-proposal-class-properties": "^7.10.4",
-		"@wordpress/scripts": "^12.1.1",
-		"prop-types": "^15.7.2",
-		"striptags": "^3.1.1"
+		"@babel/plugin-proposal-class-properties": "^7.16.5",
+		"@wordpress/scripts": "^19.2.2",
+		"striptags": "^3.2.0"
 	},
 	"dependencies": {
-		"@fonticonpicker/react-fonticonpicker": "^1.2.0",
-		"classnames": "^2.2.6",
-		"react-transition-group": "^4.4.1",
-		"react-select": "^3.1.0"
+		"@fonticonpicker/react-fonticonpicker": "hz-tyfoon/react-fonticonpicker#master",
+		"classnames": "^2.3.1",
+		"react-transition-group": "^4.4.2",
+		"react-select": "^5.2.1"
 	}
 }

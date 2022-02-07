@@ -4,7 +4,5 @@
 	"category": "widgets",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"textdomain": "table-of-contents-block",
-	"editorScript": "file:./build/index.js",
-	"editorStyle": "file:./build/index.css",
-	"style": "file:./build/style-index.css"
+	"editorScript": "file:./dist/index.js"
 }
