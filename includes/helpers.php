@@ -47,14 +47,14 @@ class TOC_Helper
 
             $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
             wp_register_script(
-                "toc-controls-util",
+                "toc-block-controls-util",
                 TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
                 array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
                 $controls_dependencies['version'],
                 true
             );
 
-            wp_localize_script('toc-controls-util', 'EssentialBlocksLocalize', array(
+            wp_localize_script('toc-block-controls-util', 'EssentialBlocksLocalize', array(
                 'eb_wp_version' => (float) get_bloginfo('version'),
                 'rest_rootURL' => get_rest_url(),
             ));
