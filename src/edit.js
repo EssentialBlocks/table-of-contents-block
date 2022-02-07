@@ -651,13 +651,12 @@ export default function Edit({
 				
 				.${blockId}.eb-toc-container.eb-toc-is-sticky{
 					position:fixed;
-					top: ${topSpace || 25}%;
+					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
 					left:0;
 					z-index:999;
 				}
 			
 				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
-					overflow:scroll;
 					${contentHeight ? `min-height:${contentHeight}px;` : ""}
 				}
 			
