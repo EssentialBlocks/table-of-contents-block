@@ -45,7 +45,7 @@ class TOC_Helper
          */
         if ($hook == 'post-new.php' || $hook == 'post.php' || $hook == 'site-editor.php') {
 
-            $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+            $controls_dependencies = require TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
             wp_register_script(
                 "toc-block-controls-util",
                 TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
