@@ -60,7 +60,7 @@ class TOC_Helper
             ));
 
             wp_enqueue_style(
-                'toc-editor-css',
+                'essential-blocks-editor-css',
                 TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
                 array(),
                 $controls_dependencies['version'],
