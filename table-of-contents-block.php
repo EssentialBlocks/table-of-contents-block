@@ -21,6 +21,10 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
+define('TOC_BLOCK_VERSION', "1.1.0");
+define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
+define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
+
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
@@ -28,9 +32,6 @@ require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
 function create_block_table_of_content_block_init()
 {
-	define('TOC_BLOCK_VERSION', "1.1.0");
-	define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
-	define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
 	$script_asset_path = TOC_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
@@ -72,12 +73,38 @@ function create_block_table_of_content_block_init()
 		TOC_BLOCK_VERSION
 	);
 
+	// 
+	// 
+	$controls_dependencies = require TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+	wp_register_script(
+		"toc-block-controls-util",
+		TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
+		array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
+		$controls_dependencies['version'],
+		true
+	);
+
+	wp_localize_script('toc-block-controls-util', 'EssentialBlocksLocalize', array(
+		'eb_wp_version' => (float) get_bloginfo('version'),
+		'rest_rootURL' => get_rest_url(),
+	));
+
+
+	//
+	wp_register_style(
+		'toc-editor-css',
+		TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
+		array("create-block-table-of-content-block"),
+		$controls_dependencies['version'],
+		'all'
+	);
+
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/table-of-contents')) {
 		register_block_type(
 			TOC_Helper::get_block_register_path("table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH),
 			array(
 				'editor_script'	=> 'create-block-table-of-content-block-editor',
-				'editor_style' 	=> 'create-block-table-of-content-block',
+				'editor_style' 	=> 'toc-editor-css',
 				'render_callback' => function ($attributes, $content) {
 					if (!is_admin()) {
 						wp_enqueue_style('create-block-table-of-content-block');
