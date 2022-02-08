@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.0.1
+ * Version:         1.1.0
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -20,88 +21,99 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
+define('TOC_BLOCK_VERSION', "1.1.0");
+define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
+define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
+
 require_once __DIR__ . '/includes/font-loader.php';
 require_once __DIR__ . '/includes/post-meta.php';
-define('EB_TOC_VERSION', '1.0.1');
-require_once __DIR__ . '/includes/admin-enqueue.php';
+require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
-
 
 function create_block_table_of_content_block_init()
 {
-	eb_migrate_old_blocks('table-of-contents-block/table-of-contents-block', 'essential-blocks/table-of-contents-block');
-
-	$dir = dirname(__FILE__);
-
-	$script_asset_path = "$dir/build/index.asset.php";
-	$script_dependencies = require_once "$dir/build/index.asset.php";
+	$script_asset_path = TOC_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "table-of-contents-block/table-of-contents-block" block first.'
+			'You need to run `npm start` or `npm run build` for the "block/table-of-content" block first.'
 		);
 	}
+	$script_asset = require($script_asset_path);
+	$all_dependencies = array_merge($script_asset['dependencies'], array(
+		'wp-blocks',
+		'wp-i18n',
+		'wp-element',
+		'wp-block-editor',
+		'toc-block-controls-util',
+	));
 
-	$index_js = 'build/index.js';
-
+	$index_js     = TOC_BLOCK_ADMIN_URL . 'dist/index.js';
 	wp_register_script(
 		'create-block-table-of-content-block-editor',
-		plugins_url($index_js, __FILE__),
-		// array(
-		// 	'wp-blocks',
-		// 	'wp-i18n',
-		// 	'wp-element',
-		// 	'wp-block-editor',
-		// 	'wp-editor',
-		// ),
-		array_merge($script_dependencies['dependencies'], array("essential-blocks-edit-post")),
-		$script_dependencies['version']
+		$index_js,
+		$all_dependencies,
+		$script_asset['version'],
+		true
 	);
 
-	$editor_css = 'build/index.css';
-	wp_register_style(
-		'create-block-table-of-content-block-editor',
-		plugins_url($editor_css, __FILE__),
-		array("create-block-table-of-content-block"),
-		filemtime("$dir/$editor_css")
-	);
-
-	$style_css = 'build/style-index.css';
+	$style_css = TOC_BLOCK_ADMIN_URL . 'dist/style.css';
 	wp_register_style(
 		'create-block-table-of-content-block',
-		plugins_url($style_css, __FILE__),
+		$style_css,
 		array(),
-		filemtime("$dir/$style_css")
+		TOC_BLOCK_VERSION
 	);
 
-	$frontend_js = 'build/frontend.js';
+	$frontend_js = TOC_BLOCK_ADMIN_URL . 'dist/frontend/index.js';
 	wp_register_script(
 		'essential-blocks-toc-frontend',
-		plugins_url($frontend_js, __FILE__),
-		array("jquery", "wp-editor"),
-		filemtime("$dir/$frontend_js")
+		$frontend_js,
+		array(),
+		TOC_BLOCK_VERSION
 	);
 
-	register_block_type('table-of-contents-block/table-of-contents-block', array(
-		'editor_script' => 'create-block-table-of-content-block-editor',
-		'editor_style'  => 'create-block-table-of-content-block-editor',
-		// 'style'         => 'create-block-table-of-content-block',
-		'render_callback' => function ($attribs, $content) {
-			if (!is_admin()) {
-				wp_enqueue_style('create-block-table-of-content-block');
-				wp_enqueue_script('essential-blocks-toc-frontend');
-			}
-			return $content;
-		}
-	));
-}
-add_action('init', 'create_block_table_of_content_block_init');
+	//
+	//
+	$controls_dependencies = require TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+	wp_register_script(
+		"toc-block-controls-util",
+		TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
+		array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
+		$controls_dependencies['version'],
+		true
+	);
 
-if(!function_exists('eb_migrate_old_blocks')){
-	function eb_migrate_old_blocks($old_namespace, $new_namespace){
-		global $wpdb;
-		$posts = $wpdb->query("select * from  ".$wpdb->prefix."posts where `post_content` like '%".$old_namespace."%'");
-		if($posts){
-			$wpdb->query("update ".$wpdb->prefix."posts set `post_content`= replace(post_content, '".$old_namespace."', '".$new_namespace."') where `post_content` like '%".$old_namespace."%'");
-		}
+	wp_localize_script('toc-block-controls-util', 'EssentialBlocksLocalize', array(
+		'eb_wp_version' => (float) get_bloginfo('version'),
+		'rest_rootURL' => get_rest_url(),
+	));
+
+
+	//
+	wp_register_style(
+		'toc-editor-css',
+		TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
+		array("create-block-table-of-content-block"),
+		$controls_dependencies['version'],
+		'all'
+	);
+
+	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/table-of-contents')) {
+		register_block_type(
+			TOC_Helper::get_block_register_path("table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH),
+			array(
+				'editor_script'	=> 'create-block-table-of-content-block-editor',
+				'editor_style' 	=> 'toc-editor-css',
+				'render_callback' => function ($attributes, $content) {
+					if (!is_admin()) {
+						wp_enqueue_style('create-block-table-of-content-block');
+						wp_enqueue_script('essential-blocks-toc-frontend');
+					}
+					return $content;
+				}
+			)
+		);
 	}
 }
+
+add_action('init', 'create_block_table_of_content_block_init');

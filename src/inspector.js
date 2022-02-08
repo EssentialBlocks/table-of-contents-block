@@ -2,9 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
 import { useState, useEffect } from "@wordpress/element";
-import { select } from "@wordpress/data";
+import { InspectorControls } from "@wordpress/block-editor";
 import {
 	PanelBody,
 	BaseControl,
@@ -15,34 +14,46 @@ import {
 	ButtonGroup,
 	Button,
 } from "@wordpress/components";
+import { select } from "@wordpress/data";
 
 /**
  * Internal dependencies
  */
 
 import Select2 from "react-select";
+// // import faIcons from "../../../util/faIcons.js";
+// import TypographyDropdown from "../../../util/typography-control-v2";
+// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
+// import ResponsiveRangeController from "../../../util/responsive-range-control";
+// // import ImageAvatar from "../../../util/image-avatar/";
+// // import GradientColorControl from "../../../util/gradient-color-controller";
+// import ColorControl from "../../../util/color-control";
+// import BorderShadowControl from "../../../util/border-shadow-control";
+// // import BackgroundControl from "../../../util/background-control";
+// import UnitControl from "../../../util/unit-control";
+// // import FontPicker from "../../../util/typography-control/FontPicker";
+// // import DimensionsControl from "../../../util/dimensions-control";
+// import ResetControl from "../../../util/reset-control";
 
-// import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
-// import faIcons from "../controls/src/controls/faIcons.js";
-import TypographyDropdown from "../controls/src/controls/typography-control-v2";
-import ResponsiveDimensionsControl from "../controls/src/controls/dimensions-control-v2";
-import ResponsiveRangeController from "../controls/src/controls/responsive-range-control";
-// import ImageAvatar from "../controls/src/controls/image-avatar/";
-// import GradientColorControl from "../controls/src/controls/gradient-color-controller";
-import ColorControl from "../controls/src/controls/color-control";
-import BorderShadowControl from "../controls/src/controls/border-shadow-control";
-// import BackgroundControl from "../controls/src/controls/background-control";
-import UnitControl from "../controls/src/controls/unit-control";
-// import FontPicker from "../controls/src/controls/typography-control/FontPicker";
-// import DimensionsControl from "../controls/src/controls/dimensions-control";
-import ResetControl from "../controls/src/controls/reset-control";
+// import {
+// 	mimmikCssForResBtns,
+// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
+// } from "../../../util/helpers";
 
 import objAttributes from "./attributes";
 
-import {
-	mimmikCssForResBtns,
-	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-} from "../controls/src/helpers";
+const {
+	TypographyDropdown,
+	ResponsiveDimensionsControl,
+	ResponsiveRangeController,
+	ColorControl,
+	BorderShadowControl,
+	UnitControl,
+	ResetControl,
+	//
+	// mimmikCssForResBtns,
+	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+} = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
 	eb_style_handler.editor_type === "edit-site"
@@ -142,11 +153,30 @@ const Inspector = ({ attributes, setAttributes }) => {
 	useEffect(() => {
 		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
+			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
 		});
+
+		// // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+		// const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+		// 	domObj: document,
+		// 	select,
+		// 	setAttributes,
+		// });
+
+		// // all cleanups inside the return
+		// return () => {
+		// 	cleanUp();
+		// };
 	}, []);
+
+	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	// useEffect(() => {
+	// 	mimmikCssForResBtns({
+	// 		domObj: document,
+	// 		resOption,
+	// 	});
+	// }, [resOption]);
+
 	//
 	useEffect(() => {
 		setDefaultVisible();

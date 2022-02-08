@@ -17,25 +17,16 @@ import { select, useSelect } from "@wordpress/data";
  */
 import striptags from "striptags";
 
-/**
- * Internal dependencies
- *
- *
- *
- */
-
-import "./editor.scss";
-
-import {
+const {
 	softMinifyCssStrings,
 	// generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	mimmikCssForPreviewBtnClick,
+	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
-} from "../controls/src/helpers";
+} = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
 	eb_style_handler.editor_type === "edit-site"
@@ -239,8 +230,6 @@ const useHeader = () => {
 	const allBlocks = useSelect((select) =>
 		select("core/block-editor").getBlocks()
 	);
-
-	// console.log(allBlocks);
 
 	const headerBlocks = allBlocks.filter((block) =>
 		supportedHeaders.includes(block.name)
@@ -662,13 +651,12 @@ export default function Edit({
 				
 				.${blockId}.eb-toc-container.eb-toc-is-sticky{
 					position:fixed;
-					top: ${topSpace || 25}%;
+					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
 					left:0;
 					z-index:999;
 				}
 			
 				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
-					overflow:scroll;
 					${contentHeight ? `min-height:${contentHeight}px;` : ""}
 				}
 			

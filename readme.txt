@@ -2,7 +2,7 @@
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
-Tested up to: 5.8
+Tested up to: 5.9
 Stable tag: 1.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.1.0 - (hanzala-dev) =
+= 1.1.0 - 08/02/2022 =
 * Added: Dynamic asset generation for inline styles
 * Added: Responsive control
 * Improved: Controls and structure

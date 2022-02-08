@@ -4,7 +4,7 @@
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
-	"main": "build/index.js",
+	"main": "Gruntfile.js",
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",
@@ -14,17 +14,14 @@
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^19.2.2",
-		"prop-types": "^15.7.2",
-		"@babel/core": "^7.16.5",
 		"@babel/plugin-proposal-class-properties": "^7.16.5",
-		"@babel/preset-env": "^7.16.5",
-		"@babel/preset-react": "^7.16.5",
+		"@wordpress/scripts": "^19.2.2",
 		"striptags": "^3.2.0"
 	},
 	"dependencies": {
-		"@fonticonpicker/react-fonticonpicker": "hz-tyfoon/react-fonticonpicker#315507825f707f06a2eeedbfa52d6c91155b1169",
-		"classnames": "^2.2.6",
+		"@fonticonpicker/react-fonticonpicker": "hz-tyfoon/react-fonticonpicker#master",
+		"classnames": "^2.3.1",
+		"react-transition-group": "^4.4.2",
 		"react-select": "^5.2.1"
 	}
 }
