@@ -2,24 +2,37 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
+import { useState, useEffect } from "@wordpress/element";
 import {
 	BlockControls,
 	RichText,
-	BlockAlignmentToolbar,
+	AlignmentToolbar,
+	useBlockProps,
 } from "@wordpress/block-editor";
-import { Toolbar, ToolbarButton } from "@wordpress/components";
-import { useState, useEffect } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import { select, useSelect } from "@wordpress/data";
 
 /*
  * External dependencies
  */
 import striptags from "striptags";
 
-/**
- * Internal dependencies
- */
-import Inspector from "./inspector";
+const {
+	softMinifyCssStrings,
+	// generateBackgroundControlStyles,
+	generateDimensionsControlStyles,
+	generateTypographyStyles,
+	generateBorderShadowStyles,
+	generateResponsiveRangeStyles,
+	// mimmikCssForPreviewBtnClick,
+	duplicateBlockIdFix,
+} = window.EBTOCControls;
+
+const editorStoreForGettingPreivew =
+	eb_style_handler.editor_type === "edit-site"
+		? "core/edit-site"
+		: "core/edit-post";
+
 import {
 	supportedHeaders,
 	isCoreHeading,
@@ -39,7 +52,47 @@ import {
 	isElegantHeading,
 	parseTocSlug,
 } from "./helper";
-import "./editor.scss";
+
+import classnames from "classnames";
+
+import Inspector from "./inspector";
+import {
+	// typoPrefix_subTitle,
+	// typoPrefix_number,
+	// typoPrefix_buttonText,
+
+	//
+	typoPrefix_content,
+	typoPrefix_title,
+} from "./constants/typographyPrefixConstants";
+
+import {
+	//
+	WrpMarginConst,
+	WrpPaddingConst,
+	contentPaddingConst,
+	titlePaddingConst,
+} from "./constants/dimensionsConstants";
+
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
+import {
+	//
+	WrpBdShadowConst,
+} from "./constants/borderShadowConstants";
+
+import {
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	//
+	wrapMaxWidthPrefix,
+} from "./constants/rangeNames";
+
 import List from "./list";
 
 function getArrayFromBlocks(headerBlocks) {
@@ -178,8 +231,6 @@ const useHeader = () => {
 		select("core/block-editor").getBlocks()
 	);
 
-	// console.log(allBlocks);
-
 	const headerBlocks = allBlocks.filter((block) =>
 		supportedHeaders.includes(block.name)
 	);
@@ -189,57 +240,48 @@ const useHeader = () => {
 	return headerList;
 };
 
-export default function Edit({ isSelected, attributes, setAttributes }) {
+export default function Edit({
+	isSelected,
+	attributes,
+	setAttributes,
+	clientId,
+	className,
+}) {
 	const {
+		resOption,
+		blockId,
+		blockMeta,
+
+		//  deadline Date timestamp
 		headers,
 		title,
 		collapsible,
 		listType,
-		titleBg,
-		titleColor,
-		contentBg,
-		contentColor,
+		titleBg = "#ff7d50",
+		titleColor = "#fff",
+		contentBg = "#fff6f3",
+		contentColor = "#707070",
+		mainBgc,
+		contentHoverColor,
 		displayTitle,
 		titleAlign,
-		titleFontFamily,
-		titleSizeUnit,
-		titleFontSize,
-		titleFontWeight,
-		titleTextTransform,
-		titleTextDecoration,
-		titleLetterSpacing,
-		titleLetterSpacingUnit,
-		titleLineHeight,
-		titleLineHeightUnit,
 		seperator,
 		seperatorSize,
-		seperatorColor,
+		seperatorColor = "#000",
 		seperatorStyle,
-		borderWidth,
-		borderColor,
-		borderStyle,
-		titlePaddingTop,
-		titlePaddingRight,
-		titlePaddingBottom,
-		titlePaddingLeft,
-		titlePaddingUnit,
 		scrollToTop,
 		arrowHeight,
 		arrowWidth,
 		arrowBg,
 		arrowColor,
-		shadowColor,
-		hOffset,
-		vOffset,
-		blur,
-		spread,
-		contentPaddingTop,
-		contentPaddingRight,
-		contentPaddingBottom,
-		contentPaddingLeft,
-		contentPaddingUnit,
 		contentAlign,
-		containerWidth,
+
+		//
+		isSticky,
+		topSpace,
+		contentHeight,
+		indent,
+		hasUnderline,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -253,11 +295,10 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 	}, [headerList]);
 
 	useEffect(() => {
-		const goTop = document.createElement("div");
-		goTop.setAttribute(
-			"class",
-			"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
-		);
+		if (document.querySelector(".eb-toc-go-top")) return () => {};
+		const goTop = document.createElement("span");
+		goTop.innerHTML = ">";
+		goTop.setAttribute("class", "eb-toc-go-top ");
 		goTop.style.right = "300px";
 		document.body.insertBefore(goTop, document.body.lastChild);
 	}, []);
@@ -274,63 +315,390 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		}
 	}, [scrollToTop]);
 
+	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
 	useEffect(() => {
-		const scrollElement = document.querySelector(".eb-toc-go-top");
+		setAttributes({
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
+		});
+	}, []);
 
-		if (scrollElement) {
-			if (arrowHeight) scrollElement.style.height = arrowHeight + "px";
+	// this useEffect is for creating a unique blockId for each block's unique className
+	useEffect(() => {
+		const BLOCK_PREFIX = "eb-toc";
+		duplicateBlockIdFix({
+			BLOCK_PREFIX,
+			blockId,
+			setAttributes,
+			select,
+			clientId,
+		});
+	}, []);
 
-			if (arrowWidth) scrollElement.style.width = arrowWidth + "px";
+	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
+	// useEffect(() => {
+	// 	mimmikCssForPreviewBtnClick({
+	// 		domObj: document,
+	// 		select,
+	// 	});
+	// }, []);
 
-			if (arrowBg) scrollElement.style.background = arrowBg;
+	const blockProps = useBlockProps({
+		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
+	});
 
-			if (arrowColor) scrollElement.style.color = arrowColor;
+	//
+	// styling codes start from here
+	//
+
+	// // styles related to generateResponsiveRangeStyles start ⬇
+	const {
+		rangeStylesDesktop: wrapMaxWidthDesktop,
+		rangeStylesTab: wrapMaxWidthTab,
+		rangeStylesMobile: wrapMaxWidthMobile,
+	} = generateResponsiveRangeStyles({
+		controlName: wrapMaxWidthPrefix,
+		property: "max-width",
+		attributes,
+	});
+
+	// // styles related to generateResponsiveRangeStyles end
+
+	// // styles related to generateTypographyStyles start ⬇
+	const {
+		typoStylesDesktop: titleTypoStylesDesktop,
+		typoStylesTab: titleTypoStylesTab,
+		typoStylesMobile: titleTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_title,
+		defaultFontSize: 22,
+	});
+
+	const {
+		typoStylesDesktop: contentTypoStylesDesktop,
+		typoStylesTab: contentTypoStylesTab,
+		typoStylesMobile: contentTypoStylesMobile,
+	} = generateTypographyStyles({
+		attributes,
+		prefixConstant: typoPrefix_content,
+		defaultFontSize: 20,
+	});
+	// // styles related to generateTypographyStyles end
+
+	// // styles related to generateBackgroundControlStyles start ⬇
+
+	// const {
+	// 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
+	// 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
+	// 	backgroundStylesTab: wrpBackgroundStylesTab,
+	// 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
+	// 	backgroundStylesMobile: wrpBackgroundStylesMobile,
+	// 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
+	// 	overlayStylesDesktop: wrpOverlayStylesDesktop,
+	// 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
+	// 	overlayStylesTab: wrpOverlayStylesTab,
+	// 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
+	// 	overlayStylesMobile: wrpOverlayStylesMobile,
+	// 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
+	// 	bgTransitionStyle: wrpBgTransitionStyle,
+	// 	ovlTransitionStyle: wrpOvlTransitionStyle,
+	// } = generateBackgroundControlStyles({
+	// 	attributes,
+	// 	controlName: WrpBgConst,
+	// 	// noOverlay: true,
+	// 	// noMainBgi: true,
+	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
+	// });
+
+	// // styles related to generateBackgroundControlStyles end
+
+	// // styles related to generateDimensionsControlStyles start ⬇
+	const {
+		dimensionStylesDesktop: wrpMarginDesktop,
+		dimensionStylesTab: wrpMarginTab,
+		dimensionStylesMobile: wrpMarginMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: WrpMarginConst,
+		styleFor: "margin",
+	});
+
+	const {
+		dimensionStylesDesktop: wrpPaddingDesktop,
+		dimensionStylesTab: wrpPaddingTab,
+		dimensionStylesMobile: wrpPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: WrpPaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: titlePaddingDesktop,
+		dimensionStylesTab: titlePaddingTab,
+		dimensionStylesMobile: titlePaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: titlePaddingConst,
+		styleFor: "padding",
+	});
+
+	const {
+		dimensionStylesDesktop: contentPaddingDesktop,
+		dimensionStylesTab: contentPaddingTab,
+		dimensionStylesMobile: contentPaddingMobile,
+	} = generateDimensionsControlStyles({
+		attributes,
+		controlName: contentPaddingConst,
+		styleFor: "padding",
+	});
+
+	// // styles related to generateDimensionsControlStyles end
+
+	// // styles related to generateBorderShadowStyles start ⬇
+	const {
+		styesDesktop: wrpBdShdStyesDesktop,
+		styesTab: wrpBdShdStyesTab,
+		styesMobile: wrpBdShdStyesMobile,
+		stylesHoverDesktop: wrpBdShdStylesHoverDesktop,
+		stylesHoverTab: wrpBdShdStylesHoverTab,
+		stylesHoverMobile: wrpBdShdStylesHoverMobile,
+		transitionStyle: wrpBdShdTransitionStyle,
+	} = generateBorderShadowStyles({
+		controlName: WrpBdShadowConst,
+		attributes,
+		// noShadow: true,
+		// noBorder: true,
+	});
+
+	// // styles related to generateBorderShadowStyles end
+
+	const desktopAllStylesCommon = `
+		.${blockId}.eb-toc-container{
+			${wrapMaxWidthDesktop}
+			
+			${mainBgc ? `background-color:${mainBgc};` : ""}
+
+			${wrpMarginDesktop}
+			${wrpPaddingDesktop}
+			${wrpBdShdStyesDesktop}
+			transition:all 0.5s, ${wrpBdShdTransitionStyle};
+
+			
+
 		}
-	}, [arrowHeight, arrowWidth, arrowBg, arrowColor]);
 
-	const wrapperStyle = {
-		width: containerWidth + "%",
-		border: `${borderWidth}px ${borderStyle} ${borderColor}`,
-		background: contentBg,
-		boxShadow: `${hOffset || 0}px ${vOffset || 0}px ${blur || 0}px ${
-			spread || 0
-		}px ${shadowColor || "black"}`,
-	};
+		.${blockId}.eb-toc-container:hover{
+			${wrpBdShdStylesHoverDesktop}
+			
+			
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-title{
+			text-align: ${titleAlign};
+			cursor:${collapsible ? "pointer" : "default"};
+			color: ${titleColor};
+			background-color:${titleBg};
+			${
+				seperator
+					? `border-bottom:${
+							seperatorSize || 0
+					  }px ${seperatorStyle} ${seperatorColor};`
+					: ""
+			}
+			${titlePaddingDesktop}
+			${titleTypoStylesDesktop}
 
-	const titleStyle = {
-		display: displayTitle ? "block" : "none",
-		fontFamily: titleFontFamily,
-		fontSize: titleFontSize + titleSizeUnit,
-		fontWeight: titleFontWeight,
-		textTransform: titleTextTransform,
-		textDecoration: titleTextDecoration,
-		letterSpacing: titleLetterSpacing + titleLetterSpacingUnit,
-		lineHeight: titleLineHeight + titleLineHeightUnit,
-		textAlign: titleAlign,
-		cursor: collapsible ? "pointer" : "default",
-		color: titleColor,
-		background: titleBg,
-		borderBottom: seperator
-			? `${seperatorSize || 0}px ${seperatorStyle} ${seperatorColor}`
-			: "none",
-		padding: `${titlePaddingTop || 0}${titlePaddingUnit} ${
-			titlePaddingRight || 0
-		}${titlePaddingUnit} ${titlePaddingBottom || 0}${titlePaddingUnit} ${
-			titlePaddingLeft || 0
-		}${titlePaddingUnit}`,
-	};
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			background-color:${contentBg};
+			text-align: ${contentAlign};
+			${contentPaddingDesktop}
+		}
 
-	const contentStyle = {
-		textAlign: contentAlign,
-		color: contentColor,
-		display: visible ? "block" : "none",
-		background: contentBg,
-		padding: `${contentPaddingTop || 0}${contentPaddingUnit} ${
-			contentPaddingRight || 0
-		}${contentPaddingUnit} ${contentPaddingBottom || 0}${contentPaddingUnit} ${
-			contentPaddingLeft || 0
-		}${contentPaddingUnit}`,
-	};
+		.${blockId}.eb-toc-container .eb-toc-wrapper ul,
+		.${blockId}.eb-toc-container .eb-toc-wrapper ol
+		{
+			${listType === "none" ? `list-style: none;` : ""}
+			${indent ? `margin-left:${indent}px;` : ""} 
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li {
+			color:${contentColor};
+			${contentTypoStylesDesktop}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
+			color:${contentHoverColor};
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a{
+			color:inherit;
+		}
+		
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a,
+		.${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
+			${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
+			background:none;
+		}
+
+		${
+			scrollToTop
+				? `
+			.eb-toc-go-top.show-scroll {
+				${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
+				${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+				${arrowBg ? `background-color: ${arrowBg};` : ""}
+				${arrowColor ? `color: ${arrowColor};` : ""}
+			}
+			`
+				: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+				  ""
+		}
+
+	`;
+
+	const tabAllStylesCommon = `
+		.${blockId}.eb-toc-container{
+			${wrapMaxWidthTab}
+
+			${wrpMarginTab}
+			${wrpPaddingTab}
+			${wrpBdShdStyesTab}
+		}
+		.${blockId}.eb-toc-container:hover{
+			${wrpBdShdStylesHoverTab}
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-title{
+			${titlePaddingTab}
+			${titleTypoStylesTab}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			${contentPaddingTab}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li{
+			${contentTypoStylesTab}
+		}
+
+	`;
+
+	const mobileAllStylesCommon = `
+		.${blockId}.eb-toc-container{
+			${wrapMaxWidthMobile}
+
+
+			${wrpMarginMobile}
+			${wrpPaddingMobile}
+			${wrpBdShdStyesMobile}
+		}
+		
+		.${blockId}.eb-toc-container:hover{
+			${wrpBdShdStylesHoverMobile}
+		}
+
+		.${blockId}.eb-toc-container .eb-toc-title{
+			${titlePaddingMobile}
+			${titleTypoStylesMobile}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			${contentPaddingMobile}
+		}
+		
+		.${blockId}.eb-toc-container .eb-toc-wrapper li{
+			${contentTypoStylesMobile}
+		}
+
+	`;
+
+	//
+	const desktopAllStylesEditor = `
+		${desktopAllStylesCommon}
+
+
+		.${blockId}.eb-toc-container .eb-toc-wrapper{
+			display:${visible ? "block" : "none"};
+		}
+
+		
+		`;
+
+	const tabAllStylesEditor = `
+		${tabAllStylesCommon}
+
+	
+		`;
+
+	const mobileAllStylesEditor = `
+		${mobileAllStylesCommon}
+	
+	`;
+
+	// console.log("----------edit theke", { isSticky, scrollToTop });
+	// all css styles for large screen width (desktop/laptop) in strings ⬇
+	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
+		${desktopAllStylesCommon}
+		${
+			isSticky
+				? `
+				
+				.${blockId}.eb-toc-container.eb-toc-is-sticky{
+					position:fixed;
+					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
+					left:0;
+					z-index:999;
+				}
+			
+				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
+					${contentHeight ? `min-height:${contentHeight}px;` : ""}
+				}
+			
+				.${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
+					color:${titleColor};
+					background-color:${titleBg};
+				}
+				`
+				: ""
+		}
+
+
+	`);
+
+	// all css styles for Tab in strings ⬇
+	const tabAllStylesFrontEnd = softMinifyCssStrings(`
+		${tabAllStylesCommon}
+
+		
+	`);
+
+	// all css styles for Mobile in strings ⬇
+	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
+		${mobileAllStylesCommon}
+
+	`);
+
+	//
+	// styling codes End here
+	//
+
+	// Set All Style in "blockMeta" Attribute
+	useEffect(() => {
+		const styleObject = {
+			desktop: desktopAllStylesFrontEnd,
+			tab: tabAllStylesFrontEnd,
+			mobile: mobileAllStylesFrontEnd,
+		};
+		if (JSON.stringify(blockMeta) != JSON.stringify(styleObject)) {
+			setAttributes({ blockMeta: styleObject });
+		}
+	}, [attributes]);
 
 	return [
 		isSelected && (
@@ -338,12 +706,12 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 		),
 
 		<BlockControls>
-			<BlockAlignmentToolbar
+			<AlignmentToolbar
 				value={contentAlign}
 				onChange={(contentAlign) => setAttributes({ contentAlign })}
 				controls={["left", "center", "right"]}
 			/>
-			<Toolbar>
+			<ToolbarGroup>
 				<ToolbarButton
 					title="Unordered"
 					icon="editor-ul"
@@ -364,26 +732,57 @@ export default function Edit({ isSelected, attributes, setAttributes }) {
 					isActive={listType === "none"}
 					onClick={() => setAttributes({ listType: "none" })}
 				/>
-			</Toolbar>
+			</ToolbarGroup>
 		</BlockControls>,
 
-		<div className="eb-toc-container" style={wrapperStyle}>
-			<div onClick={() => collapsible && setVisible(!visible)}>
-				<RichText
-					className="eb-toc-title"
-					style={titleStyle}
-					placeholder="Table of content"
-					value={title}
-					onChange={(title) => setAttributes({ title })}
-				/>
-			</div>
-			{headers.length > 0 ? (
-				<div className="eb-toc-wrapper" style={contentStyle}>
-					<List attributes={attributes} />
+		<div {...blockProps}>
+			<style>
+				{`
+				${desktopAllStylesEditor}
+
+				/* mimmikcssStart */
+
+				${resOption === "Tablet" ? tabAllStylesEditor : " "}
+				${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
+
+				/* mimmikcssEnd */
+
+				@media all and (max-width: 1024px) {	
+
+					/* tabcssStart */
+					${softMinifyCssStrings(tabAllStylesEditor)}
+					/* tabcssEnd */			
+
+				}
+
+				@media all and (max-width: 767px) {
+					
+					/* mobcssStart */			
+					${softMinifyCssStrings(mobileAllStylesEditor)}
+					/* mobcssEnd */			
+
+				}
+				`}
+			</style>
+			<div className={`${blockId} eb-toc-container`}>
+				<div onClick={() => collapsible && setVisible(!visible)}>
+					{displayTitle && (
+						<RichText
+							className="eb-toc-title"
+							placeholder="Table of content"
+							value={title}
+							onChange={(title) => setAttributes({ title })}
+						/>
+					)}
 				</div>
-			) : (
-				<p>Add header to generate table of contents</p>
-			)}
+				{headers.length > 0 ? (
+					<div className="eb-toc-wrapper">
+						<List attributes={attributes} />
+					</div>
+				) : (
+					<p>Add header to generate table of contents</p>
+				)}
+			</div>
 		</div>,
 	];
 }

@@ -1,11 +1,13 @@
-(function ($) {
-	var parseTocSlug = function (slug) {
+// console.log("-------------TOC with 'wp' object on window");
+
+window.addEventListener("DOMContentLoaded", function () {
+	const parseTocSlug = function (slug) {
 		// If not have the element then return false!
 		if (!slug) {
 			return slug;
 		}
 
-		var parsedSlug = slug
+		let parsedSlug = slug
 			.toString()
 			.toLowerCase()
 			.replace(/&(amp;)/g, "") // Remove &
@@ -21,7 +23,7 @@
 		return decodeURI(encodeURIComponent(parsedSlug));
 	};
 
-	EBTableOfContents = {
+	const EBTableOfContents = {
 		init: function () {
 			this._run();
 			this._scroll();
@@ -29,9 +31,7 @@
 			this._scrollToTop();
 			this._hide();
 			this._show();
-			this._hover();
 			this._hideOnMobileView();
-			this._changeHeaderColors();
 		},
 
 		_toggleCollapse: function () {
@@ -41,31 +41,10 @@
 				const isSticky = container.getAttribute("data-sticky") === "true";
 				const collapsible =
 					container.getAttribute("data-collapsible") === "true";
-				const initialCollapse =
-					container.getAttribute("data-initial-collapse") === "true";
-				const headerButton = container.querySelector(".eb-toc-button");
-
-				if (isSticky) {
-					headerButton.style.visibility = "hidden";
-					headerButton.style.display = "none";
-				}
 
 				if (collapsible) {
 					const title = container.querySelector(".eb-toc-title");
 					const content = container.querySelector(".eb-toc-wrapper");
-
-					if (initialCollapse) {
-						if (isSticky) {
-							container.style.visibility = "hidden";
-							content.style.height = "0";
-							headerButton.style.visibility = "visible";
-							headerButton.style.display = "inline-block";
-						} else {
-							content.classList.add("hide-content");
-						}
-					} else {
-						container.style.visibility = "none";
-					}
 
 					if (!isSticky) {
 						title.addEventListener("click", function () {
@@ -83,17 +62,20 @@
 
 			if (hasScrollTop) {
 				// Create go to top element
-				const goTop = document.createElement("div");
-				goTop.setAttribute(
-					"class",
-					"eb-toc-go-top dashicons dashicons-arrow-up-alt2"
-				);
+				const goTop = document.createElement("span");
+				goTop.setAttribute("class", "eb-toc-go-top ");
+				goTop.innerHTML = ">";
 				document.body.insertBefore(goTop, document.body.lastChild);
 
 				// Add click event
 				goTop.addEventListener("click", function () {
-					document.body.scrollTop = 0;
-					document.documentElement.scrollTop = 0;
+					// document.body.scrollTop = 0;
+					// document.documentElement.scrollTop = 0;
+					window.scroll({
+						top: 0,
+						left: 0,
+						behavior: "smooth",
+					});
 				});
 
 				function hideScroll() {
@@ -113,28 +95,14 @@
 						: hideScroll();
 				}
 
-				function setArrowStyles(height, width, bg, color) {
-					if (height) goTop.style.height = height + "px";
-					if (width) goTop.style.width = width + "px";
-					if (bg) goTop.style.background = bg;
-					if (color) goTop.style.color = color;
-				}
-
 				const containers = document.querySelectorAll(".eb-toc-container");
 
 				for (container of containers) {
 					const goToTop = container.getAttribute("data-scroll-top") === "true";
-					const height = container.getAttribute("data-arrow-height");
-					const width = container.getAttribute("data-arrow-width");
-					const bg = container.getAttribute("data-arrow-bg");
-					const color = container.getAttribute("data-arrow-color");
 
 					if (goToTop) {
 						// Add scroll event
 						window.addEventListener("scroll", onScrollPage);
-
-						// Set arrow styles
-						setArrowStyles(height, width, bg, color);
 
 						showScroll();
 					} else {
@@ -176,16 +144,9 @@
 			for (crossButton of crossButtons) {
 				crossButton.addEventListener("click", function () {
 					const container = crossButton.closest(".eb-toc-container");
-					const contentNode = container.querySelector(".eb-toc-wrapper");
-					const headerButton = container.lastChild;
 
-					container.style.visibility = "hidden";
-					contentNode.style.height = "0";
-					headerButton.style.visibility = "visible";
-					headerButton.style.display = "inline-block";
-
-					// Remove container border
-					container.style.border = 0;
+					container.classList.add("eb-toc-content-hidden");
+					container.classList.remove("eb-toc-content-visible");
 				});
 			}
 		},
@@ -196,39 +157,9 @@
 			for (headerButton of headerButtons) {
 				headerButton.addEventListener("click", function () {
 					const container = headerButton.closest(".eb-toc-container");
-					const contentNode = container.querySelector(".eb-toc-wrapper");
 
-					container.style.visibility = "visible";
-					container.style.border = window.ebTocBorder;
-
-					contentNode.style.height = window.ebTocHeight || "200px";
-					this.style.visibility = "hidden";
-					this.style.display = "none";
-				});
-			}
-		},
-
-		/**
-		 * Hover color
-		 */
-		_hover: function () {
-			let nodes = document.querySelectorAll(".eb-toc-container");
-
-			for (node of nodes) {
-				const defaultColor = node.getAttribute("data-text-color");
-				const hoverColor = node.getAttribute("data-hover-color");
-				const lists = node.querySelectorAll("li");
-
-				lists.forEach((list) => {
-					list.addEventListener("mouseenter", function () {
-						this.style.color = hoverColor;
-						this.firstChild.style.color = hoverColor;
-					});
-
-					list.addEventListener("mouseleave", function () {
-						this.style.color = defaultColor;
-						this.firstChild.style.color = defaultColor;
-					});
+					container.classList.remove("eb-toc-content-hidden");
+					container.classList.add("eb-toc-content-visible");
 				});
 			}
 		},
@@ -237,54 +168,57 @@
 		 * Alter the_content.
 		 */
 		_run: function () {
-			let container = document.querySelector(".eb-toc-container");
+			let containers = document.querySelectorAll(".eb-toc-container");
 
-			if (container) {
-				// Save container border
-				const tocBorder = container.style.border;
-				window.ebTocBorder = tocBorder;
-			}
-
-			let node = document.querySelector(".eb-toc-wrapper");
-
-			if (node) {
-				// Save container height
-				const tocHeight = node.style.height;
-				window.ebTocHeight = tocHeight;
-
-				let headers = JSON.parse(node.getAttribute("data-headers"));
-				let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
-
-				var allowed_h_tags = [];
-				if (visibleHeaders !== undefined) {
-					visibleHeaders.forEach((h_tag, index) =>
-						h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
-					);
+			for (container of containers) {
+				if (container) {
+					// Save container border
+					const tocBorder = container.style.border;
+					window.ebTocBorder = tocBorder;
 				}
 
-				var allowed_h_tags_str =
-					null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+				let node = document.querySelector(".eb-toc-wrapper");
 
-				var all_header =
-					undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
-						? $("body").find(allowed_h_tags_str)
-						: $("body").find("h1, h2, h3, h4, h5, h6");
+				if (node) {
+					let headers = JSON.parse(node.getAttribute("data-headers"));
+					let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
-				if (undefined !== headers && 0 !== all_header.length) {
-					headers.forEach(function (element, i) {
-						let element_text = parseTocSlug(element.text);
-						all_header.each(function () {
-							let header = $(this);
-							let header_text = parseTocSlug(header.text());
-							if (element_text.localeCompare(header_text) === 0) {
-								header.before(
-									'<span id="' +
-										header_text +
-										'" class="eb-toc__heading-anchor"></span>'
-								);
-							}
+					let allowed_h_tags = [];
+					if (visibleHeaders !== undefined) {
+						visibleHeaders.forEach((h_tag, index) =>
+							h_tag === true ? allowed_h_tags.push("h" + (index + 1)) : null
+						);
+					}
+
+					let allowed_h_tags_str =
+						null !== allowed_h_tags ? allowed_h_tags.join(",") : "";
+
+					let all_header =
+						undefined !== allowed_h_tags_str && "" !== allowed_h_tags_str
+							? document.body.querySelectorAll(allowed_h_tags_str)
+							: document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+					if (undefined !== headers && 0 !== all_header.length) {
+						headers.forEach((element) => {
+							const element_text = parseTocSlug(element.text);
+
+							all_header.forEach((item) => {
+								const header_text = parseTocSlug(item.textContent);
+
+								// console.log({
+								// 	header_text,
+								// 	element_text,
+								// 	item,
+								// 	element,
+								// });
+
+								if (element_text.localeCompare(header_text) === 0) {
+									// item.before(``);
+									item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
+								}
+							});
 						});
-					});
+					}
 				}
 			}
 		},
@@ -305,29 +239,7 @@
 				}
 			}
 		},
-
-		/**
-		 * Change collapsible header colors for sticky content
-		 */
-		_changeHeaderColors: function () {
-			let containers = document.querySelectorAll(".eb-toc-container");
-
-			for (container of containers) {
-				const isSticky = container.getAttribute("data-sticky") === "true";
-
-				if (isSticky) {
-					const titleBg = container.getAttribute("data-title-bg");
-					const titleColor = container.getAttribute("data-title-color");
-					const button = container.querySelector(".eb-toc-button");
-
-					button.style.color = titleColor;
-					button.style.background = titleBg;
-				}
-			}
-		},
 	};
 
-	$(document).ready(function () {
-		EBTableOfContents.init();
-	});
-})(jQuery);
+	EBTableOfContents.init();
+});

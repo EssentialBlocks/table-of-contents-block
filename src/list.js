@@ -1,3 +1,6 @@
+/**
+ * WordPress dependencies
+ */
 import { __ } from "@wordpress/i18n";
 import { Component } from "@wordpress/element";
 
@@ -7,45 +10,15 @@ class List extends Component {
 			visibleHeaders,
 			headers,
 			listType,
-			listColor,
-			contentColor,
-			indent,
-			contentGap,
-			contentGapUnit,
-			contentFontFamily,
-			contentSizeUnit,
-			contentFontSize,
-			contentFontWeight,
-			contentTextTransform,
-			contentLetterSpacing,
-			contentLetterSpacingUnit,
-			contentLineHeight,
-			listSeperatorWidth,
-			listSeperatorStyle,
-			listSeperatorColor,
-			hasUnderline,
+			contentGap = 20,
+			contentGapUnit = "px",
+			listSeperatorWidth = 10,
+			listSeperatorStyle = "solid",
+			listSeperatorColor = "#000",
+			showListSeparator,
 		} = this.props.attributes;
 
 		// Style objects
-		const listStyle = {
-			listStyle: listType === "none" ? "none" : undefined,
-			color: listType !== "none" ? listColor : undefined,
-			marginLeft: indent,
-		};
-
-		const listItemStyle = {
-			fontFamily: contentFontFamily,
-			fontSize: contentFontSize + contentSizeUnit,
-			fontWeight: contentFontWeight,
-			letterSpacing: contentLetterSpacing + contentLetterSpacingUnit,
-			lineHeight: contentLineHeight,
-			textTransform: contentTextTransform,
-		};
-
-		const linkStyle = {
-			color: contentColor,
-			textDecoration: hasUnderline ? "underline" : "none",
-		};
 
 		const ListTag = listType === "ol" ? "ol" : "ul";
 
@@ -106,13 +79,18 @@ class List extends Component {
 						<li
 							key={counter}
 							style={{
-								...listItemStyle,
-								paddingTop: counter > 0 && contentGap / 2 + contentGapUnit,
+								paddingTop:
+									counter > 0
+										? `${contentGap / 2}${contentGapUnit}`
+										: undefined,
 								paddingBottom:
-									counter < list.length && contentGap / 2 + contentGapUnit,
+									counter < list.length
+										? `${contentGap / 2}${contentGapUnit}`
+										: undefined,
 								borderBottom:
-									counter < list.length &&
-									`${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor}`,
+									counter < list.length && showListSeparator
+										? `${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor}`
+										: undefined,
 							}}
 						>
 							<a
@@ -120,7 +98,6 @@ class List extends Component {
 								dangerouslySetInnerHTML={{
 									__html: item.text,
 								}}
-								style={linkStyle}
 							/>
 						</li>
 					);
@@ -129,11 +106,7 @@ class List extends Component {
 			});
 			ul_counter++;
 			return (
-				<ListTag
-					key={counter + "-" + ul_counter}
-					className="eb-toc__list"
-					style={listStyle}
-				>
+				<ListTag key={counter + "-" + ul_counter} className="eb-toc__list">
 					{items}
 				</ListTag>
 			);
@@ -153,7 +126,7 @@ class List extends Component {
 		} else {
 			return (
 				<p className="eb_table-of-contents-placeholder">
-					{__("Add a header to begin generating the table of contents")}
+					{__("Add a header to begin generating the table of contents", "essential-blocks")}
 				</p>
 			);
 		}

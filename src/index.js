@@ -1,22 +1,33 @@
-import { registerBlockType } from "@wordpress/blocks";
+/**
+ * WordPress dependencies
+ */
 import { __ } from "@wordpress/i18n";
+
+/**
+ * Internal dependencies
+ */
 
 import "./style.scss";
 
+import { TOC_Icon } from "./icon";
 import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
-import icon from "./icon";
+import metadata from "../block.json";
 
-registerBlockType("table-of-contents-block/table-of-contents-block", {
-	title: __("Table Of Contents", "table-of-contents-block"),
-	description: __(
-		"Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
-		"table-of-contents-block"
-	),
-	category: "widgets",
-	icon,
+import example from "./example";
+
+const { ebConditionalRegisterBlockType } = EBTOCControls;
+
+ebConditionalRegisterBlockType(metadata, {
+	keywords: [
+		__("TOC", "essential-blocks"),
+		__("Table Of Contents", "essential-blocks"),
+		__("eb table of contents", "essential-blocks"),
+	],
+	icon: TOC_Icon,
 	attributes,
 	edit: Edit,
 	save,
+	example,
 });
