@@ -124,7 +124,7 @@ Yes, it should work fine with all standard theme.
 * Added: Responsive control
 * Improved: Controls and structure
 * Improved: Inspector Panel Design & controls
-* Improved: Responsive Device Preview improved. Now the preview options synced with the wordpress's default preview button.
+* Improved: Responsive Device Preview improved. Now the preview options synced with the WordPress's default preview button.
 * Improved: Security for asset generation
 
 = 1.0.1 - 25/01/2022 =
