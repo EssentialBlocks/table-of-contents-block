@@ -153,7 +153,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 	useEffect(() => {
 		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 		setAttributes({
-			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
 
 		// // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
@@ -406,6 +408,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													<ButtonGroup>
 														{ALIGNS.map((align, index) => (
 															<Button
+																key={index}
 																isSmall
 																isPrimary={titleAlign === align.value}
 																isSecondary={titleAlign !== align.value}

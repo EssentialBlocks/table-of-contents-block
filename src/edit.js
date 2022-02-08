@@ -700,44 +700,45 @@ export default function Edit({
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-		),
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
-		<BlockControls>
-			<AlignmentToolbar
-				value={contentAlign}
-				onChange={(contentAlign) => setAttributes({ contentAlign })}
-				controls={["left", "center", "right"]}
-			/>
-			<ToolbarGroup>
-				<ToolbarButton
-					title="Unordered"
-					icon="editor-ul"
-					isActive={listType === "ul"}
-					onClick={() => setAttributes({ listType: "ul" })}
+			<BlockControls>
+				<AlignmentToolbar
+					value={contentAlign}
+					onChange={(contentAlign) => setAttributes({ contentAlign })}
+					controls={["left", "center", "right"]}
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						title="Unordered"
+						icon="editor-ul"
+						isActive={listType === "ul"}
+						onClick={() => setAttributes({ listType: "ul" })}
+					/>
 
-				<ToolbarButton
-					title="Ordered"
-					icon="editor-ol"
-					isActive={listType === "ol"}
-					onClick={() => setAttributes({ listType: "ol" })}
-				/>
+					<ToolbarButton
+						title="Ordered"
+						icon="editor-ol"
+						isActive={listType === "ol"}
+						onClick={() => setAttributes({ listType: "ol" })}
+					/>
 
-				<ToolbarButton
-					title="None"
-					icon="minus"
-					isActive={listType === "none"}
-					onClick={() => setAttributes({ listType: "none" })}
-				/>
-			</ToolbarGroup>
-		</BlockControls>,
+					<ToolbarButton
+						title="None"
+						icon="minus"
+						isActive={listType === "none"}
+						onClick={() => setAttributes({ listType: "none" })}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 
-		<div {...blockProps}>
-			<style>
-				{`
+			<div {...blockProps}>
+				<style>
+					{`
 				${desktopAllStylesEditor}
 
 				/* mimmikcssStart */
@@ -763,26 +764,27 @@ export default function Edit({
 
 				}
 				`}
-			</style>
-			<div className={`${blockId} eb-toc-container`}>
-				<div onClick={() => collapsible && setVisible(!visible)}>
-					{displayTitle && (
-						<RichText
-							className="eb-toc-title"
-							placeholder="Table of content"
-							value={title}
-							onChange={(title) => setAttributes({ title })}
-						/>
+				</style>
+				<div className={`${blockId} eb-toc-container`}>
+					<div onClick={() => collapsible && setVisible(!visible)}>
+						{displayTitle && (
+							<RichText
+								className="eb-toc-title"
+								placeholder="Table of content"
+								value={title}
+								onChange={(title) => setAttributes({ title })}
+							/>
+						)}
+					</div>
+					{headers.length > 0 ? (
+						<div className="eb-toc-wrapper">
+							<List attributes={attributes} />
+						</div>
+					) : (
+						<p>Add header to generate table of contents</p>
 					)}
 				</div>
-				{headers.length > 0 ? (
-					<div className="eb-toc-wrapper">
-						<List attributes={attributes} />
-					</div>
-				) : (
-					<p>Add header to generate table of contents</p>
-				)}
 			</div>
-		</div>,
-	];
+		</>
+	);
 }
