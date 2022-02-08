@@ -36,7 +36,7 @@ function create_block_table_of_content_block_init()
 	$script_asset_path = TOC_BLOCK_ADMIN_PATH . "/dist/index.asset.php";
 	if (!file_exists($script_asset_path)) {
 		throw new Error(
-			'You need to run `npm start` or `npm run build` for the "block/testimonial" block first.'
+			'You need to run `npm start` or `npm run build` for the "table-of-contents-block/table-of-contents-block" block first.'
 		);
 	}
 	$script_asset = require($script_asset_path);
