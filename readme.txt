@@ -132,3 +132,7 @@ Yes, it should work fine with all standard theme.
 
 = 1.0.0 =
 * Initial Release
+
+== Upgrade Notice ==
+
+[Major Update] Changed to controls and this might break your existing block
