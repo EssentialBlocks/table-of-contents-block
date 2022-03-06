@@ -1,5 +1,3 @@
-// console.log("-------------TOC with 'wp' object on window");
-
 window.addEventListener("DOMContentLoaded", function () {
 	const parseTocSlug = function (slug) {
 		// If not have the element then return false!
@@ -90,7 +88,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 				function onScrollPage() {
 					document.body.scrollTop > 30 ||
-					document.documentElement.scrollTop > 20
+						document.documentElement.scrollTop > 20
 						? showScroll()
 						: hideScroll();
 				}
@@ -124,9 +122,9 @@ window.addEventListener("DOMContentLoaded", function () {
 				if (isSmooth) {
 					node.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 						anchor.addEventListener("click", function (e) {
+							let selector = this.getAttribute("href").replace('#', '')
 							e.preventDefault();
-
-							document.querySelector(this.getAttribute("href")).scrollIntoView({
+							document.getElementById(selector).scrollIntoView({
 								behavior: "smooth",
 							});
 						});
@@ -183,6 +181,9 @@ window.addEventListener("DOMContentLoaded", function () {
 					let headers = JSON.parse(node.getAttribute("data-headers"));
 					let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
 
+					// let tocHeaderList = node.querySelectorAll('.eb-toc__list li a')
+					// console.log("tocHeaderList", tocHeaderList)
+
 					let allowed_h_tags = [];
 					if (visibleHeaders !== undefined) {
 						visibleHeaders.forEach((h_tag, index) =>
@@ -204,13 +205,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
 							all_header.forEach((item) => {
 								const header_text = parseTocSlug(item.textContent);
-
-								// console.log({
-								// 	header_text,
-								// 	element_text,
-								// 	item,
-								// 	element,
-								// });
 
 								if (element_text.localeCompare(header_text) === 0) {
 									// item.before(``);
