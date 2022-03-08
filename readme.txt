@@ -119,6 +119,9 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
+= 1.2.0 - 08/03/2022 =
+* Fixed: Issue with Digit text in start of Heading
+
 = 1.1.0 - 08/02/2022 =
 * Added: Dynamic asset generation for inline styles
 * Added: Responsive control
