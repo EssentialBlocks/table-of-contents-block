@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
 Tested up to: 5.9
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
