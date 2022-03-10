@@ -478,22 +478,15 @@ export default function Edit({
 	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrapMaxWidthDesktop}
-			
 			${mainBgc ? `background-color:${mainBgc};` : ""}
-
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
 			transition:all 0.5s, ${wrpBdShdTransitionStyle};
-
-			
-
 		}
 
 		.${blockId}.eb-toc-container:hover{
 			${wrpBdShdStylesHoverDesktop}
-			
-			
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-title{
@@ -510,7 +503,6 @@ export default function Edit({
 			}
 			${titlePaddingDesktop}
 			${titleTypoStylesDesktop}
-
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
@@ -559,7 +551,6 @@ export default function Edit({
 				: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
 				  ""
 		}
-
 	`;
 
 	const tabAllStylesCommon = `
@@ -586,7 +577,6 @@ export default function Edit({
 		.${blockId}.eb-toc-container .eb-toc-wrapper li{
 			${contentTypoStylesTab}
 		}
-
 	`;
 
 	const mobileAllStylesCommon = `
@@ -622,26 +612,19 @@ export default function Edit({
 	const desktopAllStylesEditor = `
 		${desktopAllStylesCommon}
 
-
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			display:${visible ? "block" : "none"};
 		}
-
-		
 		`;
 
 	const tabAllStylesEditor = `
 		${tabAllStylesCommon}
-
-	
 		`;
 
 	const mobileAllStylesEditor = `
 		${mobileAllStylesCommon}
-	
 	`;
 
-	// console.log("----------edit theke", { isSticky, scrollToTop });
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
 		${desktopAllStylesCommon}
@@ -674,14 +657,11 @@ export default function Edit({
 	// all css styles for Tab in strings ⬇
 	const tabAllStylesFrontEnd = softMinifyCssStrings(`
 		${tabAllStylesCommon}
-
-		
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
 		${mobileAllStylesCommon}
-
 	`);
 
 	//

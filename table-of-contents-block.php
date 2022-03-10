@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI: 		https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.2.0
+ * Version:         1.2.1
  * Author:          WPDeveloper
  * Author URI: 		https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define('TOC_BLOCK_VERSION', "1.2.0");
+define('TOC_BLOCK_VERSION', "1.2.1");
 define('TOC_BLOCK_ADMIN_URL', plugin_dir_url(__FILE__));
 define('TOC_BLOCK_ADMIN_PATH', dirname(__FILE__));
 
@@ -64,38 +64,14 @@ function create_block_table_of_content_block_init()
 		TOC_BLOCK_VERSION
 	);
 
+	$frontend_js_path = include_once dirname(__FILE__) . "/dist/frontend/index.asset.php";
 	$frontend_js = TOC_BLOCK_ADMIN_URL . 'dist/frontend/index.js';
 	wp_register_script(
 		'essential-blocks-toc-frontend',
 		$frontend_js,
-		array(),
-		TOC_BLOCK_VERSION
-	);
-
-	//
-	//
-	$controls_dependencies = require TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
-	wp_register_script(
-		"toc-block-controls-util",
-		TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
-		array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
-		$controls_dependencies['version'],
+		$frontend_js_path['dependencies'],
+		$frontend_js_path['version'],
 		true
-	);
-
-	wp_localize_script('toc-block-controls-util', 'EssentialBlocksLocalize', array(
-		'eb_wp_version' => (float) get_bloginfo('version'),
-		'rest_rootURL' => get_rest_url(),
-	));
-
-
-	//
-	wp_register_style(
-		'toc-editor-css',
-		TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
-		array("create-block-table-of-content-block"),
-		$controls_dependencies['version'],
-		'all'
 	);
 
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/table-of-contents')) {
