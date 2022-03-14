@@ -6,7 +6,12 @@
 .eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper {
 	overflow-y: scroll;
 	overflow-x: hidden;
-	height: 70px;
+	height: auto;
+}
+
+.eb-toc-container.eb-toc-is-sticky.eb-toc-collapsible button.eb-toc-button {
+	position: absolute;
+	top: 0;
 }
 
 .eb-toc-container > * {
