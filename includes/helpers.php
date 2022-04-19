@@ -63,7 +63,7 @@ class TOC_Helper
             wp_register_style(
                 'toc-editor-css',
                 TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
-                array("create-block-table-of-content-block"),
+                array("create-block-table-of-content-block", "essential-blocks-animation"),
                 $controls_dependencies['version'],
                 'all'
             );

@@ -19,17 +19,15 @@ import striptags from "striptags";
 
 const {
 	softMinifyCssStrings,
-	// generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
 } = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -57,11 +55,6 @@ import classnames from "classnames";
 
 import Inspector from "./inspector";
 import {
-	// typoPrefix_subTitle,
-	// typoPrefix_number,
-	// typoPrefix_buttonText,
-
-	//
 	typoPrefix_content,
 	typoPrefix_title,
 } from "./constants/typographyPrefixConstants";
@@ -74,22 +67,12 @@ import {
 	titlePaddingConst,
 } from "./constants/dimensionsConstants";
 
-// import {
-// 	//
-// 	WrpBgConst,
-// } from "./constants/backgroundsConstants";
 import {
 	//
 	WrpBdShadowConst,
 } from "./constants/borderShadowConstants";
 
 import {
-	// mediaIconSize,
-	// mediaImageWidth,
-	// mediaImageHeight,
-	// mediaContentGap,
-
-	//
 	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
@@ -275,13 +258,12 @@ export default function Edit({
 		arrowBg,
 		arrowColor,
 		contentAlign,
-
-		//
 		isSticky,
 		topSpace,
 		contentHeight,
 		indent,
 		hasUnderline,
+		classHook,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -295,7 +277,7 @@ export default function Edit({
 	}, [headerList]);
 
 	useEffect(() => {
-		if (document.querySelector(".eb-toc-go-top")) return () => {};
+		if (document.querySelector(".eb-toc-go-top")) return () => { };
 		const goTop = document.createElement("span");
 		goTop.innerHTML = ">";
 		goTop.setAttribute("class", "eb-toc-go-top ");
@@ -387,33 +369,6 @@ export default function Edit({
 	});
 	// // styles related to generateTypographyStyles end
 
-	// // styles related to generateBackgroundControlStyles start ⬇
-
-	// const {
-	// 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
-	// 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
-	// 	backgroundStylesTab: wrpBackgroundStylesTab,
-	// 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
-	// 	backgroundStylesMobile: wrpBackgroundStylesMobile,
-	// 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
-	// 	overlayStylesDesktop: wrpOverlayStylesDesktop,
-	// 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
-	// 	overlayStylesTab: wrpOverlayStylesTab,
-	// 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
-	// 	overlayStylesMobile: wrpOverlayStylesMobile,
-	// 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
-	// 	bgTransitionStyle: wrpBgTransitionStyle,
-	// 	ovlTransitionStyle: wrpOvlTransitionStyle,
-	// } = generateBackgroundControlStyles({
-	// 	attributes,
-	// 	controlName: WrpBgConst,
-	// 	// noOverlay: true,
-	// 	// noMainBgi: true,
-	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// });
-
-	// // styles related to generateBackgroundControlStyles end
-
 	// // styles related to generateDimensionsControlStyles start ⬇
 	const {
 		dimensionStylesDesktop: wrpMarginDesktop,
@@ -478,7 +433,9 @@ export default function Edit({
 	const desktopAllStylesCommon = `
 		.${blockId}.eb-toc-container{
 			${wrapMaxWidthDesktop}
+			
 			${mainBgc ? `background-color:${mainBgc};` : ""}
+
 			${wrpMarginDesktop}
 			${wrpPaddingDesktop}
 			${wrpBdShdStyesDesktop}
@@ -494,15 +451,14 @@ export default function Edit({
 			cursor:${collapsible ? "pointer" : "default"};
 			color: ${titleColor};
 			background-color:${titleBg};
-			${
-				seperator
-					? `border-bottom:${
-							seperatorSize || 0
-					  }px ${seperatorStyle} ${seperatorColor};`
-					: ""
-			}
+			${seperator
+			? `border-bottom:${seperatorSize || 0
+			}px ${seperatorStyle} ${seperatorColor};`
+			: ""
+		}
 			${titlePaddingDesktop}
 			${titleTypoStylesDesktop}
+
 		}
 		
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
@@ -538,9 +494,8 @@ export default function Edit({
 			background:none;
 		}
 
-		${
-			scrollToTop
-				? `
+		${scrollToTop
+			? `
 			.eb-toc-go-top.show-scroll {
 				${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
 				${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
@@ -548,9 +503,10 @@ export default function Edit({
 				${arrowColor ? `color: ${arrowColor};` : ""}
 			}
 			`
-				: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
-				  ""
+			: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+			""
 		}
+
 	`;
 
 	const tabAllStylesCommon = `
@@ -577,6 +533,7 @@ export default function Edit({
 		.${blockId}.eb-toc-container .eb-toc-wrapper li{
 			${contentTypoStylesTab}
 		}
+
 	`;
 
 	const mobileAllStylesCommon = `
@@ -612,6 +569,7 @@ export default function Edit({
 	const desktopAllStylesEditor = `
 		${desktopAllStylesCommon}
 
+
 		.${blockId}.eb-toc-container .eb-toc-wrapper{
 			display:${visible ? "block" : "none"};
 		}
@@ -628,10 +586,8 @@ export default function Edit({
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
 		${desktopAllStylesCommon}
-		${
-			isSticky
-				? `
-				
+		${isSticky
+			? `					
 				.${blockId}.eb-toc-container.eb-toc-is-sticky{
 					position:fixed;
 					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
@@ -648,7 +604,7 @@ export default function Edit({
 					background-color:${titleBg};
 				}
 				`
-				: ""
+			: ""
 		}
 
 
@@ -657,11 +613,14 @@ export default function Edit({
 	// all css styles for Tab in strings ⬇
 	const tabAllStylesFrontEnd = softMinifyCssStrings(`
 		${tabAllStylesCommon}
+
+		
 	`);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
 		${mobileAllStylesCommon}
+
 	`);
 
 	//
@@ -680,44 +639,45 @@ export default function Edit({
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-		),
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
-		<BlockControls>
-			<AlignmentToolbar
-				value={contentAlign}
-				onChange={(contentAlign) => setAttributes({ contentAlign })}
-				controls={["left", "center", "right"]}
-			/>
-			<ToolbarGroup>
-				<ToolbarButton
-					title="Unordered"
-					icon="editor-ul"
-					isActive={listType === "ul"}
-					onClick={() => setAttributes({ listType: "ul" })}
+			<BlockControls>
+				<AlignmentToolbar
+					value={contentAlign}
+					onChange={(contentAlign) => setAttributes({ contentAlign })}
+					controls={["left", "center", "right"]}
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						title="Unordered"
+						icon="editor-ul"
+						isActive={listType === "ul"}
+						onClick={() => setAttributes({ listType: "ul" })}
+					/>
 
-				<ToolbarButton
-					title="Ordered"
-					icon="editor-ol"
-					isActive={listType === "ol"}
-					onClick={() => setAttributes({ listType: "ol" })}
-				/>
+					<ToolbarButton
+						title="Ordered"
+						icon="editor-ol"
+						isActive={listType === "ol"}
+						onClick={() => setAttributes({ listType: "ol" })}
+					/>
 
-				<ToolbarButton
-					title="None"
-					icon="minus"
-					isActive={listType === "none"}
-					onClick={() => setAttributes({ listType: "none" })}
-				/>
-			</ToolbarGroup>
-		</BlockControls>,
+					<ToolbarButton
+						title="None"
+						icon="minus"
+						isActive={listType === "none"}
+						onClick={() => setAttributes({ listType: "none" })}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 
-		<div {...blockProps}>
-			<style>
-				{`
+			<div {...blockProps}>
+				<style>
+					{`
 				${desktopAllStylesEditor}
 
 				/* mimmikcssStart */
@@ -743,26 +703,29 @@ export default function Edit({
 
 				}
 				`}
-			</style>
-			<div className={`${blockId} eb-toc-container`}>
-				<div onClick={() => collapsible && setVisible(!visible)}>
-					{displayTitle && (
-						<RichText
-							className="eb-toc-title"
-							placeholder="Table of content"
-							value={title}
-							onChange={(title) => setAttributes({ title })}
-						/>
-					)}
-				</div>
-				{headers.length > 0 ? (
-					<div className="eb-toc-wrapper">
-						<List attributes={attributes} />
+				</style>
+				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
+					<div className={`${blockId} eb-toc-container`}>
+						<div onClick={() => collapsible && setVisible(!visible)}>
+							{displayTitle && (
+								<RichText
+									className="eb-toc-title"
+									placeholder="Table of content"
+									value={title}
+									onChange={(title) => setAttributes({ title })}
+								/>
+							)}
+						</div>
+						{headers.length > 0 ? (
+							<div className="eb-toc-wrapper">
+								<List attributes={attributes} />
+							</div>
+						) : (
+							<p>Add header to generate table of contents</p>
+						)}
 					</div>
-				) : (
-					<p>Add header to generate table of contents</p>
-				)}
+				</div>
 			</div>
-		</div>,
-	];
+		</>
+	);
 }

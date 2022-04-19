@@ -45,6 +45,7 @@ function create_block_table_of_content_block_init()
 		'wp-element',
 		'wp-block-editor',
 		'toc-block-controls-util',
+		'essential-blocks-eb-animation',
 	));
 
 	$index_js     = TOC_BLOCK_ADMIN_URL . 'dist/index.js';
@@ -74,6 +75,23 @@ function create_block_table_of_content_block_init()
 		true
 	);
 
+	$load_animation_js = TOC_BLOCK_ADMIN_URL . 'assets/js/eb-animation-load.js';
+	wp_register_script(
+		'essential-blocks-eb-animation',
+		$load_animation_js,
+		array(),
+		TOC_BLOCK_VERSION,
+		true
+	);
+
+	$animate_css = TOC_BLOCK_ADMIN_URL . 'assets/css/animate.min.css';
+	wp_register_style(
+		'essential-blocks-animation',
+		$animate_css,
+		array(),
+		TOC_BLOCK_VERSION
+	);
+
 	if (!WP_Block_Type_Registry::get_instance()->is_registered('essential-blocks/table-of-contents')) {
 		register_block_type(
 			TOC_Helper::get_block_register_path("table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH),
@@ -83,7 +101,9 @@ function create_block_table_of_content_block_init()
 				'render_callback' => function ($attributes, $content) {
 					if (!is_admin()) {
 						wp_enqueue_style('create-block-table-of-content-block');
+						wp_enqueue_style('essential-blocks-animation');
 						wp_enqueue_script('essential-blocks-toc-frontend');
+						wp_enqueue_script('essential-blocks-eb-animation');
 					}
 					return $content;
 				}
@@ -92,4 +112,4 @@ function create_block_table_of_content_block_init()
 	}
 }
 
-add_action('init', 'create_block_table_of_content_block_init');
+add_action('init', 'create_block_table_of_content_block_init', 99);
