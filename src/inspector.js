@@ -323,6 +323,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													onChange={(topSpace) => setAttributes({ topSpace })}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 											</PanelBody>
 										)}
@@ -456,6 +457,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 											label={__("Indent", "essential-blocks")}
 											value={indent}
 											onChange={(indent) => setAttributes({ indent })}
+											allowReset={true}
 										/>
 
 										<UnitControl
