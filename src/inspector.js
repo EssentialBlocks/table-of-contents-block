@@ -21,24 +21,6 @@ import { select } from "@wordpress/data";
  */
 
 import Select2 from "react-select";
-// // import faIcons from "../../../util/faIcons.js";
-// import TypographyDropdown from "../../../util/typography-control-v2";
-// import ResponsiveDimensionsControl from "../../../util/dimensions-control-v2";
-// import ResponsiveRangeController from "../../../util/responsive-range-control";
-// // import ImageAvatar from "../../../util/image-avatar/";
-// // import GradientColorControl from "../../../util/gradient-color-controller";
-// import ColorControl from "../../../util/color-control";
-// import BorderShadowControl from "../../../util/border-shadow-control";
-// // import BackgroundControl from "../../../util/background-control";
-// import UnitControl from "../../../util/unit-control";
-// // import FontPicker from "../../../util/typography-control/FontPicker";
-// // import DimensionsControl from "../../../util/dimensions-control";
-// import ResetControl from "../../../util/reset-control";
-
-// import {
-// 	mimmikCssForResBtns,
-// 	mimmikCssOnPreviewBtnClickWhileBlockSelected,
-// } from "../../../util/helpers";
 
 import objAttributes from "./attributes";
 
@@ -50,34 +32,20 @@ const {
 	BorderShadowControl,
 	UnitControl,
 	ResetControl,
-	//
-	// mimmikCssForResBtns,
-	// mimmikCssOnPreviewBtnClickWhileBlockSelected,
+	AdvancedControls,
 } = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
 import {
-	// typoPrefix_number,
-	// typoPrefix_subTitle,
-	// typoPrefix_buttonText,
-
-	//
 	typoPrefix_title,
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
-import {
-	// mediaIconSize,
-	// mediaImageWidth,
-	// mediaImageHeight,
-	// mediaContentGap,
-
-	wrapMaxWidthPrefix,
-} from "./constants/rangeNames";
+import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import {
 	//
@@ -86,11 +54,6 @@ import {
 	titlePaddingConst,
 	contentPaddingConst,
 } from "./constants/dimensionsConstants";
-
-// import {
-// 	//
-// 	WrpBgConst,
-// } from "./constants/backgroundsConstants";
 
 import {
 	//
@@ -153,31 +116,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 	useEffect(() => {
 		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
 		setAttributes({
-			resOption: select(editorStoreForGettingPreivew).__experimentalGetPreviewDeviceType(),
+			resOption: select(
+				editorStoreForGettingPreivew
+			).__experimentalGetPreviewDeviceType(),
 		});
-
-		// // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-		// const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-		// 	domObj: document,
-		// 	select,
-		// 	setAttributes,
-		// });
-
-		// // all cleanups inside the return
-		// return () => {
-		// 	cleanUp();
-		// };
 	}, []);
 
-	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	// useEffect(() => {
-	// 	mimmikCssForResBtns({
-	// 		domObj: document,
-	// 		resOption,
-	// 	});
-	// }, [resOption]);
-
-	//
 	useEffect(() => {
 		setDefaultVisible();
 	}, [visibleHeaders]);
@@ -189,7 +133,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	}, [isSticky]);
 
-	//
 	const resRequiredProps = {
 		setAttributes,
 		resOption,
@@ -380,6 +323,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													onChange={(topSpace) => setAttributes({ topSpace })}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 											</PanelBody>
 										)}
@@ -406,6 +350,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													<ButtonGroup>
 														{ALIGNS.map((align, index) => (
 															<Button
+																key={index}
 																isSmall
 																isPrimary={titleAlign === align.value}
 																isSecondary={titleAlign !== align.value}
@@ -512,6 +457,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 											label={__("Indent", "essential-blocks")}
 											value={indent}
 											onChange={(indent) => setAttributes({ indent })}
+											allowReset={true}
 										/>
 
 										<UnitControl
@@ -712,6 +658,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 											// noBorder
 										/>
 									</PanelBody>
+
+									<AdvancedControls
+										attributes={attributes}
+										setAttributes={setAttributes}
+									/>
 								</>
 							)}
 						</div>

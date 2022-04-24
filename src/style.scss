@@ -9,6 +9,12 @@
 	height: 70px;
 }
 
+.eb-toc-container.eb-toc-is-sticky.eb-toc-collapsible
+	button.eb-toc-button {
+	position: absolute;
+	top: 0;
+}
+
 .eb-toc-container > * {
 	position: relative;
 }
