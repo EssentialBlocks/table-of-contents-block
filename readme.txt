@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
 Tested up to: 5.9
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.2.1 - 24/04/2022 = 
+= 1.3.0 - 24/04/2022 =
 * Added: Animation Option
 * Added: Responsive Block Show/Hide option
 * Added: Custom CSS Option
