@@ -72,9 +72,7 @@ import {
 	WrpBdShadowConst,
 } from "./constants/borderShadowConstants";
 
-import {
-	wrapMaxWidthPrefix,
-} from "./constants/rangeNames";
+import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import List from "./list";
 
@@ -234,8 +232,6 @@ export default function Edit({
 		resOption,
 		blockId,
 		blockMeta,
-
-		//  deadline Date timestamp
 		headers,
 		title,
 		collapsible,
@@ -277,7 +273,7 @@ export default function Edit({
 	}, [headerList]);
 
 	useEffect(() => {
-		if (document.querySelector(".eb-toc-go-top")) return () => { };
+		if (document.querySelector(".eb-toc-go-top")) return () => {};
 		const goTop = document.createElement("span");
 		goTop.innerHTML = ">";
 		goTop.setAttribute("class", "eb-toc-go-top ");
@@ -318,21 +314,9 @@ export default function Edit({
 		});
 	}, []);
 
-	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	// useEffect(() => {
-	// 	mimmikCssForPreviewBtnClick({
-	// 		domObj: document,
-	// 		select,
-	// 	});
-	// }, []);
-
 	const blockProps = useBlockProps({
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
-
-	//
-	// styling codes start from here
-	//
 
 	// // styles related to generateResponsiveRangeStyles start ⬇
 	const {
@@ -344,8 +328,6 @@ export default function Edit({
 		property: "max-width",
 		attributes,
 	});
-
-	// // styles related to generateResponsiveRangeStyles end
 
 	// // styles related to generateTypographyStyles start ⬇
 	const {
@@ -431,197 +413,214 @@ export default function Edit({
 	// // styles related to generateBorderShadowStyles end
 
 	const desktopAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthDesktop}
-			
-			${mainBgc ? `background-color:${mainBgc};` : ""}
-
-			${wrpMarginDesktop}
-			${wrpPaddingDesktop}
-			${wrpBdShdStyesDesktop}
-			transition:all 0.5s, ${wrpBdShdTransitionStyle};
-		}
-
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverDesktop}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-title{
-			text-align: ${titleAlign};
-			cursor:${collapsible ? "pointer" : "default"};
-			color: ${titleColor};
-			background-color:${titleBg};
-			${seperator
-			? `border-bottom:${seperatorSize || 0
-			}px ${seperatorStyle} ${seperatorColor};`
-			: ""
-		}
-			${titlePaddingDesktop}
-			${titleTypoStylesDesktop}
-
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			background-color:${contentBg};
-			text-align: ${contentAlign};
-			${contentPaddingDesktop}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper ul,
-		.${blockId}.eb-toc-container .eb-toc-wrapper ol
-		{
-			${listType === "none" ? `list-style: none;` : ""}
-			${indent ? `margin-left:${indent}px;` : ""} 
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li {
-			color:${contentColor};
-			${contentTypoStylesDesktop}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
-			color:${contentHoverColor};
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a{
-			color:inherit;
-		}
-		
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a,
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
-			${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
-			background:none;
-		}
-
-		${scrollToTop
-			? `
-			.eb-toc-go-top.show-scroll {
-				${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
-				${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
-				${arrowBg ? `background-color: ${arrowBg};` : ""}
-				${arrowColor ? `color: ${arrowColor};` : ""}
+		 ${
+				isSticky
+					? `
+			 .eb-parent-${blockId}.eb__animated, .eb__animated.eb__flip {
+				 -webkit-animation-fill-mode: none;
+				 animation-fill-mode: none;
+				 -webkit-animation-name: none;
+				 animation-name: none !important;
+			 }
+		 `
+					: ""
 			}
-			`
-			: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
-			""
-		}
-
-	`;
+ 
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthDesktop}
+			 
+			 ${mainBgc ? `background-color:${mainBgc};` : ""}
+ 
+			 ${wrpMarginDesktop}
+			 ${wrpPaddingDesktop}
+			 ${wrpBdShdStyesDesktop}
+			 ${isSticky ? "" : `transition:all 0.5s, ${wrpBdShdTransitionStyle}`};
+		 }
+ 
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverDesktop}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 text-align: ${titleAlign};
+			 cursor:${collapsible ? "pointer" : "default"};
+			 color: ${titleColor};
+			 background-color:${titleBg};
+			 ${
+					seperator
+						? `border-bottom:${
+								seperatorSize || 0
+						  }px ${seperatorStyle} ${seperatorColor};`
+						: ""
+				}
+			 ${titlePaddingDesktop}
+			 ${titleTypoStylesDesktop}
+ 
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 background-color:${contentBg};
+			 text-align: ${contentAlign};
+			 ${contentPaddingDesktop}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper ul,
+		 .${blockId}.eb-toc-container .eb-toc-wrapper ol
+		 {
+			 ${listType === "none" ? `list-style: none;` : ""}
+			 ${indent ? `margin-left:${indent}px;` : ""} 
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li {
+			 color:${contentColor};
+			 ${contentTypoStylesDesktop}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
+			 color:${contentHoverColor};
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a{
+			 color:inherit;
+		 }
+		 
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a,
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
+			 ${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
+			 background:none;
+		 }
+ 
+		 ${
+				scrollToTop
+					? `
+			 .eb-toc-go-top.show-scroll {
+				 ${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
+				 ${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+				 ${arrowBg ? `background-color: ${arrowBg};` : ""}
+				 ${arrowColor ? `color: ${arrowColor};` : ""}
+			 }
+			 `
+					: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+					  ""
+			}
+ 
+	 `;
 
 	const tabAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthTab}
-
-			${wrpMarginTab}
-			${wrpPaddingTab}
-			${wrpBdShdStyesTab}
-		}
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverTab}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-title{
-			${titlePaddingTab}
-			${titleTypoStylesTab}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			${contentPaddingTab}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li{
-			${contentTypoStylesTab}
-		}
-
-	`;
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthTab}
+ 
+			 ${wrpMarginTab}
+			 ${wrpPaddingTab}
+			 ${wrpBdShdStyesTab}
+		 }
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverTab}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 ${titlePaddingTab}
+			 ${titleTypoStylesTab}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 ${contentPaddingTab}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li{
+			 ${contentTypoStylesTab}
+		 }
+ 
+	 `;
 
 	const mobileAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthMobile}
-
-
-			${wrpMarginMobile}
-			${wrpPaddingMobile}
-			${wrpBdShdStyesMobile}
-		}
-		
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverMobile}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-title{
-			${titlePaddingMobile}
-			${titleTypoStylesMobile}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			${contentPaddingMobile}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li{
-			${contentTypoStylesMobile}
-		}
-
-	`;
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthMobile}
+ 
+ 
+			 ${wrpMarginMobile}
+			 ${wrpPaddingMobile}
+			 ${wrpBdShdStyesMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverMobile}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 ${titlePaddingMobile}
+			 ${titleTypoStylesMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 ${contentPaddingMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li{
+			 ${contentTypoStylesMobile}
+		 }
+ 
+	 `;
 
 	//
 	const desktopAllStylesEditor = `
-		${desktopAllStylesCommon}
-
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			display:${visible ? "block" : "none"};
-		}
-		`;
+		 ${desktopAllStylesCommon}
+ 
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 display:${visible ? "block" : "none"};
+		 }
+		 `;
 
 	const tabAllStylesEditor = `
-		${tabAllStylesCommon}
-		`;
+		 ${tabAllStylesCommon}
+		 `;
 
 	const mobileAllStylesEditor = `
-		${mobileAllStylesCommon}
-	`;
+		 ${mobileAllStylesCommon}
+	 `;
 
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
-		${desktopAllStylesCommon}
-		${isSticky
-			? `					
-				.${blockId}.eb-toc-container.eb-toc-is-sticky{
-					position:fixed;
-					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
-					left:0;
-					z-index:999;
-				}
-			
-				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
-					${contentHeight ? `min-height:${contentHeight}px;` : ""}
-				}
-			
-				.${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
-					color:${titleColor};
-					background-color:${titleBg};
-				}
-				`
-			: ""
-		}
-
-
-	`);
+		 ${desktopAllStylesCommon}
+		 ${
+				isSticky
+					? `					
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky{
+					 position:fixed;
+					 top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
+					 left:0;
+					 z-index:999;
+				 }
+			 
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
+					 ${contentHeight ? `min-height:${contentHeight}px;` : ""}
+				 }
+			 
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
+					 color:${titleColor};
+					 background-color:${titleBg};
+				 }
+				 `
+					: ""
+			}
+ 
+ 
+	 `);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStylesFrontEnd = softMinifyCssStrings(`
-		${tabAllStylesCommon}
-
-		
-	`);
+		 ${tabAllStylesCommon}
+ 
+		 
+	 `);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
-		${mobileAllStylesCommon}
-
-	`);
+		 ${mobileAllStylesCommon}
+ 
+	 `);
 
 	//
 	// styling codes End here
@@ -678,31 +677,31 @@ export default function Edit({
 			<div {...blockProps}>
 				<style>
 					{`
-				${desktopAllStylesEditor}
-
-				/* mimmikcssStart */
-
-				${resOption === "Tablet" ? tabAllStylesEditor : " "}
-				${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
-
-				/* mimmikcssEnd */
-
-				@media all and (max-width: 1024px) {	
-
-					/* tabcssStart */
-					${softMinifyCssStrings(tabAllStylesEditor)}
-					/* tabcssEnd */			
-
-				}
-
-				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
-					${softMinifyCssStrings(mobileAllStylesEditor)}
-					/* mobcssEnd */			
-
-				}
-				`}
+				 ${desktopAllStylesEditor}
+ 
+				 /* mimmikcssStart */
+ 
+				 ${resOption === "Tablet" ? tabAllStylesEditor : " "}
+				 ${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
+ 
+				 /* mimmikcssEnd */
+ 
+				 @media all and (max-width: 1024px) {	
+ 
+					 /* tabcssStart */
+					 ${softMinifyCssStrings(tabAllStylesEditor)}
+					 /* tabcssEnd */			
+ 
+				 }
+ 
+				 @media all and (max-width: 767px) {
+					 
+					 /* mobcssStart */			
+					 ${softMinifyCssStrings(mobileAllStylesEditor)}
+					 /* mobcssEnd */			
+ 
+				 }
+				 `}
 				</style>
 				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 					<div className={`${blockId} eb-toc-container`}>
