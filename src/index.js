@@ -14,9 +14,8 @@ import Edit from "./edit";
 import save from "./save";
 import attributes from "./attributes";
 import metadata from "../block.json";
-
 import example from "./example";
-
+import deprecated from "./deprecated";
 const { ebConditionalRegisterBlockType } = EBTOCControls;
 
 ebConditionalRegisterBlockType(metadata, {
@@ -30,4 +29,5 @@ ebConditionalRegisterBlockType(metadata, {
 	edit: Edit,
 	save,
 	example,
+	deprecated
 });

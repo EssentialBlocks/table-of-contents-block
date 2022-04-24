@@ -18,29 +18,12 @@ import {
 } from "./constants/borderShadowConstants";
 
 import {
-	// mediaIconSize,
-	// mediaImageWidth,
-	// mediaImageHeight,
-	// mediaContentGap,
-
-	//
 	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
-// import {
-// 	generateDimensionsAttributes,
-// 	generateTypographyAttributes,
-// 	// generateBackgroundAttributes,
-// 	generateBorderShadowAttributes,
-// 	generateResponsiveRangeAttributes,
-// } from "../../../util/helpers";
-
 const {
-	//
-
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
-	// generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
 } = window.EBTOCControls;

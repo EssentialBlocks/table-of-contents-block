@@ -119,6 +119,14 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
+= 1.2.1 - 24/04/2022 = 
+* Added: Animation Option
+* Added: Responsive Block Show/Hide option
+* Added: Custom CSS Option
+* Added: Reset button on few controls
+* Improved: Controls and structure
+* Fixed: Minor css issues
+
 = 1.2.0 - 08/03/2022 =
 * Fixed: Issue with Digit text in start of Heading
 

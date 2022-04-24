@@ -19,17 +19,15 @@ import striptags from "striptags";
 
 const {
 	softMinifyCssStrings,
-	// generateBackgroundControlStyles,
 	generateDimensionsControlStyles,
 	generateTypographyStyles,
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
-	// mimmikCssForPreviewBtnClick,
 	duplicateBlockIdFix,
 } = window.EBTOCControls;
 
 const editorStoreForGettingPreivew =
-	eb_style_handler.editor_type === "edit-site"
+	eb_conditional_localize.editor_type === "edit-site"
 		? "core/edit-site"
 		: "core/edit-post";
 
@@ -57,11 +55,6 @@ import classnames from "classnames";
 
 import Inspector from "./inspector";
 import {
-	// typoPrefix_subTitle,
-	// typoPrefix_number,
-	// typoPrefix_buttonText,
-
-	//
 	typoPrefix_content,
 	typoPrefix_title,
 } from "./constants/typographyPrefixConstants";
@@ -74,24 +67,12 @@ import {
 	titlePaddingConst,
 } from "./constants/dimensionsConstants";
 
-// import {
-// 	//
-// 	WrpBgConst,
-// } from "./constants/backgroundsConstants";
 import {
 	//
 	WrpBdShadowConst,
 } from "./constants/borderShadowConstants";
 
-import {
-	// mediaIconSize,
-	// mediaImageWidth,
-	// mediaImageHeight,
-	// mediaContentGap,
-
-	//
-	wrapMaxWidthPrefix,
-} from "./constants/rangeNames";
+import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import List from "./list";
 
@@ -251,8 +232,6 @@ export default function Edit({
 		resOption,
 		blockId,
 		blockMeta,
-
-		//  deadline Date timestamp
 		headers,
 		title,
 		collapsible,
@@ -275,13 +254,12 @@ export default function Edit({
 		arrowBg,
 		arrowColor,
 		contentAlign,
-
-		//
 		isSticky,
 		topSpace,
 		contentHeight,
 		indent,
 		hasUnderline,
+		classHook,
 	} = attributes;
 
 	const [visible, setVisible] = useState(true);
@@ -336,21 +314,9 @@ export default function Edit({
 		});
 	}, []);
 
-	// // this useEffect is for mimmiking css when responsive options clicked from wordpress's 'preview' button
-	// useEffect(() => {
-	// 	mimmikCssForPreviewBtnClick({
-	// 		domObj: document,
-	// 		select,
-	// 	});
-	// }, []);
-
 	const blockProps = useBlockProps({
 		className: classnames(className, `eb-guten-block-main-parent-wrapper`),
 	});
-
-	//
-	// styling codes start from here
-	//
 
 	// // styles related to generateResponsiveRangeStyles start ⬇
 	const {
@@ -362,8 +328,6 @@ export default function Edit({
 		property: "max-width",
 		attributes,
 	});
-
-	// // styles related to generateResponsiveRangeStyles end
 
 	// // styles related to generateTypographyStyles start ⬇
 	const {
@@ -386,33 +350,6 @@ export default function Edit({
 		defaultFontSize: 20,
 	});
 	// // styles related to generateTypographyStyles end
-
-	// // styles related to generateBackgroundControlStyles start ⬇
-
-	// const {
-	// 	backgroundStylesDesktop: wrpBackgroundStylesDesktop,
-	// 	hoverBackgroundStylesDesktop: wrpHoverBackgroundStylesDesktop,
-	// 	backgroundStylesTab: wrpBackgroundStylesTab,
-	// 	hoverBackgroundStylesTab: wrpHoverBackgroundStylesTab,
-	// 	backgroundStylesMobile: wrpBackgroundStylesMobile,
-	// 	hoverBackgroundStylesMobile: wrpHoverBackgroundStylesMobile,
-	// 	overlayStylesDesktop: wrpOverlayStylesDesktop,
-	// 	hoverOverlayStylesDesktop: wrpHoverOverlayStylesDesktop,
-	// 	overlayStylesTab: wrpOverlayStylesTab,
-	// 	hoverOverlayStylesTab: wrpHoverOverlayStylesTab,
-	// 	overlayStylesMobile: wrpOverlayStylesMobile,
-	// 	hoverOverlayStylesMobile: wrpHoverOverlayStylesMobile,
-	// 	bgTransitionStyle: wrpBgTransitionStyle,
-	// 	ovlTransitionStyle: wrpOvlTransitionStyle,
-	// } = generateBackgroundControlStyles({
-	// 	attributes,
-	// 	controlName: WrpBgConst,
-	// 	// noOverlay: true,
-	// 	// noMainBgi: true,
-	// 	// noOverlayBgi: true, // if 'noOverlay : true' is given then there's no need to give 'noOverlayBgi : true'
-	// });
-
-	// // styles related to generateBackgroundControlStyles end
 
 	// // styles related to generateDimensionsControlStyles start ⬇
 	const {
@@ -476,213 +413,214 @@ export default function Edit({
 	// // styles related to generateBorderShadowStyles end
 
 	const desktopAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthDesktop}
-			
-			${mainBgc ? `background-color:${mainBgc};` : ""}
-
-			${wrpMarginDesktop}
-			${wrpPaddingDesktop}
-			${wrpBdShdStyesDesktop}
-			transition:all 0.5s, ${wrpBdShdTransitionStyle};
-
-			
-
-		}
-
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverDesktop}
-			
-			
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-title{
-			text-align: ${titleAlign};
-			cursor:${collapsible ? "pointer" : "default"};
-			color: ${titleColor};
-			background-color:${titleBg};
-			${
-				seperator
-					? `border-bottom:${
-							seperatorSize || 0
-					  }px ${seperatorStyle} ${seperatorColor};`
+		 ${
+				isSticky
+					? `
+			 .eb-parent-${blockId}.eb__animated, .eb__animated.eb__flip {
+				 -webkit-animation-fill-mode: none;
+				 animation-fill-mode: none;
+				 -webkit-animation-name: none;
+				 animation-name: none !important;
+			 }
+		 `
 					: ""
 			}
-			${titlePaddingDesktop}
-			${titleTypoStylesDesktop}
-
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			background-color:${contentBg};
-			text-align: ${contentAlign};
-			${contentPaddingDesktop}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper ul,
-		.${blockId}.eb-toc-container .eb-toc-wrapper ol
-		{
-			${listType === "none" ? `list-style: none;` : ""}
-			${indent ? `margin-left:${indent}px;` : ""} 
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li {
-			color:${contentColor};
-			${contentTypoStylesDesktop}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
-			color:${contentHoverColor};
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a{
-			color:inherit;
-		}
-		
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a,
-		.${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
-			${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
-			background:none;
-		}
-
-		${
-			scrollToTop
-				? `
-			.eb-toc-go-top.show-scroll {
-				${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
-				${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
-				${arrowBg ? `background-color: ${arrowBg};` : ""}
-				${arrowColor ? `color: ${arrowColor};` : ""}
+ 
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthDesktop}
+			 
+			 ${mainBgc ? `background-color:${mainBgc};` : ""}
+ 
+			 ${wrpMarginDesktop}
+			 ${wrpPaddingDesktop}
+			 ${wrpBdShdStyesDesktop}
+			 ${isSticky ? "" : `transition:all 0.5s, ${wrpBdShdTransitionStyle}`};
+		 }
+ 
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverDesktop}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 text-align: ${titleAlign};
+			 cursor:${collapsible ? "pointer" : "default"};
+			 color: ${titleColor};
+			 background-color:${titleBg};
+			 ${
+					seperator
+						? `border-bottom:${
+								seperatorSize || 0
+						  }px ${seperatorStyle} ${seperatorColor};`
+						: ""
+				}
+			 ${titlePaddingDesktop}
+			 ${titleTypoStylesDesktop}
+ 
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 background-color:${contentBg};
+			 text-align: ${contentAlign};
+			 ${contentPaddingDesktop}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper ul,
+		 .${blockId}.eb-toc-container .eb-toc-wrapper ol
+		 {
+			 ${listType === "none" ? `list-style: none;` : ""}
+			 ${indent ? `margin-left:${indent}px;` : ""} 
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li {
+			 color:${contentColor};
+			 ${contentTypoStylesDesktop}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
+			 color:${contentHoverColor};
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a{
+			 color:inherit;
+		 }
+		 
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a,
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
+			 ${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
+			 background:none;
+		 }
+ 
+		 ${
+				scrollToTop
+					? `
+			 .eb-toc-go-top.show-scroll {
+				 ${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
+				 ${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+				 ${arrowBg ? `background-color: ${arrowBg};` : ""}
+				 ${arrowColor ? `color: ${arrowColor};` : ""}
+			 }
+			 `
+					: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+					  ""
 			}
-			`
-				: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
-				  ""
-		}
-
-	`;
+ 
+	 `;
 
 	const tabAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthTab}
-
-			${wrpMarginTab}
-			${wrpPaddingTab}
-			${wrpBdShdStyesTab}
-		}
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverTab}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-title{
-			${titlePaddingTab}
-			${titleTypoStylesTab}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			${contentPaddingTab}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li{
-			${contentTypoStylesTab}
-		}
-
-	`;
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthTab}
+ 
+			 ${wrpMarginTab}
+			 ${wrpPaddingTab}
+			 ${wrpBdShdStyesTab}
+		 }
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverTab}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 ${titlePaddingTab}
+			 ${titleTypoStylesTab}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 ${contentPaddingTab}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li{
+			 ${contentTypoStylesTab}
+		 }
+ 
+	 `;
 
 	const mobileAllStylesCommon = `
-		.${blockId}.eb-toc-container{
-			${wrapMaxWidthMobile}
-
-
-			${wrpMarginMobile}
-			${wrpPaddingMobile}
-			${wrpBdShdStyesMobile}
-		}
-		
-		.${blockId}.eb-toc-container:hover{
-			${wrpBdShdStylesHoverMobile}
-		}
-
-		.${blockId}.eb-toc-container .eb-toc-title{
-			${titlePaddingMobile}
-			${titleTypoStylesMobile}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			${contentPaddingMobile}
-		}
-		
-		.${blockId}.eb-toc-container .eb-toc-wrapper li{
-			${contentTypoStylesMobile}
-		}
-
-	`;
+		 .${blockId}.eb-toc-container{
+			 ${wrapMaxWidthMobile}
+ 
+ 
+			 ${wrpMarginMobile}
+			 ${wrpPaddingMobile}
+			 ${wrpBdShdStyesMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container:hover{
+			 ${wrpBdShdStylesHoverMobile}
+		 }
+ 
+		 .${blockId}.eb-toc-container .eb-toc-title{
+			 ${titlePaddingMobile}
+			 ${titleTypoStylesMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 ${contentPaddingMobile}
+		 }
+		 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper li{
+			 ${contentTypoStylesMobile}
+		 }
+ 
+	 `;
 
 	//
 	const desktopAllStylesEditor = `
-		${desktopAllStylesCommon}
-
-
-		.${blockId}.eb-toc-container .eb-toc-wrapper{
-			display:${visible ? "block" : "none"};
-		}
-
-		
-		`;
+		 ${desktopAllStylesCommon}
+ 
+ 
+		 .${blockId}.eb-toc-container .eb-toc-wrapper{
+			 display:${visible ? "block" : "none"};
+		 }
+		 `;
 
 	const tabAllStylesEditor = `
-		${tabAllStylesCommon}
-
-	
-		`;
+		 ${tabAllStylesCommon}
+		 `;
 
 	const mobileAllStylesEditor = `
-		${mobileAllStylesCommon}
-	
-	`;
+		 ${mobileAllStylesCommon}
+	 `;
 
-	// console.log("----------edit theke", { isSticky, scrollToTop });
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
-		${desktopAllStylesCommon}
-		${
-			isSticky
-				? `
-				
-				.${blockId}.eb-toc-container.eb-toc-is-sticky{
-					position:fixed;
-					top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
-					left:0;
-					z-index:999;
-				}
-			
-				.${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
-					${contentHeight ? `min-height:${contentHeight}px;` : ""}
-				}
-			
-				.${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
-					color:${titleColor};
-					background-color:${titleBg};
-				}
-				`
-				: ""
-		}
-
-
-	`);
+		 ${desktopAllStylesCommon}
+		 ${
+				isSticky
+					? `					
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky{
+					 position:fixed;
+					 top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
+					 left:0;
+					 z-index:999;
+				 }
+			 
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
+					 ${contentHeight ? `min-height:${contentHeight}px;` : ""}
+				 }
+			 
+				 .${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
+					 color:${titleColor};
+					 background-color:${titleBg};
+				 }
+				 `
+					: ""
+			}
+ 
+ 
+	 `);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStylesFrontEnd = softMinifyCssStrings(`
-		${tabAllStylesCommon}
-
-		
-	`);
+		 ${tabAllStylesCommon}
+ 
+		 
+	 `);
 
 	// all css styles for Mobile in strings ⬇
 	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
-		${mobileAllStylesCommon}
-
-	`);
+		 ${mobileAllStylesCommon}
+ 
+	 `);
 
 	//
 	// styling codes End here
@@ -700,89 +638,93 @@ export default function Edit({
 		}
 	}, [attributes]);
 
-	return [
-		isSelected && (
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-		),
+	return (
+		<>
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
-		<BlockControls>
-			<AlignmentToolbar
-				value={contentAlign}
-				onChange={(contentAlign) => setAttributes({ contentAlign })}
-				controls={["left", "center", "right"]}
-			/>
-			<ToolbarGroup>
-				<ToolbarButton
-					title="Unordered"
-					icon="editor-ul"
-					isActive={listType === "ul"}
-					onClick={() => setAttributes({ listType: "ul" })}
+			<BlockControls>
+				<AlignmentToolbar
+					value={contentAlign}
+					onChange={(contentAlign) => setAttributes({ contentAlign })}
+					controls={["left", "center", "right"]}
 				/>
+				<ToolbarGroup>
+					<ToolbarButton
+						title="Unordered"
+						icon="editor-ul"
+						isActive={listType === "ul"}
+						onClick={() => setAttributes({ listType: "ul" })}
+					/>
 
-				<ToolbarButton
-					title="Ordered"
-					icon="editor-ol"
-					isActive={listType === "ol"}
-					onClick={() => setAttributes({ listType: "ol" })}
-				/>
+					<ToolbarButton
+						title="Ordered"
+						icon="editor-ol"
+						isActive={listType === "ol"}
+						onClick={() => setAttributes({ listType: "ol" })}
+					/>
 
-				<ToolbarButton
-					title="None"
-					icon="minus"
-					isActive={listType === "none"}
-					onClick={() => setAttributes({ listType: "none" })}
-				/>
-			</ToolbarGroup>
-		</BlockControls>,
+					<ToolbarButton
+						title="None"
+						icon="minus"
+						isActive={listType === "none"}
+						onClick={() => setAttributes({ listType: "none" })}
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 
-		<div {...blockProps}>
-			<style>
-				{`
-				${desktopAllStylesEditor}
-
-				/* mimmikcssStart */
-
-				${resOption === "Tablet" ? tabAllStylesEditor : " "}
-				${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
-
-				/* mimmikcssEnd */
-
-				@media all and (max-width: 1024px) {	
-
-					/* tabcssStart */
-					${softMinifyCssStrings(tabAllStylesEditor)}
-					/* tabcssEnd */			
-
-				}
-
-				@media all and (max-width: 767px) {
-					
-					/* mobcssStart */			
-					${softMinifyCssStrings(mobileAllStylesEditor)}
-					/* mobcssEnd */			
-
-				}
-				`}
-			</style>
-			<div className={`${blockId} eb-toc-container`}>
-				<div onClick={() => collapsible && setVisible(!visible)}>
-					{displayTitle && (
-						<RichText
-							className="eb-toc-title"
-							placeholder="Table of content"
-							value={title}
-							onChange={(title) => setAttributes({ title })}
-						/>
-					)}
-				</div>
-				{headers.length > 0 ? (
-					<div className="eb-toc-wrapper">
-						<List attributes={attributes} />
+			<div {...blockProps}>
+				<style>
+					{`
+				 ${desktopAllStylesEditor}
+ 
+				 /* mimmikcssStart */
+ 
+				 ${resOption === "Tablet" ? tabAllStylesEditor : " "}
+				 ${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
+ 
+				 /* mimmikcssEnd */
+ 
+				 @media all and (max-width: 1024px) {	
+ 
+					 /* tabcssStart */
+					 ${softMinifyCssStrings(tabAllStylesEditor)}
+					 /* tabcssEnd */			
+ 
+				 }
+ 
+				 @media all and (max-width: 767px) {
+					 
+					 /* mobcssStart */			
+					 ${softMinifyCssStrings(mobileAllStylesEditor)}
+					 /* mobcssEnd */			
+ 
+				 }
+				 `}
+				</style>
+				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
+					<div className={`${blockId} eb-toc-container`}>
+						<div onClick={() => collapsible && setVisible(!visible)}>
+							{displayTitle && (
+								<RichText
+									className="eb-toc-title"
+									placeholder="Table of content"
+									value={title}
+									onChange={(title) => setAttributes({ title })}
+								/>
+							)}
+						</div>
+						{headers.length > 0 ? (
+							<div className="eb-toc-wrapper">
+								<List attributes={attributes} />
+							</div>
+						) : (
+							<p>Add header to generate table of contents</p>
+						)}
 					</div>
-				) : (
-					<p>Add header to generate table of contents</p>
-				)}
+				</div>
 			</div>
-		</div>,
-	];
+		</>
+	);
 }
