@@ -21,6 +21,7 @@ export default function save({ attributes }) {
 		scrollToTop,
 		isSticky,
 		hideOnMobile,
+		topOffset,
 		classHook,
 	} = attributes;
 
@@ -29,12 +30,15 @@ export default function save({ attributes }) {
 			{headers.length !== 0 ? (
 				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 					<div
-						className={`${blockId} eb-toc-container ${collapsible ? "eb-toc-collapsible" : "eb-toc-not-collapsible"
-							} ${initialCollapse
+						className={`${blockId} eb-toc-container ${
+							collapsible ? "eb-toc-collapsible" : "eb-toc-not-collapsible"
+						} ${
+							initialCollapse
 								? "eb-toc-initially-collapsed"
 								: "eb-toc-initially-not-collapsed"
-							} ${isSticky ? "eb-toc-is-sticky" : "eb-toc-is-not-sticky"} ${scrollToTop ? "eb-toc-scrollToTop" : "eb-toc-not-scrollToTop"
-							}    `}
+						} ${isSticky ? "eb-toc-is-sticky" : "eb-toc-is-not-sticky"} ${
+							scrollToTop ? "eb-toc-scrollToTop" : "eb-toc-not-scrollToTop"
+						}    `}
 						data-scroll-top={scrollToTop}
 						data-collapsible={collapsible}
 						data-hide-mobile={hideOnMobile}
@@ -52,11 +56,15 @@ export default function save({ attributes }) {
 							)}
 						</div>
 						<div
-							className={`eb-toc-wrapper ${collapsible && initialCollapse && !isSticky ? "hide-content" : ""
-								}  `}
+							className={`eb-toc-wrapper ${
+								collapsible && initialCollapse && !isSticky
+									? "hide-content"
+									: ""
+							}  `}
 							data-headers={JSON.stringify(headers)}
 							data-visible={JSON.stringify(visibleHeaders)}
 							data-smooth={isSmooth}
+							data-top-offset={topOffset ? topOffset : ""}
 						>
 							<List attributes={attributes} />
 						</div>

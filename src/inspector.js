@@ -13,6 +13,7 @@ import {
 	SelectControl,
 	ButtonGroup,
 	Button,
+	TextControl,
 } from "@wordpress/components";
 import { select } from "@wordpress/data";
 
@@ -41,11 +42,23 @@ const editorStoreForGettingPreivew =
 		: "core/edit-post";
 
 import {
+	// typoPrefix_number,
+	// typoPrefix_subTitle,
+	// typoPrefix_buttonText,
+
+	//
 	typoPrefix_title,
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
-import { wrapMaxWidthPrefix } from "./constants/rangeNames";
+import {
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	wrapMaxWidthPrefix,
+} from "./constants/rangeNames";
 
 import {
 	//
@@ -54,6 +67,11 @@ import {
 	titlePaddingConst,
 	contentPaddingConst,
 } from "./constants/dimensionsConstants";
+
+// import {
+// 	//
+// 	WrpBgConst,
+// } from "./constants/backgroundsConstants";
 
 import {
 	//
@@ -108,6 +126,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 		//
 		showListSeparator,
+		topOffset,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
@@ -120,8 +139,29 @@ const Inspector = ({ attributes, setAttributes }) => {
 				editorStoreForGettingPreivew
 			).__experimentalGetPreviewDeviceType(),
 		});
+
+		// // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
+		// const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
+		// 	domObj: document,
+		// 	select,
+		// 	setAttributes,
+		// });
+
+		// // all cleanups inside the return
+		// return () => {
+		// 	cleanUp();
+		// };
 	}, []);
 
+	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
+	// useEffect(() => {
+	// 	mimmikCssForResBtns({
+	// 		domObj: document,
+	// 		resOption,
+	// 	});
+	// }, [resOption]);
+
+	//
 	useEffect(() => {
 		setDefaultVisible();
 	}, [visibleHeaders]);
@@ -133,6 +173,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	}, [isSticky]);
 
+	//
 	const resRequiredProps = {
 		setAttributes,
 		resOption,
@@ -323,7 +364,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 													onChange={(topSpace) => setAttributes({ topSpace })}
 													min={0}
 													max={100}
-													allowReset={true}
 												/>
 											</PanelBody>
 										)}
@@ -395,7 +435,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{displayTitle && (
 											<ToggleControl
-												label={__("Title Seperator", "essential-blocks")}
+												label={__("Title Separator", "essential-blocks")}
 												checked={seperator}
 												onChange={() =>
 													setAttributes({ seperator: !seperator })
@@ -406,7 +446,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 										{displayTitle && seperator && (
 											<PanelBody
 												title={__(
-													"Title seperator settings",
+													"Title separator settings",
 													"essential-blocks"
 												)}
 												initialOpen={false}
@@ -422,7 +462,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<ColorControl
-													label={__("Seperator Color", "essential-blocks")}
+													label={__("Separator Color", "essential-blocks")}
 													color={seperatorColor}
 													onChange={(seperatorColor) =>
 														setAttributes({ seperatorColor })
@@ -430,7 +470,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<SelectControl
-													label={__("Seperator Style", "essential-blocks")}
+													label={__("Separator Style", "essential-blocks")}
 													value={seperatorStyle}
 													options={BORDER_STYLES}
 													onChange={(seperatorStyle) =>
@@ -457,7 +497,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 											label={__("Indent", "essential-blocks")}
 											value={indent}
 											onChange={(indent) => setAttributes({ indent })}
-											allowReset={true}
 										/>
 
 										<UnitControl
@@ -524,10 +563,17 @@ const Inspector = ({ attributes, setAttributes }) => {
 											}
 										/>
 
+										<TextControl
+											label={__("Offset Top", "essential-blocks")}
+											value={topOffset}
+											onChange={(value) => setAttributes({ topOffset: value })}
+											type="number"
+										/>
+
 										{showListSeparator && (
 											<>
 												<SelectControl
-													label={__("Seperator Style", "essential-blocks")}
+													label={__("Separator Style", "essential-blocks")}
 													value={listSeperatorStyle}
 													options={BORDER_STYLES}
 													onChange={(listSeperatorStyle) =>
@@ -536,7 +582,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<ColorControl
-													label={__("Seperator Color", "essential-blocks")}
+													label={__("Separator Color", "essential-blocks")}
 													color={listSeperatorColor}
 													onChange={(listSeperatorColor) =>
 														setAttributes({ listSeperatorColor })
@@ -544,7 +590,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												<RangeControl
-													label={__("Seperator Size", "essential-blocks")}
+													label={__("Separator Size", "essential-blocks")}
 													value={listSeperatorWidth}
 													onChange={(listSeperatorWidth) =>
 														setAttributes({ listSeperatorWidth })

@@ -18,12 +18,29 @@ import {
 } from "./constants/borderShadowConstants";
 
 import {
+	// mediaIconSize,
+	// mediaImageWidth,
+	// mediaImageHeight,
+	// mediaContentGap,
+
+	//
 	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
+// import {
+// 	generateDimensionsAttributes,
+// 	generateTypographyAttributes,
+// 	// generateBackgroundAttributes,
+// 	generateBorderShadowAttributes,
+// 	generateResponsiveRangeAttributes,
+// } from "../../../util/helpers";
+
 const {
+	//
+
 	generateDimensionsAttributes,
 	generateTypographyAttributes,
+	// generateBackgroundAttributes,
 	generateBorderShadowAttributes,
 	generateResponsiveRangeAttributes,
 } = window.EBTOCControls;
@@ -334,7 +351,9 @@ const attributes = {
 		type: "number",
 		default: 100,
 	},
-
+	topOffset: {
+		type: "string",
+	},
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
 

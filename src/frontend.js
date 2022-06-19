@@ -88,7 +88,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 				function onScrollPage() {
 					document.body.scrollTop > 30 ||
-						document.documentElement.scrollTop > 20
+					document.documentElement.scrollTop > 20
 						? showScroll()
 						: hideScroll();
 				}
@@ -118,15 +118,25 @@ window.addEventListener("DOMContentLoaded", function () {
 
 			for (node of nodes) {
 				const isSmooth = node.getAttribute("data-smooth") === "true";
-
+				const wrapperOffset = parseFloat(node.getAttribute("data-top-offset"));
 				if (isSmooth) {
 					node.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 						anchor.addEventListener("click", function (e) {
-							let selector = this.getAttribute("href").replace('#', '')
+							let selector = this.getAttribute("href").replace("#", "");
 							e.preventDefault();
-							document.getElementById(selector).scrollIntoView({
-								behavior: "smooth",
-							});
+							if (typeof wrapperOffset === "number") {
+								const yOffset = wrapperOffset ? -Math.abs(wrapperOffset) : 0;
+								const element = document.getElementById(selector);
+								const finalOffset =
+									element.getBoundingClientRect().top +
+									window.pageYOffset +
+									yOffset;
+								window.scrollTo({ top: finalOffset, behavior: "smooth" });
+							} else {
+								document.getElementById(selector).scrollIntoView({
+									behavior: "smooth",
+								});
+							}
 						});
 					});
 				}
