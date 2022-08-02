@@ -37,18 +37,20 @@ class TOC_Helper
      *
      * @access public
      */
-    public function enqueues($hook)
+    public function enqueues()
     {
+        global $pagenow;
+
         /**
          * Only for Admin Add/Edit Pages 
          */
-        if ($hook == 'post-new.php' || $hook == 'post.php' || $hook == 'site-editor.php') {
+        if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
             $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
             wp_register_script(
                 "toc-block-controls-util",
-                TOC_BLOCK_ADMIN_URL . '/dist/controls.js',
-                array_merge($controls_dependencies['dependencies'], array("essential-blocks-edit-post")),
+                TOC_BLOCK_ADMIN_URL . 'dist/controls.js',
+                array_merge($controls_dependencies['dependencies']),
                 $controls_dependencies['version'],
                 true
             );
@@ -58,27 +60,23 @@ class TOC_Helper
                 'rest_rootURL' => get_rest_url(),
             ));
 
+            if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {
+                wp_localize_script('toc-block-controls-util', 'eb_conditional_localize', array(
+                    'editor_type' => 'edit-post'
+                ));
+            } else if ($pagenow == 'site-editor.php' || $pagenow == 'themes.php') {
+                wp_localize_script('toc-block-controls-util', 'eb_conditional_localize', array(
+                    'editor_type' => 'edit-site'
+                ));
+            }
 
-            //
-            wp_register_style(
+            wp_enqueue_style(
                 'toc-editor-css',
-                TOC_BLOCK_ADMIN_URL . '/dist/controls.css',
-                array("create-block-table-of-content-block", "essential-blocks-animation"),
+                TOC_BLOCK_ADMIN_URL . 'dist/controls.css',
+                array(),
                 $controls_dependencies['version'],
                 'all'
             );
-        }
-
-        global $pagenow;
-
-        if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {
-            wp_localize_script('toc-block-controls-util', 'eb_conditional_localize', array(
-                'editor_type' => 'edit-post'
-            ));
-        } else if ($pagenow == 'site-editor.php') {
-            wp_localize_script('toc-block-controls-util', 'eb_conditional_localize', array(
-                'editor_type' => 'edit-site'
-            ));
         }
     }
 

@@ -2,8 +2,8 @@
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
-Tested up to: 5.9
-Stable tag: 1.3.0
+Tested up to: 6.0
+Stable tag: 1.3.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,10 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.3.1 - 02/08/2022 =
+* Added: Offset top options
+* Improved: Converted style-handler to php for working perfectly with Reusable blocks and FSE
 
 = 1.3.0 - 24/04/2022 =
 * Added: Animation Option
