@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.3.1 - dev =
+= 1.3.1 - 02/08/2022 =
 * Added: Offset top options
 * Improved: Converted style-handler to php for working perfectly with Reusable blocks and FSE
 
