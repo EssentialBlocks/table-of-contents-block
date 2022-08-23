@@ -1,6 +1,12 @@
+.wp-admin .eb-toc-container{
+	overflow:hidden;
+  }
 .eb-toc-container {
 	margin: 0 auto;
 	width: 100%;
+	&.eb-toc-is-not-sticky {
+		overflow: hidden;
+	}
 }
 
 .eb-toc-go-top.show-scroll {

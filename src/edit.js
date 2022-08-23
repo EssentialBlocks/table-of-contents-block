@@ -26,11 +26,6 @@ const {
 	duplicateBlockIdFix,
 } = window.EBTOCControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 import {
 	supportedHeaders,
 	isCoreHeading,
@@ -292,15 +287,6 @@ export default function Edit({
 			scrollElement.classList.remove("show-scroll");
 		}
 	}, [scrollToTop]);
-
-	// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class
-	useEffect(() => {
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-	}, []);
 
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
