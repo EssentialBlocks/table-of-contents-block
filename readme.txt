@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.3.2 - dev =
+= 1.3.2 - 23/08/2022 =
 * Fixed: TOC Heading issue with wrapper border radius
 * Improved: Update controls
 
