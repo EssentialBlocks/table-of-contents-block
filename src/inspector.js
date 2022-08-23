@@ -36,27 +36,12 @@ const {
 	AdvancedControls,
 } = window.EBTOCControls;
 
-const editorStoreForGettingPreivew =
-	eb_conditional_localize.editor_type === "edit-site"
-		? "core/edit-site"
-		: "core/edit-post";
-
 import {
-	// typoPrefix_number,
-	// typoPrefix_subTitle,
-	// typoPrefix_buttonText,
-
-	//
 	typoPrefix_title,
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
 import {
-	// mediaIconSize,
-	// mediaImageWidth,
-	// mediaImageHeight,
-	// mediaContentGap,
-
 	wrapMaxWidthPrefix,
 } from "./constants/rangeNames";
 
@@ -67,11 +52,6 @@ import {
 	titlePaddingConst,
 	contentPaddingConst,
 } from "./constants/dimensionsConstants";
-
-// import {
-// 	//
-// 	WrpBgConst,
-// } from "./constants/backgroundsConstants";
 
 import {
 	//
@@ -131,35 +111,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	const [options, setOptions] = useState(HEADERS);
 	const [defaultOptions, setDefaultOptions] = useState([]);
-
-	useEffect(() => {
-		// this useEffect is for setting the resOption attribute to desktop/tab/mobile depending on the added 'eb-res-option-' class only the first time once
-		setAttributes({
-			resOption: select(
-				editorStoreForGettingPreivew
-			).__experimentalGetPreviewDeviceType(),
-		});
-
-		// // this following code is to mimmik css for responsive preview in the editor page when clicking the buttons in the 'Preview button of wordpress' located beside the 'update' button while any block is selected and it's inspector panel is mounted in the DOM
-		// const cleanUp = mimmikCssOnPreviewBtnClickWhileBlockSelected({
-		// 	domObj: document,
-		// 	select,
-		// 	setAttributes,
-		// });
-
-		// // all cleanups inside the return
-		// return () => {
-		// 	cleanUp();
-		// };
-	}, []);
-
-	// // this useEffect is for mimmiking css for all the eb blocks on resOption changing
-	// useEffect(() => {
-	// 	mimmikCssForResBtns({
-	// 		domObj: document,
-	// 		resOption,
-	// 	});
-	// }, [resOption]);
 
 	//
 	useEffect(() => {
