@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		_toggleCollapse: function () {
 			let containers = document.querySelectorAll(".eb-toc-container");
 
-			for (container of containers) {
+			for (let container of containers) {
 				const isSticky = container.getAttribute("data-sticky") === "true";
 				const collapsible =
 					container.getAttribute("data-collapsible") === "true";
@@ -57,6 +57,11 @@ window.addEventListener("DOMContentLoaded", function () {
 			let container = document.querySelector(".eb-toc-container");
 			let hasScrollTop =
 				container && container.getAttribute("data-scroll-top") == "true";
+			let hasSticky =
+				container && container.getAttribute("data-sticky") == "true";
+			let scrollTarget = container.getAttribute("data-scroll-target");
+			let wrapper = document.querySelector(".eb-toc-wrapper");
+			let offsetTop = wrapper.getAttribute("data-top-offset");
 
 			if (hasScrollTop) {
 				// Create go to top element
@@ -67,13 +72,24 @@ window.addEventListener("DOMContentLoaded", function () {
 
 				// Add click event
 				goTop.addEventListener("click", function () {
-					// document.body.scrollTop = 0;
-					// document.documentElement.scrollTop = 0;
-					window.scroll({
-						top: 0,
-						left: 0,
-						behavior: "smooth",
-					});
+					if (!hasSticky && "scroll_to_toc" === scrollTarget) {
+						const yOffset = offsetTop ? -Math.abs(offsetTop) : 0;
+						const finalOffset =
+							container.getBoundingClientRect().top +
+							window.pageYOffset +
+							yOffset;
+
+						window.scroll({
+							top: finalOffset,
+							behavior: "smooth",
+						});
+					} else {
+						window.scroll({
+							top: 0,
+							left: 0,
+							behavior: "smooth",
+						});
+					}
 				});
 
 				function hideScroll() {
@@ -95,7 +111,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 				const containers = document.querySelectorAll(".eb-toc-container");
 
-				for (container of containers) {
+				for (let container of containers) {
 					const goToTop = container.getAttribute("data-scroll-top") === "true";
 
 					if (goToTop) {
@@ -116,7 +132,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		_scroll: function () {
 			let nodes = document.querySelectorAll(".eb-toc-wrapper");
 
-			for (node of nodes) {
+			for (let node of nodes) {
 				const isSmooth = node.getAttribute("data-smooth") === "true";
 				const wrapperOffset = parseFloat(node.getAttribute("data-top-offset"));
 				if (isSmooth) {
@@ -149,7 +165,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		_hide: function () {
 			const crossButtons = document.querySelectorAll(".eb-toc-close");
 
-			for (crossButton of crossButtons) {
+			for (let crossButton of crossButtons) {
 				crossButton.addEventListener("click", function () {
 					const container = crossButton.closest(".eb-toc-container");
 
@@ -162,7 +178,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		_show: function () {
 			const headerButtons = document.querySelectorAll(".eb-toc-button");
 
-			for (headerButton of headerButtons) {
+			for (let headerButton of headerButtons) {
 				headerButton.addEventListener("click", function () {
 					const container = headerButton.closest(".eb-toc-container");
 
@@ -178,7 +194,7 @@ window.addEventListener("DOMContentLoaded", function () {
 		_run: function () {
 			let containers = document.querySelectorAll(".eb-toc-container");
 
-			for (container of containers) {
+			for (let container of containers) {
 				if (container) {
 					// Save container border
 					const tocBorder = container.style.border;

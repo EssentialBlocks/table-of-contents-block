@@ -1,6 +1,6 @@
-.wp-admin .eb-toc-container{
-	overflow:hidden;
-  }
+.wp-admin .eb-toc-container {
+	overflow: hidden;
+}
 .eb-toc-container {
 	margin: 0 auto;
 	width: 100%;
@@ -27,8 +27,7 @@
 	height: 70px;
 }
 
-.eb-toc-container.eb-toc-is-sticky.eb-toc-collapsible
-	button.eb-toc-button {
+.eb-toc-container.eb-toc-is-sticky.eb-toc-collapsible button.eb-toc-button {
 	position: absolute;
 	top: 0;
 }
@@ -149,7 +148,6 @@
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	right: -9px;
 	top: -11px;
 	width: 28px;
 	height: 28px;
@@ -166,7 +164,12 @@
 	margin: 0;
 	border: 0;
 	opacity: 0.8;
-
+	&.eb-toc-sticky-left {
+		right: -9px;
+	}
+	&.eb-toc-sticky-right {
+		left: -9px;
+	}
 	&:hover {
 		opacity: 1;
 	}

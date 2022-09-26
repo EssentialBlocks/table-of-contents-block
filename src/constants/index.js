@@ -34,7 +34,10 @@ export const TEXT_DECORATION = [
 	{ label: __("Overline", "essential-blocks"), value: "overline" },
 	{ label: __("Line Through", "essential-blocks"), value: "line-through" },
 	{ label: __("Underline", "essential-blocks"), value: "underline" },
-	{ label: __("Underline Oveline", "essential-blocks"), value: "underline overline" },
+	{
+		label: __("Underline Oveline", "essential-blocks"),
+		value: "underline overline",
+	},
 ];
 
 export const BORDER_STYLES = [
@@ -234,5 +237,27 @@ export const HOVER_EFFECT = [
 	{
 		label: __("Curl Bottom Left", "essential-blocks"),
 		value: "hvr-curl-bottom-left",
+	},
+];
+
+export const SCROLL_OPTIONS = [
+	{
+		label: __("Scroll to the top of page", "essential-blocks"),
+		value: "scroll_to_page",
+	},
+	{
+		label: __("Scroll to the TOC", "essential-blocks"),
+		value: "scroll_to_toc",
+	},
+];
+
+export const STICKY_POSITION = [
+	{
+		label: __("Left", "essential-blocks"),
+		value: "left",
+	},
+	{
+		label: __("Right", "essential-blocks"),
+		value: "right",
 	},
 ];

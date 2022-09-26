@@ -354,6 +354,14 @@ const attributes = {
 	topOffset: {
 		type: "string",
 	},
+	scrollTarget: {
+		type: "string",
+		default: "scroll_to_toc",
+	},
+	stickyPosition: {
+		type: "string",
+		default: "left",
+	},
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
 

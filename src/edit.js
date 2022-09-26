@@ -573,12 +573,20 @@ export default function Edit({
 		  ${
 				isSticky
 					? `					
-				  .${blockId}.eb-toc-container.eb-toc-is-sticky{
-					  position:fixed;
-					  top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
-					  left:0;
-					  z-index:999;
-				  }
+					.${blockId}.eb-toc-container.eb-toc-sticky-right.eb-toc-is-sticky {
+						position:fixed;
+						top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
+						z-index:999;
+						left: auto;
+						right: 0;
+					}
+
+					.${blockId}.eb-toc-container.eb-toc-sticky-left.eb-toc-is-sticky {
+						position:fixed;
+						top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
+						z-index:999;
+						left: 0;
+					}
 			  
 				  .${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
 					  ${contentHeight ? `min-height:${contentHeight}px;` : ""}
@@ -587,6 +595,13 @@ export default function Edit({
 				  .${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
 					  color:${titleColor};
 					  background-color:${titleBg};
+				  }
+
+				  .${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button.eb-toc-button-right {
+					right: 0;
+					left: auto;
+					transform-origin: right top;
+					transform: rotate(90deg) translate(100%, 0);
 				  }
 				  `
 					: ""
