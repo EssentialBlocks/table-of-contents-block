@@ -601,6 +601,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 
 												<RangeControl
@@ -611,6 +612,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 
 												<ColorControl
