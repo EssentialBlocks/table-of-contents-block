@@ -22,6 +22,8 @@ export default function save({ attributes }) {
 		isSticky,
 		hideOnMobile,
 		topOffset,
+		scrollTarget,
+		stickyPosition = "left",
 		classHook,
 	} = attributes;
 
@@ -30,7 +32,9 @@ export default function save({ attributes }) {
 			{headers.length !== 0 ? (
 				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
 					<div
-						className={`${blockId} eb-toc-container ${
+						className={`${blockId} eb-toc-container${
+							isSticky ? ` eb-toc-sticky-${stickyPosition}` : ""
+						} ${
 							collapsible ? "eb-toc-collapsible" : "eb-toc-not-collapsible"
 						} ${
 							initialCollapse
@@ -43,9 +47,16 @@ export default function save({ attributes }) {
 						data-collapsible={collapsible}
 						data-hide-mobile={hideOnMobile}
 						data-sticky={isSticky}
+						data-scroll-target={scrollTarget}
 					>
 						<div className="eb-toc-header">
-							{isSticky && <span className="eb-toc-close"></span>}
+							{isSticky && (
+								<span
+									className={`eb-toc-close${
+										isSticky ? ` eb-toc-sticky-${stickyPosition}` : ""
+									}`}
+								></span>
+							)}
 
 							{displayTitle && (
 								<RichText.Content
@@ -69,7 +80,11 @@ export default function save({ attributes }) {
 							<List attributes={attributes} />
 						</div>
 						{isSticky && (
-							<button className="eb-toc-button">
+							<button
+								className={`eb-toc-button${
+									isSticky ? ` eb-toc-button-${stickyPosition}` : ""
+								}`}
+							>
 								{displayTitle && title ? title : "Table of Contents"}
 							</button>
 						)}

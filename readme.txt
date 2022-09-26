@@ -1,9 +1,9 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
 Tested up to: 6.0
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,10 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.3.3 - 26/09/2022 =
+* Added: Scroll to TOC position option
+* Added: Added TOC sticky position option
 
 = 1.3.2 - 23/08/2022 =
 * Fixed: TOC Heading issue with wrapper border radius

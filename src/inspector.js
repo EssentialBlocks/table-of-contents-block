@@ -41,9 +41,7 @@ import {
 	typoPrefix_content,
 } from "./constants/typographyPrefixConstants";
 
-import {
-	wrapMaxWidthPrefix,
-} from "./constants/rangeNames";
+import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import {
 	//
@@ -63,6 +61,8 @@ import {
 	HEADERS,
 	ALIGNS,
 	BORDER_STYLES,
+	SCROLL_OPTIONS,
+	STICKY_POSITION,
 } from "./constants";
 
 const Inspector = ({ attributes, setAttributes }) => {
@@ -103,7 +103,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 		contentHeight,
 		topSpace,
 		hideOnMobile,
-
+		scrollTarget,
+		stickyPosition,
 		//
 		showListSeparator,
 		topOffset,
@@ -273,6 +274,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 												title={__("Sticky settings", "essential-blocks")}
 												initialOpen={false}
 											>
+												<SelectControl
+													label={__("Sticky Position", "essential-blocks")}
+													value={stickyPosition}
+													options={STICKY_POSITION}
+													onChange={(stickyPosition) =>
+														setAttributes({ stickyPosition })
+													}
+												/>
+
 												<ToggleControl
 													label={__("Hide on Mobile", "essential-blocks")}
 													checked={hideOnMobile}
@@ -573,6 +583,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 										{scrollToTop && (
 											<>
+												{!isSticky && (
+													<SelectControl
+														label={__("Scroll Target", "essential-blocks")}
+														value={scrollTarget}
+														options={SCROLL_OPTIONS}
+														onChange={(scrollTarget) =>
+															setAttributes({ scrollTarget })
+														}
+													/>
+												)}
 												<RangeControl
 													label={__("Arrow Height", "essential-blocks")}
 													value={arrowHeight}
@@ -581,6 +601,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 
 												<RangeControl
@@ -591,6 +612,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													}
 													min={0}
 													max={100}
+													allowReset={true}
 												/>
 
 												<ColorControl
