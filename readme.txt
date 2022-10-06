@@ -1,97 +1,72 @@
 === Table Of Contents Block ===
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir, hztyfoon
-Tags: gutenberg, blocks, toc, table of contents, seo, schema
+Tags: gutenberg, blocks, toc, table of contents, seo, schema, Table of contents, table of content, TOC, Gutenberg, SEO, Gutenberg TOC block, Gutenberg Table of Contents, Table Of Contents block, blocks
 Requires at least: 5.6
 Tested up to: 6.0
 Stable tag: 1.3.3
-License: GPLv3
-License URI: https://opensource.org/licenses/GPL-3.0
+License: GPLv3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Automatically Add Table of Contents Block for your WordPress Posts & Pages
 
 == Description ==
 
-**Table of Contents** is a roadmap for your whole content and helps your readers to locate specific parts of the page to go directly to that section.
+**Table Of Contents** is a complete roadmap for your whole content and helps your readers navigate directly to specific sections of your web pages or posts. Using the Table Of Contents block (TOC), you can boost users’ reading experiences, accessibility, page SEO score, and more.
 
-Using Table of Contents Block (TOC), you can improve the reading experience, accessibility, page SEO score & help your visitors to easily navigate.
+You do not need any coding to create a TOC in Gutenberg. All you need to do is install the block plugin on your website and insert the Table Of Contents on the block editor with just a click.
 
-You don’t need any coding to create TOC in Gutenberg. Just install this block plugin & use Table of Content within Block Editor for WordPress.
+##CREATE A STICKY TABLE OF CONTENTS##
 
+Using this Table Of Contents block, you can also enable the ‘Sticky’ scroll effect to help your users access the TOC from any section on your web page and navigate easy.
 
-**⚙️ Completely Customizable:** You can customize and pick the heading tags which you want to appear on your Table of Contents.
+##STUNNING FEATURES:##
 
-**⚡ Super Light-weight:** No extra resources used and it's highly optimized to automatically add Table of Contents inside your post or pages.
+* No extra configuration needed
+* Full customization possibilities
+* Smooth scroll facilities with TOC
+* 100% responsive on all screens
 
-**🧑‍💻 Dedicated Support:** We’ve an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
+**Completely Customizable:** You can customize the Table Of Contents block just the way you want and fit your website layout
 
-## 🎁 GET ACCESS TO 22+ MORE FREE BLOCKS FOR WORDPRESS BLOCK EDITOR ##
+**Super Light-weight:** No extra resources used and it’s highly optimized for super fast loading & instant live editing
 
-Get [Essential Blocks Gutenberg](https://wordpress.org/plugins/essential-blocks/) editor - an advanced blocks library to power up your Gutenberg design experience. It brings stunning blocks including:
+**Dedicated Support:** We have an extraordinary support team ready to help you. Ask your questions in the support forum, we’ll get back to you immediately.
 
-- [EB Infobox](https://essential-blocks.com/docs/infobox/)
-- [EB Heading](https://essential-blocks.com/docs/heading/)
-- [EB Image Gallery](https://essential-blocks.com/docs/image-gallery/)
-- [EB Instagram Feed](https://essential-blocks.com/docs/instagram-feed/)
-- [EB Parallax Slider](https://essential-blocks.com/docs/parallax-slider/)
-- [EB Dual Button](https://essential-blocks.com/docs/dual-button/)
-- [EB Typing Text](https://essential-blocks.com/docs/typing-text/)
-- [EB Notice](https://essential-blocks.com/docs/notice/)
-- [EB Progress Bar](https://essential-blocks.com/docs/progress-bar/)
-- [EB Slider](https://essential-blocks.com/docs/slider)
-- [EB Social](https://essential-blocks.com/docs/social/)
-- [EB Team Member](https://essential-blocks.com/docs/team-member/)
-- [EB Testimonial](https://essential-blocks.com/docs/testimonial/)
-- [EB Block Wrapper](https://essential-blocks.com/docs/block-wrapper/)
-- [EB Pricing Table](https://essential-blocks.com/docs/pricing-table/)
-- [EB Flipbox](https://essential-blocks.com/docs/flipbox/)
-- [EB Image Comparison](https://essential-blocks.com/docs/image-comparison/)
-- [EB Call To Action](https://essential-blocks.com/docs/call-to-action/)
-- [EB Button](https://essential-blocks.com/docs/button/)
-- [EB Interactive Promo](https://essential-blocks.com/docs/interactive-promo/)
-- [EB Accordion](https://essential-blocks.com/docs/accordion/)
-- [EB Countdown](https://essential-blocks.com/docs/countdown/) + more coming soon
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
 
-This Block plugin is brought to you by WPDeveloper, the team behind the most popular elements library Essential Addons for Elementor (used by almost 800,000+ happy users from around 180 countries).
+This Block is brought to you by [WPDeveloper](https://wpdeveloper.net), the team behind the most popular elements library [Essential Addons for Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/) (used by almost 1 million+ happy users from 180+ countries).
 
+## 👨‍💻 DOCUMENTATION AND SUPPORT ##
 
-## ⚡ SUPPORT & DOCUMENTATION ##
-
-🧑‍💻 If you have any more questions, visit our support on the Plugin’s Forum
-
-🌐 For more information about features, FAQs and documentation, check out our website at [Essential Blocks for Gutenberg](https://essential-blocks.com/)
+- For documentation and tutorials go to our [documentation](https://essential-blocks.com/docs/)
+- To report issue and contribution visit [Github](https://github.com/EssentialBlocks/table-of-contents-block/).
+- If you have any more questions, visit our support on the [Plugin's Forum](https://wordpress.org/support/plugin/table-of-contents-block/).
+- For more information about features, FAQs and documentation, check out our website at [WPDeveloper](https://wpdeveloper.net/).
 
 ## 🙌 JOIN THE COMMUNITY ##
 
-- 🎦 Subscribe to our Youtube Channel to watch video tutorials on WordPress
-- 🤝 Join our Facebook Community & get connected with expert web creators like yourself
-- 🧡 LOVED this plugin? Rate us on WordPress Repository
+🎦 Subscribe to our [Youtube Channel](https://www.youtube.com/wpdevelopernet/?sub_confirmation=1) to watch video tutorials on WordPress.
 
-## 🔥 GET FREEBIES FOR YOUR WORDPRESS SITE ##
+🤝 Join our [Facebook Community](https://www.facebook.com/groups/wpdeveloper.net/) & get connected with expert web creators like yourself.
 
-Consider checking out our other WordPress solutions & boost your WordPress website:
+🧡 LOVED Table of Content block? Rate us on WordPress Repository
 
-**🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/):** Most popular Elementor addons with 70+ widgets & ready blocks
+🔥 GET FREEBIES FOR YOUR WORDPRESS SITE
 
-**☁ [Templately](https://wordpress.org/plugins/templately/):** Free templates library for Elementor & Gutenberg along with the cloud collaboration for WordPress
+🔝 [Essential Addons For Elementor](https://wordpress.org/plugins/essential-addons-for-elementor-lite/): Most popular Elementor addons with 70+ widgets & ready blocks
 
+☁ [Templately](https://wordpress.org/plugins/templately/): Free templates library for Elementor & Gutenberg along with the cloud collaboration for WordPress
 
-**🔔 [NotificationX](https://wordpress.org/plugins/notificationx/):** Best Social Proof & FOMO Marketing Solution to increase conversion rates
+🔔 [NotificationX](https://wordpress.org/plugins/notificationx/): Best Social Proof & FOMO Marketing Solution to increase conversion rates
 
+📚 [BetterDocs](https://wordpress.org/plugins/betterdocs/): Best Documentation & Knowledge Base Plugin for WordPress reduce manual support tickets & improve user experience.
 
-**📚 [BetterDocs](https://wordpress.org/plugins/betterdocs/):** Best Documentation & Knowledge Base Plugin for WordPress reduce manual support tickets & improve user experience.
+⏰ [WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/): Advanced editorial calendar & complete solution for WordPress Post Scheduling, social sharing, missed scheduled alerts and more.
 
+⭐ [ReviewX](https://wordpress.org/plugins/reviewx/): WooCommerce Product review plugin that allows users to submit product reviews with multiple criteria, photos, video and more
 
-**⏰ [WP Scheduled Posts](https://wordpress.org/plugins/wp-scheduled-posts/):** Advanced editorial calendar & complete solution for WordPress Post Scheduling, social sharing, missed scheduled alerts and more.
-
-
-**⭐ [ReviewX](https://wordpress.org/plugins/reviewx/):** WooCommerce Product review plugin that allows users to submit product reviews with multiple criteria, photos, video and more
-
-**♾️ [EmbedPress](https://wordpress.org/plugins/embedpress/):** Embed anything and everything in WordPress without any coding
-
-
-**⚡ [Flexia](http://wordpress.org/plugins/flexia):** Most lightweight, customizable & multi purpose theme for WordPress
+⚡ [Flexia](http://wordpress.org/plugins/flexia): Most lightweight, customizable & multi purpose theme for WordPress
 
 == Installation ==
 
