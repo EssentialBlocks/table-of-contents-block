@@ -1,9 +1,9 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, hztyfoon
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
-Tested up to: 6.0
-Stable tag: 1.3.3
+Tested up to: 6.1
+Stable tag: 1.3.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -53,7 +53,7 @@ Get [Essential Blocks Gutenberg](https://wordpress.org/plugins/essential-blocks/
 
 ## 🚀 BACKED BY A TRUSTED TEAM ##
 
-This Block plugin is brought to you by WPDeveloper, the team behind the most popular elements library Essential Addons for Elementor (used by almost 800,000+ happy users from around 180 countries).
+This Block plugin is brought to you by WPDeveloper, the team behind the most popular elements library Essential Addons for Elementor (used by almost 1 million+ happy users from around 180 countries).
 
 
 ## ⚡ SUPPORT & DOCUMENTATION ##
@@ -118,6 +118,10 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.3.4 - 18/12/2022 =
+* Fixed: Minor bugs
+* Improved: Update controls
 
 = 1.3.3 - 26/09/2022 =
 * Added: Scroll to TOC position option
