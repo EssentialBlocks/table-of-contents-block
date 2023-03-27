@@ -182,7 +182,11 @@ function Edit({
 	);
 	const deleteHeadersLists = useMemo(() => {
 		let _headerList = headerList.map((item) => {
-			let _item = { label: item.content, value: item.link, isDelete: false };
+			let _item = {
+				label: item.content,
+				value: item.link,
+				isDelete: false,
+			};
 			let _deleteHeaderList = deleteHeaderList.filter(
 				(i) => i.value == _item.value
 			);
@@ -196,7 +200,6 @@ function Edit({
 			if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
 				let newHeaderList = headerList.map((item) => item.text);
 				let newHeaders = headers.map((item) => decodeEntities(item.text));
-				console.log("newHeaderList", newHeaderList, "newHeaders", newHeaders);
 				let difference = newHeaderList.filter((x) => !newHeaders.includes(x));
 
 				_headerList = [..._headerList].map((item) => {
