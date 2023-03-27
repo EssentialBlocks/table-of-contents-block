@@ -30,48 +30,6 @@ window.addEventListener("DOMContentLoaded", function () {
 			this._hide();
 			this._show();
 			this._hideOnMobileView();
-			this._tooltip();
-		},
-
-		_tooltip: function () {
-			let containers = document.querySelectorAll(".eb-toc-container");
-			for (let container of containers) {
-				let enableCopyLink =
-					container && container.getAttribute("data-copy-link") == "true";
-
-				if (enableCopyLink) {
-					let headingAnchors = document.querySelectorAll(".eb-tooltip");
-
-					for (let headingAnchor of headingAnchors) {
-						if (headingAnchor) {
-							headingAnchor.parentNode.parentNode.addEventListener(
-								"mouseenter",
-								function (event) {
-									headingAnchor.style.display = "inline-block";
-								}
-							);
-							headingAnchor.parentNode.parentNode.addEventListener(
-								"mouseleave",
-								function (event) {
-									headingAnchor.style.display = "none";
-									this.getElementsByClassName(
-										"eb-tooltiptext"
-									)[0].style.visibility = "hidden";
-								}
-							);
-						}
-					}
-
-					let tooltips = document.querySelectorAll(".eb-tooltip");
-					for (let tooltip of tooltips) {
-						if (tooltip) {
-							tooltip.addEventListener("click", function (e) {
-								this.children[0].style.visibility = "visible";
-							});
-						}
-					}
-				}
-			}
 		},
 
 		_toggleCollapse: function () {
@@ -189,10 +147,7 @@ window.addEventListener("DOMContentLoaded", function () {
 									element.getBoundingClientRect().top +
 									window.pageYOffset +
 									yOffset;
-								window.scrollTo({
-									top: finalOffset,
-									behavior: "smooth",
-								});
+								window.scrollTo({ top: finalOffset, behavior: "smooth" });
 							} else {
 								document.getElementById(selector).scrollIntoView({
 									behavior: "smooth",
@@ -245,21 +200,12 @@ window.addEventListener("DOMContentLoaded", function () {
 					const tocBorder = container.style.border;
 					window.ebTocBorder = tocBorder;
 				}
-				let enableCopyLink =
-					container && container.getAttribute("data-copy-link") == "true";
-
-				let copyLinkHtml = enableCopyLink
-					? `<span class="eb-tooltip dashicons dashicons-clipboard"><span class="eb-tooltiptext">Copied!</span></span></span>`
-					: "";
 
 				let node = document.querySelector(".eb-toc-wrapper");
 
 				if (node) {
 					let headers = JSON.parse(node.getAttribute("data-headers"));
 					let visibleHeaders = JSON.parse(node.getAttribute("data-visible"));
-					let deleteHeaderLists = JSON.parse(
-						node.getAttribute("data-delete-headers")
-					);
 
 					let allowed_h_tags = [];
 					if (visibleHeaders !== undefined) {
@@ -279,25 +225,15 @@ window.addEventListener("DOMContentLoaded", function () {
 					if (undefined !== headers && 0 !== all_header.length) {
 						headers.forEach((element, headerIndex) => {
 							const element_text = parseTocSlug(element.text);
-							if (
-								undefined !== deleteHeaderLists &&
-								!deleteHeaderLists[headerIndex].isDelete
-							) {
-								all_header.forEach((item, index) => {
-									const header_text = parseTocSlug(item.textContent);
 
-									if (element_text.localeCompare(header_text) === 0) {
-										new ClipboardJS(`#${header_text}`);
-										item.innerHTML = `${item.innerHTML}<span id="${header_text}"
-                                    class="eb-toc__heading-anchor" data-clipboard-text="${
-																			location.protocol +
-																			"//" +
-																			location.host +
-																			location.pathname
-																		}#${header_text}">${copyLinkHtml}</span>`;
-									}
-								});
-							}
+							all_header.forEach((item, index) => {
+								const header_text = parseTocSlug(item.textContent);
+
+								if (element_text.localeCompare(header_text) === 0) {
+									// item.before(``);
+									item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
+								}
+							});
 						});
 					}
 				}

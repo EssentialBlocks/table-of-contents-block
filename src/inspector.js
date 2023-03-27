@@ -15,7 +15,6 @@ import {
 	Button,
 	TextControl,
 	CheckboxControl,
-	__experimentalDivider as Divider,
 } from "@wordpress/components";
 import { unescape as unescapeString, without } from "lodash";
 /**
@@ -111,7 +110,6 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 		topOffset,
 		deleteHeaderList,
 		title,
-		enableCopyLink,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
@@ -237,9 +235,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												label={__("Title Text", "essential-blocks")}
 												value={title}
 												onChange={(newTitle) =>
-													setAttributes({
-														title: newTitle,
-													})
+													setAttributes({ title: newTitle })
 												}
 											/>
 										</>
@@ -329,16 +325,6 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												/>
 											</>
 										)}
-										<ToggleControl
-											label={__("Enable Copy Link", "essential-blocks")}
-											help={__("Visible on frontend only")}
-											checked={enableCopyLink}
-											onChange={() =>
-												setAttributes({
-													enableCopyLink: !enableCopyLink,
-												})
-											}
-										/>
 										<TextControl
 											label={__("Offset Top", "essential-blocks")}
 											value={topOffset}
@@ -516,7 +502,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												controlName={titlePaddingConst}
 												baseLabel="Padding"
 											/>
-											<Divider />
+											<hr />
 											<ToggleControl
 												label={__("Title Separator", "essential-blocks")}
 												checked={seperator}
@@ -592,15 +578,9 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											<UnitControl
 												selectedUnit={contentGapUnit}
 												unitTypes={[
-													{
-														label: "px",
-														value: "px",
-													},
+													{ label: "px", value: "px" },
 													{ label: "%", value: "%" },
-													{
-														label: "em",
-														value: "em",
-													},
+													{ label: "em", value: "em" },
 												]}
 												onClick={(contentGapUnit) =>
 													setAttributes({
@@ -612,11 +592,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											<RangeControl
 												label={__("Content Gap", "essential-blocks")}
 												value={contentGap}
-												onChange={(contentGap) =>
-													setAttributes({
-														contentGap,
-													})
-												}
+												onChange={(contentGap) => setAttributes({ contentGap })}
 												min={0}
 												max={CONTENT_GAP_MAX}
 												step={CONTENT_GAP_STEP}
@@ -632,9 +608,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												label={__("Text Color", "essential-blocks")}
 												color={contentColor}
 												onChange={(contentColor) =>
-													setAttributes({
-														contentColor,
-													})
+													setAttributes({ contentColor })
 												}
 											/>
 

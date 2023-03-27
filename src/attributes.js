@@ -370,10 +370,6 @@ const attributes = {
 		type: "string",
 		default: "left",
 	},
-	enableCopyLink: {
-		type: "boolean",
-		default: false,
-	},
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
 
