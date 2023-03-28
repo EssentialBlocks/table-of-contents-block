@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", function () {
 						anchor.addEventListener("click", function (e) {
 							let selector = this.getAttribute("href").replace("#", "");
 							e.preventDefault();
-							if (typeof wrapperOffset === "number") {
+							if (typeof wrapperOffset === "number" && wrapperOffset) {
 								const yOffset = wrapperOffset ? -Math.abs(wrapperOffset) : 0;
 								const element = document.getElementById(selector);
 								const finalOffset =
@@ -279,7 +279,10 @@ window.addEventListener("DOMContentLoaded", function () {
 					if (undefined !== headers && 0 !== all_header.length) {
 						headers.forEach((element, headerIndex) => {
 							const element_text = parseTocSlug(element.text);
-							if (!deleteHeaderLists[headerIndex].isDelete) {
+							if (
+								deleteHeaderLists &&
+								!deleteHeaderLists[headerIndex].isDelete
+							) {
 								all_header.forEach((item, index) => {
 									const header_text = parseTocSlug(item.textContent);
 
@@ -292,6 +295,15 @@ window.addEventListener("DOMContentLoaded", function () {
 																			location.host +
 																			location.pathname
 																		}#${header_text}">${copyLinkHtml}</span>`;
+									}
+								});
+							} else {
+								all_header.forEach((item) => {
+									const header_text = parseTocSlug(item.textContent);
+
+									if (element_text.localeCompare(header_text) === 0) {
+										// item.before(``);
+										item.innerHTML = `<span id="${header_text}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
 									}
 								});
 							}
