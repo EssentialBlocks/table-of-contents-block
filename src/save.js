@@ -24,6 +24,8 @@ export default function save({ attributes }) {
 		topOffset,
 		scrollTarget,
 		stickyPosition = "left",
+		enableCopyLink,
+		deleteHeaderList,
 		classHook,
 	} = attributes;
 
@@ -48,6 +50,7 @@ export default function save({ attributes }) {
 						data-hide-mobile={hideOnMobile}
 						data-sticky={isSticky}
 						data-scroll-target={scrollTarget}
+						data-copy-link={enableCopyLink}
 					>
 						<div className="eb-toc-header">
 							{isSticky && (
@@ -74,6 +77,7 @@ export default function save({ attributes }) {
 							}  `}
 							data-headers={JSON.stringify(headers)}
 							data-visible={JSON.stringify(visibleHeaders)}
+							data-delete-headers={JSON.stringify(deleteHeaderList)}
 							data-smooth={isSmooth}
 							data-top-offset={topOffset ? topOffset : ""}
 						>
@@ -85,7 +89,9 @@ export default function save({ attributes }) {
 									isSticky ? ` eb-toc-button-${stickyPosition}` : ""
 								}`}
 							>
-								{displayTitle && title ? title : "Table of Contents"}
+								{displayTitle && (
+									<RichText.Content tagName="" className="" value={title} />
+								)}
 							</button>
 						)}
 					</div>

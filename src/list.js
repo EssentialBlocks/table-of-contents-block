@@ -12,10 +12,11 @@ class List extends Component {
 			listType,
 			contentGap = 20,
 			contentGapUnit = "px",
-			listSeperatorWidth = 10,
+			listSeperatorWidth = 3,
 			listSeperatorStyle = "solid",
 			listSeperatorColor = "#000",
 			showListSeparator,
+			deleteHeaderList,
 		} = this.props.attributes;
 
 		// Style objects
@@ -58,7 +59,7 @@ class List extends Component {
 
 		const filterArray = (origHeaders) => {
 			let arrays = [];
-			headers.forEach((heading, key) => {
+			origHeaders.forEach((heading, key) => {
 				if (visibleHeaders[heading.level - 1]) {
 					arrays.push(heading);
 				}
@@ -118,15 +119,33 @@ class List extends Component {
 			headers.length > 0 &&
 			headers.filter((header) => visibleHeaders[header.level - 1]).length > 0
 		) {
+			let newHeaders = [];
+			headers.forEach((item, index) => {
+				if (
+					deleteHeaderList &&
+					deleteHeaderList.length > 0 &&
+					deleteHeaderList[index] &&
+					deleteHeaderList[index].hasOwnProperty("isDelete") &&
+					deleteHeaderList[index].isDelete === false
+				) {
+					newHeaders.push(headers[index]);
+				}
+			});
+
 			return (
 				<div className="eb-toc__list-wrap">
-					{parseList(filterArray(headers))}
+					{newHeaders.length > 0
+						? parseList(filterArray(newHeaders))
+						: parseList(filterArray(headers))}
 				</div>
 			);
 		} else {
 			return (
 				<p className="eb_table-of-contents-placeholder">
-					{__("Add a header to begin generating the table of contents", "essential-blocks")}
+					{__(
+						"Add a header to begin generating the table of contents",
+						"essential-blocks"
+					)}
 				</p>
 			);
 		}

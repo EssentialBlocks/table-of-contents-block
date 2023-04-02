@@ -29,5 +29,5 @@ ebConditionalRegisterBlockType(metadata, {
 	edit: Edit,
 	save,
 	example,
-	deprecated
+	deprecated,
 });

@@ -2,7 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
+import { compose } from "@wordpress/compose";
 import {
 	BlockControls,
 	RichText,
@@ -10,7 +11,8 @@ import {
 	useBlockProps,
 } from "@wordpress/block-editor";
 import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
-import { select, useSelect } from "@wordpress/data";
+import { select, withSelect } from "@wordpress/data";
+import { decodeEntities } from "@wordpress/html-entities";
 
 /*
  * External dependencies
@@ -26,25 +28,7 @@ const {
 	duplicateBlockIdFix,
 } = window.EBTOCControls;
 
-import {
-	supportedHeaders,
-	isCoreHeading,
-	isEbHeading,
-	isUaHeading,
-	isKadenceHeading,
-	isQubelyHeading,
-	isQubelyText,
-	isStackableHeader,
-	isStackableHeading,
-	isOtterHeading,
-	isGetwidHeader,
-	isGenerateBlocksHeader,
-	isCreativeBlockHeading,
-	isEasyBlocksHeading,
-	isDiHeading,
-	isElegantHeading,
-	parseTocSlug,
-} from "./helper";
+import { parseTocSlug } from "./helper";
 
 import classnames from "classnames";
 
@@ -71,157 +55,85 @@ import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import List from "./list";
 
-function getArrayFromBlocks(headerBlocks) {
-	let headerList = [];
+function getHeadingsFromHeadingElements(headingElements) {
+	return [...headingElements].map((heading, index) => {
+		let level;
+		switch (heading.tagName) {
+			case "H1":
+				level = 1;
+				break;
+			case "H2":
+				level = 2;
+				break;
+			case "H3":
+				level = 3;
+				break;
+			case "H4":
+				level = 4;
+				break;
+			case "H5":
+				level = 5;
+				break;
+			case "H6":
+				level = 6;
+				break;
+		}
 
-	if (headerBlocks.length > 0) {
-		headerBlocks.map((block) => {
-			let header = {};
-
-			if (
-				isCoreHeading(block) ||
-				isKadenceHeading(block) ||
-				isQubelyHeading(block)
-			) {
-				header = {
-					level: parseInt(block.attributes.level),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
-			} else if (isEbHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tagName[1]),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
-			} else if (isUaHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.level),
-					content: block.attributes.headingTitle,
-					text: striptags(block.attributes.headingTitle),
-					link: parseTocSlug(striptags(block.attributes.headingTitle)),
-				};
-			} else if (isQubelyText(block)) {
-				if (block.attributes.enableTitle) {
-					header = {
-						level: parseInt(block.attributes.titleLevel),
-						content: block.attributes.title,
-						text: striptags(block.attributes.title),
-						link: parseTocSlug(striptags(block.attributes.title)),
-					};
-				}
-			} else if (isStackableHeader(block)) {
-				if (block.attributes.showTitle) {
-					header = {
-						level: parseInt(block.attributes.titleTag[1]),
-						content: block.attributes.title,
-						text: striptags(block.attributes.title),
-						link: parseTocSlug(striptags(block.attributes.title)),
-					};
-				}
-			} else if (isStackableHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.titleTag[1]),
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
-			} else if (isOtterHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tag[1]),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
-			} else if (isGetwidHeader(block)) {
-				// Ignore getwid span and p tag
-				if (block.attributes.titleTag[0] === "h") {
-					header = {
-						level: parseInt(block.attributes.titleTag[1]),
-						content: block.attributes.content,
-						text: striptags(block.attributes.content),
-						link: parseTocSlug(striptags(block.attributes.content)),
-					};
-				}
-			} else if (isGenerateBlocksHeader(block)) {
-				// Ignore tags other than heading, check empty content
-				if (
-					block.attributes.element[0] === "h" &&
-					block.attributes.content.length > 0
-				) {
-					let content = block.attributes.content.find(
-						(item) => typeof item === "string"
-					);
-
-					if (content) {
-						header = {
-							level: parseInt(block.attributes.element[1]),
-							conetnt: content,
-							text: striptags(content),
-							link: parseTocSlug(striptags(content)),
-						};
-					}
-				}
-			} else if (isCreativeBlockHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tag[1]),
-					content: block.attributes.headingText,
-					text: striptags(block.attributes.headingText),
-					link: parseTocSlug(striptags(block.attributes.headingText)),
-				};
-			} else if (isEasyBlocksHeading(block)) {
-				header = {
-					level: 2, // Only suports h2
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
-			} else if (isDiHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.HeadTag[1]),
-					content: block.attributes.HeadContent,
-					text: striptags(block.attributes.HeadContent),
-					link: parseTocSlug(striptags(block.attributes.HeadContent)),
-				};
-			} else if (isElegantHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.headingTag[1]),
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
-			}
-
-			headerList.push(header);
-		});
-	}
-
-	return headerList;
+		return {
+			level: level,
+			content: heading.textContent,
+			text: heading.textContent,
+			link: parseTocSlug(striptags(heading.textContent)),
+		};
+	});
 }
 
-// Custom hook for dynamic header list
-const useHeader = () => {
-	const allBlocks = useSelect((select) =>
-		select("core/block-editor").getBlocks()
-	);
-
-	const headerBlocks = allBlocks.filter((block) =>
-		supportedHeaders.includes(block.name)
-	);
-
-	const headerList = getArrayFromBlocks(headerBlocks);
-
-	return headerList;
+const getHeadersFromContent = (attributes, postContent) => {
+	const tempPostContentDOM = document.createElement("div");
+	tempPostContentDOM.innerHTML = postContent;
+	let queryArray = ["h1", "h2", "h3", "h4", "h5", "h6"];
+	if (
+		attributes &&
+		undefined !== attributes.visibleHeaders &&
+		undefined !== attributes.visibleHeaders[0]
+	) {
+		queryArray = [];
+		if (attributes.visibleHeaders[0]) {
+			queryArray.push("h1");
+		}
+		if (attributes.visibleHeaders[1]) {
+			queryArray.push("h2");
+		}
+		if (attributes.visibleHeaders[2]) {
+			queryArray.push("h3");
+		}
+		if (attributes.visibleHeaders[3]) {
+			queryArray.push("h4");
+		}
+		if (attributes.visibleHeaders[4]) {
+			queryArray.push("h5");
+		}
+		if (attributes.visibleHeaders[5]) {
+			queryArray.push("h6");
+		}
+	}
+	const queryString = queryArray.toString();
+	if (queryString) {
+		const headingElements = tempPostContentDOM.querySelectorAll(queryString);
+		return getHeadingsFromHeadingElements(headingElements);
+	}
+	return [];
 };
 
-export default function Edit({
+function Edit({
 	isSelected,
 	attributes,
 	setAttributes,
 	clientId,
 	className,
+	postContent,
+	blockOrder,
+	isTyping,
 }) {
 	const {
 		resOption,
@@ -253,22 +165,72 @@ export default function Edit({
 		topSpace,
 		contentHeight,
 		indent,
+		deleteHeaderList,
 		hasUnderline,
+		isMigrated,
 		classHook,
 	} = attributes;
-
 	const [visible, setVisible] = useState(true);
 
-	const headerList = useHeader();
+	const isBlockJustInserted = select("core/block-editor").wasBlockJustInserted(
+		clientId
+	);
+
+	const headerList = useMemo(
+		() => getHeadersFromContent(attributes, postContent),
+		[blockOrder, isTyping, postContent]
+	);
+	const deleteHeadersLists = useMemo(() => {
+		let _headerList = headerList.map((item) => {
+			let _item = {
+				label: item.content,
+				value: item.link,
+				isDelete: false,
+			};
+			let _deleteHeaderList = deleteHeaderList.filter(
+				(i) => i.value == _item.value
+			);
+			if (_deleteHeaderList.length > 0) {
+				_item.isDelete = _deleteHeaderList[0]?.isDelete ?? _item.isDelete;
+			}
+			return _item;
+		});
+
+		if (!isMigrated && !isBlockJustInserted) {
+			if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
+				let newHeaderList = headerList.map((item) => item.text);
+				let newHeaders = headers.map((item) => decodeEntities(item.text));
+				let difference = newHeaderList.filter((x) => !newHeaders.includes(x));
+
+				_headerList = [..._headerList].map((item) => {
+					if (difference.includes(item.label)) {
+						item.isDelete = true;
+					}
+					return item;
+				});
+			}
+
+			setAttributes({ isMigrated: true });
+		}
+
+		return _headerList;
+	}, [headerList, isBlockJustInserted]);
 
 	useEffect(() => {
 		if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
 			setAttributes({ headers: headerList });
 		}
-	}, [headerList]);
+		if (
+			JSON.stringify(deleteHeadersLists) !== JSON.stringify(deleteHeaderList)
+		) {
+			setAttributes({ deleteHeaderList: deleteHeadersLists });
+		}
+	}, [deleteHeadersLists]);
 
 	useEffect(() => {
-		if (document.querySelector(".eb-toc-go-top")) return () => {};
+		if (document.querySelector(".eb-toc-go-top")) {
+			return;
+		}
 		const goTop = document.createElement("span");
 		goTop.innerHTML = ">";
 		goTop.setAttribute("class", "eb-toc-go-top ");
@@ -411,22 +373,22 @@ export default function Edit({
 		  `
 					: ""
 			}
-  
+
 		  .${blockId}.eb-toc-container{
 			  ${wrapMaxWidthDesktop}
-			  
+
 			  ${mainBgc ? `background-color:${mainBgc};` : ""}
-  
+
 			  ${wrpMarginDesktop}
 			  ${wrpPaddingDesktop}
 			  ${wrpBdShdStyesDesktop}
 			  ${isSticky ? "" : `transition:all 0.5s, ${wrpBdShdTransitionStyle}`};
 		  }
-  
+
 		  .${blockId}.eb-toc-container:hover{
 			  ${wrpBdShdStylesHoverDesktop}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-title{
 			  text-align: ${titleAlign};
 			  cursor:${collapsible ? "pointer" : "default"};
@@ -441,48 +403,48 @@ export default function Edit({
 				}
 			  ${titlePaddingDesktop}
 			  ${titleTypoStylesDesktop}
-  
+
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper{
 			  background-color:${contentBg};
 			  text-align: ${contentAlign};
 			  ${contentPaddingDesktop}
 		  }
-  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper ul,
 		  .${blockId}.eb-toc-container .eb-toc-wrapper ol
 		  {
 			  ${listType === "none" ? `list-style: none;` : ""}
-			  ${indent ? `margin-left:${indent}px;` : ""} 
+			  ${indent ? `margin-left:${indent}px;` : ""}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li {
 			  color:${contentColor};
 			  ${contentTypoStylesDesktop}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li:hover{
 			  color:${contentHoverColor};
 		  }
-  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li a{
 			  color:inherit;
 		  }
-		  
-		  
+
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li a,
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li a:focus{
 			  ${!hasUnderline ? "text-decoration:none;" : "text-decoration:underline;"}
 			  background:none;
 		  }
-  
+
 		  ${
 				scrollToTop
 					? `
 			  .eb-toc-go-top.show-scroll {
-				  ${arrowHeight ? `height: ${arrowHeight}px;` : ""}	
-				  ${arrowWidth ? `width: ${arrowWidth}px;` : ""}	
+				  ${arrowHeight ? `height: ${arrowHeight}px;` : ""}
+				  ${arrowWidth ? `width: ${arrowWidth}px;` : ""}
 				  ${arrowBg ? `background-color: ${arrowBg};` : ""}
 				  ${arrowColor ? `color: ${arrowColor};` : ""}
 			  }
@@ -490,13 +452,13 @@ export default function Edit({
 					: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
 					  ""
 			}
-  
+
 	  `;
 
 	const tabAllStylesCommon = `
 		  .${blockId}.eb-toc-container{
 			  ${wrapMaxWidthTab}
-  
+
 			  ${wrpMarginTab}
 			  ${wrpPaddingTab}
 			  ${wrpBdShdStyesTab}
@@ -504,56 +466,56 @@ export default function Edit({
 		  .${blockId}.eb-toc-container:hover{
 			  ${wrpBdShdStylesHoverTab}
 		  }
-  
+
 		  .${blockId}.eb-toc-container .eb-toc-title{
 			  ${titlePaddingTab}
 			  ${titleTypoStylesTab}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper{
 			  ${contentPaddingTab}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li{
 			  ${contentTypoStylesTab}
 		  }
-  
+
 	  `;
 
 	const mobileAllStylesCommon = `
 		  .${blockId}.eb-toc-container{
 			  ${wrapMaxWidthMobile}
-  
-  
+
+
 			  ${wrpMarginMobile}
 			  ${wrpPaddingMobile}
 			  ${wrpBdShdStyesMobile}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container:hover{
 			  ${wrpBdShdStylesHoverMobile}
 		  }
-  
+
 		  .${blockId}.eb-toc-container .eb-toc-title{
 			  ${titlePaddingMobile}
 			  ${titleTypoStylesMobile}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper{
 			  ${contentPaddingMobile}
 		  }
-		  
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper li{
 			  ${contentTypoStylesMobile}
 		  }
-  
+
 	  `;
 
 	//
 	const desktopAllStylesEditor = `
 		  ${desktopAllStylesCommon}
-  
-  
+
+
 		  .${blockId}.eb-toc-container .eb-toc-wrapper{
 			  display:${visible ? "block" : "none"};
 		  }
@@ -572,7 +534,7 @@ export default function Edit({
 		  ${desktopAllStylesCommon}
 		  ${
 				isSticky
-					? `					
+					? `
 					.${blockId}.eb-toc-container.eb-toc-sticky-right.eb-toc-is-sticky {
 						position:fixed;
 						top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
@@ -587,11 +549,11 @@ export default function Edit({
 						z-index:999;
 						left: 0;
 					}
-			  
+
 				  .${blockId}.eb-toc-container.eb-toc-is-sticky .eb-toc-wrapper{
 					  ${contentHeight ? `min-height:${contentHeight}px;` : ""}
 				  }
-			  
+
 				  .${blockId}.eb-toc-container.eb-toc-is-sticky button.eb-toc-button{
 					  color:${titleColor};
 					  background-color:${titleBg};
@@ -606,21 +568,21 @@ export default function Edit({
 				  `
 					: ""
 			}
-  
-  
+
+
 	  `);
 
 	// all css styles for Tab in strings ⬇
 	const tabAllStylesFrontEnd = softMinifyCssStrings(`
 		  ${tabAllStylesCommon}
-  
-		  
+
+
 	  `);
 
 	// all css styles for Mobile in strings ⬇
-	const mobileAllStylesFrontEnd = softMinifyCssStrings(`	
+	const mobileAllStylesFrontEnd = softMinifyCssStrings(`
 		  ${mobileAllStylesCommon}
-  
+
 	  `);
 
 	//
@@ -642,7 +604,11 @@ export default function Edit({
 	return (
 		<>
 			{isSelected && (
-				<Inspector attributes={attributes} setAttributes={setAttributes} />
+				<Inspector
+					deleteHeaders={deleteHeadersLists}
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
 			)}
 
 			<BlockControls>
@@ -679,28 +645,28 @@ export default function Edit({
 				<style>
 					{`
 				  ${desktopAllStylesEditor}
-  
+
 				  /* mimmikcssStart */
-  
+
 				  ${resOption === "Tablet" ? tabAllStylesEditor : " "}
 				  ${resOption === "Mobile" ? tabAllStylesEditor + mobileAllStylesEditor : " "}
-  
+
 				  /* mimmikcssEnd */
-  
-				  @media all and (max-width: 1024px) {	
-  
+
+				  @media all and (max-width: 1024px) {
+
 					  /* tabcssStart */
 					  ${softMinifyCssStrings(tabAllStylesEditor)}
-					  /* tabcssEnd */			
-  
+					  /* tabcssEnd */
+
 				  }
-  
+
 				  @media all and (max-width: 767px) {
-					  
-					  /* mobcssStart */			
+
+					  /* mobcssStart */
 					  ${softMinifyCssStrings(mobileAllStylesEditor)}
-					  /* mobcssEnd */			
-  
+					  /* mobcssEnd */
+
 				  }
 				  `}
 				</style>
@@ -729,3 +695,16 @@ export default function Edit({
 		</>
 	);
 }
+
+export default compose([
+	withSelect((select, ownProps) => {
+		const postContent = select("core/editor")
+			? select("core/editor").getEditedPostContent()
+			: "";
+		return {
+			postContent: postContent,
+			blockOrder: select("core/block-editor").getBlockOrder(),
+			isTyping: select("core/block-editor").isTyping(),
+		};
+	}),
+])(Edit);

@@ -76,6 +76,14 @@ const attributes = {
 		type: "array",
 		default: Array(6).fill(true),
 	},
+	deleteHeaderList: {
+		type: "array",
+		default: [],
+	},
+	isMigrated: {
+		type: "boolean",
+		default: false,
+	},
 	listType: {
 		type: "string",
 		default: "ul",
@@ -361,6 +369,10 @@ const attributes = {
 	stickyPosition: {
 		type: "string",
 		default: "left",
+	},
+	enableCopyLink: {
+		type: "boolean",
+		default: false,
 	},
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
