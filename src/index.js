@@ -11,7 +11,6 @@ import "./style.scss";
 
 import { TOC_Icon } from "./icon";
 import Edit from "./edit";
-import save from "./save";
 import attributes from "./attributes";
 import metadata from "../block.json";
 import example from "./example";
@@ -27,7 +26,7 @@ ebConditionalRegisterBlockType(metadata, {
 	icon: TOC_Icon,
 	attributes,
 	edit: Edit,
-	save,
+	save: () => null,
 	example,
 	deprecated,
 });
