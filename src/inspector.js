@@ -17,7 +17,8 @@ import {
 	CheckboxControl,
 	__experimentalDivider as Divider,
 } from "@wordpress/components";
-import { unescape as unescapeString, without } from "lodash";
+import { unescape as unescapeString } from "lodash";
+import FontIconPicker from "@fonticonpicker/react-fonticonpicker";
 /**
  * Internal dependencies
  */
@@ -35,6 +36,7 @@ const {
 	UnitControl,
 	ResetControl,
 	AdvancedControls,
+	DynamicInputControl,
 } = window.EBTOCControls;
 
 import {
@@ -43,6 +45,7 @@ import {
 } from "./constants/typographyPrefixConstants";
 
 import { wrapMaxWidthPrefix } from "./constants/rangeNames";
+import faIcons from "./fontawesomeIcons";
 
 import {
 	//
@@ -103,7 +106,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 		isSticky,
 		contentHeight,
 		topSpace,
-		hideOnMobile,
+		stickyHideOnMobile,
 		scrollTarget,
 		stickyPosition,
 		//
@@ -112,10 +115,13 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 		deleteHeaderList,
 		title,
 		enableCopyLink,
+		scrollToTopIcon,
+		listStyle,
 	} = attributes;
 
 	const [options, setOptions] = useState(HEADERS);
 	const [defaultOptions, setDefaultOptions] = useState([]);
+
 	//
 	useEffect(() => {
 		setDefaultVisible();
@@ -196,7 +202,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 					]}
 				>
 					{(tab) => (
-						<div className={"eb-tab-controls" + tab.name} key={tab.name}>
+						<div
+							className={"eb-tab-controls" + tab.name}
+							key={tab.name}
+						>
 							{tab.name === "general" && (
 								<>
 									<style>
@@ -220,11 +229,16 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										}
 										`}
 									</style>
-									<PanelBody title={__("Title", "essential-block")}>
+									<PanelBody
+										title={__("Title", "essential-block")}
+									>
 										<>
 											{!isSticky && (
 												<ToggleControl
-													label={__("Display Title", "essential-blocks")}
+													label={__(
+														"Display Title",
+														"essential-blocks"
+													)}
 													checked={displayTitle}
 													onChange={() =>
 														setAttributes({
@@ -233,7 +247,21 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													}
 												/>
 											)}
-											<TextControl
+											<DynamicInputControl
+												label={__(
+													"Title Text",
+													"essential-blocks"
+												)}
+												attrName="title"
+												inputValue={title}
+												setAttributes={setAttributes}
+												onChange={(text) =>
+													setAttributes({
+														title: text,
+													})
+												}
+											/>
+											{/* <TextControl
 												label={__("Title Text", "essential-blocks")}
 												value={title}
 												onChange={(newTitle) =>
@@ -241,15 +269,19 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 														title: newTitle,
 													})
 												}
-											/>
+											/> */}
 										</>
 									</PanelBody>
 									<PanelBody
-										title={__("Supported Heading Tags", "essential-blocks")}
+										title={__(
+											"Supported Heading Tags",
+											"essential-blocks"
+										)}
 									>
 										<div className="fix-select-over-lapping">
 											<Select2
 												options={options}
+												value={defaultOptions}
 												defaultValue={defaultOptions}
 												isMulti
 												onChange={onHeaderChange}
@@ -258,11 +290,17 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 									</PanelBody>
 
 									<PanelBody
-										title={__("Content Settings", "essential-blocks")}
+										title={__(
+											"Content Settings",
+											"essential-blocks"
+										)}
 										initialOpen={false}
 									>
 										<ToggleControl
-											label={__("Display Underline", "essential-blocks")}
+											label={__(
+												"Display Underline",
+												"essential-blocks"
+											)}
 											checked={hasUnderline}
 											onChange={() =>
 												setAttributes({
@@ -272,7 +310,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										/>
 										{displayTitle && !isSticky && (
 											<ToggleControl
-												label={__("Collapsible", "essential-blocks")}
+												label={__(
+													"Collapsible",
+													"essential-blocks"
+												)}
 												checked={collapsible}
 												onChange={() =>
 													setAttributes({
@@ -284,7 +325,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 
 										{displayTitle && collapsible && (
 											<ToggleControl
-												label={__("Collapsed initially", "essential-blocks")}
+												label={__(
+													"Collapsed initially",
+													"essential-blocks"
+												)}
 												checked={initialCollapse}
 												onChange={() =>
 													setAttributes({
@@ -295,7 +339,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										)}
 
 										<ToggleControl
-											label={__("Sticky contents", "essential-blocks")}
+											label={__(
+												"Sticky contents",
+												"essential-blocks"
+											)}
 											help={__(
 												"Always show contents on sidebar (Visible on frontend only)"
 											)}
@@ -309,29 +356,42 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										{isSticky && (
 											<>
 												<SelectControl
-													label={__("Sticky Position", "essential-blocks")}
+													label={__(
+														"Sticky Position",
+														"essential-blocks"
+													)}
 													value={stickyPosition}
 													options={STICKY_POSITION}
-													onChange={(stickyPosition) =>
+													onChange={(
+														stickyPosition
+													) =>
 														setAttributes({
 															stickyPosition,
 														})
 													}
 												/>
 												<ToggleControl
-													label={__("Hide on Mobile", "essential-blocks")}
-													checked={hideOnMobile}
+													label={__(
+														"Hide on Mobile",
+														"essential-blocks"
+													)}
+													checked={stickyHideOnMobile}
 													onChange={() =>
 														setAttributes({
-															hideOnMobile: !hideOnMobile,
+															stickyHideOnMobile: !stickyHideOnMobile,
 														})
 													}
 												/>
 											</>
 										)}
 										<ToggleControl
-											label={__("Enable Copy Link", "essential-blocks")}
-											help={__("Visible on frontend only")}
+											label={__(
+												"Enable Copy Link",
+												"essential-blocks"
+											)}
+											help={__(
+												"Visible on frontend only"
+											)}
 											checked={enableCopyLink}
 											onChange={() =>
 												setAttributes({
@@ -340,7 +400,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											}
 										/>
 										<TextControl
-											label={__("Offset Top", "essential-blocks")}
+											label={__(
+												"Offset Top",
+												"essential-blocks"
+											)}
 											value={topOffset}
 											onChange={(value) =>
 												setAttributes({
@@ -349,6 +412,34 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											}
 											type="number"
 										/>
+										<SelectControl
+											label={__(
+												"List Style",
+												"essential-blocks"
+											)}
+											value={listStyle}
+											options={[
+												{
+													label: __(
+														"Unordered",
+														"essential-blocks"
+													),
+													value: "ul",
+												},
+												{
+													label: __(
+														"Ordered",
+														"essential-blocks"
+													),
+													value: "ol",
+												},
+											]}
+											onChange={(listStyle) =>
+												setAttributes({
+													listStyle,
+												})
+											}
+										/>
 									</PanelBody>
 
 									<PanelBody
@@ -356,7 +447,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										initialOpen={false}
 									>
 										<ToggleControl
-											label={__("Smooth Scroll", "essential-blocks")}
+											label={__(
+												"Smooth Scroll",
+												"essential-blocks"
+											)}
 											checked={isSmooth}
 											onChange={() =>
 												setAttributes({
@@ -366,7 +460,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										/>
 
 										<ToggleControl
-											label={__("Scroll To Top", "essential-blocks")}
+											label={__(
+												"Scroll To Top",
+												"essential-blocks"
+											)}
 											checked={scrollToTop}
 											onChange={() =>
 												setAttributes({
@@ -377,12 +474,35 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 
 										{scrollToTop && (
 											<>
+												<Divider />
+												<BaseControl
+													label={__(
+														"Icon",
+														"essential-blocks"
+													)}
+												>
+													<FontIconPicker
+														icons={faIcons}
+														value={scrollToTopIcon}
+														onChange={(icon) =>
+															setAttributes({
+																scrollToTopIcon: icon,
+															})
+														}
+														appendTo="body"
+													/>
+												</BaseControl>
 												{!isSticky && (
 													<SelectControl
-														label={__("Scroll Target", "essential-blocks")}
+														label={__(
+															"Scroll Target",
+															"essential-blocks"
+														)}
 														value={scrollTarget}
 														options={SCROLL_OPTIONS}
-														onChange={(scrollTarget) =>
+														onChange={(
+															scrollTarget
+														) =>
 															setAttributes({
 																scrollTarget,
 															})
@@ -390,7 +510,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													/>
 												)}
 												<RangeControl
-													label={__("Arrow Height", "essential-blocks")}
+													label={__(
+														"Arrow Height",
+														"essential-blocks"
+													)}
 													value={arrowHeight}
 													onChange={(arrowHeight) =>
 														setAttributes({
@@ -402,7 +525,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												/>
 
 												<RangeControl
-													label={__("Arrow Width", "essential-blocks")}
+													label={__(
+														"Arrow Width",
+														"essential-blocks"
+													)}
 													value={arrowWidth}
 													onChange={(arrowWidth) =>
 														setAttributes({
@@ -414,7 +540,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												/>
 
 												<ColorControl
-													label={__("Arrow Background", "essential-blocks")}
+													label={__(
+														"Arrow Background",
+														"essential-blocks"
+													)}
 													color={arrowBg}
 													onChange={(arrowBg) =>
 														setAttributes({
@@ -424,7 +553,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												/>
 
 												<ColorControl
-													label={__("Arrow Color", "essential-blocks")}
+													label={__(
+														"Arrow Color",
+														"essential-blocks"
+													)}
 													color={arrowColor}
 													onChange={(arrowColor) =>
 														setAttributes({
@@ -435,59 +567,97 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											</>
 										)}
 									</PanelBody>
-
-									<PanelBody
-										title={__("Exclude Headings", "essential-blocks")}
-										initialOpen={false}
-									>
-										{deleteHeaderList.map((header, index) => {
-											return (
-												<CheckboxControl
-													key={index}
-													label={unescapeString(header.label)}
-													value={header.value}
-													checked={header.isDelete}
-													onChange={() => {
-														onDeleteHeaderChange(header, index);
-													}}
-												/>
-											);
-										})}
-									</PanelBody>
+									{typeof eb_conditional_localize !==
+										"undefined" &&
+										eb_conditional_localize?.editor_type !==
+										"edit-site" && (
+											<PanelBody
+												title={__(
+													"Exclude Headings",
+													"essential-blocks"
+												)}
+												initialOpen={false}
+											>
+												{deleteHeaderList.map(
+													(header, index) => {
+														return (
+															<CheckboxControl
+																key={index}
+																label={unescapeString(
+																	header.label
+																)}
+																value={
+																	header.value
+																}
+																checked={
+																	header.isDelete
+																}
+																onChange={() => {
+																	onDeleteHeaderChange(
+																		header,
+																		index
+																	);
+																}}
+															/>
+														);
+													}
+												)}
+											</PanelBody>
+										)}
 								</>
 							)}
 							{tab.name === "styles" && (
 								<>
 									{displayTitle && (
 										<PanelBody
-											title={__("Title", "essential-blocks")}
+											title={__(
+												"Title",
+												"essential-blocks"
+											)}
 											initialOpen={true}
 										>
 											<BaseControl
-												label={__("Align", "essential-blocks")}
+												label={__(
+													"Align",
+													"essential-blocks"
+												)}
 												className="eb-base-control"
 											>
 												<ButtonGroup>
-													{ALIGNS.map((align, index) => (
-														<Button
-															key={index}
-															isSmall
-															isPrimary={titleAlign === align.value}
-															isSecondary={titleAlign !== align.value}
-															onClick={() =>
-																setAttributes({
-																	titleAlign: align.value,
-																})
-															}
-														>
-															{align.label}
-														</Button>
-													))}
+													{ALIGNS.map(
+														(align, index) => (
+															<Button
+																key={index}
+																isSmall
+																isPrimary={
+																	titleAlign ===
+																	align.value
+																}
+																isSecondary={
+																	titleAlign !==
+																	align.value
+																}
+																onClick={() =>
+																	setAttributes(
+																		{
+																			titleAlign:
+																				align.value,
+																		}
+																	)
+																}
+															>
+																{align.label}
+															</Button>
+														)
+													)}
 												</ButtonGroup>
 											</BaseControl>
 
 											<ColorControl
-												label={__("Background Color", "essential-blocks")}
+												label={__(
+													"Background Color",
+													"essential-blocks"
+												)}
 												color={titleBg}
 												onChange={(titleBg) =>
 													setAttributes({
@@ -497,7 +667,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											/>
 
 											<ColorControl
-												label={__("Text Color", "essential-blocks")}
+												label={__(
+													"Text Color",
+													"essential-blocks"
+												)}
 												color={titleColor}
 												onChange={(titleColor) =>
 													setAttributes({
@@ -507,18 +680,27 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											/>
 											<TypographyDropdown
 												baseLabel="Typography"
-												typographyPrefixConstant={typoPrefix_title}
-												resRequiredProps={resRequiredProps}
+												typographyPrefixConstant={
+													typoPrefix_title
+												}
+												resRequiredProps={
+													resRequiredProps
+												}
 												defaultFontSize={22}
 											/>
 											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
+												resRequiredProps={
+													resRequiredProps
+												}
 												controlName={titlePaddingConst}
 												baseLabel="Padding"
 											/>
 											<Divider />
 											<ToggleControl
-												label={__("Title Separator", "essential-blocks")}
+												label={__(
+													"Title Separator",
+													"essential-blocks"
+												)}
 												checked={seperator}
 												onChange={() =>
 													setAttributes({
@@ -529,9 +711,14 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											{seperator && (
 												<>
 													<RangeControl
-														label={__("Seperator Size", "essential-blocks")}
+														label={__(
+															"Seperator Size",
+															"essential-blocks"
+														)}
 														value={seperatorSize}
-														onChange={(seperatorSize) =>
+														onChange={(
+															seperatorSize
+														) =>
 															setAttributes({
 																seperatorSize,
 															})
@@ -541,9 +728,14 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													/>
 
 													<ColorControl
-														label={__("Separator Color", "essential-blocks")}
+														label={__(
+															"Separator Color",
+															"essential-blocks"
+														)}
 														color={seperatorColor}
-														onChange={(seperatorColor) =>
+														onChange={(
+															seperatorColor
+														) =>
 															setAttributes({
 																seperatorColor,
 															})
@@ -551,10 +743,15 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													/>
 
 													<SelectControl
-														label={__("Separator Style", "essential-blocks")}
+														label={__(
+															"Separator Style",
+															"essential-blocks"
+														)}
 														value={seperatorStyle}
 														options={BORDER_STYLES}
-														onChange={(seperatorStyle) =>
+														onChange={(
+															seperatorStyle
+														) =>
 															setAttributes({
 																seperatorStyle,
 															})
@@ -565,28 +762,37 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										</PanelBody>
 									)}
 									<PanelBody
-										title={__("Content", "essential-blocks")}
+										title={__(
+											"Content",
+											"essential-blocks"
+										)}
 										initialOpen={false}
 									>
 										<div className="wrap-width-range-fix-style">
 											<ResponsiveRangeController
 												baseLabel={__(
-													`${
-														isSticky
-															? "sticky content max width"
-															: "Container max width"
+													`${isSticky
+														? "Sticky max width"
+														: "Container max width"
 													}`
 												)}
 												controlName={wrapMaxWidthPrefix}
-												resRequiredProps={resRequiredProps}
+												resRequiredProps={
+													resRequiredProps
+												}
 												min={0}
 												max={2000}
 												step={1}
 											/>
 											<RangeControl
-												label={__("Indent", "essential-blocks")}
+												label={__(
+													"Indent",
+													"essential-blocks"
+												)}
 												value={indent}
-												onChange={(indent) => setAttributes({ indent })}
+												onChange={(indent) =>
+													setAttributes({ indent })
+												}
 											/>
 
 											<UnitControl
@@ -610,7 +816,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											/>
 
 											<RangeControl
-												label={__("Content Gap", "essential-blocks")}
+												label={__(
+													"Content Gap",
+													"essential-blocks"
+												)}
 												value={contentGap}
 												onChange={(contentGap) =>
 													setAttributes({
@@ -623,13 +832,21 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											/>
 
 											<ColorControl
-												label={__("Background Color", "essential-blocks")}
+												label={__(
+													"Background Color",
+													"essential-blocks"
+												)}
 												color={contentBg}
-												onChange={(contentBg) => setAttributes({ contentBg })}
+												onChange={(contentBg) =>
+													setAttributes({ contentBg })
+												}
 											/>
 
 											<ColorControl
-												label={__("Text Color", "essential-blocks")}
+												label={__(
+													"Text Color",
+													"essential-blocks"
+												)}
 												color={contentColor}
 												onChange={(contentColor) =>
 													setAttributes({
@@ -639,7 +856,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											/>
 
 											<ColorControl
-												label={__("Hover Color", "essential-blocks")}
+												label={__(
+													"Hover Color",
+													"essential-blocks"
+												)}
 												color={contentHoverColor}
 												onChange={(contentHoverColor) =>
 													setAttributes({
@@ -650,19 +870,30 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 
 											<TypographyDropdown
 												baseLabel="Typography"
-												typographyPrefixConstant={typoPrefix_content}
-												resRequiredProps={resRequiredProps}
+												typographyPrefixConstant={
+													typoPrefix_content
+												}
+												resRequiredProps={
+													resRequiredProps
+												}
 												defaultFontSize={20}
 											/>
 
 											<ResponsiveDimensionsControl
-												resRequiredProps={resRequiredProps}
-												controlName={contentPaddingConst}
+												resRequiredProps={
+													resRequiredProps
+												}
+												controlName={
+													contentPaddingConst
+												}
 												baseLabel="Padding"
 											/>
 
 											<ToggleControl
-												label={__("Show Separator", "essential-blocks")}
+												label={__(
+													"Show Separator",
+													"essential-blocks"
+												)}
 												checked={showListSeparator}
 												onChange={() =>
 													setAttributes({
@@ -673,9 +904,16 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 											{showListSeparator && (
 												<>
 													<RangeControl
-														label={__("Separator Size", "essential-blocks")}
-														value={listSeperatorWidth}
-														onChange={(listSeperatorWidth) =>
+														label={__(
+															"Separator Size",
+															"essential-blocks"
+														)}
+														value={
+															listSeperatorWidth
+														}
+														onChange={(
+															listSeperatorWidth
+														) =>
 															setAttributes({
 																listSeperatorWidth,
 															})
@@ -684,10 +922,17 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 														max={100}
 													/>
 													<SelectControl
-														label={__("Separator Style", "essential-blocks")}
-														value={listSeperatorStyle}
+														label={__(
+															"Separator Style",
+															"essential-blocks"
+														)}
+														value={
+															listSeperatorStyle
+														}
 														options={BORDER_STYLES}
-														onChange={(listSeperatorStyle) =>
+														onChange={(
+															listSeperatorStyle
+														) =>
 															setAttributes({
 																listSeperatorStyle,
 															})
@@ -695,9 +940,16 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													/>
 
 													<ColorControl
-														label={__("Separator Color", "essential-blocks")}
-														color={listSeperatorColor}
-														onChange={(listSeperatorColor) =>
+														label={__(
+															"Separator Color",
+															"essential-blocks"
+														)}
+														color={
+															listSeperatorColor
+														}
+														onChange={(
+															listSeperatorColor
+														) =>
 															setAttributes({
 																listSeperatorColor,
 															})
@@ -709,7 +961,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 									</PanelBody>
 									{isSticky && (
 										<PanelBody
-											title={__("Sticky", "essential-blocks")}
+											title={__(
+												"Sticky",
+												"essential-blocks"
+											)}
 											initialOpen={false}
 										>
 											<div className="eb-reset-button-margin-fix">
@@ -721,13 +976,18 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 													}
 												>
 													<RangeControl
-														label={__("Content min-height", "essential-blocks")}
+														label={__(
+															"Content min-height",
+															"essential-blocks"
+														)}
 														help={__(
 															"Visible on frontend only",
 															"essential-blocks"
 														)}
 														value={contentHeight}
-														onChange={(contentHeight) =>
+														onChange={(
+															contentHeight
+														) =>
 															setAttributes({
 																contentHeight,
 															})
@@ -738,7 +998,10 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 												</ResetControl>
 											</div>
 											<RangeControl
-												label={__("Top Space", "essential-blocks")}
+												label={__(
+													"Top Space",
+													"essential-blocks"
+												)}
 												help={__(
 													"Visible on frontend only",
 													"essential-blocks"
@@ -760,7 +1023,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 								<>
 									<PanelBody
 										title={__("Margin & Padding")}
-										// initialOpen={true}
+									// initialOpen={true}
 									>
 										<ResponsiveDimensionsControl
 											resRequiredProps={resRequiredProps}
@@ -774,20 +1037,33 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Background ", "essential-blocks")}>
+									<PanelBody
+										title={__(
+											"Background ",
+											"essential-blocks"
+										)}
+									>
 										<ColorControl
-											label={__("Background Color", "essential-blocks")}
+											label={__(
+												"Background Color",
+												"essential-blocks"
+											)}
 											color={mainBgc}
-											onChange={(mainBgc) => setAttributes({ mainBgc })}
+											onChange={(mainBgc) =>
+												setAttributes({ mainBgc })
+											}
 										/>
 									</PanelBody>
 
-									<PanelBody title={__("Border & Shadow")} initialOpen={false}>
+									<PanelBody
+										title={__("Border & Shadow")}
+										initialOpen={false}
+									>
 										<BorderShadowControl
 											controlName={WrpBdShadowConst}
 											resRequiredProps={resRequiredProps}
-											// noShadow
-											// noBorder
+										// noShadow
+										// noBorder
 										/>
 									</PanelBody>
 

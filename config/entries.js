@@ -8,6 +8,8 @@ export { default as TypographyDropdown } from "../controls/src/controls/typograp
 export { default as ColorControl } from "../controls/src/controls/color-control";
 export { default as UnitControl } from "../controls/src/controls/unit-control";
 export { default as ResetControl } from "../controls/src/controls/reset-control";
+export { default as DynamicInputValueHandler } from "../controls/src/controls/dynamic-field/DynamicInputValueHandler";
+export { default as DynamicInputControl } from "../controls/src/controls/dynamic-field";
 import "../controls/src/group-controls";
 export { default as AdvancedControls } from "../controls/src/group-controls/components/advanced-controls";
 

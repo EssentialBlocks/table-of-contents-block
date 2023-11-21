@@ -26,12 +26,12 @@ const {
 	generateBorderShadowStyles,
 	generateResponsiveRangeStyles,
 	duplicateBlockIdFix,
+	DynamicInputValueHandler,
 } = window.EBTOCControls;
 
 import { parseTocSlug } from "./helper";
 
 import classnames from "classnames";
-
 import Inspector from "./inspector";
 import {
 	typoPrefix_content,
@@ -119,7 +119,9 @@ const getHeadersFromContent = (attributes, postContent) => {
 	}
 	const queryString = queryArray.toString();
 	if (queryString) {
-		const headingElements = tempPostContentDOM.querySelectorAll(queryString);
+		const headingElements = tempPostContentDOM.querySelectorAll(
+			queryString
+		);
 		return getHeadingsFromHeadingElements(headingElements);
 	}
 	return [];
@@ -168,13 +170,20 @@ function Edit({
 		deleteHeaderList,
 		hasUnderline,
 		isMigrated,
+		contentGap = "20",
+		contentGapUnit = "px",
+		listSeperatorWidth = 3,
+		listSeperatorStyle = "solid",
+		listSeperatorColor = "#000",
+		showListSeparator,
+		scrollToTopIcon,
 		classHook,
 	} = attributes;
 	const [visible, setVisible] = useState(true);
 
-	const isBlockJustInserted = select("core/block-editor").wasBlockJustInserted(
-		clientId
-	);
+	const isBlockJustInserted = select(
+		"core/block-editor"
+	).wasBlockJustInserted(clientId);
 
 	const headerList = useMemo(
 		() => getHeadersFromContent(attributes, postContent),
@@ -191,7 +200,8 @@ function Edit({
 				(i) => i.value == _item.value
 			);
 			if (_deleteHeaderList.length > 0) {
-				_item.isDelete = _deleteHeaderList[0]?.isDelete ?? _item.isDelete;
+				_item.isDelete =
+					_deleteHeaderList[0]?.isDelete ?? _item.isDelete;
 			}
 			return _item;
 		});
@@ -199,8 +209,12 @@ function Edit({
 		if (!isMigrated && !isBlockJustInserted) {
 			if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
 				let newHeaderList = headerList.map((item) => item.text);
-				let newHeaders = headers.map((item) => decodeEntities(item.text));
-				let difference = newHeaderList.filter((x) => !newHeaders.includes(x));
+				let newHeaders = headers.map((item) =>
+					decodeEntities(item.text)
+				);
+				let difference = newHeaderList.filter(
+					(x) => !newHeaders.includes(x)
+				);
 
 				_headerList = [..._headerList].map((item) => {
 					if (difference.includes(item.label)) {
@@ -221,22 +235,25 @@ function Edit({
 			setAttributes({ headers: headerList });
 		}
 		if (
-			JSON.stringify(deleteHeadersLists) !== JSON.stringify(deleteHeaderList)
+			JSON.stringify(deleteHeadersLists) !==
+			JSON.stringify(deleteHeaderList)
 		) {
 			setAttributes({ deleteHeaderList: deleteHeadersLists });
 		}
 	}, [deleteHeadersLists]);
 
 	useEffect(() => {
-		if (document.querySelector(".eb-toc-go-top")) {
-			return;
+		const previousGoTop = document.querySelector(".eb-toc-go-top");
+		if (previousGoTop) {
+			previousGoTop.remove();
 		}
+
 		const goTop = document.createElement("span");
-		goTop.innerHTML = ">";
+		goTop.innerHTML = `<i class="${scrollToTopIcon}"></i>`;
 		goTop.setAttribute("class", "eb-toc-go-top ");
 		goTop.style.right = "300px";
 		document.body.insertBefore(goTop, document.body.lastChild);
-	}, []);
+	}, [scrollToTopIcon]);
 
 	useEffect(() => {
 		const scrollElement = document.querySelector(".eb-toc-go-top");
@@ -248,7 +265,7 @@ function Edit({
 			scrollElement.classList.add("hide-scroll");
 			scrollElement.classList.remove("show-scroll");
 		}
-	}, [scrollToTop]);
+	}, [scrollToTop, scrollToTopIcon]);
 
 	// this useEffect is for creating a unique blockId for each block's unique className
 	useEffect(() => {
@@ -361,9 +378,8 @@ function Edit({
 	// // styles related to generateBorderShadowStyles end
 
 	const desktopAllStylesCommon = `
-		  ${
-				isSticky
-					? `
+		  ${isSticky
+			? `
 			  .eb-parent-${blockId}.eb__animated, .eb__animated.eb__flip {
 				  -webkit-animation-fill-mode: none;
 				  animation-fill-mode: none;
@@ -371,8 +387,8 @@ function Edit({
 				  animation-name: none !important;
 			  }
 		  `
-					: ""
-			}
+			: ""
+		}
 
 		  .${blockId}.eb-toc-container{
 			  ${wrapMaxWidthDesktop}
@@ -394,13 +410,11 @@ function Edit({
 			  cursor:${collapsible ? "pointer" : "default"};
 			  color: ${titleColor};
 			  background-color:${titleBg};
-			  ${
-					seperator
-						? `border-bottom:${
-								seperatorSize || 0
-						  }px ${seperatorStyle} ${seperatorColor};`
-						: ""
-				}
+			  ${seperator
+			? `border-bottom:${seperatorSize || 0
+			}px ${seperatorStyle} ${seperatorColor};`
+			: ""
+		}
 			  ${titlePaddingDesktop}
 			  ${titleTypoStylesDesktop}
 
@@ -439,9 +453,8 @@ function Edit({
 			  background:none;
 		  }
 
-		  ${
-				scrollToTop
-					? `
+		  ${scrollToTop
+			? `
 			  .eb-toc-go-top.show-scroll {
 				  ${arrowHeight ? `height: ${arrowHeight}px;` : ""}
 				  ${arrowWidth ? `width: ${arrowWidth}px;` : ""}
@@ -449,9 +462,26 @@ function Edit({
 				  ${arrowColor ? `color: ${arrowColor};` : ""}
 			  }
 			  `
-					: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
-					  ""
-			}
+			: // Important N.B. : in the selector above we used ".eb-toc-go-top.show-scroll" this. It's very important to start the selector with ".eb-" if this css strings goes inside "softMinifyCssStrings" function. Always make sure to use a selector that starts with ".eb-" when using this string inside "softMinifyCssStrings" function
+			""
+		}
+
+        .${blockId}.eb-toc-container .eb-toc-wrapper li {
+            padding-top: ${contentGap / 2}${contentGapUnit};
+        }
+
+        .${blockId}.eb-toc-container .eb-toc-wrapper .eb-toc__list li:not(:last-child) {
+            padding-bottom: ${contentGap / 2}${contentGapUnit};
+        }
+
+        ${showListSeparator
+			? `
+                .${blockId}.eb-toc-container .eb-toc-wrapper .eb-toc__list li:first-child {
+                    border-bottom: ${listSeperatorWidth}px ${listSeperatorStyle} ${listSeperatorColor};
+                }
+        `
+			: ""
+		}
 
 	  `;
 
@@ -532,9 +562,8 @@ function Edit({
 	// all css styles for large screen width (desktop/laptop) in strings ⬇
 	const desktopAllStylesFrontEnd = softMinifyCssStrings(`
 		  ${desktopAllStylesCommon}
-		  ${
-				isSticky
-					? `
+		  ${isSticky
+			? `
 					.${blockId}.eb-toc-container.eb-toc-sticky-right.eb-toc-is-sticky {
 						position:fixed;
 						top: ${topSpace === 0 || topSpace ? topSpace : 25}%;
@@ -566,8 +595,8 @@ function Edit({
 					transform: rotate(90deg) translate(100%, 0);
 				  }
 				  `
-					: ""
-			}
+			: ""
+		}
 
 
 	  `);
@@ -670,16 +699,43 @@ function Edit({
 				  }
 				  `}
 				</style>
-				<div className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}>
+				<div
+					className={`eb-parent-wrapper eb-parent-${blockId} ${classHook}`}
+				>
 					<div className={`${blockId} eb-toc-container`}>
-						<div onClick={() => collapsible && setVisible(!visible)}>
+						<div
+							onClick={() => collapsible && setVisible(!visible)}
+						>
 							{displayTitle && (
-								<RichText
-									className="eb-toc-title"
-									placeholder="Table of content"
+								<DynamicInputValueHandler
 									value={title}
-									onChange={(title) => setAttributes({ title })}
+									className="eb-toc-title"
+									tagName="div"
+									allowedFormats={[
+										"core/bold",
+										"core/italic",
+										"core/link",
+										"core/strikethrough",
+										"core/underline",
+										"core/text-color",
+									]}
+									placeholder={__(
+										"Table of content",
+										"essential-blocks"
+									)}
+									onChange={(title) =>
+										setAttributes({
+											title,
+										})
+									}
+									readOnly={true}
 								/>
+								// <RichText
+								// 	className="eb-toc-title"
+								// 	placeholder={__("Table of content", "essential-blocks")}
+								// 	value={title}
+								// 	onChange={(title) => setAttributes({ title })}
+								// />
 							)}
 						</div>
 						{headers.length > 0 ? (

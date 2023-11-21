@@ -2,11 +2,11 @@
 
 /**
  * Plugin Name:     Table Of Contents Block
- * Plugin URI:         https://essential-blocks.com
+ * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
  * Version:         1.3.5
  * Author:          WPDeveloper
- * Author URI:         https://wpdeveloper.net
+ * Author URI:     	https://wpdeveloper.net
  * License:         GPL-3.0-or-later
  * License URI:     https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:     table-of-contents-block
@@ -81,12 +81,35 @@ function create_block_table_of_content_block_init() {
         [],
         TOC_BLOCK_VERSION
     );
+		wp_register_style(
+        'fontpicker-default-theme',
+        TOC_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.base-theme.react.css',
+        [],
+        TOC_BLOCK_VERSION,
+        "all"
+    );
+
+    wp_register_style(
+        'fontpicker-matetial-theme',
+        TOC_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.material-theme.react.css',
+        [],
+        TOC_BLOCK_VERSION,
+        "all"
+    );
+
+    wp_register_style(
+        'fontawesome-frontend-css',
+        TOC_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
+        [],
+        TOC_BLOCK_VERSION,
+        "all"
+    );
 
     $style_css = TOC_BLOCK_ADMIN_URL . 'dist/style.css';
     wp_register_style(
         'create-block-table-of-content-block',
         $style_css,
-        ["essential-blocks-animation"],
+        ["essential-blocks-animation","fontawesome-frontend-css","fontpicker-default-theme","fontpicker-matetial-theme"],
         TOC_BLOCK_VERSION
     );
 
@@ -114,7 +137,140 @@ function create_block_table_of_content_block_init() {
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
                         wp_enqueue_script( 'essential-blocks-clipboard' );
                     }
-                    return $content;
+
+
+										$the_post = get_post();
+
+										if ( ! $the_post ) {
+												return;
+										}
+
+										$default_attributes = [
+											'title'              => "Table of Contents",
+											"collapsible"        => false,
+											"initialCollapse"    => false,
+											"displayTitle"       => true,
+											"isSmooth"           => true,
+											"seperator"          => false,
+											"isSticky"           => false,
+											"contentAlign"       => 'left',
+											"scrollTarget"       => "scroll_to_toc",
+											"stickyPosition"     => 'left',
+											"enableCopyLink"     => false,
+											"showListSeparator"  => false,
+											"scrollToTop"        => false,
+											"scrollToTopIcon"    => "fas fa-angle-up",
+											"stickyHideOnMobile" => false,
+											"hideOnDesktop"      => false,
+											"hideOnTab"          => false,
+											"hideOnMobile"       => false,
+											"topOffset"          => '',
+											"listStyle"          => "ul"
+									];
+
+										$attributes         = wp_parse_args( $attributes, $default_attributes );
+										$scrollToTop        = $attributes['scrollToTop'] ? 'true' : 'false';
+										$scrollToTopIcon    = $attributes['scrollToTopIcon'];
+										$listStyle          = $attributes['listStyle'];
+										$collapsible        = $attributes['collapsible'] ? 'true' : 'false';
+										$initialCollapse    = $attributes['initialCollapse'] ? 'true' : 'false';
+										$stickyHideOnMobile = $attributes['stickyHideOnMobile'] ? 'true' : 'false';
+										$isSticky           = $attributes['isSticky'] ? 'true' : 'false';
+										$stickyPosition     = $attributes['stickyPosition'];
+										$scrollTarget       = $attributes['scrollTarget'];
+										$enableCopyLink     = $attributes['enableCopyLink'] ? 'true' : 'false';
+										$displayTitle       = $attributes['displayTitle'] ? 'true' : 'false';
+										$title              = $attributes['title'];
+										$isSmooth           = $attributes['isSmooth'] ? 'true' : 'false';
+										$topOffset          = $attributes['topOffset'];
+										$hideOnDesktop      = $attributes['hideOnDesktop'] ? 'true' : 'false';
+										$hideOnTab          = $attributes['hideOnTab'] ? 'true' : 'false';
+										$hideOnMobile       = $attributes['hideOnMobile'] ? 'true' : 'false';
+										$visibleHeaders     = isset( $attributes['visibleHeaders'] ) ? $attributes['visibleHeaders'] : array_fill( 0, 6, true );
+										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, $the_post->post_content, $content );
+										$deleteHeaderList   = isset( $attributes['deleteHeaderList'] ) ? $attributes['deleteHeaderList'] : [];
+										$classHook          = isset( $attributes['classHook'] ) ? $attributes['classHook'] : '';
+
+										$container_class   = [];
+										$container_class[] = 'eb-toc-container ' . $attributes['blockId'];
+										$container_class[] = $isSticky == 'true' ? 'eb-toc-sticky-' . $stickyPosition : '';
+										$container_class[] = $isSticky == 'true' ? 'eb-toc-is-sticky' : 'eb-toc-is-not-sticky';
+										$container_class[] = $collapsible == 'true' ? 'eb-toc-collapsible' : 'eb-toc-not-collapsible';
+										$container_class[] = $initialCollapse == 'true' ? 'eb-toc-initially-collapsed' : 'eb-toc-initially-not-collapsed';
+										$container_class[] = $scrollToTop ? 'eb-toc-scrollToTop' : 'eb-toc-not-scrollToTop';
+										$wrapper_class   = [];
+										$wrapper_class[] = $collapsible == 'true' && $initialCollapse == 'true' && $isSticky == 'false' ? 'hide-content' : '';
+										$output          = "";
+										$output .= '<div ' . wp_kses_data( get_block_wrapper_attributes() ) . '>';
+										$output .= '<div class="eb-parent-wrapper eb-parent-' . $attributes['blockId'] . ' ' . $classHook . '">';
+										$output .= '<div class="' . implode( " ", $container_class ) . '"
+														data-scroll-top="' . $scrollToTop . '"
+														data-scroll-top-icon="' . $scrollToTopIcon . '"
+														data-collapsible="' . $collapsible . '"
+														data-sticky-hide-mobile="' . $stickyHideOnMobile . '"
+														data-sticky="' . $isSticky . '"
+														data-scroll-target="' . $scrollTarget . '"
+														data-copy-link="' . $enableCopyLink . '"
+														data-editor-type="' . TOC_Helper::get_editor_type() . '"
+														data-hide-desktop="' . $hideOnDesktop . '"
+														data-hide-tab="' . $hideOnTab . '"
+														data-hide-mobile="' . $hideOnMobile . '"
+														>';
+										$output .= '<div class="eb-toc-header">';
+										if ( $isSticky == 'true' ) {
+												$output .= '<span class="eb-toc-close eb-toc-sticky-' . $stickyPosition . '">';
+												$output .= '</span>';
+										}
+										if ( $displayTitle == 'true' ) {
+												$output .= '<div class="eb-toc-title">' . $title . '</div>';
+										}
+										$output .= '</div>'; // header
+										$output .= '<div class="eb-toc-wrapper ' . implode( " ", $wrapper_class ) . '"
+										data-headers="' . htmlspecialchars( json_encode( $headers ), ENT_QUOTES, 'UTF-8' ) . '"
+										data-visible="' . json_encode( $visibleHeaders ) . '"
+										data-delete-headers="' . htmlspecialchars( json_encode( $deleteHeaderList ), ENT_QUOTES, 'UTF-8' ) . '"
+										data-smooth="' . $isSmooth . '"
+										data-top-offset="' . $topOffset . '"
+										>';
+
+										if ( $visibleHeaders && count( $headers ) > 0 && count( array_filter( $headers, function ( $header ) use ( $visibleHeaders ) {
+												return isset( $visibleHeaders[$header['level'] - 1] );
+										} ) ) > 0 ) {
+												$newHeaders = [];
+												foreach ( $headers as $index => $item ) {
+														if (
+																isset( $deleteHeaderList ) &&
+																is_array( $deleteHeaderList ) &&
+																count( $deleteHeaderList ) > 0 &&
+																isset( $deleteHeaderList[$index] ) &&
+																isset( $deleteHeaderList[$index]["isDelete"] ) &&
+																$deleteHeaderList[$index]["isDelete"] === false
+														) {
+																$newHeaders[] = $headers[$index];
+														}
+												}
+
+												$output .= '<div class="eb-toc__list-wrap">';
+												$output .= count( $newHeaders ) > 0 ? TOC_Helper::generate_toc( $newHeaders, $listStyle ) : TOC_Helper::generate_toc( $headers, $listStyle );
+												$output .= '</div>';
+										}
+
+										$output .= '</div>'; // wrapper
+										$stickyPositionClass = $isSticky ? " eb-toc-button-$stickyPosition" : '';
+										if ( 'false' !== $isSticky ) {
+												$output .= '<button class="eb-toc-button ' . $stickyPositionClass . '">';
+												if ( $displayTitle ) {
+														$output .= '<div>' . $title . '</div>';
+												}
+												$output .= '</button>';
+										}
+										$output .= '</div>'; // container
+										$output .= '</div>'; // parent wrapper
+										$output .= "</div>"; // block
+
+										return $output;
+
+                    // return $content;
                 }
             ]
         );
