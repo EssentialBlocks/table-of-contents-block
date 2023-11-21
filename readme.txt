@@ -119,7 +119,7 @@ Yes, it should work fine with all standard theme.
 
 == Changelog ==
 
-= 1.3.5 - 20/11/2023 =
+= 1.3.5 - 21/11/2023 =
 * Added: Table of Content link copy button
 * Added: Table of Content block support All Heading blocks
 * Added: Heading exclude option in Table of Content block
