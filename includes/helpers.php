@@ -47,11 +47,20 @@ class TOC_Helper
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
             $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+            $dependencies = [];
+            $version = TOC_BLOCK_VERSION;
+            if (is_array($controls_dependencies)) {
+                $dependencies = array_merge($dependencies, $controls_dependencies);
+            }
+            if(is_array($controls_dependencies) && isset($controls_dependencies['version'])) {
+                $version = $controls_dependencies['version'];
+            }
+
             wp_register_script(
                 "toc-block-controls-util",
                 TOC_BLOCK_ADMIN_URL . 'dist/controls.js',
-                array_merge($controls_dependencies['dependencies']),
-                $controls_dependencies['version'],
+                array_merge($dependencies),
+                $version,
                 true
             );
 
@@ -69,12 +78,15 @@ class TOC_Helper
                     'editor_type' => 'edit-site'
                 ));
             }
-
+            $version = TOC_BLOCK_VERSION;
+            if(is_array($controls_dependencies) && isset($controls_dependencies['version'])) {
+                $version = $controls_dependencies['version'];
+            }
             wp_enqueue_style(
                 'toc-editor-css',
                 TOC_BLOCK_ADMIN_URL . 'dist/controls.css',
                 array(),
-                $controls_dependencies['version'],
+                $version,
                 'all'
             );
         }
