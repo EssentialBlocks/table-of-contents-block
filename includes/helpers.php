@@ -49,8 +49,8 @@ class TOC_Helper
             $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
             $dependencies = [];
             $version = TOC_BLOCK_VERSION;
-            if (is_array($controls_dependencies)) {
-                $dependencies = array_merge($dependencies, $controls_dependencies);
+            if (is_array($controls_dependencies) && isset($controls_dependencies['dependencies'])) {
+                $dependencies = array_merge($dependencies, $controls_dependencies['dependencies']);
             }
             if(is_array($controls_dependencies) && isset($controls_dependencies['version'])) {
                 $version = $controls_dependencies['version'];
@@ -59,7 +59,7 @@ class TOC_Helper
             wp_register_script(
                 "toc-block-controls-util",
                 TOC_BLOCK_ADMIN_URL . 'dist/controls.js',
-                array_merge($dependencies),
+                $dependencies,
                 $version,
                 true
             );
