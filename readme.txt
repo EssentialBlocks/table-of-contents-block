@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,9 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.3.6 - 06/12/2023 =
+* Fixed: style enqueue issue
 
 = 1.3.5 - 21/11/2023 =
 * Added: Table of Content link copy button
