@@ -46,7 +46,7 @@ class TOC_Helper
          */
         if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
-            $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/controls.asset.php';
+            $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
             $dependencies = [];
             $version = TOC_BLOCK_VERSION;
             if (is_array($controls_dependencies) && isset($controls_dependencies['dependencies'])) {
@@ -58,7 +58,7 @@ class TOC_Helper
 
             wp_register_script(
                 "toc-block-controls-util",
-                TOC_BLOCK_ADMIN_URL . 'dist/controls.js',
+                TOC_BLOCK_ADMIN_URL . 'dist/modules.js',
                 $dependencies,
                 $version,
                 true
@@ -67,6 +67,7 @@ class TOC_Helper
             wp_localize_script('toc-block-controls-util', 'EssentialBlocksLocalize', array(
                 'eb_wp_version' => (float) get_bloginfo('version'),
                 'rest_rootURL' => get_rest_url(),
+								'fontAwesome' => 'true'
             ));
 
             if ($pagenow == 'post-new.php' || $pagenow == 'post.php') {
@@ -82,10 +83,17 @@ class TOC_Helper
             if(is_array($controls_dependencies) && isset($controls_dependencies['version'])) {
                 $version = $controls_dependencies['version'];
             }
+						wp_register_style(
+							'essential-blocks-iconpicker-css',
+							TOC_BLOCK_ADMIN_URL . 'dist/style-modules.css',
+							[],
+							TOC_BLOCK_VERSION,
+							'all'
+						);
             wp_enqueue_style(
                 'toc-editor-css',
-                TOC_BLOCK_ADMIN_URL . 'dist/controls.css',
-                array(),
+                TOC_BLOCK_ADMIN_URL . 'dist/modules.css',
+                ['essential-blocks-iconpicker-css'],
                 $version,
                 'all'
             );
@@ -135,25 +143,31 @@ class TOC_Helper
      *
      * @param array $data
      */
-    public static function generate_toc( $data, $listStyle ) {
+    public static function generate_toc( $data, $listStyle, $itemCollapsed ) {
         $toc   = "<$listStyle class='eb-toc__list'>";
-        $stack = [];
+        $stack = [  ];
 
         for ( $i = 0; $i < count( $data ); $i++ ) {
-            $level   = $data[$i]['level'];
-            $content = $data[$i]['content'];
-            $link    = $data[$i]['link'];
+            $level   = $data[ $i ][ 'level' ];
+            $content = $data[ $i ][ 'content' ];
+            $link    = $data[ $i ][ 'link' ];
 
-            while ( count( $stack ) > 0 && $stack[count( $stack ) - 1]['level'] >= $level ) {
+            while ( count( $stack ) > 0 && $stack[ count( $stack ) - 1 ][ 'level' ] >= $level ) {
                 array_pop( $stack );
                 $toc .= "</li></$listStyle>";
             }
 
             $toc .= "<li><a href=\"#$link\">$content</a>";
 
-            if ( $i < count( $data ) - 1 && $data[$i + 1]['level'] > $level ) {
+            if ( $i < count( $data ) - 1 && $data[ $i + 1 ][ 'level' ] > $level ) {
+                if ( $itemCollapsed == 'true' && ! count( $stack ) ) {
+                    $toc .= '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M6.75 9.75L9 7.5L11.25 9.75" stroke="#252D3B" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 15.75C9.88642 15.75 10.7642 15.5754 11.5831 15.2362C12.4021 14.897 13.1462 14.3998 13.773 13.773C14.3998 13.1462 14.897 12.4021 15.2362 11.5831C15.5754 10.7642 15.75 9.88642 15.75 9C15.75 8.11358 15.5754 7.23583 15.2362 6.41689C14.897 5.59794 14.3998 4.85383 13.773 4.22703C13.1462 3.60023 12.4021 3.10303 11.5831 2.76381C10.7642 2.42459 9.88642 2.25 9 2.25C7.20979 2.25 5.4929 2.96116 4.22703 4.22703C2.96116 5.4929 2.25 7.20979 2.25 9C2.25 10.7902 2.96116 12.5071 4.22703 13.773C5.4929 15.0388 7.20979 15.75 9 15.75Z" stroke="#252D3B" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>';
+                }
                 $toc .= "<$listStyle class='eb-toc__list'>";
-                array_push( $stack, ['level' => $level, 'content' => $content, 'link' => $link] );
+                array_push( $stack, [ 'level' => $level, 'content' => $content, 'link' => $link ] );
             }
         }
         while ( count( $stack ) > 0 ) {
@@ -169,54 +183,37 @@ class TOC_Helper
     /**
      * Generate headers from content
      */
-    public static function getHeadersFromContent( $visibleHeaders, $postContent, $content ) {
+    public static function getHeadersFromContent( $visibleHeaders, $postContent )
+		{
+        if ( empty( $postContent ) ) {
+            return [  ];
+        }
 
-        $wp_charset = get_bloginfo( 'charset' );
-        $doc        = new \DOMDocument( '1.0', $wp_charset );
+        $dom = new \DOMDocument();
         libxml_use_internal_errors( true );
-        $tempPostContentDOM = mb_convert_encoding( $postContent, 'HTML-ENTITIES', 'UTF-8' );
-        $doc->loadHTML(
-            // loadHTML expects ISO-8859-1, so we need to convert the post content to
-            // that format. We use htmlentities to encode Unicode characters not
-            // supported by ISO-8859-1 as HTML entities. However, this function also
-            // converts all special characters like <pre or > to HTML entities, so we use
-            // htmlspecialchars_decode to decode them.
-            htmlspecialchars_decode(
-                utf8_decode(
-                    htmlentities(
-                        '<!DOCTYPE html><html><head><title>:D</title><body>' .
-                        htmlspecialchars( $tempPostContentDOM ) .
-                        '</body></html>',
-                        ENT_COMPAT,
-                        'UTF-8',
-                        false
-                    )
-                ),
-                ENT_COMPAT
-            )
-        );
+        $dom->loadHTML( '<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body>' . $postContent . '</body></html>' );
         libxml_use_internal_errors( false );
 
-        $queryArray = ["h1", "h2", "h3", "h4", "h5", "h6"];
+        $queryArray = [ "h1", "h2", "h3", "h4", "h5", "h6" ];
         if ( isset( $visibleHeaders ) ) {
-            $queryArray = [];
-            if ( $visibleHeaders[0] ) {
-                $queryArray[] = "self::h1";
+            $queryArray = [  ];
+            if ( $visibleHeaders[ 0 ] ) {
+                $queryArray[  ] = "self::h1";
             }
-            if ( $visibleHeaders[1] ) {
-                $queryArray[] = "self::h2";
+            if ( $visibleHeaders[ 1 ] ) {
+                $queryArray[  ] = "self::h2";
             }
-            if ( $visibleHeaders[2] ) {
-                $queryArray[] = "self::h3";
+            if ( $visibleHeaders[ 2 ] ) {
+                $queryArray[  ] = "self::h3";
             }
-            if ( $visibleHeaders[3] ) {
-                $queryArray[] = "self::h4";
+            if ( $visibleHeaders[ 3 ] ) {
+                $queryArray[  ] = "self::h4";
             }
-            if ( $visibleHeaders[4] ) {
-                $queryArray[] = "self::h5";
+            if ( $visibleHeaders[ 4 ] ) {
+                $queryArray[  ] = "self::h5";
             }
-            if ( $visibleHeaders[5] ) {
-                $queryArray[] = "self::h6";
+            if ( $visibleHeaders[ 5 ] ) {
+                $queryArray[  ] = "self::h6";
             }
         }
 
@@ -224,52 +221,53 @@ class TOC_Helper
         $queryString = '//*[' . $queryString . ']';
 
         if ( ! self::areAllFalse( $visibleHeaders ) ) {
-            $xpath           = new \DOMXPath( $doc );
+            $xpath           = new \DOMXpath( $dom );
             $headingElements = iterator_to_array( $xpath->query( $queryString ) );
             return self::getHeadingsFromHeadingElements( $headingElements );
         }
 
-        return [];
+        return [  ];
     }
 
     /**
      * generate heading from headings elements
      */
-    public static function getHeadingsFromHeadingElements( $headingElements ) {
-        $headings = [];
+    public static function getHeadingsFromHeadingElements( $headingElements )
+		{
+        $headings = [  ];
         foreach ( $headingElements as $index => $heading ) {
             $level = null;
             switch ( $heading->tagName ) {
-            case "h1":
-                $level = 1;
-                break;
-            case "h2":
-                $level = 2;
-                break;
-            case "h3":
-                $level = 3;
-                break;
-            case "h4":
-                $level = 4;
-                break;
-            case "h5":
-                $level = 5;
-                break;
-            case "h6":
-                $level = 6;
-                break;
+                case "h1":
+                    $level = 1;
+                    break;
+                case "h2":
+                    $level = 2;
+                    break;
+                case "h3":
+                    $level = 3;
+                    break;
+                case "h4":
+                    $level = 4;
+                    break;
+                case "h5":
+                    $level = 5;
+                    break;
+                case "h6":
+                    $level = 6;
+                    break;
             }
 
             $value          = apply_filters( 'eb_dynamic_tag_value', $heading->textContent, '', true );
             $value          = empty( $value ) ? $heading->textContent : $value;
             $heading_string = self::parseTocSlug( wp_strip_all_tags( $value ) );
 
-            $headings[] = [
+            $headings[  ] = [
                 "level"   => $level,
                 "content" => $value,
                 "text"    => $value,
                 "link"    => preg_match( '/^[A-Za-z0-9\-]+$/', $heading_string ) === 1 ? $heading_string : "eb-table-content-$index"
-            ];
+             ];
         }
 
         return $headings;
@@ -278,7 +276,8 @@ class TOC_Helper
 		/**
      * parse slug
      */
-    public static function parseTocSlug( $slug ) {
+    public static function parseTocSlug( $slug )
+    {
         if ( ! $slug ) {
             return $slug;
         }

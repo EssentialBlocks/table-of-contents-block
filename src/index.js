@@ -18,15 +18,19 @@ import deprecated from "./deprecated";
 const { ebConditionalRegisterBlockType } = EBTOCControls;
 
 ebConditionalRegisterBlockType(metadata, {
-	keywords: [
-		__("TOC", "essential-blocks"),
-		__("Table Of Contents", "essential-blocks"),
-		__("eb table of contents", "essential-blocks"),
-	],
-	icon: TOC_Icon,
-	attributes,
-	edit: Edit,
-	save: () => null,
-	example,
-	deprecated,
+    keywords: [
+        __("TOC", "essential-blocks"),
+        __("Table Of Contents", "essential-blocks"),
+        __("eb table of contents", "essential-blocks"),
+    ],
+    icon: TOC_Icon,
+    attributes,
+    edit: Edit,
+    save: () => null,
+    example: {
+        attributes: {
+            cover: `${EssentialBlocksLocalize?.image_url}/block-preview/table-of-contents.jpeg`,
+        },
+    },
+    deprecated,
 });

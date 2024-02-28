@@ -81,25 +81,9 @@ function create_block_table_of_content_block_init() {
         [],
         TOC_BLOCK_VERSION
     );
-		wp_register_style(
-        'fontpicker-default-theme',
-        TOC_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.base-theme.react.css',
-        [],
-        TOC_BLOCK_VERSION,
-        "all"
-    );
-
-    wp_register_style(
-        'fontpicker-matetial-theme',
-        TOC_BLOCK_ADMIN_URL . 'assets/css/fonticonpicker.material-theme.react.css',
-        [],
-        TOC_BLOCK_VERSION,
-        "all"
-    );
-
     wp_register_style(
         'fontawesome-frontend-css',
-        TOC_BLOCK_ADMIN_URL . 'assets/css/font-awesome5.css',
+        TOC_BLOCK_ADMIN_URL . 'assets/css/fontawesome/css/all.min.css',
         [],
         TOC_BLOCK_VERSION,
         "all"
@@ -109,7 +93,7 @@ function create_block_table_of_content_block_init() {
     wp_register_style(
         'create-block-table-of-content-block',
         $style_css,
-        ["essential-blocks-animation","fontawesome-frontend-css","fontpicker-default-theme","fontpicker-matetial-theme"],
+        ["essential-blocks-animation","fontawesome-frontend-css"],
         TOC_BLOCK_VERSION
     );
 
@@ -165,44 +149,56 @@ function create_block_table_of_content_block_init() {
 											"hideOnTab"          => false,
 											"hideOnMobile"       => false,
 											"topOffset"          => '',
-											"listStyle"          => "ul"
+											"listStyle"          => "ul",
+											"enableListStyle"    => false,
+											"itemCollapsed"      => false,
+											"preset"             => "style-1"
 									];
 
 										$attributes         = wp_parse_args( $attributes, $default_attributes );
-										$scrollToTop        = $attributes['scrollToTop'] ? 'true' : 'false';
-										$scrollToTopIcon    = $attributes['scrollToTopIcon'];
-										$listStyle          = $attributes['listStyle'];
-										$collapsible        = $attributes['collapsible'] ? 'true' : 'false';
-										$initialCollapse    = $attributes['initialCollapse'] ? 'true' : 'false';
-										$stickyHideOnMobile = $attributes['stickyHideOnMobile'] ? 'true' : 'false';
-										$isSticky           = $attributes['isSticky'] ? 'true' : 'false';
-										$stickyPosition     = $attributes['stickyPosition'];
-										$scrollTarget       = $attributes['scrollTarget'];
-										$enableCopyLink     = $attributes['enableCopyLink'] ? 'true' : 'false';
-										$displayTitle       = $attributes['displayTitle'] ? 'true' : 'false';
-										$title              = $attributes['title'];
-										$isSmooth           = $attributes['isSmooth'] ? 'true' : 'false';
-										$topOffset          = $attributes['topOffset'];
-										$hideOnDesktop      = $attributes['hideOnDesktop'] ? 'true' : 'false';
-										$hideOnTab          = $attributes['hideOnTab'] ? 'true' : 'false';
-										$hideOnMobile       = $attributes['hideOnMobile'] ? 'true' : 'false';
-										$visibleHeaders     = isset( $attributes['visibleHeaders'] ) ? $attributes['visibleHeaders'] : array_fill( 0, 6, true );
-										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, $the_post->post_content, $content );
-										$deleteHeaderList   = isset( $attributes['deleteHeaderList'] ) ? $attributes['deleteHeaderList'] : [];
-										$classHook          = isset( $attributes['classHook'] ) ? $attributes['classHook'] : '';
+										$blockId            = esc_attr($attributes['blockId']);
+										$scrollToTop        = $attributes[ 'scrollToTop' ] ? 'true' : 'false';
+										$scrollToTopIcon    = $attributes[ 'scrollToTopIcon' ];
+										$listStyle          = $attributes[ 'listStyle' ];
+										$collapsible        = $attributes[ 'collapsible' ] ? 'true' : 'false';
+										$initialCollapse    = $attributes[ 'initialCollapse' ] ? 'true' : 'false';
+										$stickyHideOnMobile = $attributes[ 'stickyHideOnMobile' ] ? 'true' : 'false';
+										$isSticky           = $attributes[ 'isSticky' ] ? 'true' : 'false';
+										$stickyPosition     = $attributes[ 'stickyPosition' ];
+										$scrollTarget       = $attributes[ 'scrollTarget' ];
+										$enableCopyLink     = $attributes[ 'enableCopyLink' ] ? 'true' : 'false';
+										$displayTitle       = $attributes[ 'displayTitle' ] ? 'true' : 'false';
+										$title              = $attributes[ 'title' ];
+										$isSmooth           = $attributes[ 'isSmooth' ] ? 'true' : 'false';
+										$itemCollapsed      = $attributes[ 'itemCollapsed' ] ? 'true' : 'false';
+										$topOffset          = $attributes[ 'topOffset' ];
+										$preset             = $attributes[ 'preset' ];
+										$enableListStyle    = $attributes[ 'enableListStyle' ];
+										$hideOnDesktop      = $attributes[ 'hideOnDesktop' ] ? 'true' : 'false';
+										$hideOnTab          = $attributes[ 'hideOnTab' ] ? 'true' : 'false';
+										$hideOnMobile       = $attributes[ 'hideOnMobile' ] ? 'true' : 'false';
+										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) ? $attributes[ 'visibleHeaders' ] : array_fill( 0, 6, true );
+										$content            = html_entity_decode( preg_replace( "~<!--(.*?)-->~s", "", $the_post->post_content ) );
+										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, wp_kses_post( $content ) );
+										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
+										$classHook          = isset( $attributes[ 'classHook' ] ) ? $attributes[ 'classHook' ] : '';
 
-										$container_class   = [];
-										$container_class[] = 'eb-toc-container ' . $attributes['blockId'];
-										$container_class[] = $isSticky == 'true' ? 'eb-toc-sticky-' . $stickyPosition : '';
-										$container_class[] = $isSticky == 'true' ? 'eb-toc-is-sticky' : 'eb-toc-is-not-sticky';
-										$container_class[] = $collapsible == 'true' ? 'eb-toc-collapsible' : 'eb-toc-not-collapsible';
-										$container_class[] = $initialCollapse == 'true' ? 'eb-toc-initially-collapsed' : 'eb-toc-initially-not-collapsed';
-										$container_class[] = $scrollToTop ? 'eb-toc-scrollToTop' : 'eb-toc-not-scrollToTop';
-										$wrapper_class   = [];
-										$wrapper_class[] = $collapsible == 'true' && $initialCollapse == 'true' && $isSticky == 'false' ? 'hide-content' : '';
-										$output          = "";
+										$container_class     = [  ];
+										$container_class[  ] = 'eb-toc-container ' . $blockId;
+										$container_class[  ] = $isSticky == 'true' ? 'eb-toc-sticky-' . $stickyPosition : '';
+										$container_class[  ] = $isSticky == 'true' ? 'eb-toc-is-sticky' : 'eb-toc-is-not-sticky';
+										$container_class[  ] = $collapsible == 'true' ? 'eb-toc-collapsible' : 'eb-toc-not-collapsible';
+										$container_class[  ] = $initialCollapse == 'true' ? 'eb-toc-initially-collapsed' : 'eb-toc-initially-not-collapsed';
+										$container_class[  ] = $scrollToTop ? 'eb-toc-scrollToTop' : 'eb-toc-not-scrollToTop';
+										$container_class[  ] = $preset;
+										$container_class[  ] = $enableListStyle === false ? 'list-style-none' : '';
+
+										$wrapper_class     = [  ];
+										$wrapper_class[  ] = $collapsible == 'true' && $initialCollapse == 'true' && $isSticky == 'false' ? 'hide-content' : '';
+
+										$output = "";
 										$output .= '<div ' . wp_kses_data( get_block_wrapper_attributes() ) . '>';
-										$output .= '<div class="eb-parent-wrapper eb-parent-' . $attributes['blockId'] . ' ' . $classHook . '">';
+										$output .= '<div class="eb-parent-wrapper eb-parent-' . $blockId . ' ' . $classHook . '">';
 										$output .= '<div class="' . implode( " ", $container_class ) . '"
 														data-scroll-top="' . $scrollToTop . '"
 														data-scroll-top-icon="' . $scrollToTopIcon . '"
@@ -215,6 +211,7 @@ function create_block_table_of_content_block_init() {
 														data-hide-desktop="' . $hideOnDesktop . '"
 														data-hide-tab="' . $hideOnTab . '"
 														data-hide-mobile="' . $hideOnMobile . '"
+														data-itemCollapsed="' . $itemCollapsed . '"
 														>';
 										$output .= '<div class="eb-toc-header">';
 										if ( $isSticky == 'true' ) {
@@ -224,6 +221,7 @@ function create_block_table_of_content_block_init() {
 										if ( $displayTitle == 'true' ) {
 												$output .= '<div class="eb-toc-title">' . $title . '</div>';
 										}
+
 										$output .= '</div>'; // header
 										$output .= '<div class="eb-toc-wrapper ' . implode( " ", $wrapper_class ) . '"
 										data-headers="' . htmlspecialchars( json_encode( $headers ), ENT_QUOTES, 'UTF-8' ) . '"
@@ -234,24 +232,24 @@ function create_block_table_of_content_block_init() {
 										>';
 
 										if ( $visibleHeaders && count( $headers ) > 0 && count( array_filter( $headers, function ( $header ) use ( $visibleHeaders ) {
-												return isset( $visibleHeaders[$header['level'] - 1] );
+												return isset( $visibleHeaders[ $header[ 'level' ] - 1 ] );
 										} ) ) > 0 ) {
-												$newHeaders = [];
+												$newHeaders = [  ];
 												foreach ( $headers as $index => $item ) {
 														if (
 																isset( $deleteHeaderList ) &&
 																is_array( $deleteHeaderList ) &&
 																count( $deleteHeaderList ) > 0 &&
-																isset( $deleteHeaderList[$index] ) &&
-																isset( $deleteHeaderList[$index]["isDelete"] ) &&
-																$deleteHeaderList[$index]["isDelete"] === false
+																isset( $deleteHeaderList[ $index ] ) &&
+																isset( $deleteHeaderList[ $index ][ "isDelete" ] ) &&
+																$deleteHeaderList[ $index ][ "isDelete" ] === false
 														) {
-																$newHeaders[] = $headers[$index];
+																$newHeaders[  ] = $headers[ $index ];
 														}
 												}
 
 												$output .= '<div class="eb-toc__list-wrap">';
-												$output .= count( $newHeaders ) > 0 ? TOC_Helper::generate_toc( $newHeaders, $listStyle ) : TOC_Helper::generate_toc( $headers, $listStyle );
+												$output .= count( $newHeaders ) > 0 ? TOC_Helper::generate_toc( $newHeaders, $listStyle, $itemCollapsed ) : TOC_Helper::generate_toc( $headers, $listStyle, $itemCollapsed );
 												$output .= '</div>';
 										}
 
@@ -269,8 +267,6 @@ function create_block_table_of_content_block_init() {
 										$output .= "</div>"; // block
 
 										return $output;
-
-                    // return $content;
                 }
             ]
         );
