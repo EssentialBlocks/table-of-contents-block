@@ -3,7 +3,7 @@ Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
 Tested up to: 6.4
-Stable tag: 1.3.6
+Stable tag: 1.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,14 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.4.0 - 28/02/2024 =
+* Added: New preset for Table of Contents Block
+* Fixed: Special Character issue in Table of Content block headings
+* Fixed: Table of Content block warnings with PHP 8.2 or higher
+* Improved: Table of Contents block multiple request reduce on editor load
+* Table of Contents block special character support issue
+* Fixed: Table of Contents block issue with PHP@7.2
 
 = 1.3.6 - 06/12/2023 =
 * Fixed: style enqueue issue
