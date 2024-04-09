@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.4.0
+ * Version:         1.4.1
  * Author:          WPDeveloper
  * Author URI:     	https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -21,7 +21,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.4.0" );
+define( 'TOC_BLOCK_VERSION', "1.4.1" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -156,7 +156,7 @@ function create_block_table_of_content_block_init() {
 									];
 
 										$attributes         = wp_parse_args( $attributes, $default_attributes );
-										$blockId            = esc_attr($attributes['blockId']);
+										$blockId            = esc_attr( $attributes[ 'blockId' ] );
 										$scrollToTop        = $attributes[ 'scrollToTop' ] ? 'true' : 'false';
 										$scrollToTopIcon    = $attributes[ 'scrollToTopIcon' ];
 										$listStyle          = $attributes[ 'listStyle' ];
@@ -266,7 +266,7 @@ function create_block_table_of_content_block_init() {
 										$output .= '</div>'; // parent wrapper
 										$output .= "</div>"; // block
 
-										return $output;
+										return wp_kses_post( $output );
                 }
             ]
         );

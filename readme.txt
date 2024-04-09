@@ -2,8 +2,8 @@
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
 Requires at least: 5.6
-Tested up to: 6.4
-Stable tag: 1.4.0
+Tested up to: 6.5
+Stable tag: 1.4.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +118,11 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.4.1 - 09/04/2024 =
+* Fixed: compatibility support with wordpress 6.5 version
+* Improved: Security enhancement
+* Improved: controls
 
 = 1.4.0 - 28/02/2024 =
 * Added: New preset for Table of Contents Block

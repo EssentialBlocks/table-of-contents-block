@@ -7,6 +7,5 @@
 	"textdomain": "table-of-contents-block",
 	"supports": {
 		"align": ["wide", "full"]
-	},
-	"editorScript": "file:./dist/index.js"
+	}
 }
