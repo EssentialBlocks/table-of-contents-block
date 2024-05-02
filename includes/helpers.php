@@ -222,7 +222,7 @@ class TOC_Helper
 
         if ( ! self::areAllFalse( $visibleHeaders ) ) {
             $xpath           = new \DOMXpath( $dom );
-            $headingElements = iterator_to_array( $xpath->query( $queryString ) );
+            $headingElements = is_string($queryString) ? iterator_to_array( $xpath->query( $queryString )) : array();
             return self::getHeadingsFromHeadingElements( $headingElements );
         }
 
