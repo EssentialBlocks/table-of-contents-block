@@ -136,7 +136,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         const selectorIcon = item.querySelector("svg");
                         const collapsedItem = item.querySelector(".eb-toc__list");
 
-                        if (collapsedItem !== null) {
+                        if (collapsedItem !== null && selectorIcon) {
                             selectorIcon.addEventListener("click", function () {
                                 item.classList.toggle("hide-items");
                             });

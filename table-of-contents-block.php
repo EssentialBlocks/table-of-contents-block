@@ -266,7 +266,33 @@ function create_block_table_of_content_block_init() {
 										$output .= '</div>'; // parent wrapper
 										$output .= "</div>"; // block
 
-										return wp_kses_post( $output );
+										/**
+										 * The collapse toggle is a plugin-authored inline SVG (see
+										 * TOC_Helper::generate_toc()). wp_kses_post() strips svg/path,
+										 * so allow only those two elements with a fixed attribute
+										 * list. No script, use, foreignObject, style or event handlers.
+										 */
+										$allowed_html          = wp_kses_allowed_html( 'post' );
+										$allowed_html[ 'svg' ]  = [
+												'xmlns'       => true,
+												'width'       => true,
+												'height'      => true,
+												'viewbox'     => true,
+												'fill'        => true,
+												'class'       => true,
+												'aria-hidden' => true,
+												'focusable'   => true,
+										];
+										$allowed_html[ 'path' ] = [
+												'd'               => true,
+												'stroke'          => true,
+												'fill'            => true,
+												'stroke-width'    => true,
+												'stroke-linecap'  => true,
+												'stroke-linejoin' => true,
+										];
+
+										return wp_kses( $output, $allowed_html );
                 }
             ]
         );

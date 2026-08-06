@@ -3,7 +3,7 @@
  */
 import { __ } from "@wordpress/i18n";
 import { renderToString, useEffect, useMemo } from "@wordpress/element";
-import { compose } from "@wordpress/compose";
+import { compose, useRefEffect } from "@wordpress/compose";
 import {
     BlockControls,
     RichText,
@@ -219,6 +219,10 @@ function Edit(props) {
     useEffect(() => {
         const scrollElement = document.querySelector(".eb-toc-go-top");
 
+        if (!scrollElement) {
+            return;
+        }
+
         if (scrollToTop) {
             scrollElement.classList.add("show-scroll");
             scrollElement.classList.remove("hide-scroll");
@@ -240,32 +244,51 @@ function Edit(props) {
         });
     }, []);
 
-    const blockProps = useBlockProps({
-        className: classnames(className, `eb-guten-block-main-parent-wrapper`),
-    });
-
-
     // CollapsedItem
-    useEffect(() => {
-        if (itemCollapsed) {
-            let container = document.querySelector(`.eb-toc-container.${blockId}`);
-            const items = container?.querySelectorAll(".eb-toc-wrapper .eb-toc__list-wrap > .eb-toc__list > li");
+    // Scoped to the block's own element: with apiVersion 3 the block renders inside
+    // the editor iframe, so a lookup on the top-level `document` never finds it.
+    const collapsedItemRef = useRefEffect(
+        (element) => {
+            if (!itemCollapsed) {
+                return;
+            }
+
+            const container = element.querySelector(
+                `.eb-toc-container.${blockId}`
+            );
+            const items =
+                container?.querySelectorAll(
+                    ".eb-toc-wrapper .eb-toc__list-wrap > .eb-toc__list > li"
+                ) ?? [];
+
+            const listeners = [];
 
             for (let item of items) {
-                const selector = item?.querySelector("a");
                 const selectorIcon = item?.querySelector("svg");
                 const collapsedItem = item?.querySelector(".eb-toc__list");
 
-                if (collapsedItem !== null) {
-                    selectorIcon?.addEventListener("click", function () {
+                if (collapsedItem !== null && selectorIcon) {
+                    const toggle = function () {
                         item?.classList.toggle("hide-items");
-                    });
+                    };
+                    selectorIcon.addEventListener("click", toggle);
+                    listeners.push([selectorIcon, toggle]);
                 }
-
             }
 
-        }
-    })
+            return () => {
+                listeners.forEach(([node, toggle]) =>
+                    node.removeEventListener("click", toggle)
+                );
+            };
+        },
+        [itemCollapsed, blockId, headers]
+    );
+
+    const blockProps = useBlockProps({
+        className: classnames(className, `eb-guten-block-main-parent-wrapper`),
+        ref: collapsedItemRef,
+    });
 
     return cover.length ? (
         <div>
