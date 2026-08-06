@@ -120,6 +120,13 @@ function create_block_table_of_content_block_init() {
                         wp_enqueue_script( 'essential-blocks-toc-frontend' );
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
                         wp_enqueue_script( 'essential-blocks-clipboard' );
+
+                        // The copy-link icon is a dashicon; that stylesheet is
+                        // admin-only by default, so load it on the frontend
+                        // only for blocks that actually render the icon.
+                        if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
+                            wp_enqueue_style( 'dashicons' );
+                        }
                     }
 
 
