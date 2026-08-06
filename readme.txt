@@ -1,9 +1,10 @@
 === Table Of Contents Block ===
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir, hztyfoon
 Tags: gutenberg, blocks, toc, table of contents, seo, schema
-Requires at least: 5.6
-Tested up to: 6.1
-Stable tag: 1.3.4
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 1.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -118,6 +119,15 @@ Yes, it should work fine with all standard theme.
 
 
 == Changelog ==
+
+= 1.5.0 - 06/08/2026 =
+* Added: Block API version 3 support for full compatibility with the iframed Block Editor (WordPress 6.3+) & latest Gutenberg
+* Added: Compatibility with WordPress 7.0
+* Fixed: Headings nested inside Group, Columns & other container blocks were not detected in the Table of Contents
+* Fixed: Fatal error on PHP 7.x when opening the Site Editor
+* Fixed: JavaScript error on pages where the Table of Contents has no headings
+* Fixed: Heading anchors only generated for the first Table of Contents block on a page
+* Improved: Updated build tooling & modernized block registration metadata
 
 = 1.3.4 - 18/12/2022 =
 * Fixed: Minor bugs

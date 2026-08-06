@@ -55,13 +55,16 @@ window.addEventListener("DOMContentLoaded", function () {
 
 		_scrollToTop: function () {
 			let container = document.querySelector(".eb-toc-container");
-			let hasScrollTop =
-				container && container.getAttribute("data-scroll-top") == "true";
-			let hasSticky =
-				container && container.getAttribute("data-sticky") == "true";
+
+			if (!container) {
+				return;
+			}
+
+			let hasScrollTop = container.getAttribute("data-scroll-top") == "true";
+			let hasSticky = container.getAttribute("data-sticky") == "true";
 			let scrollTarget = container.getAttribute("data-scroll-target");
 			let wrapper = document.querySelector(".eb-toc-wrapper");
-			let offsetTop = wrapper.getAttribute("data-top-offset");
+			let offsetTop = wrapper ? wrapper.getAttribute("data-top-offset") : "";
 
 			if (hasScrollTop) {
 				// Create go to top element
@@ -201,7 +204,7 @@ window.addEventListener("DOMContentLoaded", function () {
 					window.ebTocBorder = tocBorder;
 				}
 
-				let node = document.querySelector(".eb-toc-wrapper");
+				let node = container.querySelector(".eb-toc-wrapper");
 
 				if (node) {
 					let headers = JSON.parse(node.getAttribute("data-headers"));
@@ -225,8 +228,11 @@ window.addEventListener("DOMContentLoaded", function () {
 							? document.body.querySelectorAll(allowed_h_tags_str)
 							: document.body.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
-					if (undefined !== headers && 0 !== all_header.length) {
+					if (undefined !== headers && null !== headers && 0 !== all_header.length) {
 						headers.forEach((element) => {
+							if (!element || !element.text) {
+								return;
+							}
 							const element_text = parseTocSlug(element.text);
 
 							all_header.forEach((item) => {
