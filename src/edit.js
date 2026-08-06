@@ -71,6 +71,28 @@ import { wrapMaxWidthPrefix } from "./constants/rangeNames";
 
 import List from "./list";
 
+// Since WordPress 6.5 rich-text attributes (e.g. core/heading "content") can be
+// RichTextData objects instead of plain strings. Normalize before using striptags
+function getPlainText(value) {
+	if (value === undefined || value === null) {
+		return "";
+	}
+	return value.toString();
+}
+
+// Build a header entry from a heading level and its (possibly rich-text) content
+function makeHeader(level, rawContent) {
+	const content = getPlainText(rawContent);
+	const text = striptags(content);
+
+	return {
+		level: parseInt(level),
+		content,
+		text,
+		link: parseTocSlug(text),
+	};
+}
+
 function getArrayFromBlocks(headerBlocks) {
 	let headerList = [];
 
@@ -83,67 +105,45 @@ function getArrayFromBlocks(headerBlocks) {
 				isKadenceHeading(block) ||
 				isQubelyHeading(block)
 			) {
-				header = {
-					level: parseInt(block.attributes.level),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
+				header = makeHeader(block.attributes.level, block.attributes.content);
 			} else if (isEbHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tagName[1]),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
+				header = makeHeader(
+					block.attributes.tagName[1],
+					block.attributes.content
+				);
 			} else if (isUaHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.level),
-					content: block.attributes.headingTitle,
-					text: striptags(block.attributes.headingTitle),
-					link: parseTocSlug(striptags(block.attributes.headingTitle)),
-				};
+				header = makeHeader(
+					block.attributes.level,
+					block.attributes.headingTitle
+				);
 			} else if (isQubelyText(block)) {
 				if (block.attributes.enableTitle) {
-					header = {
-						level: parseInt(block.attributes.titleLevel),
-						content: block.attributes.title,
-						text: striptags(block.attributes.title),
-						link: parseTocSlug(striptags(block.attributes.title)),
-					};
+					header = makeHeader(
+						block.attributes.titleLevel,
+						block.attributes.title
+					);
 				}
 			} else if (isStackableHeader(block)) {
 				if (block.attributes.showTitle) {
-					header = {
-						level: parseInt(block.attributes.titleTag[1]),
-						content: block.attributes.title,
-						text: striptags(block.attributes.title),
-						link: parseTocSlug(striptags(block.attributes.title)),
-					};
+					header = makeHeader(
+						block.attributes.titleTag[1],
+						block.attributes.title
+					);
 				}
 			} else if (isStackableHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.titleTag[1]),
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
+				header = makeHeader(
+					block.attributes.titleTag[1],
+					block.attributes.title
+				);
 			} else if (isOtterHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tag[1]),
-					content: block.attributes.content,
-					text: striptags(block.attributes.content),
-					link: parseTocSlug(striptags(block.attributes.content)),
-				};
+				header = makeHeader(block.attributes.tag[1], block.attributes.content);
 			} else if (isGetwidHeader(block)) {
 				// Ignore getwid span and p tag
 				if (block.attributes.titleTag[0] === "h") {
-					header = {
-						level: parseInt(block.attributes.titleTag[1]),
-						content: block.attributes.content,
-						text: striptags(block.attributes.content),
-						link: parseTocSlug(striptags(block.attributes.content)),
-					};
+					header = makeHeader(
+						block.attributes.titleTag[1],
+						block.attributes.content
+					);
 				}
 			} else if (isGenerateBlocksHeader(block)) {
 				// Ignore tags other than heading, check empty content
@@ -151,54 +151,56 @@ function getArrayFromBlocks(headerBlocks) {
 					block.attributes.element[0] === "h" &&
 					block.attributes.content.length > 0
 				) {
-					let content = block.attributes.content.find(
-						(item) => typeof item === "string"
-					);
+					let content = Array.isArray(block.attributes.content)
+						? block.attributes.content.find(
+								(item) => typeof item === "string"
+						  )
+						: getPlainText(block.attributes.content);
 
 					if (content) {
-						header = {
-							level: parseInt(block.attributes.element[1]),
-							conetnt: content,
-							text: striptags(content),
-							link: parseTocSlug(striptags(content)),
-						};
+						header = makeHeader(block.attributes.element[1], content);
 					}
 				}
 			} else if (isCreativeBlockHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.tag[1]),
-					content: block.attributes.headingText,
-					text: striptags(block.attributes.headingText),
-					link: parseTocSlug(striptags(block.attributes.headingText)),
-				};
+				header = makeHeader(
+					block.attributes.tag[1],
+					block.attributes.headingText
+				);
 			} else if (isEasyBlocksHeading(block)) {
-				header = {
-					level: 2, // Only suports h2
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
+				// Only supports h2
+				header = makeHeader(2, block.attributes.title);
 			} else if (isDiHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.HeadTag[1]),
-					content: block.attributes.HeadContent,
-					text: striptags(block.attributes.HeadContent),
-					link: parseTocSlug(striptags(block.attributes.HeadContent)),
-				};
+				header = makeHeader(
+					block.attributes.HeadTag[1],
+					block.attributes.HeadContent
+				);
 			} else if (isElegantHeading(block)) {
-				header = {
-					level: parseInt(block.attributes.headingTag[1]),
-					content: block.attributes.title,
-					text: striptags(block.attributes.title),
-					link: parseTocSlug(striptags(block.attributes.title)),
-				};
+				header = makeHeader(
+					block.attributes.headingTag[1],
+					block.attributes.title
+				);
 			}
 
-			headerList.push(header);
+			// Skip empty entries and headings with no text
+			if (Object.keys(header).length > 0 && header.text !== "") {
+				headerList.push(header);
+			}
 		});
 	}
 
 	return headerList;
+}
+
+// Flatten the block tree so headings nested inside groups, columns,
+// patterns or any other container blocks are also picked up
+function flattenBlocks(blocks) {
+	return blocks.reduce((flat, block) => {
+		flat.push(block);
+		if (block.innerBlocks && block.innerBlocks.length > 0) {
+			flat.push(...flattenBlocks(block.innerBlocks));
+		}
+		return flat;
+	}, []);
 }
 
 // Custom hook for dynamic header list
@@ -207,7 +209,7 @@ const useHeader = () => {
 		select("core/block-editor").getBlocks()
 	);
 
-	const headerBlocks = allBlocks.filter((block) =>
+	const headerBlocks = flattenBlocks(allBlocks).filter((block) =>
 		supportedHeaders.includes(block.name)
 	);
 

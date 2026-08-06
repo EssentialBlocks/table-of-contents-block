@@ -10,73 +10,73 @@ export const HEADERS = [
 ];
 
 export const ALIGNS = [
-	{ label: __("Left", "essential-blocks"), value: "left" },
-	{ label: __("Center", "essential-blocks"), value: "center" },
-	{ label: __("Right", "essential-blocks"), value: "right" },
+	{ label: __("Left", "table-of-contents-block"), value: "left" },
+	{ label: __("Center", "table-of-contents-block"), value: "center" },
+	{ label: __("Right", "table-of-contents-block"), value: "right" },
 ];
 
 export const TEXT_TRANSFORM = [
-	{ label: __("None", "essential-blocks"), value: "none" },
-	{ label: __("Lowercase", "essential-blocks"), value: "lowercase" },
-	{ label: __("Capitalize", "essential-blocks"), value: "capitalize" },
-	{ label: __("Uppercase", "essential-blocks"), value: "uppercase" },
+	{ label: __("None", "table-of-contents-block"), value: "none" },
+	{ label: __("Lowercase", "table-of-contents-block"), value: "lowercase" },
+	{ label: __("Capitalize", "table-of-contents-block"), value: "capitalize" },
+	{ label: __("Uppercase", "table-of-contents-block"), value: "uppercase" },
 ];
 
 export const FONT_WEIGHTS = [
-	{ label: __("Lighter", "essential-blocks"), value: "lighter" },
-	{ label: __("Normal", "essential-blocks"), value: "normal" },
-	{ label: __("Bold", "essential-blocks"), value: "bold" },
-	{ label: __("Bolder", "essential-blocks"), value: "bolder" },
+	{ label: __("Lighter", "table-of-contents-block"), value: "lighter" },
+	{ label: __("Normal", "table-of-contents-block"), value: "normal" },
+	{ label: __("Bold", "table-of-contents-block"), value: "bold" },
+	{ label: __("Bolder", "table-of-contents-block"), value: "bolder" },
 ];
 
 export const TEXT_DECORATION = [
-	{ label: __("Initial", "essential-blocks"), value: "initial" },
-	{ label: __("Overline", "essential-blocks"), value: "overline" },
-	{ label: __("Line Through", "essential-blocks"), value: "line-through" },
-	{ label: __("Underline", "essential-blocks"), value: "underline" },
+	{ label: __("Initial", "table-of-contents-block"), value: "initial" },
+	{ label: __("Overline", "table-of-contents-block"), value: "overline" },
+	{ label: __("Line Through", "table-of-contents-block"), value: "line-through" },
+	{ label: __("Underline", "table-of-contents-block"), value: "underline" },
 	{
-		label: __("Underline Oveline", "essential-blocks"),
+		label: __("Underline Oveline", "table-of-contents-block"),
 		value: "underline overline",
 	},
 ];
 
 export const BORDER_STYLES = [
-	{ label: __("None", "essential-blocks"), value: "none" },
-	{ label: __("Dashed", "essential-blocks"), value: "dashed" },
-	{ label: __("Solid", "essential-blocks"), value: "solid" },
-	{ label: __("Dotted", "essential-blocks"), value: "dotted" },
-	{ label: __("Double", "essential-blocks"), value: "double" },
-	{ label: __("Groove", "essential-blocks"), value: "groove" },
-	{ label: __("Inset", "essential-blocks"), value: "inset" },
-	{ label: __("Outset", "essential-blocks"), value: "outset" },
-	{ label: __("Ridge", "essential-blocks"), value: "ridge" },
+	{ label: __("None", "table-of-contents-block"), value: "none" },
+	{ label: __("Dashed", "table-of-contents-block"), value: "dashed" },
+	{ label: __("Solid", "table-of-contents-block"), value: "solid" },
+	{ label: __("Dotted", "table-of-contents-block"), value: "dotted" },
+	{ label: __("Double", "table-of-contents-block"), value: "double" },
+	{ label: __("Groove", "table-of-contents-block"), value: "groove" },
+	{ label: __("Inset", "table-of-contents-block"), value: "inset" },
+	{ label: __("Outset", "table-of-contents-block"), value: "outset" },
+	{ label: __("Ridge", "table-of-contents-block"), value: "ridge" },
 ];
 
 export const LAYOUT_TYPES = [
-	{ label: __("Preset 1", "essential-blocks"), value: "preset1" },
-	{ label: __("Preset 2", "essential-blocks"), value: "preset2" },
-	{ label: __("Preset 3", "essential-blocks"), value: "preset3" },
-	{ label: __("Preset 4", "essential-blocks"), value: "preset4" },
+	{ label: __("Preset 1", "table-of-contents-block"), value: "preset1" },
+	{ label: __("Preset 2", "table-of-contents-block"), value: "preset2" },
+	{ label: __("Preset 3", "table-of-contents-block"), value: "preset3" },
+	{ label: __("Preset 4", "table-of-contents-block"), value: "preset4" },
 ];
 
 export const MEDIA_TYPES = ["image", "icon", "number", "none"];
 
 export const CONTENTS_ALIGNMENTS = [
-	{ label: __("Left", "essential-blocks"), value: "left" },
-	{ label: __("Center", "essential-blocks"), value: "center" },
-	{ label: __("Right", "essential-blocks"), value: "right" },
+	{ label: __("Left", "table-of-contents-block"), value: "left" },
+	{ label: __("Center", "table-of-contents-block"), value: "center" },
+	{ label: __("Right", "table-of-contents-block"), value: "right" },
 ];
 
 export const MEDIA_ALIGNMENTS_ON_FLEX_COLUMN = [
-	{ label: __("Left", "essential-blocks"), value: "flex-start" },
-	{ label: __("Center", "essential-blocks"), value: "center" },
-	{ label: __("Right", "essential-blocks"), value: "flex-end" },
+	{ label: __("Left", "table-of-contents-block"), value: "flex-start" },
+	{ label: __("Center", "table-of-contents-block"), value: "center" },
+	{ label: __("Right", "table-of-contents-block"), value: "flex-end" },
 ];
 
 export const MEDIA_ALIGNMENTS_ON_FLEX_ROW = [
-	{ label: __("Top", "essential-blocks"), value: "flex-start" },
-	{ label: __("Middle", "essential-blocks"), value: "center" },
-	{ label: __("Bottom", "essential-blocks"), value: "flex-end" },
+	{ label: __("Top", "table-of-contents-block"), value: "flex-start" },
+	{ label: __("Middle", "table-of-contents-block"), value: "center" },
+	{ label: __("Bottom", "table-of-contents-block"), value: "flex-end" },
 ];
 
 export const ICON_IMAGE_BG_TYPES = [
@@ -99,15 +99,15 @@ export const imgHeightUnits = [
 export const HEADER_TAGS = ["h1", "h2", "h3", "h4", "h5", "h6"];
 
 export const BACKGROUND_TYPES = [
-	{ label: __("Fill", "essential-blocks"), value: "fill" },
-	{ label: __("Gradient", "essential-blocks"), value: "gradient" },
-	{ label: __("Image", "essential-blocks"), value: "image" },
+	{ label: __("Fill", "table-of-contents-block"), value: "fill" },
+	{ label: __("Gradient", "table-of-contents-block"), value: "gradient" },
+	{ label: __("Image", "table-of-contents-block"), value: "image" },
 ];
 
 export const BACKGROUND_SIZES = [
-	{ label: __("Auto", "essential-blocks"), value: "auto" },
-	{ label: __("Cover", "essential-blocks"), value: "cover" },
-	{ label: __("Contain", "essential-blocks"), value: "contain" },
+	{ label: __("Auto", "table-of-contents-block"), value: "auto" },
+	{ label: __("Cover", "table-of-contents-block"), value: "cover" },
+	{ label: __("Contain", "table-of-contents-block"), value: "contain" },
 ];
 
 export const SHADOW_HOVER_OPTIONS = [
@@ -121,143 +121,143 @@ export const LETTER_SPACING_LINE_HEIGHT_UNITS = [
 ];
 
 export const HOVER_EFFECT = [
-	{ label: __("Select Hover Effect", "essential-blocks"), value: "" },
-	{ label: __("Grow", "essential-blocks"), value: "hvr-grow" },
-	{ label: __("Shrink", "essential-blocks"), value: "hvr-shrink" },
-	{ label: __("Pulse", "essential-blocks"), value: "hvr-pulse" },
-	{ label: __("Pulse Grow", "essential-blocks"), value: "hvr-pulse-grow" },
-	{ label: __("Pulse Shrink", "essential-blocks"), value: "hvr-pulse-shrink" },
-	{ label: __("Push", "essential-blocks"), value: "hvr-push" },
-	{ label: __("Pop", "essential-blocks"), value: "hvr-pop" },
-	{ label: __("Bounce In", "essential-blocks"), value: "hvr-bounce-in" },
-	{ label: __("Bounce Out", "essential-blocks"), value: "hvr-bounce-out" },
-	{ label: __("Rotate", "essential-blocks"), value: "hvr-rotate" },
-	{ label: __("Grow Rotate", "essential-blocks"), value: "hvr-grow-rotate" },
-	{ label: __("Float", "essential-blocks"), value: "hvr-float" },
-	{ label: __("Sink", "essential-blocks"), value: "hvr-sink" },
-	{ label: __("Bob", "essential-blocks"), value: "hvr-bob" },
-	{ label: __("Hang", "essential-blocks"), value: "hvr-hang" },
-	{ label: __("Skew", "essential-blocks"), value: "hvr-skew" },
-	{ label: __("Skew Forward", "essential-blocks"), value: "hvr-skew-forward" },
+	{ label: __("Select Hover Effect", "table-of-contents-block"), value: "" },
+	{ label: __("Grow", "table-of-contents-block"), value: "hvr-grow" },
+	{ label: __("Shrink", "table-of-contents-block"), value: "hvr-shrink" },
+	{ label: __("Pulse", "table-of-contents-block"), value: "hvr-pulse" },
+	{ label: __("Pulse Grow", "table-of-contents-block"), value: "hvr-pulse-grow" },
+	{ label: __("Pulse Shrink", "table-of-contents-block"), value: "hvr-pulse-shrink" },
+	{ label: __("Push", "table-of-contents-block"), value: "hvr-push" },
+	{ label: __("Pop", "table-of-contents-block"), value: "hvr-pop" },
+	{ label: __("Bounce In", "table-of-contents-block"), value: "hvr-bounce-in" },
+	{ label: __("Bounce Out", "table-of-contents-block"), value: "hvr-bounce-out" },
+	{ label: __("Rotate", "table-of-contents-block"), value: "hvr-rotate" },
+	{ label: __("Grow Rotate", "table-of-contents-block"), value: "hvr-grow-rotate" },
+	{ label: __("Float", "table-of-contents-block"), value: "hvr-float" },
+	{ label: __("Sink", "table-of-contents-block"), value: "hvr-sink" },
+	{ label: __("Bob", "table-of-contents-block"), value: "hvr-bob" },
+	{ label: __("Hang", "table-of-contents-block"), value: "hvr-hang" },
+	{ label: __("Skew", "table-of-contents-block"), value: "hvr-skew" },
+	{ label: __("Skew Forward", "table-of-contents-block"), value: "hvr-skew-forward" },
 	{
-		label: __("Skew Backward", "essential-blocks"),
+		label: __("Skew Backward", "table-of-contents-block"),
 		value: "hvr-skew-backward",
 	},
 	{
-		label: __("Wobble Horizontal", "essential-blocks"),
+		label: __("Wobble Horizontal", "table-of-contents-block"),
 		value: "hvr-wobble-horizontal",
 	},
 	{
-		label: __("Wobble Vertical", "essential-blocks"),
+		label: __("Wobble Vertical", "table-of-contents-block"),
 		value: "hvr-wobble-vertical",
 	},
 	{
-		label: __("Wobble To Bottom Right", "essential-blocks"),
+		label: __("Wobble To Bottom Right", "table-of-contents-block"),
 		value: "hvr-wobble-to-bottom-right",
 	},
 	{
-		label: __("Wobble To Top Right", "essential-blocks"),
+		label: __("Wobble To Top Right", "table-of-contents-block"),
 		value: "hvr-wobble-to-top-right",
 	},
-	{ label: __("Wobble Top", "essential-blocks"), value: "hvr-wobble-top" },
+	{ label: __("Wobble Top", "table-of-contents-block"), value: "hvr-wobble-top" },
 	{
-		label: __("Wobble Bottom", "essential-blocks"),
+		label: __("Wobble Bottom", "table-of-contents-block"),
 		value: "hvr-wobble-bottom",
 	},
-	{ label: __("Wobble Skew", "essential-blocks"), value: "hvr-wobble-skew" },
-	{ label: __("Buzz", "essential-blocks"), value: "hvr-buzz" },
-	{ label: __("Buzz Out", "essential-blocks"), value: "hvr-buzz-out" },
-	{ label: __("Forward", "essential-blocks"), value: "hvr-forward" },
-	{ label: __("Fade", "essential-blocks"), value: "hvr-fade" },
-	{ label: __("Back Pulse", "essential-blocks"), value: "hvr-back-pulse" },
+	{ label: __("Wobble Skew", "table-of-contents-block"), value: "hvr-wobble-skew" },
+	{ label: __("Buzz", "table-of-contents-block"), value: "hvr-buzz" },
+	{ label: __("Buzz Out", "table-of-contents-block"), value: "hvr-buzz-out" },
+	{ label: __("Forward", "table-of-contents-block"), value: "hvr-forward" },
+	{ label: __("Fade", "table-of-contents-block"), value: "hvr-fade" },
+	{ label: __("Back Pulse", "table-of-contents-block"), value: "hvr-back-pulse" },
 	{
-		label: __("Sweep To Right", "essential-blocks"),
+		label: __("Sweep To Right", "table-of-contents-block"),
 		value: "hvr-sweep-to-right",
 	},
 	{
-		label: __("Sweep To Left", "essential-blocks"),
+		label: __("Sweep To Left", "table-of-contents-block"),
 		value: "hvr-sweep-to-left",
 	},
 	{
-		label: __("Sweep To Bottom", "essential-blocks"),
+		label: __("Sweep To Bottom", "table-of-contents-block"),
 		value: "hvr-sweep-to-bottom",
 	},
-	{ label: __("Sweep To Top", "essential-blocks"), value: "hvr-sweep-to-top" },
+	{ label: __("Sweep To Top", "table-of-contents-block"), value: "hvr-sweep-to-top" },
 	{
-		label: __("Bounce To Right", "essential-blocks"),
+		label: __("Bounce To Right", "table-of-contents-block"),
 		value: "hvr-bounce-to-right",
 	},
 	{
-		label: __("Bounce To Left", "essential-blocks"),
+		label: __("Bounce To Left", "table-of-contents-block"),
 		value: "hvr-bounce-to-left",
 	},
 	{
-		label: __("Bounce To Bottom", "essential-blocks"),
+		label: __("Bounce To Bottom", "table-of-contents-block"),
 		value: "hvr-bounce-to-bottom",
 	},
 	{
-		label: __("Bounce To Top", "essential-blocks"),
+		label: __("Bounce To Top", "table-of-contents-block"),
 		value: "hvr-bounce-to-top",
 	},
-	{ label: __("Radial Out", "essential-blocks"), value: "hvr-radial-out" },
-	{ label: __("Radial In", "essential-blocks"), value: "hvr-radial-in" },
-	{ label: __("Rectangle In", "essential-blocks"), value: "hvr-rectangle-in" },
+	{ label: __("Radial Out", "table-of-contents-block"), value: "hvr-radial-out" },
+	{ label: __("Radial In", "table-of-contents-block"), value: "hvr-radial-in" },
+	{ label: __("Rectangle In", "table-of-contents-block"), value: "hvr-rectangle-in" },
 	{
-		label: __("Rectangle Out", "essential-blocks"),
+		label: __("Rectangle Out", "table-of-contents-block"),
 		value: "hvr-rectangle-out",
 	},
 	{
-		label: __("Shutter In Horizontal", "essential-blocks"),
+		label: __("Shutter In Horizontal", "table-of-contents-block"),
 		value: "hvr-shutter-in-horizontal",
 	},
 	{
-		label: __("Shutter Out Horizontal", "essential-blocks"),
+		label: __("Shutter Out Horizontal", "table-of-contents-block"),
 		value: "hvr-shutter-out-horizontal",
 	},
 	{
-		label: __("Shutter In Vertical", "essential-blocks"),
+		label: __("Shutter In Vertical", "table-of-contents-block"),
 		value: "hvr-shutter-in-vertical",
 	},
 	{
-		label: __("Shutter Out Vertical", "essential-blocks"),
+		label: __("Shutter Out Vertical", "table-of-contents-block"),
 		value: "hvr-shutter-out-vertical",
 	},
 	{
-		label: __("Curl Top Left", "essential-blocks"),
+		label: __("Curl Top Left", "table-of-contents-block"),
 		value: "hvr-curl-top-left",
 	},
 	{
-		label: __("Curl Top Right", "essential-blocks"),
+		label: __("Curl Top Right", "table-of-contents-block"),
 		value: "hvr-curl-top-right",
 	},
 	{
-		label: __("Curl Bottom Right", "essential-blocks"),
+		label: __("Curl Bottom Right", "table-of-contents-block"),
 		value: "hvr-curl-bottom-right",
 	},
 	{
-		label: __("Curl Bottom Left", "essential-blocks"),
+		label: __("Curl Bottom Left", "table-of-contents-block"),
 		value: "hvr-curl-bottom-left",
 	},
 ];
 
 export const SCROLL_OPTIONS = [
 	{
-		label: __("Scroll to the top of page", "essential-blocks"),
+		label: __("Scroll to the top of page", "table-of-contents-block"),
 		value: "scroll_to_page",
 	},
 	{
-		label: __("Scroll to the TOC", "essential-blocks"),
+		label: __("Scroll to the TOC", "table-of-contents-block"),
 		value: "scroll_to_toc",
 	},
 ];
 
 export const STICKY_POSITION = [
 	{
-		label: __("Left", "essential-blocks"),
+		label: __("Left", "table-of-contents-block"),
 		value: "left",
 	},
 	{
-		label: __("Right", "essential-blocks"),
+		label: __("Right", "table-of-contents-block"),
 		value: "right",
 	},
 ];

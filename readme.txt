@@ -1,13 +1,14 @@
 === Table Of Contents Block ===
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir, hztyfoon
-Tags: gutenberg, blocks, toc, table of contents, seo, schema
-Requires at least: 5.6
-Tested up to: 6.1
-Stable tag: 1.3.4
+Tags: table of contents, toc, gutenberg, blocks, seo
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 1.5.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
-Automatically Add Table of Contents Block for your WordPress Posts & Pages
+Add a customizable, SEO-friendly Table of Contents block to WordPress posts & pages — auto-generated from your headings in the Block Editor.
 
 == Description ==
 
@@ -95,29 +96,71 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 == Installation ==
 
-== Modern Way: ==
+**Modern Way (from the Block Editor):**
 
 1. Go to the WordPress Block/Gutenberg Editor
-2. Search For "Table of Contents Block"
-3. Install in 1-click
+2. Search for "Table of Contents Block" in the block inserter
+3. Install & activate in 1-click
 
-== Manual Installation: ==
+**From your WordPress Dashboard:**
 
-1. Upload table-of-contents-block to the /wp-content/plugins/ directory
-2. Activate the plugin through the ‘Plugins’ menu in WordPress
+1. Go to Plugins → Add New
+2. Search for "Table of Contents Block"
+3. Click Install Now, then Activate
+
+**Manual Installation:**
+
+1. Upload the `table-of-contents-block` folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Add the Table Of Contents block to any post or page from the block inserter
 
 
 == Frequently Asked Questions ==
 
-= Does it work with all theme? =
+= Does it work with all themes? =
 
-Yes, it should work fine with all standard theme.
+Yes, it works with any standard WordPress theme, including classic themes and modern block themes with Full Site Editing.
+
+= Which heading blocks are detected? =
+
+The core Heading block is fully supported, along with headings from popular block libraries such as Essential Blocks, Kadence Blocks, Stackable, Spectra (Ultimate Addons), Otter, Getwid, GenerateBlocks, Qubely & more. Headings nested inside Groups, Columns & patterns are detected too.
+
+= Can I choose which heading levels appear in the Table of Contents? =
+
+Yes. From the block settings you can toggle each heading tag (H1–H6) individually, so only the levels you want show up in the Table of Contents.
+
+= Can I make the Table of Contents sticky or collapsible? =
+
+Yes. The block includes a sticky mode (pinned to the left or right of the screen), a collapsible mode with an optional initially-collapsed state, plus smooth scrolling and a scroll-to-top button.
+
+= Will this plugin slow down my website? =
+
+No. The block is super lightweight — its small script & stylesheet are only loaded on pages that actually contain a Table of Contents block.
+
+= Is it compatible with the latest WordPress? =
+
+Yes. Version 1.5.0 is tested up to WordPress 7.0 with the latest Gutenberg, supports the iframed Block Editor, and works on PHP 7.4 through 8.3.
 
 
 == Screenshots ==
 
+1. Table of Contents block inserted in the Block Editor, auto-generated from post headings
+2. Customization options — heading levels, colors, typography, spacing & more
+3. Collapsible Table of Contents on the frontend
+4. Sticky Table of Contents pinned to the side of the page
+5. Smooth scroll navigation with the scroll-to-top button
+
 
 == Changelog ==
+
+= 1.5.0 - 06/08/2026 =
+* Added: Block API version 3 support for full compatibility with the iframed Block Editor (WordPress 6.3+) & latest Gutenberg
+* Added: Compatibility with WordPress 7.0
+* Fixed: Headings nested inside Group, Columns & other container blocks were not detected in the Table of Contents
+* Fixed: Fatal error on PHP 7.x when opening the Site Editor
+* Fixed: JavaScript error on pages where the Table of Contents has no headings
+* Fixed: Heading anchors only generated for the first Table of Contents block on a page
+* Improved: Updated build tooling & modernized block registration metadata
 
 = 1.3.4 - 18/12/2022 =
 * Fixed: Minor bugs
@@ -162,4 +205,5 @@ Yes, it should work fine with all standard theme.
 
 == Upgrade Notice ==
 
-[Major Update] Changed to controls and this might break your existing block
+= 1.5.0 =
+Compatibility update for WordPress 7.0 & the latest Block Editor, with important bug fixes for heading detection. Recommended for all users.

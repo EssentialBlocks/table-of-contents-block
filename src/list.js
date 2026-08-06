@@ -126,7 +126,7 @@ class List extends Component {
 		} else {
 			return (
 				<p className="eb_table-of-contents-placeholder">
-					{__("Add a header to begin generating the table of contents", "essential-blocks")}
+					{__("Add a header to begin generating the table of contents", "table-of-contents-block")}
 				</p>
 			);
 		}

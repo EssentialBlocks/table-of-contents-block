@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { RichText, useBlockProps } from "@wordpress/block-editor";
-const { omit } = lodash;
+import { omit } from "lodash";
 
 import attributes from "./attributes";
 import List from "./list";
