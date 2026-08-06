@@ -13,8 +13,9 @@ import {
 // 	WrpBgConst,
 // } from "./constants/backgroundsConstants";
 import {
-	//
 	WrpBdShadowConst,
+	ItemBdShadow,
+	CLOSE_BORDER
 } from "./constants/borderShadowConstants";
 
 import {
@@ -66,6 +67,10 @@ const attributes = {
 	blockMeta: {
 		type: "object",
 	},
+	cover: {
+		type: "string",
+		default: "",
+	},
 
 	//
 	headers: {
@@ -75,6 +80,14 @@ const attributes = {
 	visibleHeaders: {
 		type: "array",
 		default: Array(6).fill(true),
+	},
+	deleteHeaderList: {
+		type: "array",
+		default: [],
+	},
+	isMigrated: {
+		type: "boolean",
+		default: false,
 	},
 	listType: {
 		type: "string",
@@ -94,7 +107,7 @@ const attributes = {
 	},
 	mainBgc: {
 		type: "string",
-		// default: "#ff7d50",
+		default: "#f9fafb",
 	},
 	titleBg: {
 		type: "string",
@@ -117,6 +130,7 @@ const attributes = {
 	},
 	contentGap: {
 		type: "number",
+		default: 10,
 	},
 	contentGapUnit: {
 		type: "string",
@@ -335,7 +349,7 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
-	hideOnMobile: {
+	stickyHideOnMobile: {
 		type: "boolean",
 		default: false,
 	},
@@ -353,6 +367,7 @@ const attributes = {
 	},
 	topOffset: {
 		type: "string",
+		default: "-50",
 	},
 	scrollTarget: {
 		type: "string",
@@ -361,6 +376,40 @@ const attributes = {
 	stickyPosition: {
 		type: "string",
 		default: "left",
+	},
+	enableCopyLink: {
+		type: "boolean",
+		default: false,
+	},
+	scrollToTopIcon: {
+		type: "string",
+		default: "fas fa-angle-up",
+	},
+	listStyle: { type: "string", default: "ul" },
+
+	closeBtnColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	closeBtnHoverColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	closeBtnBgColor: {
+		type: "string",
+		default: "#000000",
+	},
+	closeBtnBgHvColor: {
+		type: "string",
+		default: "#000000",
+	},
+	closeIconSize: {
+		type: "number",
+		default: 12,
+	},
+	closeBtnSize: {
+		type: "number",
+		default: 28,
 	},
 	// typography attributes
 	...generateTypographyAttributes(Object.values(typoPrefixs)),
@@ -375,6 +424,23 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
+	enableListStyle: {
+		type: "boolean",
+		default: false,
+	},
+	itemCollapsed: {
+		type: "boolean",
+		default: false,
+	},
+	preset: {
+		type: "string",
+		default: "style-1",
+	},
+	contentItemBg: {
+		type: "string",
+		default: "#fff",
+	},
+
 	// //
 	// ...generateBackgroundAttributes(WrpBgConst, {
 	// 	defaultBgGradient: "linear-gradient(45deg,#7967ff,#c277f2)",
@@ -383,18 +449,42 @@ const attributes = {
 
 	//
 	...generateBorderShadowAttributes(WrpBdShadowConst, {
+		rdsDefaults: {
+			top: 4,
+			bottom: 4,
+			right: 4,
+			left: 4,
+		},
+		// noShadow: true,
+		// noBorder: true,
+	}),
+	...generateBorderShadowAttributes(ItemBdShadow, {
+		rdsDefaults: {
+			top: 4,
+			bottom: 4,
+			right: 4,
+			left: 4,
+		},
 		// noShadow: true,
 		// noBorder: true,
 	}),
 
 	//
 	...generateDimensionsAttributes(WrpMarginConst),
-	...generateDimensionsAttributes(WrpPaddingConst),
+	...generateDimensionsAttributes(WrpPaddingConst, {
+		top: 30,
+		bottom: 30,
+		right: 30,
+		left: 30,
+		isLinked: true,
+	}),
 	...generateDimensionsAttributes(titlePaddingConst, {
-		left: 10,
+		// left: 10,
 		isLinked: false,
 	}),
 	...generateDimensionsAttributes(contentPaddingConst),
+	...generateBorderShadowAttributes(CLOSE_BORDER),
+
 };
 
 export default attributes;

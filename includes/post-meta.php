@@ -9,7 +9,7 @@ class Toc_Post_Meta
 {
     public function __construct()
     {
-        add_filter('init', array($this, 'register_meta'));
+        add_action('init', array($this, 'register_meta'));
     }
 
     /**
@@ -23,6 +23,7 @@ class Toc_Post_Meta
             array(
                 'show_in_rest' => true,
                 'single' => true,
+                'type' => 'string',
                 'auth_callback' => [$this, 'auth_callback'],
             )
         );

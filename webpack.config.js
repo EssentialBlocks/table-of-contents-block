@@ -5,7 +5,8 @@ const MiniCSSExtractPlugin = require("mini-css-extract-plugin");
 const plugins = defaultConfig.plugins.filter(
 	(plugin) =>
 		plugin.constructor.name != "MiniCssExtractPlugin" &&
-		plugin.constructor.name != "CleanWebpackPlugin"
+		plugin.constructor.name != "CleanWebpackPlugin" &&
+		plugin.constructor.name != "RtlCssPlugin"
 );
 
 let allEntries = {
