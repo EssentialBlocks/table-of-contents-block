@@ -51,3 +51,13 @@ controls
 lib/style-handler/style-handler.js
 lib/style-handler/helpers.js
 .wordpress-org
+
+# Source maps — debug artifacts, no runtime use
+*.map
+
+# Legacy FontAwesome 4 set — unreferenced by any PHP/CSS/JS
+assets/fonts
+
+# Build-only config (read by controls/webpack.config.js, not at runtime)
+config
+babel.config.json
