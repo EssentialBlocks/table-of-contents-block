@@ -146,7 +146,7 @@ const List = (props) => {
             <p className="eb_table-of-contents-placeholder">
                 {__(
                     "Add a header to begin generating the table of contents",
-                    "essential-blocks"
+                    "table-of-contents-block"
                 )}
             </p>
         );

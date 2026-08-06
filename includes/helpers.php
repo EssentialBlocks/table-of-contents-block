@@ -44,7 +44,7 @@ class TOC_Helper
         /**
          * Only for Admin Add/Edit Pages
          */
-        if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && str_contains($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
+        if ($pagenow == 'post-new.php' || $pagenow == 'post.php' || $pagenow == 'site-editor.php' || $pagenow == 'widgets.php' || ($pagenow == 'themes.php' && !empty($_SERVER['QUERY_STRING']) && false !== strpos($_SERVER['QUERY_STRING'], 'gutenberg-edit-site'))) {
 
             $controls_dependencies = include_once TOC_BLOCK_ADMIN_PATH . '/dist/modules.asset.php';
             $dependencies = [];

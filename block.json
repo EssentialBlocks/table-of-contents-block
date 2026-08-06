@@ -1,11 +1,15 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"name": "table-of-contents-block/table-of-contents-block",
 	"title": "Table Of Contents",
-	"apiVersion": 2,
+	"apiVersion": 3,
+	"version": "1.5.0",
 	"category": "widgets",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"textdomain": "table-of-contents-block",
 	"supports": {
 		"align": ["wide", "full"]
-	}
+	},
+	"editorScript": "create-block-table-of-content-block-editor",
+	"editorStyle": "create-block-table-of-content-block"
 }

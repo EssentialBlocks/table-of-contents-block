@@ -149,14 +149,19 @@ window.addEventListener("DOMContentLoaded", function () {
 
         _scrollToTop: function () {
             let container = document.querySelector(".eb-toc-container");
+
+            if (!container) {
+                return;
+            }
+
             let hasScrollTop =
-                container &&
                 container.getAttribute("data-scroll-top") == "true";
-            let hasSticky =
-                container && container.getAttribute("data-sticky") == "true";
+            let hasSticky = container.getAttribute("data-sticky") == "true";
             let scrollTarget = container.getAttribute("data-scroll-target");
             let wrapper = document.querySelector(".eb-toc-wrapper");
-            let offsetTop = wrapper.getAttribute("data-top-offset");
+            let offsetTop = wrapper
+                ? wrapper.getAttribute("data-top-offset")
+                : "";
             let scrollIcon = container.getAttribute("data-scroll-top-icon");
 
             if (hasScrollTop) {
@@ -355,7 +360,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     ? `<span class="eb-tooltip dashicons dashicons-clipboard"><span class="eb-tooltiptext">Copied!</span></span></span>`
                     : "";
 
-                let node = document.querySelector(".eb-toc-wrapper");
+                let node = container.querySelector(".eb-toc-wrapper");
 
                 if (node) {
                     let headers = JSON.parse(node.getAttribute("data-headers"));
@@ -387,8 +392,11 @@ window.addEventListener("DOMContentLoaded", function () {
                                 "h1, h2, h3, h4, h5, h6"
                             );
 
-                    if (undefined !== headers && 0 !== all_header.length) {
+                    if (undefined !== headers && null !== headers && 0 !== all_header.length) {
                         headers.forEach((element, headerIndex) => {
+                            if (!element || !element.text) {
+                                return;
+                            }
                             const element_text = parseTocSlug(element.text);
                             if (
                                 deleteHeaderLists &&

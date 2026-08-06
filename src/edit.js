@@ -336,7 +336,7 @@ function Edit(props) {
                                     ]}
                                     placeholder={__(
                                         "Table of content",
-                                        "essential-blocks"
+                                        "table-of-contents-block"
                                     )}
                                     onChange={(title) =>
                                         setAttributes({
