@@ -80,9 +80,12 @@ window.addEventListener("DOMContentLoaded", function () {
                                 "mouseleave",
                                 function (event) {
                                     headingAnchor.style.display = "none";
-                                    this.getElementsByClassName(
-                                        "eb-tooltiptext"
-                                    )[0].style.visibility = "hidden";
+                                    // Hide this icon's own tooltip, not the first
+                                    // one in the heading — a heading may hold several.
+                                    if (headingAnchor.children[0]) {
+                                        headingAnchor.children[0].style.visibility =
+                                            "hidden";
+                                    }
                                 }
                             );
                         }
@@ -136,7 +139,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         const selectorIcon = item.querySelector("svg");
                         const collapsedItem = item.querySelector(".eb-toc__list");
 
-                        if (collapsedItem !== null) {
+                        if (collapsedItem !== null && selectorIcon) {
                             selectorIcon.addEventListener("click", function () {
                                 item.classList.toggle("hide-items");
                             });
@@ -410,7 +413,10 @@ window.addEventListener("DOMContentLoaded", function () {
                                     if (
                                         element_text.localeCompare(
                                             header_text
-                                        ) === 0
+                                        ) === 0 &&
+                                        !item.querySelector(
+                                            ".eb-toc__heading-anchor"
+                                        )
                                     ) {
                                         if (isValidHtmlId(element.link)) {
                                             new ClipboardJS(`#${element.link}`);
@@ -434,7 +440,10 @@ window.addEventListener("DOMContentLoaded", function () {
                                     if (
                                         element_text.localeCompare(
                                             header_text
-                                        ) === 0
+                                        ) === 0 &&
+                                        !item.querySelector(
+                                            ".eb-toc__heading-anchor"
+                                        )
                                     ) {
                                         item.innerHTML = `<span id="${element.link}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
                                     }
