@@ -156,6 +156,7 @@ Yes. Version 1.5.0 is tested up to WordPress 7.0 with the latest Gutenberg, supp
 = 1.5.0 - 06/08/2026 =
 * Added: Compatibility with WordPress 7.0 & the latest Block Editor
 * Added: Block API version 3 support for the iframed Block Editor
+* Fixed: Security — stored cross-site scripting through the Scroll to Top icon setting, which a contributor-level user could use to run script for anyone viewing the post
 * Fixed: Fatal error on PHP 7.x when opening the Site Editor
 * Fixed: Block assets could fail to load on newer WordPress versions due to deprecated registration arguments
 * Fixed: JavaScript error on pages where the Table of Contents has no headings
