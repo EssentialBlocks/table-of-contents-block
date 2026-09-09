@@ -3,7 +3,7 @@
 	"name": "table-of-contents-block/table-of-contents-block",
 	"title": "Table Of Contents",
 	"apiVersion": 3,
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"category": "widgets",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"textdomain": "table-of-contents-block",

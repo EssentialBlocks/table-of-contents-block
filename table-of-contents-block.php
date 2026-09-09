@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.5.0
+ * Version:         1.5.1
  * Requires at least: 6.0
  * Requires PHP:    7.4
  * Author:          WPDeveloper
@@ -23,7 +23,7 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.5.0" );
+define( 'TOC_BLOCK_VERSION', "1.5.1" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
