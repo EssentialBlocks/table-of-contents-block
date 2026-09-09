@@ -2,9 +2,9 @@
 Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
 Tags: table of contents, toc, gutenberg, blocks, seo
 Requires at least: 6.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.0
+Stable tag: 1.5.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -139,7 +139,7 @@ No. The block is super lightweight — its small script & stylesheet are only lo
 
 = Is it compatible with the latest WordPress? =
 
-Yes. Version 1.5.0 is tested up to WordPress 7.0 with the latest Gutenberg, supports the iframed Block Editor, and works on PHP 7.4 through 8.3.
+Yes. Version 1.5.1 is tested up to WordPress 7.1 with the latest Gutenberg, supports the iframed Block Editor, and works on PHP 7.4 through 8.3.
 
 
 == Screenshots ==
@@ -152,6 +152,9 @@ Yes. Version 1.5.0 is tested up to WordPress 7.0 with the latest Gutenberg, supp
 
 
 == Changelog ==
+
+= 1.5.1 - 09/09/2026 =
+* Improved: Security Enhancement
 
 = 1.5.0 - 06/08/2026 =
 * Added: Compatibility with WordPress 7.0 & the latest Block Editor
@@ -228,6 +231,9 @@ Yes. Version 1.5.0 is tested up to WordPress 7.0 with the latest Gutenberg, supp
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.5.1 =
+Security enhancement. Update recommended for all users.
 
 = 1.5.0 =
 Compatibility update for WordPress 7.0 & the latest Block Editor, with important bug fixes. Recommended for all users.

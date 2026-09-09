@@ -1,6 +1,6 @@
 {
 	"name": "table-of-contents",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
@@ -11,10 +11,12 @@
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"start": "wp-scripts start",
+		"test": "node tests/scroll-to-top-icon.cjs",
 		"packages-update": "wp-scripts packages-update"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^30.0.0",
+		"jsdom": "^30.0.1",
 		"striptags": "^3.2.0"
 	},
 	"dependencies": {

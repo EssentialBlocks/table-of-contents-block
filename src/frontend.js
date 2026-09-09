@@ -28,18 +28,12 @@ window.addEventListener("DOMContentLoaded", function () {
         return 'dashicon';
     }
 
-    let ebRenderIcon = (iconType, className, icon) => {
-        if (iconType === 'dashicon') {
-            // Render Dashicon
-            return '<span class="dashicon dashicons ' + icon + ' ' + className + '"></span>';
-        } else if (iconType === 'fontawesome') {
-            // Render FontAwesome icon
-            return '<i class="' + icon + ' ' + className + '"></i>';
-        }
-
-        // Handle other icon types or return an error message if needed.
-        return 'Invalid icon type';
-    }
+    // Attribute values are data, even when the browser has decoded HTML entities.
+    const ebRenderIcon = (iconType, className, icon) => {
+        const element = document.createElement(iconType === 'fontawesome' ? 'i' : 'span');
+        element.className = (iconType === 'dashicon' ? 'dashicon dashicons ' : '') + icon + ' ' + className;
+        return element;
+    };
 
     const EBTableOfContents = {
         init: function () {
@@ -165,13 +159,13 @@ window.addEventListener("DOMContentLoaded", function () {
             let offsetTop = wrapper
                 ? wrapper.getAttribute("data-top-offset")
                 : "";
-            let scrollIcon = container.getAttribute("data-scroll-top-icon");
+            let scrollIcon = container.getAttribute("data-scroll-top-icon") || "fas fa-angle-up";
 
             if (hasScrollTop) {
                 // Create go to top element
                 const goTop = document.createElement("span");
                 goTop.setAttribute("class", "eb-toc-go-top");
-                goTop.innerHTML = ebRenderIcon(ebGetIconType(scrollIcon), '', scrollIcon);
+                goTop.appendChild(ebRenderIcon(ebGetIconType(scrollIcon), '', scrollIcon));
                 document.body.insertBefore(goTop, document.body.lastChild);
 
                 // Add click event
