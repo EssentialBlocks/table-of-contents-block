@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.5.1
+ * Version:         1.5.2
  * Requires at least: 6.0
  * Requires PHP:    7.4
  * Author:          WPDeveloper
@@ -23,12 +23,11 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.5.1" );
+define( 'TOC_BLOCK_VERSION', "1.5.2" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
 require_once __DIR__ . '/includes/font-loader.php';
-require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
@@ -232,7 +231,7 @@ function create_block_table_of_content_block_init() {
 										$output .= '</div>'; // header
 										$output .= '<div class="eb-toc-wrapper ' . implode( " ", $wrapper_class ) . '"
 										data-headers="' . htmlspecialchars( json_encode( $headers ), ENT_QUOTES, 'UTF-8' ) . '"
-										data-visible="' . json_encode( $visibleHeaders ) . '"
+										data-visible="' . esc_attr( wp_json_encode( $visibleHeaders ) ) . '"
 										data-delete-headers="' . htmlspecialchars( json_encode( $deleteHeaderList ), ENT_QUOTES, 'UTF-8' ) . '"
 										data-smooth="' . $isSmooth . '"
 										data-top-offset="' . $topOffset . '"
