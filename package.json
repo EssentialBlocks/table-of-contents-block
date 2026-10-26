@@ -20,6 +20,7 @@
 		"striptags": "^3.2.0"
 	},
 	"dependencies": {
+		"@wordpress/escape-html": "^3.0.0",
 		"classnames": "^2.3.1",
 		"react-select": "^5.2.1"
 	}

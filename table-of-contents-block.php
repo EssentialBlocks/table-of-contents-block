@@ -16,6 +16,8 @@
  * @package         table-of-contents-block
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
@@ -131,8 +133,8 @@ function create_block_table_of_content_block_init() {
 
 										$the_post = get_post();
 
-										if ( ! $the_post ) {
-												return;
+										if ( ! $the_post || post_password_required( $the_post ) ) {
+												return '';
 										}
 
 										$default_attributes = [
@@ -174,7 +176,7 @@ function create_block_table_of_content_block_init() {
 										$scrollTarget       = in_array( $attributes[ 'scrollTarget' ], [ 'scroll_to_toc', 'scroll_to_page' ], true ) ? $attributes[ 'scrollTarget' ] : 'scroll_to_toc';
 										$enableCopyLink     = $attributes[ 'enableCopyLink' ] ? 'true' : 'false';
 										$displayTitle       = $attributes[ 'displayTitle' ] ? 'true' : 'false';
-										$title              = $attributes[ 'title' ];
+										$title              = is_string( $attributes[ 'title' ] ) ? $attributes[ 'title' ] : '';
 										$isSmooth           = $attributes[ 'isSmooth' ] ? 'true' : 'false';
 										$itemCollapsed      = $attributes[ 'itemCollapsed' ] ? 'true' : 'false';
 										$topOffset          = esc_attr( $attributes[ 'topOffset' ] );
@@ -183,10 +185,10 @@ function create_block_table_of_content_block_init() {
 										$hideOnDesktop      = $attributes[ 'hideOnDesktop' ] ? 'true' : 'false';
 										$hideOnTab          = $attributes[ 'hideOnTab' ] ? 'true' : 'false';
 										$hideOnMobile       = $attributes[ 'hideOnMobile' ] ? 'true' : 'false';
-										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) ? $attributes[ 'visibleHeaders' ] : array_fill( 0, 6, true );
+										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) && is_array( $attributes[ 'visibleHeaders' ] ) ? array_pad( array_values( $attributes[ 'visibleHeaders' ] ), 6, false ) : array_fill( 0, 6, true );
 										$content            = html_entity_decode( preg_replace( "~<!--(.*?)-->~s", "", $the_post->post_content ) );
 										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, wp_kses_post( $content ) );
-										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
+										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) && is_array( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
 										$classHook          = isset( $attributes[ 'classHook' ] ) ? esc_attr( $attributes[ 'classHook' ] ) : '';
 
 										$container_class     = [  ];
@@ -225,7 +227,7 @@ function create_block_table_of_content_block_init() {
 												$output .= '</span>';
 										}
 										if ( $displayTitle == 'true' ) {
-												$output .= '<div class="eb-toc-title">' . $title . '</div>';
+												$output .= '<div class="eb-toc-title">' . wp_kses_post( $title ) . '</div>';
 										}
 
 										$output .= '</div>'; // header
@@ -264,7 +266,7 @@ function create_block_table_of_content_block_init() {
 										if ( 'false' !== $isSticky ) {
 												$output .= '<button class="eb-toc-button ' . $stickyPositionClass . '">';
 												if ( $displayTitle ) {
-														$output .= '<div>' . $title . '</div>';
+														$output .= '<div>' . wp_kses_post( $title ) . '</div>';
 												}
 												$output .= '</button>';
 										}

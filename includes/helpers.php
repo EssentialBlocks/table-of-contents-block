@@ -133,6 +133,10 @@ class TOC_Helper
      * @return boolean
      */
     public static function areAllFalse( $array ) {
+        if ( ! is_array( $array ) ) {
+            return true;
+        }
+
         return array_reduce( $array, function ( $carry, $item ) {
             return $carry && ( $item === false );
         }, true );
@@ -157,7 +161,7 @@ class TOC_Helper
                 $toc .= "</li></$listStyle>";
             }
 
-            $toc .= "<li><a href=\"#$link\">$content</a>";
+            $toc .= '<li><a href="#' . esc_attr( $link ) . '">' . wp_kses_post( $content ) . '</a>';
 
             if ( $i < count( $data ) - 1 && $data[ $i + 1 ][ 'level' ] > $level ) {
                 if ( $itemCollapsed == 'true' && ! count( $stack ) ) {
@@ -193,6 +197,8 @@ class TOC_Helper
         libxml_use_internal_errors( true );
         $dom->loadHTML( '<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body>' . $postContent . '</body></html>' );
         libxml_use_internal_errors( false );
+
+        $visibleHeaders = is_array( $visibleHeaders ) ? array_pad( array_values( $visibleHeaders ), 6, false ) : array_fill( 0, 6, true );
 
         $queryArray = [ "h1", "h2", "h3", "h4", "h5", "h6" ];
         if ( isset( $visibleHeaders ) ) {
