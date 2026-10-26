@@ -1,5 +1,5 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89
 Tags: table of contents, toc, gutenberg, blocks, seo
 Requires at least: 6.0
 Tested up to: 7.1
