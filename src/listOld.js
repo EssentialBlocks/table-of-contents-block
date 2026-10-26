@@ -3,6 +3,12 @@
  */
 import { __ } from "@wordpress/i18n";
 import { Component } from "@wordpress/element";
+import { escapeAttribute } from "@wordpress/escape-html";
+
+/**
+ * Internal dependencies
+ */
+import sanitizeHtml from "./sanitize-html";
 
 class List extends Component {
     render() {
@@ -27,7 +33,7 @@ class List extends Component {
                     toc += "</li></ul>";
                 }
 
-                toc += `<li><a href="#${link}">${content}</a>`;
+                toc += `<li><a href="#${escapeAttribute(String(link ?? ""))}">${sanitizeHtml(String(content ?? ""))}</a>`;
 
                 if (i < data.length - 1 && data[i + 1].level > level) {
                     toc += '<ul class="eb-toc__list">';

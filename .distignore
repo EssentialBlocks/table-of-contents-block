@@ -55,6 +55,10 @@ lib/style-handler/helpers.js
 # Source maps — debug artifacts, no runtime use
 *.map
 
+# Unused controls helper bundle; the block's frontend script is dist/frontend/index.js
+dist/frontend.js
+dist/frontend.asset.php
+
 # Legacy FontAwesome 4 set — unreferenced by any PHP/CSS/JS
 assets/fonts
 

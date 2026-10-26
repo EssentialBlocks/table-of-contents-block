@@ -1,6 +1,6 @@
 {
 	"name": "table-of-contents",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"description": "Insert Table of Contents on your posts/pages and enhance user experience on your WordPress website",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
@@ -20,6 +20,7 @@
 		"striptags": "^3.2.0"
 	},
 	"dependencies": {
+		"@wordpress/escape-html": "^3.0.0",
 		"classnames": "^2.3.1",
 		"react-select": "^5.2.1"
 	}
