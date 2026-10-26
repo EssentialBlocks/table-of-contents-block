@@ -163,12 +163,9 @@ Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 == Changelog ==
 
-= 1.5.2 - 19/10/2026 =
-* Security: Hardened heading list, title and block style generation
-* Fixed: Animation stylesheet replaced with animate.css 3.7.2 (MIT licence)
-* Removed: Unused `_eb_attr` post meta registration
-* Improved: Release package no longer includes the unused frontend helper script
-* Added: External services section documenting Google Fonts
+= 1.5.2 - 26/10/2026 =
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.5.1 - 09/09/2026 =
 * Improved: Security Enhancement
