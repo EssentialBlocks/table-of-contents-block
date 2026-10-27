@@ -35,6 +35,15 @@ window.addEventListener("DOMContentLoaded", function () {
         return element;
     };
 
+    // The anchor is added without reparsing the heading, and the link is
+    // only ever an attribute value.
+    const ebHeadingAnchor = (link) => {
+        const anchor = document.createElement("span");
+        anchor.id = link;
+        anchor.className = "eb-toc__heading-anchor";
+        return anchor;
+    };
+
     const EBTableOfContents = {
         init: function () {
             this._run();
@@ -415,14 +424,19 @@ window.addEventListener("DOMContentLoaded", function () {
                                         if (isValidHtmlId(element.link)) {
                                             new ClipboardJS(`#${element.link}`);
                                         }
-                                        item.innerHTML = `${item.innerHTML
-                                            }<span id="${element.link}"
-                                    class="eb-toc__heading-anchor" data-clipboard-text="${location.protocol +
+                                        const anchor = ebHeadingAnchor(element.link);
+                                        anchor.setAttribute(
+                                            "data-clipboard-text",
+                                            location.protocol +
                                             "//" +
                                             location.host +
                                             location.pathname +
-                                            (location.search ? location.search : "")
-                                            }#${element.link}">${copyLinkHtml}</span>`;
+                                            (location.search ? location.search : "") +
+                                            "#" +
+                                            element.link
+                                        );
+                                        anchor.innerHTML = copyLinkHtml;
+                                        item.appendChild(anchor);
                                     }
                                 });
                             } else {
@@ -439,7 +453,10 @@ window.addEventListener("DOMContentLoaded", function () {
                                             ".eb-toc__heading-anchor"
                                         )
                                     ) {
-                                        item.innerHTML = `<span id="${element.link}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
+                                        item.insertBefore(
+                                            ebHeadingAnchor(element.link),
+                                            item.firstChild
+                                        );
                                     }
                                 });
                             }

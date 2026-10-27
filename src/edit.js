@@ -30,6 +30,7 @@ const {
 } = window.EBTOCControls;
 
 import { parseTocSlug } from "./helper";
+import sanitizeHtml from "./sanitize-html";
 
 import classnames from "classnames";
 import Inspector from "./inspector";
@@ -75,7 +76,10 @@ function getHeadingsFromHeadingElements(headingElements) {
 const getHeadersFromContent = (attributes, postContent) => {
     const safeContent = safeHTML(decodeEntities(postContent));
 
-    const tempPostContentDOM = document.createElement("div");
+    // An inert document: nothing in the post content loads while it is parsed.
+    const tempPostContentDOM = document.implementation
+        .createHTMLDocument("")
+        .createElement("div");
     tempPostContentDOM.innerHTML = safeContent;
 
 
@@ -346,7 +350,7 @@ function Edit(props) {
                         >
                             {displayTitle && (
                                 <DynamicInputValueHandler
-                                    value={title}
+                                    value={sanitizeHtml(title)}
                                     className="eb-toc-title"
                                     tagName="div"
                                     allowedFormats={[

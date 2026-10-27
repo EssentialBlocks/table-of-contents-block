@@ -1,10 +1,10 @@
 === Table Of Contents Block ===
-Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89, fencermonir
+Contributors: wpdevteam, re_enter_rupok, asif2bd, rahat89
 Tags: table of contents, toc, gutenberg, blocks, seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -94,6 +94,16 @@ Consider checking out our other WordPress solutions & boost your WordPress websi
 
 **⚡ [Flexia](http://wordpress.org/plugins/flexia):** Most lightweight, customizable & multi purpose theme for WordPress
 
+== External services ==
+
+This plugin connects to Google Fonts to load the fonts you pick in a Table of Contents block's typography settings.
+
+* What it is used for: displaying the selected font on the front end of your site.
+* When data is sent: on every front-end page that contains a Table of Contents block whose typography uses any font family other than Default.
+* What is sent: the visitor's browser requests the stylesheet from fonts.googleapis.com and the font files from fonts.gstatic.com, so Google receives the visitor's IP address, user agent and the referring page, together with the requested font family names.
+
+The service is provided by Google: [Terms of Service](https://policies.google.com/terms), [Privacy Policy](https://policies.google.com/privacy).
+
 == Installation ==
 
 **Modern Way (from the Block Editor):**
@@ -139,7 +149,7 @@ No. The block is super lightweight — its small script & stylesheet are only lo
 
 = Is it compatible with the latest WordPress? =
 
-Yes. Version 1.5.1 is tested up to WordPress 7.1 with the latest Gutenberg, supports the iframed Block Editor, and works on PHP 7.4 through 8.3.
+Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supports the iframed Block Editor, and works on PHP 7.4 through 8.3.
 
 
 == Screenshots ==
@@ -152,6 +162,10 @@ Yes. Version 1.5.1 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 
 == Changelog ==
+
+= 1.5.2 - 27/10/2026 =
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.5.1 - 09/09/2026 =
 * Improved: Security Enhancement
@@ -231,6 +245,9 @@ Yes. Version 1.5.1 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 * Initial Release
 
 == Upgrade Notice ==
+
+= 1.5.2 =
+Maintenance and security hardening. Update recommended for all users.
 
 = 1.5.1 =
 Security enhancement. Update recommended for all users.

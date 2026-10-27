@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.5.1
+ * Version:         1.5.2
  * Requires at least: 6.0
  * Requires PHP:    7.4
  * Author:          WPDeveloper
@@ -16,6 +16,8 @@
  * @package         table-of-contents-block
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
@@ -23,12 +25,11 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.5.1" );
+define( 'TOC_BLOCK_VERSION', "1.5.2" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
 require_once __DIR__ . '/includes/font-loader.php';
-require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
@@ -132,8 +133,8 @@ function create_block_table_of_content_block_init() {
 
 										$the_post = get_post();
 
-										if ( ! $the_post ) {
-												return;
+										if ( ! $the_post || post_password_required( $the_post ) ) {
+												return '';
 										}
 
 										$default_attributes = [
@@ -175,7 +176,7 @@ function create_block_table_of_content_block_init() {
 										$scrollTarget       = in_array( $attributes[ 'scrollTarget' ], [ 'scroll_to_toc', 'scroll_to_page' ], true ) ? $attributes[ 'scrollTarget' ] : 'scroll_to_toc';
 										$enableCopyLink     = $attributes[ 'enableCopyLink' ] ? 'true' : 'false';
 										$displayTitle       = $attributes[ 'displayTitle' ] ? 'true' : 'false';
-										$title              = $attributes[ 'title' ];
+										$title              = is_string( $attributes[ 'title' ] ) ? $attributes[ 'title' ] : '';
 										$isSmooth           = $attributes[ 'isSmooth' ] ? 'true' : 'false';
 										$itemCollapsed      = $attributes[ 'itemCollapsed' ] ? 'true' : 'false';
 										$topOffset          = esc_attr( $attributes[ 'topOffset' ] );
@@ -184,10 +185,10 @@ function create_block_table_of_content_block_init() {
 										$hideOnDesktop      = $attributes[ 'hideOnDesktop' ] ? 'true' : 'false';
 										$hideOnTab          = $attributes[ 'hideOnTab' ] ? 'true' : 'false';
 										$hideOnMobile       = $attributes[ 'hideOnMobile' ] ? 'true' : 'false';
-										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) ? $attributes[ 'visibleHeaders' ] : array_fill( 0, 6, true );
+										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) && is_array( $attributes[ 'visibleHeaders' ] ) ? array_pad( array_values( $attributes[ 'visibleHeaders' ] ), 6, false ) : array_fill( 0, 6, true );
 										$content            = html_entity_decode( preg_replace( "~<!--(.*?)-->~s", "", $the_post->post_content ) );
 										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, wp_kses_post( $content ) );
-										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
+										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) && is_array( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
 										$classHook          = isset( $attributes[ 'classHook' ] ) ? esc_attr( $attributes[ 'classHook' ] ) : '';
 
 										$container_class     = [  ];
@@ -226,13 +227,13 @@ function create_block_table_of_content_block_init() {
 												$output .= '</span>';
 										}
 										if ( $displayTitle == 'true' ) {
-												$output .= '<div class="eb-toc-title">' . $title . '</div>';
+												$output .= '<div class="eb-toc-title">' . wp_kses_post( $title ) . '</div>';
 										}
 
 										$output .= '</div>'; // header
 										$output .= '<div class="eb-toc-wrapper ' . implode( " ", $wrapper_class ) . '"
 										data-headers="' . htmlspecialchars( json_encode( $headers ), ENT_QUOTES, 'UTF-8' ) . '"
-										data-visible="' . json_encode( $visibleHeaders ) . '"
+										data-visible="' . esc_attr( wp_json_encode( $visibleHeaders ) ) . '"
 										data-delete-headers="' . htmlspecialchars( json_encode( $deleteHeaderList ), ENT_QUOTES, 'UTF-8' ) . '"
 										data-smooth="' . $isSmooth . '"
 										data-top-offset="' . $topOffset . '"
@@ -265,7 +266,7 @@ function create_block_table_of_content_block_init() {
 										if ( 'false' !== $isSticky ) {
 												$output .= '<button class="eb-toc-button ' . $stickyPositionClass . '">';
 												if ( $displayTitle ) {
-														$output .= '<div>' . $title . '</div>';
+														$output .= '<div>' . wp_kses_post( $title ) . '</div>';
 												}
 												$output .= '</button>';
 										}
