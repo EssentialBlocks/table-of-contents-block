@@ -163,7 +163,7 @@ Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 == Changelog ==
 
-= 1.5.2 - 26/10/2026 =
+= 1.5.2 - 27/10/2026 =
 * Improved: Security enhancements
 * Few minor bug fixes & improvements
 
