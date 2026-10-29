@@ -19,9 +19,9 @@ const { ebConditionalRegisterBlockType } = EBTOCControls;
 
 ebConditionalRegisterBlockType(metadata, {
     keywords: [
-        __("TOC", "essential-blocks"),
-        __("Table Of Contents", "essential-blocks"),
-        __("eb table of contents", "essential-blocks"),
+        __("TOC", "table-of-contents-block"),
+        __("Table Of Contents", "table-of-contents-block"),
+        __("eb table of contents", "table-of-contents-block"),
     ],
     icon: TOC_Icon,
     attributes,

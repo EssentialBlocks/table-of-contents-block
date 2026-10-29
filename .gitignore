@@ -39,3 +39,6 @@ dist/index.js
 dist/index.js.map
 dist/style.css
 dist/style.css.map
+
+# Source maps expose the private controls source
+*.map

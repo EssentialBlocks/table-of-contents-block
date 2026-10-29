@@ -4,7 +4,9 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.4.1
+ * Version:         1.5.2
+ * Requires at least: 6.0
+ * Requires PHP:    7.4
  * Author:          WPDeveloper
  * Author URI:     	https://wpdeveloper.net
  * License:         GPL-3.0-or-later
@@ -14,6 +16,8 @@
  * @package         table-of-contents-block
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Registers all block assets so that they can be enqueued through the block editor
  * in the corresponding context.
@@ -21,12 +25,11 @@
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.4.1" );
+define( 'TOC_BLOCK_VERSION', "1.5.2" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
 require_once __DIR__ . '/includes/font-loader.php';
-require_once __DIR__ . '/includes/post-meta.php';
 require_once __DIR__ . '/includes/helpers.php';
 require_once __DIR__ . '/lib/style-handler/style-handler.php';
 
@@ -111,8 +114,6 @@ function create_block_table_of_content_block_init() {
         register_block_type(
             TOC_Helper::get_block_register_path( "table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH ),
             [
-                'editor_script'   => 'create-block-table-of-content-block-editor',
-                'editor_style'    => 'create-block-table-of-content-block',
                 'render_callback' => function ( $attributes, $content ) {
                     if ( ! is_admin() ) {
                         wp_enqueue_style( 'create-block-table-of-content-block' );
@@ -120,13 +121,20 @@ function create_block_table_of_content_block_init() {
                         wp_enqueue_script( 'essential-blocks-toc-frontend' );
                         wp_enqueue_script( 'essential-blocks-eb-animation' );
                         wp_enqueue_script( 'essential-blocks-clipboard' );
+
+                        // The copy-link icon is a dashicon; that stylesheet is
+                        // admin-only by default, so load it on the frontend
+                        // only for blocks that actually render the icon.
+                        if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
+                            wp_enqueue_style( 'dashicons' );
+                        }
                     }
 
 
 										$the_post = get_post();
 
-										if ( ! $the_post ) {
-												return;
+										if ( ! $the_post || post_password_required( $the_post ) ) {
+												return '';
 										}
 
 										$default_attributes = [
@@ -159,29 +167,29 @@ function create_block_table_of_content_block_init() {
 										$blockId            = esc_attr( $attributes[ 'blockId' ] );
 										$scrollToTop        = $attributes[ 'scrollToTop' ] ? 'true' : 'false';
 										$scrollToTopIcon    = $attributes[ 'scrollToTopIcon' ];
-										$listStyle          = $attributes[ 'listStyle' ];
+										$listStyle          = in_array( $attributes[ 'listStyle' ], [ 'ul', 'ol' ], true ) ? $attributes[ 'listStyle' ] : 'ul';
 										$collapsible        = $attributes[ 'collapsible' ] ? 'true' : 'false';
 										$initialCollapse    = $attributes[ 'initialCollapse' ] ? 'true' : 'false';
 										$stickyHideOnMobile = $attributes[ 'stickyHideOnMobile' ] ? 'true' : 'false';
 										$isSticky           = $attributes[ 'isSticky' ] ? 'true' : 'false';
-										$stickyPosition     = $attributes[ 'stickyPosition' ];
-										$scrollTarget       = $attributes[ 'scrollTarget' ];
+										$stickyPosition     = in_array( $attributes[ 'stickyPosition' ], [ 'left', 'right' ], true ) ? $attributes[ 'stickyPosition' ] : 'left';
+										$scrollTarget       = in_array( $attributes[ 'scrollTarget' ], [ 'scroll_to_toc', 'scroll_to_page' ], true ) ? $attributes[ 'scrollTarget' ] : 'scroll_to_toc';
 										$enableCopyLink     = $attributes[ 'enableCopyLink' ] ? 'true' : 'false';
 										$displayTitle       = $attributes[ 'displayTitle' ] ? 'true' : 'false';
-										$title              = $attributes[ 'title' ];
+										$title              = is_string( $attributes[ 'title' ] ) ? $attributes[ 'title' ] : '';
 										$isSmooth           = $attributes[ 'isSmooth' ] ? 'true' : 'false';
 										$itemCollapsed      = $attributes[ 'itemCollapsed' ] ? 'true' : 'false';
-										$topOffset          = $attributes[ 'topOffset' ];
-										$preset             = $attributes[ 'preset' ];
+										$topOffset          = esc_attr( $attributes[ 'topOffset' ] );
+										$preset             = in_array( $attributes[ 'preset' ], [ 'style-1', 'style-2' ], true ) ? $attributes[ 'preset' ] : 'style-1';
 										$enableListStyle    = $attributes[ 'enableListStyle' ];
 										$hideOnDesktop      = $attributes[ 'hideOnDesktop' ] ? 'true' : 'false';
 										$hideOnTab          = $attributes[ 'hideOnTab' ] ? 'true' : 'false';
 										$hideOnMobile       = $attributes[ 'hideOnMobile' ] ? 'true' : 'false';
-										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) ? $attributes[ 'visibleHeaders' ] : array_fill( 0, 6, true );
+										$visibleHeaders     = isset( $attributes[ 'visibleHeaders' ] ) && is_array( $attributes[ 'visibleHeaders' ] ) ? array_pad( array_values( $attributes[ 'visibleHeaders' ] ), 6, false ) : array_fill( 0, 6, true );
 										$content            = html_entity_decode( preg_replace( "~<!--(.*?)-->~s", "", $the_post->post_content ) );
 										$headers            = TOC_Helper::getHeadersFromContent( $visibleHeaders, wp_kses_post( $content ) );
-										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
-										$classHook          = isset( $attributes[ 'classHook' ] ) ? $attributes[ 'classHook' ] : '';
+										$deleteHeaderList   = isset( $attributes[ 'deleteHeaderList' ] ) && is_array( $attributes[ 'deleteHeaderList' ] ) ? $attributes[ 'deleteHeaderList' ] : [  ];
+										$classHook          = isset( $attributes[ 'classHook' ] ) ? esc_attr( $attributes[ 'classHook' ] ) : '';
 
 										$container_class     = [  ];
 										$container_class[  ] = 'eb-toc-container ' . $blockId;
@@ -201,7 +209,7 @@ function create_block_table_of_content_block_init() {
 										$output .= '<div class="eb-parent-wrapper eb-parent-' . $blockId . ' ' . $classHook . '">';
 										$output .= '<div class="' . implode( " ", $container_class ) . '"
 														data-scroll-top="' . $scrollToTop . '"
-														data-scroll-top-icon="' . $scrollToTopIcon . '"
+														data-scroll-top-icon="' . esc_attr( $scrollToTopIcon ) . '"
 														data-collapsible="' . $collapsible . '"
 														data-sticky-hide-mobile="' . $stickyHideOnMobile . '"
 														data-sticky="' . $isSticky . '"
@@ -219,13 +227,13 @@ function create_block_table_of_content_block_init() {
 												$output .= '</span>';
 										}
 										if ( $displayTitle == 'true' ) {
-												$output .= '<div class="eb-toc-title">' . $title . '</div>';
+												$output .= '<div class="eb-toc-title">' . wp_kses_post( $title ) . '</div>';
 										}
 
 										$output .= '</div>'; // header
 										$output .= '<div class="eb-toc-wrapper ' . implode( " ", $wrapper_class ) . '"
 										data-headers="' . htmlspecialchars( json_encode( $headers ), ENT_QUOTES, 'UTF-8' ) . '"
-										data-visible="' . json_encode( $visibleHeaders ) . '"
+										data-visible="' . esc_attr( wp_json_encode( $visibleHeaders ) ) . '"
 										data-delete-headers="' . htmlspecialchars( json_encode( $deleteHeaderList ), ENT_QUOTES, 'UTF-8' ) . '"
 										data-smooth="' . $isSmooth . '"
 										data-top-offset="' . $topOffset . '"
@@ -258,7 +266,7 @@ function create_block_table_of_content_block_init() {
 										if ( 'false' !== $isSticky ) {
 												$output .= '<button class="eb-toc-button ' . $stickyPositionClass . '">';
 												if ( $displayTitle ) {
-														$output .= '<div>' . $title . '</div>';
+														$output .= '<div>' . wp_kses_post( $title ) . '</div>';
 												}
 												$output .= '</button>';
 										}
@@ -266,7 +274,33 @@ function create_block_table_of_content_block_init() {
 										$output .= '</div>'; // parent wrapper
 										$output .= "</div>"; // block
 
-										return wp_kses_post( $output );
+										/**
+										 * The collapse toggle is a plugin-authored inline SVG (see
+										 * TOC_Helper::generate_toc()). wp_kses_post() strips svg/path,
+										 * so allow only those two elements with a fixed attribute
+										 * list. No script, use, foreignObject, style or event handlers.
+										 */
+										$allowed_html          = wp_kses_allowed_html( 'post' );
+										$allowed_html[ 'svg' ]  = [
+												'xmlns'       => true,
+												'width'       => true,
+												'height'      => true,
+												'viewbox'     => true,
+												'fill'        => true,
+												'class'       => true,
+												'aria-hidden' => true,
+												'focusable'   => true,
+										];
+										$allowed_html[ 'path' ] = [
+												'd'               => true,
+												'stroke'          => true,
+												'fill'            => true,
+												'stroke-width'    => true,
+												'stroke-linecap'  => true,
+												'stroke-linejoin' => true,
+										];
+
+										return wp_kses( $output, $allowed_html );
                 }
             ]
         );
@@ -274,3 +308,19 @@ function create_block_table_of_content_block_init() {
 }
 
 add_action( 'init', 'create_block_table_of_content_block_init', 99 );
+
+/**
+ * Block icons are filled #6C3BFF, which almost disappears on the highlighted row of
+ * the "/" inserter, a selected List View row and the drag chip. Recolour them there,
+ * as Essential Blocks does. The handle is shared, so the stylesheet prints once when
+ * several of these plugins are active.
+ */
+function table_of_contents_block_icon_selected_style() {
+    wp_enqueue_style(
+        'eb-block-icon-selected',
+        plugins_url( 'assets/css/block-icon-selected.css', __FILE__ ),
+        [],
+        '1.0.0'
+    );
+}
+add_action( 'enqueue_block_editor_assets', 'table_of_contents_block_icon_selected_style' );
