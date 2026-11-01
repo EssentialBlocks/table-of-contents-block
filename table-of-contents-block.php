@@ -110,25 +110,23 @@ function create_block_table_of_content_block_init() {
         true
     );
 
-    if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/table-of-contents' ) ) {
-        register_block_type(
-            TOC_Helper::get_block_register_path( "table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH ),
-            [
-                'render_callback' => function ( $attributes, $content ) {
-                    if ( ! is_admin() ) {
-                        wp_enqueue_style( 'create-block-table-of-content-block' );
-                        wp_enqueue_style( 'essential-blocks-animation' );
-                        wp_enqueue_script( 'essential-blocks-toc-frontend' );
-                        wp_enqueue_script( 'essential-blocks-eb-animation' );
-                        wp_enqueue_script( 'essential-blocks-clipboard' );
+    $eb_has_block = WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/table-of-contents' );
+    $block_args   = [
+        'render_callback' => function ( $attributes, $content ) {
+            if ( ! is_admin() ) {
+                wp_enqueue_style( 'create-block-table-of-content-block' );
+                wp_enqueue_style( 'essential-blocks-animation' );
+                wp_enqueue_script( 'essential-blocks-toc-frontend' );
+                wp_enqueue_script( 'essential-blocks-eb-animation' );
+                wp_enqueue_script( 'essential-blocks-clipboard' );
 
-                        // The copy-link icon is a dashicon; that stylesheet is
-                        // admin-only by default, so load it on the frontend
-                        // only for blocks that actually render the icon.
-                        if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
-                            wp_enqueue_style( 'dashicons' );
-                        }
-                    }
+                // The copy-link icon is a dashicon; that stylesheet is
+                // admin-only by default, so load it on the frontend
+                // only for blocks that actually render the icon.
+                if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
+                    wp_enqueue_style( 'dashicons' );
+                }
+            }
 
 
 										$the_post = get_post();
@@ -301,10 +299,14 @@ function create_block_table_of_content_block_init() {
 										];
 
 										return wp_kses( $output, $allowed_html );
-                }
-            ]
-        );
-    }
+        }
+    ];
+
+    // Essential Blocks has its own version of this block under another name. Posts saved
+    // with this one still need its render callback and front-end assets, so keep it
+    // registered, but leave out the editor bundle, which can't run beside Essential Blocks.
+    // block.json declares that bundle, so this case registers by name, not from metadata.
+    register_block_type( $eb_has_block ? 'table-of-contents-block/table-of-contents-block' : TOC_Helper::get_block_register_path( "table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH ), $block_args );
 }
 
 add_action( 'init', 'create_block_table_of_content_block_init', 99 );
