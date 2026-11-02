@@ -163,6 +163,14 @@ Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 == Changelog ==
 
+= 1.5.3 - 02/11/2026 =
+* Improved: Security enhancements
+* Fixed: Existing Table of Contents blocks stopped working on the front end when Essential Blocks is active
+* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
+* Fixed: Entrance animations not previewing in the block editor
+* Fixed: Block icon hard to see when highlighted in the inserter and List View
+* Fixed: Chrome console warning about a deprecated DOM event
+
 = 1.5.2 - 27/10/2026 =
 * Improved: Security enhancements
 * Few minor bug fixes & improvements
