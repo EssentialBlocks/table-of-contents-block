@@ -3,15 +3,23 @@
  */
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
+import { escapeAttribute, escapeHTML } from "@wordpress/escape-html";
+
+/**
+ * Internal dependencies
+ */
+import sanitizeHtml from "./sanitize-html";
 
 const List = (props) => {
     const {
         visibleHeaders,
         headers,
         deleteHeaderList,
-        listStyle,
         itemCollapsed,
     } = props.attributes;
+    const listStyle = ["ul", "ol"].includes(props.attributes.listStyle)
+        ? props.attributes.listStyle
+        : "ul";
 
     const getDynamicValue = async (value) => {
         let data = new FormData();
@@ -39,14 +47,16 @@ const List = (props) => {
             .catch((err) => console.log(err));
     };
 
+    // Heading content is plain text, so it is escaped. A dynamic value comes
+    // back as markup and keeps only its inline formatting.
     const fetchData = async (headers) => {
         const dynamicValues = {};
 
         for (const { content } of headers) {
-            let dynamicValue = content;
+            let dynamicValue = escapeHTML(String(content ?? ""));
 
             if (typeof content === 'string' && content.startsWith(EssentialBlocksProLocalize?.eb_dynamic_tags + '/')) {
-                dynamicValue = await getDynamicValue(content); // Fetch dynamic value for content
+                dynamicValue = sanitizeHtml(await getDynamicValue(content)); // Fetch dynamic value for content
             }
 
             dynamicValues[content] = dynamicValue;
@@ -61,7 +71,7 @@ const List = (props) => {
             fetchData(headers).then((dynamicValues) => setDynamicValues(dynamicValues));
         } else {
             const dynamicValues = headers.reduce((newHeaders, { content }) => {
-                newHeaders[content] = content;
+                newHeaders[content] = escapeHTML(String(content ?? ""));
                 return newHeaders;
             }, {});
 
@@ -85,7 +95,7 @@ const List = (props) => {
             // Use the dynamic value from the state
             const dynamicValue = dynamicValues[content] || "";
 
-            toc += `<li><a href="#${link}">${dynamicValue}</a> `;
+            toc += `<li><a href="#${escapeAttribute(String(link ?? ""))}">${dynamicValue}</a> `;
 
             if (i < data.length - 1 && data[i + 1].level > level) {
                 if (itemCollapsed && !stack.length) {
@@ -146,7 +156,7 @@ const List = (props) => {
             <p className="eb_table-of-contents-placeholder">
                 {__(
                     "Add a header to begin generating the table of contents",
-                    "essential-blocks"
+                    "table-of-contents-block"
                 )}
             </p>
         );

@@ -28,18 +28,21 @@ window.addEventListener("DOMContentLoaded", function () {
         return 'dashicon';
     }
 
-    let ebRenderIcon = (iconType, className, icon) => {
-        if (iconType === 'dashicon') {
-            // Render Dashicon
-            return '<span class="dashicon dashicons ' + icon + ' ' + className + '"></span>';
-        } else if (iconType === 'fontawesome') {
-            // Render FontAwesome icon
-            return '<i class="' + icon + ' ' + className + '"></i>';
-        }
+    // Attribute values are data, even when the browser has decoded HTML entities.
+    const ebRenderIcon = (iconType, className, icon) => {
+        const element = document.createElement(iconType === 'fontawesome' ? 'i' : 'span');
+        element.className = (iconType === 'dashicon' ? 'dashicon dashicons ' : '') + icon + ' ' + className;
+        return element;
+    };
 
-        // Handle other icon types or return an error message if needed.
-        return 'Invalid icon type';
-    }
+    // The anchor is added without reparsing the heading, and the link is
+    // only ever an attribute value.
+    const ebHeadingAnchor = (link) => {
+        const anchor = document.createElement("span");
+        anchor.id = link;
+        anchor.className = "eb-toc__heading-anchor";
+        return anchor;
+    };
 
     const EBTableOfContents = {
         init: function () {
@@ -80,9 +83,12 @@ window.addEventListener("DOMContentLoaded", function () {
                                 "mouseleave",
                                 function (event) {
                                     headingAnchor.style.display = "none";
-                                    this.getElementsByClassName(
-                                        "eb-tooltiptext"
-                                    )[0].style.visibility = "hidden";
+                                    // Hide this icon's own tooltip, not the first
+                                    // one in the heading — a heading may hold several.
+                                    if (headingAnchor.children[0]) {
+                                        headingAnchor.children[0].style.visibility =
+                                            "hidden";
+                                    }
                                 }
                             );
                         }
@@ -136,7 +142,7 @@ window.addEventListener("DOMContentLoaded", function () {
                         const selectorIcon = item.querySelector("svg");
                         const collapsedItem = item.querySelector(".eb-toc__list");
 
-                        if (collapsedItem !== null) {
+                        if (collapsedItem !== null && selectorIcon) {
                             selectorIcon.addEventListener("click", function () {
                                 item.classList.toggle("hide-items");
                             });
@@ -149,21 +155,26 @@ window.addEventListener("DOMContentLoaded", function () {
 
         _scrollToTop: function () {
             let container = document.querySelector(".eb-toc-container");
+
+            if (!container) {
+                return;
+            }
+
             let hasScrollTop =
-                container &&
                 container.getAttribute("data-scroll-top") == "true";
-            let hasSticky =
-                container && container.getAttribute("data-sticky") == "true";
+            let hasSticky = container.getAttribute("data-sticky") == "true";
             let scrollTarget = container.getAttribute("data-scroll-target");
             let wrapper = document.querySelector(".eb-toc-wrapper");
-            let offsetTop = wrapper.getAttribute("data-top-offset");
-            let scrollIcon = container.getAttribute("data-scroll-top-icon");
+            let offsetTop = wrapper
+                ? wrapper.getAttribute("data-top-offset")
+                : "";
+            let scrollIcon = container.getAttribute("data-scroll-top-icon") || "fas fa-angle-up";
 
             if (hasScrollTop) {
                 // Create go to top element
                 const goTop = document.createElement("span");
                 goTop.setAttribute("class", "eb-toc-go-top");
-                goTop.innerHTML = ebRenderIcon(ebGetIconType(scrollIcon), '', scrollIcon);
+                goTop.appendChild(ebRenderIcon(ebGetIconType(scrollIcon), '', scrollIcon));
                 document.body.insertBefore(goTop, document.body.lastChild);
 
                 // Add click event
@@ -355,7 +366,7 @@ window.addEventListener("DOMContentLoaded", function () {
                     ? `<span class="eb-tooltip dashicons dashicons-clipboard"><span class="eb-tooltiptext">Copied!</span></span></span>`
                     : "";
 
-                let node = document.querySelector(".eb-toc-wrapper");
+                let node = container.querySelector(".eb-toc-wrapper");
 
                 if (node) {
                     let headers = JSON.parse(node.getAttribute("data-headers"));
@@ -387,8 +398,11 @@ window.addEventListener("DOMContentLoaded", function () {
                                 "h1, h2, h3, h4, h5, h6"
                             );
 
-                    if (undefined !== headers && 0 !== all_header.length) {
+                    if (undefined !== headers && null !== headers && 0 !== all_header.length) {
                         headers.forEach((element, headerIndex) => {
+                            if (!element || !element.text) {
+                                return;
+                            }
                             const element_text = parseTocSlug(element.text);
                             if (
                                 deleteHeaderLists &&
@@ -402,19 +416,27 @@ window.addEventListener("DOMContentLoaded", function () {
                                     if (
                                         element_text.localeCompare(
                                             header_text
-                                        ) === 0
+                                        ) === 0 &&
+                                        !item.querySelector(
+                                            ".eb-toc__heading-anchor"
+                                        )
                                     ) {
                                         if (isValidHtmlId(element.link)) {
                                             new ClipboardJS(`#${element.link}`);
                                         }
-                                        item.innerHTML = `${item.innerHTML
-                                            }<span id="${element.link}"
-                                    class="eb-toc__heading-anchor" data-clipboard-text="${location.protocol +
+                                        const anchor = ebHeadingAnchor(element.link);
+                                        anchor.setAttribute(
+                                            "data-clipboard-text",
+                                            location.protocol +
                                             "//" +
                                             location.host +
                                             location.pathname +
-                                            (location.search ? location.search : "")
-                                            }#${element.link}">${copyLinkHtml}</span>`;
+                                            (location.search ? location.search : "") +
+                                            "#" +
+                                            element.link
+                                        );
+                                        anchor.innerHTML = copyLinkHtml;
+                                        item.appendChild(anchor);
                                     }
                                 });
                             } else {
@@ -426,9 +448,15 @@ window.addEventListener("DOMContentLoaded", function () {
                                     if (
                                         element_text.localeCompare(
                                             header_text
-                                        ) === 0
+                                        ) === 0 &&
+                                        !item.querySelector(
+                                            ".eb-toc__heading-anchor"
+                                        )
                                     ) {
-                                        item.innerHTML = `<span id="${element.link}" class="eb-toc__heading-anchor"></span>${item.innerHTML}`;
+                                        item.insertBefore(
+                                            ebHeadingAnchor(element.link),
+                                            item.firstChild
+                                        );
                                     }
                                 });
                             }
