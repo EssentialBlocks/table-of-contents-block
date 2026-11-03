@@ -404,61 +404,48 @@ window.addEventListener("DOMContentLoaded", function () {
                                 return;
                             }
                             const element_text = parseTocSlug(element.text);
+
+                            // Anchor only the first heading with this text that has
+                            // no anchor yet, so repeated headings (faq, faq-2) each
+                            // get their own id instead of all taking the first link.
+                            const item = Array.from(all_header).find(
+                                (heading) =>
+                                    element_text.localeCompare(
+                                        parseTocSlug(heading.textContent)
+                                    ) === 0 &&
+                                    !heading.querySelector(
+                                        ".eb-toc__heading-anchor"
+                                    )
+                            );
+                            if (!item) {
+                                return;
+                            }
+
                             if (
                                 deleteHeaderLists &&
                                 !deleteHeaderLists[headerIndex]?.isDelete
                             ) {
-                                all_header.forEach((item, index) => {
-                                    const header_text = parseTocSlug(
-                                        item.textContent
-                                    );
-
-                                    if (
-                                        element_text.localeCompare(
-                                            header_text
-                                        ) === 0 &&
-                                        !item.querySelector(
-                                            ".eb-toc__heading-anchor"
-                                        )
-                                    ) {
-                                        if (isValidHtmlId(element.link)) {
-                                            new ClipboardJS(`#${element.link}`);
-                                        }
-                                        const anchor = ebHeadingAnchor(element.link);
-                                        anchor.setAttribute(
-                                            "data-clipboard-text",
-                                            location.protocol +
-                                            "//" +
-                                            location.host +
-                                            location.pathname +
-                                            (location.search ? location.search : "") +
-                                            "#" +
-                                            element.link
-                                        );
-                                        anchor.innerHTML = copyLinkHtml;
-                                        item.appendChild(anchor);
-                                    }
-                                });
+                                if (isValidHtmlId(element.link)) {
+                                    new ClipboardJS(`#${element.link}`);
+                                }
+                                const anchor = ebHeadingAnchor(element.link);
+                                anchor.setAttribute(
+                                    "data-clipboard-text",
+                                    location.protocol +
+                                    "//" +
+                                    location.host +
+                                    location.pathname +
+                                    (location.search ? location.search : "") +
+                                    "#" +
+                                    element.link
+                                );
+                                anchor.innerHTML = copyLinkHtml;
+                                item.appendChild(anchor);
                             } else {
-                                all_header.forEach((item) => {
-                                    const header_text = parseTocSlug(
-                                        item.textContent
-                                    );
-
-                                    if (
-                                        element_text.localeCompare(
-                                            header_text
-                                        ) === 0 &&
-                                        !item.querySelector(
-                                            ".eb-toc__heading-anchor"
-                                        )
-                                    ) {
-                                        item.insertBefore(
-                                            ebHeadingAnchor(element.link),
-                                            item.firstChild
-                                        );
-                                    }
-                                });
+                                item.insertBefore(
+                                    ebHeadingAnchor(element.link),
+                                    item.firstChild
+                                );
                             }
                         });
                     }

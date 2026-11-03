@@ -240,7 +240,8 @@ class TOC_Helper
      */
     public static function getHeadingsFromHeadingElements( $headingElements )
 		{
-        $headings = [  ];
+        $headings   = [  ];
+        $used_links = [  ];
         foreach ( $headingElements as $index => $heading ) {
             $level = null;
             switch ( $heading->tagName ) {
@@ -267,12 +268,22 @@ class TOC_Helper
             $value          = apply_filters( 'eb_dynamic_tag_value', $heading->textContent, '', true );
             $value          = empty( $value ) ? $heading->textContent : $value;
             $heading_string = self::parseTocSlug( wp_strip_all_tags( $value ) );
+            $link           = preg_match( '/^[A-Za-z0-9\-]+$/', $heading_string ) === 1 ? $heading_string : "eb-table-content-$index";
+
+            // Headings with the same text would share one id, so every TOC link
+            // pointed at the first of them. Suffix repeats: faq, faq-2, faq-3.
+            $unique_link = $link;
+            $suffix      = 2;
+            while ( isset( $used_links[ $unique_link ] ) ) {
+                $unique_link = $link . '-' . $suffix++;
+            }
+            $used_links[ $unique_link ] = true;
 
             $headings[  ] = [
                 "level"   => $level,
                 "content" => $value,
                 "text"    => $value,
-                "link"    => preg_match( '/^[A-Za-z0-9\-]+$/', $heading_string ) === 1 ? $heading_string : "eb-table-content-$index"
+                "link"    => $unique_link
              ];
         }
 

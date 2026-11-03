@@ -40,6 +40,9 @@ import List from "./list";
 import Style from "./style";
 
 function getHeadingsFromHeadingElements(headingElements) {
+    // Same suffixing as TOC_Helper on the server, so repeated headings
+    // (faq, faq-2) stay separate entries in Exclude Headings.
+    const usedLinks = new Set();
     return [...headingElements].map((heading, index) => {
         let level;
         switch (heading.tagName) {
@@ -63,12 +66,19 @@ function getHeadingsFromHeadingElements(headingElements) {
                 break;
         }
         const content = heading.textContent;
+        const baseLink = parseTocSlug(striptags(content));
+        let link = baseLink;
+        let suffix = 2;
+        while (usedLinks.has(link)) {
+            link = `${baseLink}-${suffix++}`;
+        }
+        usedLinks.add(link);
 
         return {
             level: level,
             content: content,
             text: content,
-            link: parseTocSlug(striptags(content)),
+            link: link,
         };
     });
 }
@@ -173,7 +183,13 @@ function Edit(props) {
         });
 
         if (!isMigrated && !isBlockJustInserted) {
-            if (JSON.stringify(headerList) !== JSON.stringify(headers)) {
+            // Only blocks that stored a heading list can have headings added
+            // since then. With nothing stored, every heading would count as
+            // new and be excluded.
+            if (
+                headers?.length > 0 &&
+                JSON.stringify(headerList) !== JSON.stringify(headers)
+            ) {
                 let newHeaderList = headerList.map((item) => item.text);
                 let newHeaders = headers.map((item) => item.text);
                 let difference = newHeaderList.filter(
