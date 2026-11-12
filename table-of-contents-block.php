@@ -4,7 +4,7 @@
  * Plugin Name:     Table Of Contents Block
  * Plugin URI:      https://essential-blocks.com
  * Description:     Automatically Add Table of Contents Block for your WordPress Posts & Pages
- * Version:         1.5.2
+ * Version:         1.5.3
  * Requires at least: 6.0
  * Requires PHP:    7.4
  * Author:          WPDeveloper
@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
  * @see https://developer.wordpress.org/block-editor/tutorials/block-tutorial/applying-styles-with-stylesheets/
  */
 
-define( 'TOC_BLOCK_VERSION', "1.5.2" );
+define( 'TOC_BLOCK_VERSION', "1.5.3" );
 define( 'TOC_BLOCK_ADMIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'TOC_BLOCK_ADMIN_PATH', dirname( __FILE__ ) );
 
@@ -110,25 +110,23 @@ function create_block_table_of_content_block_init() {
         true
     );
 
-    if ( ! WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/table-of-contents' ) ) {
-        register_block_type(
-            TOC_Helper::get_block_register_path( "table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH ),
-            [
-                'render_callback' => function ( $attributes, $content ) {
-                    if ( ! is_admin() ) {
-                        wp_enqueue_style( 'create-block-table-of-content-block' );
-                        wp_enqueue_style( 'essential-blocks-animation' );
-                        wp_enqueue_script( 'essential-blocks-toc-frontend' );
-                        wp_enqueue_script( 'essential-blocks-eb-animation' );
-                        wp_enqueue_script( 'essential-blocks-clipboard' );
+    $eb_has_block = WP_Block_Type_Registry::get_instance()->is_registered( 'essential-blocks/table-of-contents' );
+    $block_args   = [
+        'render_callback' => function ( $attributes, $content ) {
+            if ( ! is_admin() ) {
+                wp_enqueue_style( 'create-block-table-of-content-block' );
+                wp_enqueue_style( 'essential-blocks-animation' );
+                wp_enqueue_script( 'essential-blocks-toc-frontend' );
+                wp_enqueue_script( 'essential-blocks-eb-animation' );
+                wp_enqueue_script( 'essential-blocks-clipboard' );
 
-                        // The copy-link icon is a dashicon; that stylesheet is
-                        // admin-only by default, so load it on the frontend
-                        // only for blocks that actually render the icon.
-                        if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
-                            wp_enqueue_style( 'dashicons' );
-                        }
-                    }
+                // The copy-link icon is a dashicon; that stylesheet is
+                // admin-only by default, so load it on the frontend
+                // only for blocks that actually render the icon.
+                if ( ! empty( $attributes[ 'enableCopyLink' ] ) ) {
+                    wp_enqueue_style( 'dashicons' );
+                }
+            }
 
 
 										$the_post = get_post();
@@ -301,10 +299,46 @@ function create_block_table_of_content_block_init() {
 										];
 
 										return wp_kses( $output, $allowed_html );
-                }
-            ]
-        );
-    }
+        }
+    ];
+
+    // Essential Blocks has its own version of this block under another name. Posts saved
+    // with this one still need its render callback and front-end assets, so keep it
+    // registered, but leave out the editor bundle, which can't run beside Essential Blocks.
+    // block.json declares that bundle, so this case registers by name, not from metadata.
+    register_block_type( $eb_has_block ? 'table-of-contents-block/table-of-contents-block' : TOC_Helper::get_block_register_path( "table-of-contents-block/table-of-contents-block", TOC_BLOCK_ADMIN_PATH ), $block_args );
 }
 
 add_action( 'init', 'create_block_table_of_content_block_init', 99 );
+
+/**
+ * Block icons are filled #6C3BFF, which almost disappears on the highlighted row of
+ * the "/" inserter, a selected List View row and the drag chip. Recolour them there,
+ * as Essential Blocks does. The handle is shared, so the stylesheet prints once when
+ * several of these plugins are active.
+ */
+function table_of_contents_block_icon_selected_style() {
+    wp_enqueue_style(
+        'eb-block-icon-selected',
+        plugins_url( 'assets/css/block-icon-selected.css', __FILE__ ),
+        [],
+        TOC_BLOCK_VERSION
+    );
+}
+add_action( 'enqueue_block_editor_assets', 'table_of_contents_block_icon_selected_style' );
+
+/**
+ * Let Essential Blocks' animation assets win on the front end when it is active.
+ *
+ * Both plugins register these handles and the first registration wins. This
+ * plugin's loader doesn't set `window.ebAnimationLoaded`, so Essential Blocks'
+ * failsafe would reveal every animated block without playing it. Essential Blocks
+ * registers its own at priority 20 and handles the same `.eb___animated` classes.
+ */
+function table_of_contents_block_use_essential_blocks_animation() {
+    if ( defined( 'ESSENTIAL_BLOCKS_VERSION' ) ) {
+        wp_deregister_script( 'essential-blocks-eb-animation' );
+        wp_deregister_style( 'essential-blocks-animation' );
+    }
+}
+add_action( 'wp_enqueue_scripts', 'table_of_contents_block_use_essential_blocks_animation', 19 );
