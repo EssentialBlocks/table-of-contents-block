@@ -51,3 +51,5 @@ controls export-ignore
 lib/style-handler/style-handler.js export-ignore
 lib/style-handler/helpers.js export-ignore
 .wordpress-org export-ignore
+*.map export-ignore
+config export-ignore

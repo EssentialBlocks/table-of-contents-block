@@ -299,14 +299,14 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                     <PanelBody
                                         title={__(
                                             "Content Settings",
-                                            "essential-blocks"
+                                            "table-of-contents-block"
                                         )}
                                         initialOpen={true}
                                     >
                                         <SelectControl
                                             label={__(
                                                 "Preset",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             value={preset}
                                             options={PRESET}
@@ -315,7 +315,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Display Underline",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             checked={hasUnderline}
                                             onChange={() =>
@@ -328,7 +328,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ToggleControl
                                                 label={__(
                                                     "Collapsible",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 checked={collapsible}
                                                 onChange={() =>
@@ -343,7 +343,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ToggleControl
                                                 label={__(
                                                     "Collapsed initially",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 checked={initialCollapse}
                                                 onChange={() =>
@@ -357,7 +357,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Sticky contents",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             help={__(
                                                 "Always show contents on sidebar (Visible on frontend only)"
@@ -374,7 +374,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <SelectControl
                                                     label={__(
                                                         "Sticky Position",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     value={stickyPosition}
                                                     options={STICKY_POSITION}
@@ -389,7 +389,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <ToggleControl
                                                     label={__(
                                                         "Hide on Mobile",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     checked={stickyHideOnMobile}
                                                     onChange={() =>
@@ -403,7 +403,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Enable Item Collapsed",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             checked={itemCollapsed}
                                             onChange={() =>
@@ -416,7 +416,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Enable Copy Link",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             help={__(
                                                 "Visible on frontend only"
@@ -431,7 +431,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <TextControl
                                             label={__(
                                                 "Offset Top",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             value={topOffset}
                                             onChange={(value) =>
@@ -445,7 +445,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Enable List Style",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             checked={enableListStyle}
                                             onChange={() =>
@@ -459,21 +459,21 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <SelectControl
                                                 label={__(
                                                     "List Style",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 value={listStyle}
                                                 options={[
                                                     {
                                                         label: __(
                                                             "Unordered",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         ),
                                                         value: "ul",
                                                     },
                                                     {
                                                         label: __(
                                                             "Ordered",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         ),
                                                         value: "ol",
                                                     },
@@ -496,7 +496,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <ToggleControl
                                                     label={__(
                                                         "Display Title",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     checked={displayTitle}
                                                     onChange={() =>
@@ -509,7 +509,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <DynamicInputControl
                                                 label={__(
                                                     "Title Text",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 attrName="title"
                                                 inputValue={title}
@@ -525,7 +525,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                     <PanelBody
                                         title={__(
                                             "Supported Heading Tags",
-                                            "essential-blocks"
+                                            "table-of-contents-block"
                                         )}
                                     >
                                         <div className="fix-select-over-lapping">
@@ -540,13 +540,13 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                     </PanelBody>
 
                                     <PanelBody
-                                        title={__("Scroll", "essential-blocks")}
+                                        title={__("Scroll", "table-of-contents-block")}
                                         initialOpen={false}
                                     >
                                         <ToggleControl
                                             label={__(
                                                 "Smooth Scroll",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             checked={isSmooth}
                                             onChange={() =>
@@ -559,7 +559,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <ToggleControl
                                             label={__(
                                                 "Scroll To Top",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             checked={scrollToTop}
                                             onChange={() =>
@@ -584,7 +584,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <SelectControl
                                                         label={__(
                                                             "Scroll Target",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={scrollTarget}
                                                         options={SCROLL_OPTIONS}
@@ -600,7 +600,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <RangeControl
                                                     label={__(
                                                         "Arrow Height",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     value={arrowHeight}
                                                     onChange={(arrowHeight) =>
@@ -615,7 +615,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <RangeControl
                                                     label={__(
                                                         "Arrow Width",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     value={arrowWidth}
                                                     onChange={(arrowWidth) =>
@@ -630,7 +630,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <ColorControl
                                                     label={__(
                                                         "Arrow Background",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     color={arrowBg}
                                                     onChange={(arrowBg) =>
@@ -643,7 +643,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                 <ColorControl
                                                     label={__(
                                                         "Arrow Color",
-                                                        "essential-blocks"
+                                                        "table-of-contents-block"
                                                     )}
                                                     color={arrowColor}
                                                     onChange={(arrowColor) =>
@@ -662,7 +662,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <PanelBody
                                                 title={__(
                                                     "Exclude Headings",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 initialOpen={false}
                                             >
@@ -700,14 +700,14 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <PanelBody
                                             title={__(
                                                 "Title",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             initialOpen={true}
                                         >
                                             <BaseControl
                                                 label={__(
                                                     "Align",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 className="eb-base-control"
                                             >
@@ -744,7 +744,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ColorControl
                                                 label={__(
                                                     "Background Color",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 color={titleBg}
                                                 onChange={(titleBg) =>
@@ -757,7 +757,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ColorControl
                                                 label={__(
                                                     "Text Color",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 color={titleColor}
                                                 onChange={(titleColor) =>
@@ -787,7 +787,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ToggleControl
                                                 label={__(
                                                     "Title Separator",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 checked={seperator}
                                                 onChange={() =>
@@ -801,7 +801,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <RangeControl
                                                         label={__(
                                                             "Seperator Size",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={seperatorSize}
                                                         onChange={(
@@ -818,7 +818,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Separator Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={seperatorColor}
                                                         onChange={(
@@ -833,7 +833,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <SelectControl
                                                         label={__(
                                                             "Separator Style",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={seperatorStyle}
                                                         options={BORDER_STYLES}
@@ -852,7 +852,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                     <PanelBody
                                         title={__(
                                             "Content",
-                                            "essential-blocks"
+                                            "table-of-contents-block"
                                         )}
                                         initialOpen={false}
                                     >
@@ -875,7 +875,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <RangeControl
                                                 label={__(
                                                     "Indent",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 value={indent}
                                                 onChange={(indent) =>
@@ -906,7 +906,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <RangeControl
                                                 label={__(
                                                     "Content Gap",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 value={contentGap}
                                                 onChange={(contentGap) =>
@@ -922,7 +922,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ColorControl
                                                 label={__(
                                                     "Background Color",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 color={contentBg}
                                                 onChange={(contentBg) =>
@@ -933,7 +933,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ColorControl
                                                 label={__(
                                                     "Text Color",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 color={contentColor}
                                                 onChange={(contentColor) =>
@@ -946,7 +946,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ColorControl
                                                 label={__(
                                                     "Hover Color",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 color={contentHoverColor}
                                                 onChange={(contentHoverColor) =>
@@ -980,7 +980,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <ToggleControl
                                                 label={__(
                                                     "Show Separator",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 checked={showListSeparator}
                                                 onChange={() =>
@@ -994,7 +994,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <RangeControl
                                                         label={__(
                                                             "Separator Size",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={
                                                             listSeperatorWidth
@@ -1012,7 +1012,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <SelectControl
                                                         label={__(
                                                             "Separator Style",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={
                                                             listSeperatorStyle
@@ -1030,7 +1030,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Separator Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={
                                                             listSeperatorColor
@@ -1052,7 +1052,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Item Background Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={contentItemBg}
                                                         onChange={(contentItemBg) =>
@@ -1079,7 +1079,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                         <PanelBody
                                             title={__(
                                                 "Sticky",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             initialOpen={false}
                                         >
@@ -1094,11 +1094,11 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <RangeControl
                                                         label={__(
                                                             "Content min-height",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         help={__(
                                                             "Visible on frontend only",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={contentHeight}
                                                         onChange={(
@@ -1116,11 +1116,11 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <RangeControl
                                                 label={__(
                                                     "Top Space",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 help={__(
                                                     "Visible on frontend only",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 value={topSpace}
                                                 onChange={(topSpace) =>
@@ -1135,7 +1135,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                             <PanelBody
                                                 title={__(
                                                     "Close Button",
-                                                    "essential-blocks"
+                                                    "table-of-contents-block"
                                                 )}
                                                 initialOpen={false}
                                             >
@@ -1144,7 +1144,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={closeBtnColor}
                                                         onChange={(
@@ -1158,7 +1158,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Hover Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={closeBtnHoverColor}
                                                         onChange={(
@@ -1172,7 +1172,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Background Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={closeBtnBgColor}
                                                         onChange={(
@@ -1186,7 +1186,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <ColorControl
                                                         label={__(
                                                             "Background Hover Color",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         color={
                                                             closeBtnBgHvColor
@@ -1202,7 +1202,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <RangeControl
                                                         label={__(
                                                             "Button Size",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={closeBtnSize}
                                                         onChange={(closeBtnSize) =>
@@ -1216,7 +1216,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <RangeControl
                                                         label={__(
                                                             "Icon Size",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         value={closeIconSize}
                                                         onChange={(closeIconSize) =>
@@ -1232,7 +1232,7 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                                     <PanelBody
                                                         title={__(
                                                             "Border",
-                                                            "essential-blocks"
+                                                            "table-of-contents-block"
                                                         )}
                                                         initialOpen={false}
                                                     >
@@ -1273,13 +1273,13 @@ const Inspector = ({ attributes, setAttributes, deleteHeaders }) => {
                                     <PanelBody
                                         title={__(
                                             "Background ",
-                                            "essential-blocks"
+                                            "table-of-contents-block"
                                         )}
                                     >
                                         <ColorControl
                                             label={__(
                                                 "Background Color",
-                                                "essential-blocks"
+                                                "table-of-contents-block"
                                             )}
                                             color={mainBgc}
                                             onChange={(mainBgc) =>
