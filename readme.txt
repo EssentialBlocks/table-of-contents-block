@@ -4,7 +4,7 @@ Tags: table of contents, toc, gutenberg, blocks, seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -163,13 +163,11 @@ Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 == Changelog ==
 
-= 1.5.3 - 02/11/2026 =
+= 1.5.3 - 12/11/2026 =
+* Fixed: Frontend conflict with Essential Blocks
+* Fixed: Animation preview in editor
 * Improved: Security enhancements
-* Fixed: Existing Table of Contents blocks stopped working on the front end when Essential Blocks is active
-* Fixed: Animated blocks appeared without playing their animation when Essential Blocks is active
-* Fixed: Entrance animations not previewing in the block editor
-* Fixed: Block icon hard to see when highlighted in the inserter and List View
-* Fixed: Chrome console warning about a deprecated DOM event
+* Few minor bug fixes & improvements
 
 = 1.5.2 - 27/10/2026 =
 * Improved: Security enhancements
