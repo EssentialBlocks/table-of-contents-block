@@ -4,7 +4,7 @@ Tags: table of contents, toc, gutenberg, blocks, seo
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -162,6 +162,11 @@ Yes. Version 1.5.2 is tested up to WordPress 7.1 with the latest Gutenberg, supp
 
 
 == Changelog ==
+
+= 1.5.4 - 15/11/2026 =
+* Fixed: Unsaved changes issue in editor
+* Improved: Security enhancements
+* Few minor bug fixes & improvements
 
 = 1.5.3 - 12/11/2026 =
 * Fixed: Frontend conflict with Essential Blocks
